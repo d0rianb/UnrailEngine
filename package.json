@@ -1,0 +1,27 @@
+{
+    "name": "js-game-engine",
+    "version": "0.0.1",
+    "description": "A lightweight 2D game engine written in typescript",
+    "scripts": {
+        "dev": "webpack --watch",
+        "old-dev": "webpack-dev-server --port 8080 --hot",
+        "build": "webpack"
+    },
+    "dependencies": {
+        "file-saver": "^2.0.5",
+        "stats.js": "^0.17.0",
+        "svg-path-builder": "^1.0.2",
+        "ts-loader": "^6.2.2",
+        "typescript": "^3.8.3",
+        "vue": "^2.6.12"
+    },
+    "devDependencies": {
+        "file-loader": "^6.2.0",
+        "webpack": "^4.42.1",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.11.2"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT"
+}

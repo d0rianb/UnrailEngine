@@ -1,0 +1,17 @@
+TODO :
+    - life cycle
+    - Loading Screen
+    - Clean dependencies
+    - Find a name
+
+PARTS :
+    - Core
+    - Renderer
+    - Event System
+    - Grid System
+    - Stats
+    - Configuration
+    - Physics
+
+ ISSUE :
+    - None

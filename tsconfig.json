@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "es2016",
+        "module": "commonjs",
+        "allowJs": true,
+        "sourceMap": true,
+        "outDir": "./dist",
+        "strict": false,
+        "esModuleInterop": true,
+        "resolveJsonModule": true
+    }
+}

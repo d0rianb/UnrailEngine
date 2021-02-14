@@ -1,0 +1,3 @@
+function getWindowDimensions() { }
+
+export { getWindowDimensions }
