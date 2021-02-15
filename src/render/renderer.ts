@@ -1,4 +1,4 @@
-import { Point } from './path'
+import { Point } from '../core/path'
 import { Texture } from './texture'
 
 interface StyleObject {

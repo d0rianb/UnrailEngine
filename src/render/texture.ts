@@ -1,4 +1,4 @@
-import { Point, Vector2, V_UNIT, V_NULL } from './path'
+import { Point, Vector2, V_UNIT, V_NULL } from '../core/math'
 
 interface TextureOptions {
     rotation?: number, // radians

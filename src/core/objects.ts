@@ -1,5 +1,12 @@
+interface GameObjectInterface {
+    x?: number
+    y?: number
+    update: () => void
+    render: (CanvasRenderingContext2D) => void
+}
 
-class GameObject { }
+
+class GameObject implements GameObjectInterface { }
 
 class PlayerObject extends GameObject { }
 

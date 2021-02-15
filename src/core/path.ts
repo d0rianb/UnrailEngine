@@ -1,6 +1,7 @@
 import PathBuilder from 'svg-path-builder';
-import { Renderer } from './render'
+import { Renderer } from '../renderer/render'
 
+// [[x, y], [x, y], ...]
 interface JSONPath {
     points: Array<Array<number>>
 }

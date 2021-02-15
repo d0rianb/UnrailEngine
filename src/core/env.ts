@@ -7,7 +7,7 @@ interface EnvInterface {
     render: (CanvasRenderingContext2D) => void
 }
 
-class Env {
+class Env implements EnvInterface {
     width: number
     height: number
 
