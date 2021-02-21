@@ -9,6 +9,7 @@ import {
     PlayerObject,
     GameEnvironement
 } from '../src'
+import { clamp } from '../src/core/math'
 import { Renderer, Interface } from '../src/render'
 import { Event } from '../src/events'
 import { Config } from '../src/config'
@@ -56,12 +57,12 @@ class Player extends PlayerObject {
     }
 
     move(dx, dy) {
-        this.x += dx
+        this.x = clamp(0, this.x + dx, window.innerWidth)
         this.y += dy
     }
 
     shoot() {
-        Event.emit('new-shot', { x: this.x, y: this.y })
+        Event.emit('new-shot', { x: this.x + 15, y: this.y })
     }
 
     update() {
@@ -79,10 +80,12 @@ class Shot extends GameObject {
     }
 
     update() {
-        this.y += 5
+        this.y -= 5
     }
 
-    render(ctx) { }
+    render(ctx) {
+        Renderer.rect(ctx, this.x, this.y, 2, 5)
+    }
 }
 
 
@@ -107,11 +110,12 @@ class Env extends GameEnvironement {
     }
 
     bindEvents() {
-        const speed = 2
-        Event.onKeyPressed('ArrowLeft', e => this.player.move(-5 * speed, 0))
-        Event.onKeyPressed('ArrowRight', e => this.player.move(5 * speed, 0))
+        const speed = 3
+        Event.onKeyDown('ArrowLeft', e => this.player.move(-5 * speed, 0))
+        Event.onKeyDown('ArrowRight', e => this.player.move(5 * speed, 0))
+        Event.onKeyPressed('Space', e => this.player.shoot())
         Event.on('kill', () => this.score++)
-        Event.on('new-shot', ({ x, y }) => this.shots.push(new Shot(x, y)))
+        Event.on('new-shot', ({ x, y }) => { this.shots.push(new Shot(x, y)) })
     }
 
     update() {

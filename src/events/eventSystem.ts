@@ -2,15 +2,18 @@ import { Event, EventType } from './event'
 
 type Callback = (this: Window, ev: any) => any
 
+// TODO: move the keyboardEvents in its own file
 class EventSystem {
     windowEvents: Array<Event>
-    keyboardEvents: Array<Event>
+    keyboardDownEvents: Array<Event>
     customEvents: Array<Event>
+    keyboardPressedEvents: Array<Event>
     currentKeyEvents: Array<KeyboardEvent>
 
     constructor() {
         this.windowEvents = []
-        this.keyboardEvents = []
+        this.keyboardDownEvents = []
+        this.keyboardPressedEvents = []
         this.customEvents = []
 
         this.currentKeyEvents = []
@@ -23,13 +26,21 @@ class EventSystem {
         window.addEventListener('keyup', e => {
             if (!this.currentKeyEvents.length) return
             this.currentKeyEvents = this.currentKeyEvents.filter(event => event.code !== e.code)
+            this.keyboardPressedEvents.forEach(event => {
+                if (e.code === event.name) {
+                    event.callback(e)
+                }
+            })
         })
+
     }
 
     addEvent(e: Event): void {
         switch (e.type) {
-            case EventType.Keyboard:
-                this.keyboardEvents.push(e)
+            case EventType.KeyboardDown:
+                this.keyboardDownEvents.push(e)
+            case EventType.KeyboardPressed:
+                this.keyboardPressedEvents.push(e)
             case EventType.Mouse:
                 break
             case EventType.Window:
@@ -50,15 +61,14 @@ class EventSystem {
     }
 
     tick(): void {
-        if (this.currentKeyEvents.length) {
-            this.keyboardEvents.forEach(keyEvent => {
-                this.currentKeyEvents.forEach(e => {
-                    if (e.code === keyEvent.name) {
-                        keyEvent.callback(e)
-                    }
-                })
+        if (!this.currentKeyEvents.length) return
+        this.keyboardDownEvents.forEach(keyEvent => {
+            this.currentKeyEvents.forEach(e => {
+                if (e.code === keyEvent.name) {
+                    keyEvent.callback(e)
+                }
             })
-        }
+        })
     }
 }
 export { EventSystem }

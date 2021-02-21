@@ -1,4 +1,4 @@
-class Point {
+export class Point {
     public x: number
     public y: number
 
@@ -13,7 +13,7 @@ class Point {
     }
 }
 
-class Vector2 {
+export class Vector2 {
     public x: number
     public y: number
 
@@ -28,4 +28,7 @@ class Vector2 {
 export const V_NULL = new Vector2(0, 0)
 export const V_UNIT = new Vector2(1, 1)
 
-export { Point, Vector2 }
+
+export function clamp(min: number, x: number, max: number): number {
+    return Math.max(min, Math.min(x, max))
+}

@@ -1,7 +1,7 @@
 import { EventSystem } from './eventSystem'
 
 enum EventType {
-    Keyboard, Mouse, Window, Custom
+    KeyboardPressed, KeyboardDown, Mouse, Window, Custom
 }
 
 class Event {
@@ -17,7 +17,7 @@ class Event {
         this.listeners = [this.callback]
     }
 
-    static emit(name: string, ...params: any): void {
+    static emit(name: string, params?: any): void {
         const event: Event = ES.getCustomEvent(name)
         if (event) {
             event.listeners.forEach(callback => callback(params))
@@ -34,8 +34,12 @@ class Event {
         }
     }
 
+    static onKeyDown(name: string, callback: Function): void {
+        ES.addEvent(new Event(name, callback, EventType.KeyboardDown))
+    }
+
     static onKeyPressed(name: string, callback: Function): void {
-        ES.addEvent(new Event(name, callback, EventType.Keyboard))
+        ES.addEvent(new Event(name, callback, EventType.KeyboardPressed))
     }
 
     static onMouseClick(callback: Function) {
