@@ -46,4 +46,4 @@ class Event {
 const ES: EventSystem = new EventSystem()
 
 export default Event
-export { Event, EventType }
+export { Event, EventType, ES }

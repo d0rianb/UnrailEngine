@@ -2,7 +2,7 @@ TODO :
     - life cycle
     - Loading Screen
     - Clean dependencies
-    - Find a name 
+    - Find a name > Train Engine
     - Setup Vite for developement
     - Use keydrown for keyboard management
 

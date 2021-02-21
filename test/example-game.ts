@@ -69,7 +69,7 @@ class Player extends PlayerObject {
     }
 
     render(ctx) {
-        Renderer.circle(ctx, this.x, this.y, 30)
+        Renderer.rect(ctx, this.x, this.y, 30, 30)
     }
 }
 
@@ -96,7 +96,7 @@ class Env extends GameEnvironement {
 
     constructor(width, height) {
         super(width, height)
-        this.player = new Player(width / 2, height - 50)
+        this.player = new Player(width / 2, height - 30)
         const canvas = createCanvas(width, height)
         this.ctx = canvas.getContext('2d')
         this.shots = []
@@ -107,8 +107,9 @@ class Env extends GameEnvironement {
     }
 
     bindEvents() {
-        Event.onKeyPressed('ArrowLeft', e => this.player.move(-5, 0))
-        Event.onKeyPressed('ArrowRight', e => this.player.move(5, 0))
+        const speed = 2
+        Event.onKeyPressed('ArrowLeft', e => this.player.move(-5 * speed, 0))
+        Event.onKeyPressed('ArrowRight', e => this.player.move(5 * speed, 0))
         Event.on('kill', () => this.score++)
         Event.on('new-shot', ({ x, y }) => this.shots.push(new Shot(x, y)))
     }

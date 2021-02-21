@@ -6,17 +6,23 @@ class EventSystem {
     windowEvents: Array<Event>
     keyboardEvents: Array<Event>
     customEvents: Array<Event>
+    currentKeyEvents: Array<KeyboardEvent>
 
     constructor() {
         this.windowEvents = []
         this.keyboardEvents = []
         this.customEvents = []
+
+        this.currentKeyEvents = []
+
         window.addEventListener('keydown', e => {
-            this.keyboardEvents.forEach(keyEvent => {
-                if (e.code === keyEvent.name) {
-                    keyEvent.callback(e)
-                }
-            })
+            if (!this.currentKeyEvents.find(event => event.code === e.code)) {
+                this.currentKeyEvents.push(e)
+            }
+        })
+        window.addEventListener('keyup', e => {
+            if (!this.currentKeyEvents.length) return
+            this.currentKeyEvents = this.currentKeyEvents.filter(event => event.code !== e.code)
         })
     }
 
@@ -41,6 +47,18 @@ class EventSystem {
     bindEvents(): void {
         // TODO: check if event exist on window
         this.windowEvents.forEach(event => window.addEventListener(event.name as any, event.callback as Callback))
+    }
+
+    tick(): void {
+        if (this.currentKeyEvents.length) {
+            this.keyboardEvents.forEach(keyEvent => {
+                this.currentKeyEvents.forEach(e => {
+                    if (e.code === keyEvent.name) {
+                        keyEvent.callback(e)
+                    }
+                })
+            })
+        }
     }
 }
 export { EventSystem }

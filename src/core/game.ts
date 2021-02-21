@@ -1,27 +1,29 @@
 import { Env } from './env'
+import { ES } from '../events/event'
 
 class Game {
     env: Env
-    mainLoop: FrameRequestCallback
+    gameLoop: FrameRequestCallback
 
     constructor(env: Env) {
         this.env = env
     }
 
     setMainLoop(func: Function): void {
-        this.mainLoop = func as FrameRequestCallback
+        this.gameLoop = func as FrameRequestCallback
     }
 
-    loop(time: number): void {
-        this.mainLoop(time)
-        window.requestAnimationFrame(time => this.loop(time))
+    update(time: number): void {
+        ES.tick()
+        this.gameLoop(time)
+        window.requestAnimationFrame(time => this.update(time))
     }
 
     start(): void {
-        if (!this.mainLoop) {
-            throw new Error('No mainloop for the game')
+        if (!this.gameLoop) {
+            throw new Error('No game loop')
         }
-        this.loop(0)
+        this.update(0)
     }
 }
 
