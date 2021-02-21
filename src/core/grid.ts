@@ -5,6 +5,8 @@ interface NeihboorObject {
     left?: Cell
 }
 
+
+// TODO: Remove 
 enum CellType {
     Turret,
     Road,
@@ -12,6 +14,7 @@ enum CellType {
     Empty
 }
 
+// TODO: add properties scope
 class Grid {
     rows: number
     cols: number

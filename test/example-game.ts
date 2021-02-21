@@ -1,13 +1,23 @@
 // Dorian&Co © 2021
 // Example SpaceInvader game to test game engine
 
-import { getWindowDimensions } from 'js-game-engine'
-import { Renderer, Interface } from 'js-game-engine/render'
-import { Event } from 'js-game-engine/event'
-import { Config } from 'js-game-engine/config'
+import {
+    getWindowDimensions,
+    createCanvas,
+    Game,
+    GameObject,
+    PlayerObject,
+    GameEnvironement
+} from '../src'
+import { Renderer, Interface } from '../src/render'
+import { Event } from '../src/events'
+import { Config } from '../src/config'
 
 // enemy.ts
 class Enemy extends GameObject {
+    health: number
+    alive: boolean
+
     constructor(x, y) {
         super(x, y)
         this.health = 100
@@ -19,7 +29,7 @@ class Enemy extends GameObject {
     }
 
     update() {
-        if (this.health <= 0) return isDead()
+        if (this.health <= 0) return this.isDead()
         this.y += 5
     }
 
@@ -31,6 +41,9 @@ class Enemy extends GameObject {
 
 // player.ts
 class Player extends PlayerObject {
+    health: number
+    alive: boolean
+
     constructor(x, y) {
         super(x, y)
         this.health = 100
@@ -52,7 +65,7 @@ class Player extends PlayerObject {
     }
 
     update() {
-        if (this.health <= 0) return isDead()
+        if (this.health <= 0) return this.isDead()
     }
 
     render(ctx) {
@@ -60,41 +73,57 @@ class Player extends PlayerObject {
     }
 }
 
+class Shot extends GameObject {
+    constructor(x, y) {
+        super(x, y)
+    }
+
+    update() {
+        this.y += 5
+    }
+
+    render(ctx) { }
+}
+
 
 // env.ts
 class Env extends GameEnvironement {
-    enemies: Array<Enemies>
-    shots: Array<Shots>
+    enemies: Array<Enemy>
+    shots: Array<Shot>
     player: Player
+    ctx: CanvasRenderingContext2D
+    score: number
 
     constructor(width, height) {
         super(width, height)
-        this.player = new Player(width / 2, height)
-        this.ctx = createCanvas(width, height).getContext('2d')
+        this.player = new Player(width / 2, height - 50)
+        const canvas = createCanvas(width, height)
+        this.ctx = canvas.getContext('2d')
         this.shots = []
         this.enemies = []
         this.score = 0
         this.bindEvents()
+        document.querySelector('#app').appendChild(canvas)
     }
 
     bindEvents() {
-        Event.onKeyPressed('ArrowL', e => this.player.move(-5, 0))
-        Event.onKeyPressed('ArrowR', e => this.player.move(5, 0))
+        Event.onKeyPressed('ArrowLeft', e => this.player.move(-5, 0))
+        Event.onKeyPressed('ArrowRight', e => this.player.move(5, 0))
         Event.on('kill', () => this.score++)
         Event.on('new-shot', ({ x, y }) => this.shots.push(new Shot(x, y)))
     }
 
     update() {
-        Renderer.clear()
         this.player.update()
-        this.shoots.forEach(shot => shot.update())
+        this.shots.forEach(shot => shot.update())
         this.enemies.forEach(enemy => enemy.update())
         this.render()
     }
 
     render() {
+        Renderer.clear(this.ctx)
         this.player.render(this.ctx)
-        this.shoots.forEach(shot => shot.render(this.ctx))
+        this.shots.forEach(shot => shot.render(this.ctx))
         this.enemies.forEach(enemy => enemy.render(this.ctx))
     }
 }
@@ -109,7 +138,7 @@ const { width, height } = getWindowDimensions()
 const env = new Env(width, height)
 const game = new Game(env)
 
-const keyBinds = Config.load('keybinds.json')
+// const keyBinds = Config.load('keybinds.json')
 
-game.setMainLoop(env.update)
+game.setMainLoop(() => env.update())
 game.start()

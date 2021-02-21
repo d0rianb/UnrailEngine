@@ -6,8 +6,26 @@ interface GameObjectInterface {
 }
 
 
-class GameObject implements GameObjectInterface { }
+class GameObject implements GameObjectInterface {
+    x: number
+    y: number
 
-class PlayerObject extends GameObject { }
+    constructor(x: number, y: number) {
+        this.x = x
+        this.y = y
+    }
+
+    update() { }
+    render(ctx: CanvasRenderingContext2D) { }
+}
+
+class PlayerObject extends GameObject {
+    constructor(x: number, y: number) {
+        super(x, y)
+    }
+
+    update() { }
+    render(ctx: CanvasRenderingContext2D) { }
+}
 
 export { GameObject, PlayerObject }

@@ -3,13 +3,13 @@
 interface EnvInterface {
     width: number
     height: number
-    update: () => void
+    update: (deltaTime?: number) => void
     render: (CanvasRenderingContext2D) => void
 }
 
 class Env implements EnvInterface {
-    width: number
-    height: number
+    public width: number
+    public height: number
 
     constructor(width: number, height: number) {
         this.width = width
@@ -22,4 +22,4 @@ class Env implements EnvInterface {
 
 }
 
-export { Env as GameEnvironement }
+export { Env }

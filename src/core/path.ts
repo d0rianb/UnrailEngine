@@ -1,5 +1,7 @@
-import PathBuilder from 'svg-path-builder';
-import { Renderer } from '../renderer/render'
+import PathBuilder from 'svg-path-builder'
+
+import { Point, Vector2, V_UNIT } from './math'
+import { Renderer } from '../render/renderer'
 
 // [[x, y], [x, y], ...]
 interface JSONPath {
@@ -7,11 +9,11 @@ interface JSONPath {
 }
 
 class Path {
-    entry: Point
-    points: Array<Point>
-    end: Point
-    svg: any
-    length: number
+    public entry: Point
+    public points: Array<Point>
+    public end: Point
+    private svg: any
+    public length: number
 
     constructor(points: Array<Point>) {
         this.entry = points[0] || null
@@ -64,31 +66,4 @@ class Path {
     }
 }
 
-class Point {
-    x: number
-    y: number
-
-    constructor(x: number, y: number) {
-        this.x = x
-        this.y = y
-    }
-
-    dist(point: Point): number {
-        return Math.sqrt((this.x - point.x) ** 2 + (this.y - point.y) ** 2)
-    }
-}
-
-class Vector2 {
-    x: number
-    y: number
-
-    constructor(x: number, y: number) {
-        this.x = x
-        this.y = y
-    }
-}
-
-export const V_NULL = new Vector2(0, 0)
-export const V_UNIT = new Vector2(1, 1)
-
-export { Path, Point, Vector2 }
+export { Path }

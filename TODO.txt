@@ -2,7 +2,9 @@ TODO :
     - life cycle
     - Loading Screen
     - Clean dependencies
-    - Find a name
+    - Find a name 
+    - Setup Vite for developement
+    - Use keydrown for keyboard management
 
 PARTS :
     - Core
@@ -12,6 +14,7 @@ PARTS :
     - Stats
     - Configuration
     - Physics
+    - Particle System
 
  ISSUE :
     - None
