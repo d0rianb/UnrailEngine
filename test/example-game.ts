@@ -39,7 +39,6 @@ class Enemy extends GameObject {
     }
 }
 
-
 // player.ts
 class Player extends PlayerObject {
     health: number

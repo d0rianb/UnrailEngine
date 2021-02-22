@@ -2,9 +2,10 @@ TODO :
     - life cycle
     - Loading Screen
     - Clean dependencies
-    - Find a name > Train Engine
+    - Find a name > Unrail Engine
     - Setup Vite for developement
     - Use keydrown for keyboard management
+    - create a Github repository
 
 PARTS :
     - Core
