@@ -13,6 +13,8 @@ It contains (or will soon contains) :
 -   Physics
 -   Particle System
 
+Examples can be found at /test
+
 ## Documentation
 
 ### Create a game
@@ -32,10 +34,13 @@ game.start();
 ```ts
 import { Event } from "unrail-engine/events";
 
-Event.onKeyDown("ArrowLeft", (e) => callback(e));
-Event.onKeyPressed("Space", (e) => callback(e));
-Event.emit("custom-event", params);
-Event.on("custom-event", callback);
+// Key Events
+Event.onKeyDown("ArrowLeft", (e) => callback(e)); // While key is down
+Event.onKeyPressed("<keyCode>", (e) => callback(e)); // Fired once
+
+// Custom Events
+Event.emit("custom-event-name", params);
+Event.on("custom-event-name", callback);
 ```
 
 ### Renderer

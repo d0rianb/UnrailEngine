@@ -17,6 +17,7 @@
     },
     "devDependencies": {
         "file-loader": "^6.2.0",
+        "typedoc": "^0.20.27",
         "webpack": "^4.42.1",
         "webpack-cli": "^3.3.11",
         "webpack-dev-server": "^3.11.2"
