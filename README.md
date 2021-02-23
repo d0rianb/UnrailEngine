@@ -21,37 +21,37 @@ Examples can be found at /test
 
 ```ts
 // main.ts
-const { width, height } = getWindowDimensions(); // Had to be imported
-const env: Env = new Env(width, height); // Create an environment for the game
-const game: Game = new Game(env);
+const { width, height } = getWindowDimensions() // Had to be imported
+const env: Env = new Env(width, height) // Create an environment for the game
+const game: Game = new Game(env)
 
-game.setMainLoop(() => env.update()); // register a main loop
-game.start();
+game.setMainLoop(() => env.update()) // register a main loop
+game.start()
 ```
 
 ### Event System
 
 ```ts
-import { Event } from "unrail-engine/events";
+import { Event } from 'unrail-engine/events'
 
 // Key Events
-Event.onKeyDown("ArrowLeft", (e) => callback(e)); // While key is down
-Event.onKeyPressed("<keyCode>", (e) => callback(e)); // Fired once
+Event.onKeyDown('ArrowLeft', (e) => callback(e)) // While key is down
+Event.onKeyPressed('<keyCode>', (e) => callback(e)) // Fired once
 
 // Custom Events
-Event.emit("custom-event-name", params);
-Event.on("custom-event-name", callback);
+Event.emit('custom-event-name', params)
+Event.on('custom-event-name', callback)
 ```
 
 ### Renderer
 
 ```ts
-import { Renderer } from "unrail-engine/render";
+import { Renderer } from 'unrail-engine/render'
 
 Renderer.clear(ctx)
-Renderer.rect(ctx, x, y, width, height, style?);
+Renderer.rect(ctx, x, y, width, height, style?)
 ```
 
 ---
 
-2020 &copy; Dorian Beauchesne
+2020 &copy Dorian Beauchesne
