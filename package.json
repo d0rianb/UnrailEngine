@@ -3,24 +3,21 @@
     "version": "0.0.1",
     "description": "A lightweight 2D game engine written in typescript",
     "scripts": {
-        "dev": "webpack --watch",
-        "test": "webpack --watch test/example-game.ts",
-        "build": "webpack"
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "vite preview"
     },
     "dependencies": {
         "file-saver": "^2.0.5",
         "stats.js": "^0.17.0",
         "svg-path-builder": "^1.0.2",
-        "ts-loader": "^6.2.2",
-        "typescript": "^3.8.3",
         "vue": "^2.6.12"
     },
     "devDependencies": {
-        "file-loader": "^6.2.0",
         "typedoc": "^0.20.27",
-        "webpack": "^4.42.1",
-        "webpack-cli": "^3.3.11",
-        "webpack-dev-server": "^3.11.2"
+        "typescript": "^3.8.3",
+        "vite": "^2.0.2",
+        "vite-plugin-vue2": "^1.2.1"
     },
     "keywords": [],
     "author": "",

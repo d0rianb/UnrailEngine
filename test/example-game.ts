@@ -105,7 +105,12 @@ class Env extends GameEnvironement {
         this.enemies = []
         this.score = 0
         this.bindEvents()
-        document.querySelector('#app').appendChild(canvas)
+
+        // Temporary
+        const main = document.createElement('main')
+        main.setAttribute('id', 'app')
+        main.appendChild(canvas)
+        document.querySelector('body').appendChild(main)
     }
 
     bindEvents() {

@@ -3,12 +3,12 @@ import Vue from 'vue'
 import { blink } from '../core/utils'
 
 const _vue = new Vue({
-    el: '#app',
     data() {
         return {}
     },
     methods: {}
 })
+window.onload = () => _vue.$mount('#app')
 
 
 class Interface {

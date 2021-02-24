@@ -1,11 +1,12 @@
 TODO :
     - life cycle
     - Loading Screen
-    - Clean dependencies
-    - Find a name > Unrail Engine
-    - Setup Vite for developement
-    - Use keydrown for keyboard management
-    - create a Github repository
+    - Clean dependencies                                    - X
+    - Find a name > Unrail Engine                           - X
+    - Setup Vite for developement                           - X
+    - create a Github repository                            - X
+    - change webpack to rollup ? (for smaller bundle size)  - X
+    - Do not use Vue for interface
 
 PARTS :
     - Core

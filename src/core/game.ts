@@ -23,7 +23,11 @@ class Game {
         if (!this.gameLoop) {
             throw new Error('No game loop')
         }
-        this.update(0)
+
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log(document);
+            this.update(0)
+        })
     }
 }
 
