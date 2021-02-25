@@ -22,15 +22,15 @@ class EventSystem {
             if (!this.currentKeyEvents.find(event => event.code === e.code)) {
                 this.currentKeyEvents.push(e)
             }
-        })
-        window.addEventListener('keyup', e => {
-            if (!this.currentKeyEvents.length) return
-            this.currentKeyEvents = this.currentKeyEvents.filter(event => event.code !== e.code)
             this.keyboardPressedEvents.forEach(event => {
                 if (e.code === event.name) {
                     event.callback(e)
                 }
             })
+        })
+        window.addEventListener('keyup', e => {
+            if (!this.currentKeyEvents.length) return
+            this.currentKeyEvents = this.currentKeyEvents.filter(event => event.code !== e.code)
         })
 
     }

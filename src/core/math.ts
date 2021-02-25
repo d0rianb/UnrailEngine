@@ -8,7 +8,11 @@ export class Point {
     }
     // TODO: Implements operations
 
-    dist(point: Point): number {
+    public clone(): Point {
+        return new Point(this.x, this.y)
+    }
+
+    public dist(point: Point): number {
         return Math.sqrt((this.x - point.x) ** 2 + (this.y - point.y) ** 2)
     }
 }
@@ -31,4 +35,8 @@ export const V_UNIT = new Vector2(1, 1)
 
 export function clamp(min: number, x: number, max: number): number {
     return Math.max(min, Math.min(x, max))
+}
+
+export function sign(x: number): number {
+    return x < 0 ? -1 : 1
 }

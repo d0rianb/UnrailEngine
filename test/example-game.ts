@@ -23,6 +23,8 @@ class Enemy extends GameObject {
         super(x, y)
         this.health = 100
         this.alive = true
+        this.width = 80
+        this.height = 10
     }
 
     isDead() {
@@ -31,11 +33,11 @@ class Enemy extends GameObject {
 
     update() {
         if (this.health <= 0) return this.isDead()
-        this.y += 5
+        this.y += .25
     }
 
     render(ctx) {
-        Renderer.rect(ctx, this.x, this.y, 100, 50)
+        Renderer.rect(ctx, this.x, this.y, this.width, this.height)
     }
 }
 
@@ -74,16 +76,28 @@ class Player extends PlayerObject {
 }
 
 class Shot extends GameObject {
+
+    speed: number
+
     constructor(x, y) {
         super(x, y)
+        this.width = 2
+        this.height = 5
+        this.speed = 6
     }
 
-    update() {
-        this.y -= 5
+    update(enemies: Array<Enemy>) {
+        enemies.forEach(enemy => {
+            if (enemy.collide(this as GameObject)) {
+                enemy.health -= 5
+                Event.emit('hit', { shot: this, enemy })
+            }
+        })
+        this.y -= this.speed
     }
 
     render(ctx) {
-        Renderer.rect(ctx, this.x, this.y, 2, 5)
+        Renderer.rect(ctx, this.x, this.y, this.width, this.height, { lineWidth: 4, strokeStyle: 'red' })
     }
 }
 
@@ -106,6 +120,10 @@ class Env extends GameEnvironement {
         this.score = 0
         this.bindEvents()
 
+        for (let i = 0; i < 5; i++) {
+            this.enemies.push(new Enemy(150 * i, 10))
+        }
+
         // Temporary
         const main = document.createElement('main')
         main.setAttribute('id', 'app')
@@ -120,11 +138,17 @@ class Env extends GameEnvironement {
         Event.onKeyPressed('Space', e => this.player.shoot())
         Event.on('kill', () => this.score++)
         Event.on('new-shot', ({ x, y }) => { this.shots.push(new Shot(x, y)) })
+        Event.on('hit', ({ shot, enemy }) => this.hit(shot, enemy))
+    }
+
+    hit(shot: Shot, enemy: Enemy) {
+        enemy.health -= 20
+        this.shots = this.shots.filter(s => s !== shot)
     }
 
     update() {
         this.player.update()
-        this.shots.forEach(shot => shot.update())
+        this.shots.forEach(shot => shot.update(this.enemies))
         this.enemies.forEach(enemy => enemy.update())
         this.render()
     }
