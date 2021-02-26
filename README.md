@@ -35,8 +35,8 @@ game.start()
 import { Event } from 'unrail-engine/events'
 
 // Key Events
-Event.onKeyDown('ArrowLeft', (e) => callback(e)) // While key is down
-Event.onKeyPressed('<keyCode>', (e) => callback(e)) // Fired once
+Event.onKeyDown('ArrowLeft', e => callback(e)) // While key is down
+Event.onKeyPressed('<keyCode>', e => callback(e)) // Fired once
 
 // Custom Events
 Event.emit('custom-event-name', params)
@@ -48,8 +48,21 @@ Event.on('custom-event-name', callback)
 ```ts
 import { Renderer } from 'unrail-engine/render'
 
+let style: StyleObject = { // Canvas2DContext options from : https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D
+    strokeStyle?: string,
+    lineWidth?: number,
+    lineJoin?: CanvasLineJoin,
+    fillStyle?: string,
+    globalAlpha?: number
+    globalCompositeOperation?: string
+}
+
 Renderer.clear(ctx)
 Renderer.rect(ctx, x, y, width, height, style?)
+Renderer.line(ctx, point1, point2, style?)
+Renderer.poly(ctx, pointArray, style?)
+Renderer.circle(ctx, x, y, radius, style?)
+
 ```
 
 ---

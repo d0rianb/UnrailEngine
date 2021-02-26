@@ -1,6 +1,8 @@
 import { Env } from './env'
 import { ES } from '../events/event'
 
+import { Interface } from '../render/interface'
+
 class Game {
     env: Env
     gameLoop: FrameRequestCallback
@@ -25,7 +27,7 @@ class Game {
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            console.log(document);
+            Interface.init(this)
             this.update(0)
         })
     }

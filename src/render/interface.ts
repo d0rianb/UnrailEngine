@@ -1,22 +1,25 @@
-import Vue from 'vue'
+import { Game } from '../core/game'
 
-import { blink } from '../core/utils'
+interface InterfaceItem {
+    callback(game: Game): string
+    options: any
+}
 
-const _vue = new Vue({
-    data() {
-        return {}
-    },
-    methods: {}
-})
-window.onload = () => _vue.$mount('#app')
 
+let pendindItems: Array<InterfaceItem> = []
 
 class Interface {
-    // TODO: properly define options as CSS properties
-    static addItem(callback: Function, options: any): void {
 
+    static items: Array<InterfaceItem>
+
+    static init(game: Game): void {
+        this.items = []
     }
 
+    // TODO: properly define options as CSS properties
+    static addItem(callback: Function, options?: any): void {
+        pendindItems.push(<InterfaceItem>{ callback, options })
+    }
 }
 
 export { Interface }
