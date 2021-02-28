@@ -16,7 +16,7 @@ interface RendererInterface {
 
 const defaultStyleObject: StyleObject = {
     strokeStyle: 'black',
-    lineWidth: 4,
+    lineWidth: 2,
     lineJoin: 'round',
     fillStyle: 'transparent',
     globalAlpha: 1,

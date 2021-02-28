@@ -1,6 +1,6 @@
 import { Env } from './env'
 import { ES } from '../events/event'
-
+import { stats, showStats } from '../core/stats'
 import { Interface } from '../render/interface'
 
 class Game {
@@ -16,8 +16,10 @@ class Game {
     }
 
     update(time: number): void {
+        stats.begin()
         ES.tick()
         this.gameLoop(time)
+        stats.end()
         window.requestAnimationFrame(time => this.update(time))
     }
 
@@ -28,6 +30,7 @@ class Game {
 
         window.addEventListener('DOMContentLoaded', () => {
             Interface.init(this)
+            showStats()
             this.update(0)
         })
     }

@@ -7,9 +7,11 @@ import {
     Game,
     GameObject,
     PlayerObject,
-    GameEnvironement
+    GameEnvironement,
+    ParticuleGenerator,
+    Particle
 } from '../src'
-import { clamp } from '../src/core/math'
+import { clamp, Vector2 } from '../src/core/math'
 import { Renderer, Interface } from '../src/render'
 import { Event } from '../src/events'
 import { Config } from '../src/config'
@@ -76,7 +78,6 @@ class Player extends PlayerObject {
 }
 
 class Shot extends GameObject {
-
     speed: number
 
     constructor(x, y) {
@@ -106,6 +107,7 @@ class Shot extends GameObject {
 class Env extends GameEnvironement {
     enemies: Array<Enemy>
     shots: Array<Shot>
+    particles: Array<Particle>
     player: Player
     ctx: CanvasRenderingContext2D
     score: number
@@ -117,6 +119,7 @@ class Env extends GameEnvironement {
         this.ctx = canvas.getContext('2d')
         this.shots = []
         this.enemies = []
+        this.particles = []
         this.score = 0
         this.bindEvents()
 
@@ -144,12 +147,18 @@ class Env extends GameEnvironement {
     hit(shot: Shot, enemy: Enemy) {
         enemy.health -= 20
         this.shots = this.shots.filter(s => s !== shot)
+        const PG: ParticuleGenerator = new ParticuleGenerator(25, new Vector2(shot.x, shot.y), 600, () => {
+            this.particles = PG.removeParticles(this.particles)
+        })
+        this.particles = PG.addParticles(this.particles)
+
     }
 
     update() {
         this.player.update()
         this.shots.forEach(shot => shot.update(this.enemies))
         this.enemies.forEach(enemy => enemy.update())
+        this.particles.forEach(particle => particle.update())
         this.render()
     }
 
@@ -158,6 +167,8 @@ class Env extends GameEnvironement {
         this.player.render(this.ctx)
         this.shots.forEach(shot => shot.render(this.ctx))
         this.enemies.forEach(enemy => enemy.render(this.ctx))
+        this.particles.forEach(particle => particle.render(this.ctx))
+
     }
 }
 
