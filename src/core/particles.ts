@@ -42,6 +42,7 @@ class Particle extends GameObject {
     }
 }
 
+// TODO : add particle options (color, size, etc)
 class ParticuleGenerator {
     public pos: Vector2
     public lifeDuration: number
