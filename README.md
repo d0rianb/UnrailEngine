@@ -53,7 +53,7 @@ let style: StyleObject = { // Canvas2DContext options from : https://developer.m
     lineWidth?: number,
     lineJoin?: CanvasLineJoin,
     fillStyle?: string,
-    globalAlpha?: number
+    globalAlpha?: number,
     globalCompositeOperation?: string
 }
 
@@ -67,4 +67,4 @@ Renderer.circle(ctx, x, y, radius, style?)
 
 ---
 
-2020 &copy Dorian Beauchesne
+2020 © Dorian Beauchesne
