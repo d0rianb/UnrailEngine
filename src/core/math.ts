@@ -7,16 +7,16 @@ export class Vector2 {
         this.y = y
     }
 
-    public add(vec: Vector2) {
+    public add(vec: Vector2): Vector2 {
         return new Vector2(this.x + vec.x, this.y + vec.y)
     }
 
-    public clone(): Point {
+    public clone(): Vector2 {
         return new Vector2(this.x, this.y)
     }
 
-    public dist(point: Point): number {
-        return Math.sqrt((this.x - point.x) ** 2 + (this.y - point.y) ** 2)
+    public dist(vec: Vector2): number {
+        return Math.sqrt((this.x - vec.x) ** 2 + (this.y - vec.y) ** 2)
     }
 }
 
