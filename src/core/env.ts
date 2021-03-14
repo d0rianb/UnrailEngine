@@ -3,8 +3,8 @@
 interface EnvInterface {
     width: number
     height: number
-    update: (deltaTime?: number) => void
-    render: (CanvasRenderingContext2D) => void
+    update: (deltaTime?: number, ...args: any[]) => void
+    render: (...args: any[]) => void
 }
 
 class Env implements EnvInterface {
@@ -18,7 +18,7 @@ class Env implements EnvInterface {
 
     update(): void { }
 
-    render(ctx: CanvasRenderingContext2D): void { }
+    render(): void { }
 
 }
 

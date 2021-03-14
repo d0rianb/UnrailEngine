@@ -10,10 +10,6 @@ interface StyleObject {
     globalCompositeOperation?: string
 }
 
-interface RendererInterface {
-    renderArea?: any
-}
-
 const defaultStyleObject: StyleObject = {
     strokeStyle: 'black',
     lineWidth: 2,
@@ -23,16 +19,28 @@ const defaultStyleObject: StyleObject = {
     globalCompositeOperation: 'add'
 }
 
-// Move to math file ?
-const precision: number = 2 * (window.devicePixelRatio || 1)
+// TODO: refactor
+let precision: number = 4
+try {
+    precision = 2 * (window.devicePixelRatio || 1)
+} catch (e) { }
 
+// Move to math file ?
 function round(num: number): number {
     return ~~(num * precision) / precision
 }
 
-class Renderer implements RendererInterface {
+let ctx: CanvasRenderingContext2D = null
 
-    static style(ctx: CanvasRenderingContext2D, obj?: StyleObject): void {
+
+class Renderer {
+
+    static setContext(context: CanvasRenderingContext2D): void {
+        ctx = context
+    }
+
+    static style(obj?: StyleObject): void {
+        if (!ctx) throw new Error('Context has not been initialize. Please use Renderer.setContext')
         const styleObject = { ...defaultStyleObject, ...obj }
         for (let prop in styleObject) {
             if (ctx[prop] !== styleObject[prop]) {
@@ -41,33 +49,33 @@ class Renderer implements RendererInterface {
         }
     }
 
-    static clear(ctx: CanvasRenderingContext2D, color?: string): void {
+    static clear(color?: string): void {
         if (color) {
-            this.style(ctx, { fillStyle: color })
+            Renderer.style({ fillStyle: color })
             ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
         } else {
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
         }
     }
 
-    static line(ctx: CanvasRenderingContext2D, point1: Point, point2: Point, obj?: StyleObject): void {
-        Renderer.style(ctx, obj)
+    static line(point1: Point, point2: Point, obj?: StyleObject): void {
+        Renderer.style(obj)
         ctx.beginPath()
         ctx.moveTo(round(point1.x), round(point1.y))
         ctx.lineTo(round(point2.x), round(point2.y))
         ctx.stroke()
     }
 
-    static rect(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, obj?: StyleObject, noStyle?: boolean): void {
-        if (!noStyle) Renderer.style(ctx, obj)
+    static rect(x: number, y: number, width: number, height: number, obj?: StyleObject, noStyle?: boolean): void {
+        if (!noStyle) Renderer.style(obj)
         const [r_x, r_y, r_w, r_h] = [round(x), round(y), round(width), round(height)]
         ctx.fillRect(r_x, r_y, r_w, r_h)
         ctx.strokeRect(r_x, r_y, r_w, r_h)
     }
 
-    static poly(ctx: CanvasRenderingContext2D, points: Array<Point>, obj?: StyleObject): void {
+    static poly(points: Array<Point>, obj?: StyleObject): void {
         if (!points.length) return
-        Renderer.style(ctx, obj)
+        Renderer.style(obj)
         ctx.beginPath()
         ctx.moveTo(round(points[0].x), round(points[0].y))
         for (let i = 1; i < points.length; i++) {
@@ -76,19 +84,19 @@ class Renderer implements RendererInterface {
         ctx.stroke()
     }
 
-    static circle(ctx: CanvasRenderingContext2D, x: number, y: number, radius: number, obj?: StyleObject): void {
-        Renderer.style(ctx, obj)
+    static circle(x: number, y: number, radius: number, obj?: StyleObject): void {
+        Renderer.style(obj)
         ctx.beginPath()
         ctx.arc(round(x), round(y), radius, 0, 2 * Math.PI)
         ctx.stroke()
     }
 
-    static point(ctx: CanvasRenderingContext2D, x: number, y: number, obj?: StyleObject): void {
-        Renderer.circle(ctx, x, y, 5, obj)
+    static point(x: number, y: number, obj?: StyleObject): void {
+        Renderer.circle(x, y, 5, obj)
     }
 
-    static rectSprite(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, texture: Texture): void {
-        Renderer.style(ctx, {})
+    static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
+        Renderer.style({})
         ctx.save()
         ctx.translate(round(x + width / 2), round(y + height / 2))
         ctx.scale(texture.scale.x, texture.scale.y)
@@ -103,17 +111,17 @@ class Renderer implements RendererInterface {
         ctx.restore()
     }
 
-    static circleSprite(ctx: CanvasRenderingContext2D, x: number, y: number, radius: number, texture: Texture): void {
+    static circleSprite(x: number, y: number, radius: number, texture: Texture): void {
         ctx.save()
         ctx.beginPath()
         ctx.arc(round(x), round(y), radius, 0, 2 * Math.PI)
         ctx.clip()
-        this.rectSprite(ctx, x - radius, y - radius, 2 * radius, 2 * radius, texture)
+        Renderer.rectSprite(x - radius, y - radius, 2 * radius, 2 * radius, texture)
         ctx.restore()
     }
 
-    static tint(ctx: CanvasRenderingContext2D, color: string, x: number, y: number, width: number, height: number): void {
-        this.rect(ctx, x, y, width, height, {
+    static tint(color: string, x: number, y: number, width: number, height: number): void {
+        Renderer.rect(x, y, width, height, {
             fillStyle: color,
             globalCompositeOperation: 'multiply',
             globalAlpha: .25
@@ -121,4 +129,4 @@ class Renderer implements RendererInterface {
     }
 }
 
-export { Renderer }
+export { Renderer, StyleObject }

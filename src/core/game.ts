@@ -4,8 +4,8 @@ import { stats, showStats } from '../core/stats'
 import { Interface } from '../render/interface'
 
 class Game {
-    env: Env
-    gameLoop: FrameRequestCallback
+    private env: Env
+    private gameLoop: FrameRequestCallback
 
     constructor(env: Env) {
         this.env = env

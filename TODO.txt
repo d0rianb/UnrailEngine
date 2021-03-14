@@ -1,6 +1,6 @@
 TODO :
     - life cycle
-    - Loading Screen
+    - Splash Screen
     - Clean dependencies                                    - X
     - Find a name > Unrail Engine                           - X
     - Setup Vite for developement                           - X
@@ -9,6 +9,11 @@ TODO :
     - Do not use Vue for interface
     - Camera System
     - Serialize
+    - Offscreen Canvas rendering
+    - Version system                                        - X
+    - implement physic engine
+    - Physic interpolated rendering
+    - WebGL for rendering ?
 
 PARTS :
     - Core

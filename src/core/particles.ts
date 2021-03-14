@@ -5,6 +5,9 @@ import { Vector2, clamp, inRange } from './math'
 import { Cooldown } from '../events'
 import { Renderer } from '../render'
 
+// TODO : improve  (temporary)
+let renderer: Renderer = Renderer // Can be change to offscreen renderer
+
 const GRAVITY: number = .01 // N
 
 type ParticleAngle = number | 'random'
@@ -37,8 +40,8 @@ class Particle extends GameObject {
         this.opacity--
     }
 
-    render(ctx: CanvasRenderingContext2D): void {
-        Renderer.circle(ctx, this.pos.x, this.pos.y, this.radius, { fillStyle: this.color, lineWidth: 1, globalAlpha: this.opacity / 255 })
+    render(): void {
+        renderer.circle(this.pos.x, this.pos.y, this.radius, { fillStyle: this.color, lineWidth: 1, globalAlpha: this.opacity / 255 })
     }
 }
 
@@ -63,6 +66,10 @@ class ParticuleGenerator {
             this.destroy()
             onDestroy()
         })
+    }
+
+    setRenderer(r: Renderer): void {
+        renderer = r
     }
 
     addParticles(array: Array<Particle>): Array<Particle> {

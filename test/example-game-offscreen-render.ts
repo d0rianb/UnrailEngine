@@ -12,7 +12,7 @@ import {
     Particle
 } from '../src'
 import { clamp, Vector2 } from '../src/core/math'
-import { Renderer, Interface } from '../src/render'
+import { OffscreenRenderer as Renderer, Interface, OffscreenRenderer } from '../src/render'
 import { Event } from '../src/events'
 import { Config } from '../src/config'
 
@@ -116,14 +116,13 @@ class Env extends GameEnvironement {
     constructor(width, height) {
         super(width, height)
         this.player = new Player(width / 2, height - 30)
-        this.canvas = createCanvas(width, height)
-        this.ctx = this.canvas.getContext('2d')
+        this.canvas = createCanvas(width, height, 1)
+        // this.ctx = this.canvas.getContext('2d')
         this.shots = []
         this.enemies = []
         this.particles = []
         this.score = 0
         this.bindEvents()
-        Renderer.setContext(this.ctx)
 
         for (let i = 0; i < 5; i++) {
             this.enemies.push(new Enemy(150 * i, 10))
@@ -134,6 +133,7 @@ class Env extends GameEnvironement {
         main.setAttribute('id', 'app')
         main.appendChild(this.canvas)
         document.querySelector('body').appendChild(main)
+        Renderer.transferTo(this.canvas, width, height)
     }
 
     bindEvents() {
@@ -153,6 +153,7 @@ class Env extends GameEnvironement {
             this.particles = PG.removeParticles(this.particles)
         })
         this.particles = PG.addParticles(this.particles)
+        PG.setRenderer(OffscreenRenderer)
 
     }
 
