@@ -1,3 +1,5 @@
+import { createCanvas } from '..'
+import { insertCanvas } from '../core/geometry'
 import { Point } from '../core/math'
 import { Texture } from './texture'
 
@@ -34,6 +36,14 @@ let ctx: CanvasRenderingContext2D = null
 
 
 class Renderer {
+
+    // Create a canvas and insert it to <main>
+    static create(width: number, height: number): HTMLCanvasElement {
+        const canvas: HTMLCanvasElement = createCanvas(width, height)
+        insertCanvas(canvas, 'main')
+        Renderer.setContext(canvas.getContext('2d'))
+        return canvas
+    }
 
     static setContext(context: CanvasRenderingContext2D): void {
         ctx = context

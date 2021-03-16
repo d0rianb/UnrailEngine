@@ -1,4 +1,6 @@
 import { Texture } from '..'
+import { Game } from '../../core/game'
+import { createCanvas, insertCanvas } from '../../core/geometry'
 import { Point } from '../../core/math'
 import { Renderer, StyleObject } from '../renderer'
 import { WorkerMessage } from './workerMessage'
@@ -16,13 +18,28 @@ function sendRenderRequest(methodName: string, args: any) {
     sendMessageToWorker('render', { method: methodName, args })
 }
 
-class OffscreenRenderer extends Renderer {
-    static transferTo(canvas: HTMLCanvasElement, width?: number, height?: number): void {
-        offscreenCanvas = canvas.transferControlToOffscreen()
-        this.initWorker(width, height)
+class OffscreenRenderer {
+
+    // Create a canvas and insert it to <main>
+    static create(width: number, height: number): HTMLCanvasElement {
+        const canvas: HTMLCanvasElement = createCanvas(width, height, 1)
+        OffscreenRenderer.transferTo(canvas, width, height)
+        insertCanvas(canvas, 'main')
+        return canvas
     }
 
-    static initWorker(width?: number, height?: number): void {
+    static transferTo(canvas: HTMLCanvasElement, width?: number, height?: number): void {
+        offscreenCanvas = canvas.transferControlToOffscreen()
+        let { clientWidth, clientHeight } = canvas
+
+        if (Game.rendererType !== 'offscreen') {
+            Game.setRendererType('offscreen')
+        }
+
+        OffscreenRenderer.initRenderWorker(width || clientWidth, height || clientHeight)
+    }
+
+    static initRenderWorker(width: number, height: number): void {
         worker = new Worker(WORKER_PATH, { type: 'module' })
         sendMessageToWorker('initCanvas', {
             canvas: offscreenCanvas,

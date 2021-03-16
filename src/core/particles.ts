@@ -3,16 +3,13 @@ import Random from '@dorianb/random-js'
 import { GameObject } from './objects'
 import { Vector2, clamp, inRange } from './math'
 import { Cooldown } from '../events'
-import { Renderer } from '../render'
-
-// TODO : improve  (temporary)
-let renderer: Renderer = Renderer // Can be change to offscreen renderer
+import { OffscreenRenderer, Renderer } from '../render'
+import { Game } from '..'
 
 const GRAVITY: number = .01 // N
 
 type ParticleAngle = number | 'random'
 type Callback = () => void
-
 
 class Particle extends GameObject {
     public id: number
@@ -41,7 +38,14 @@ class Particle extends GameObject {
     }
 
     render(): void {
-        renderer.circle(this.pos.x, this.pos.y, this.radius, { fillStyle: this.color, lineWidth: 1, globalAlpha: this.opacity / 255 })
+        switch (Game.rendererType) {
+            case 'normal':
+                Renderer.circle(this.pos.x, this.pos.y, this.radius, { fillStyle: this.color, lineWidth: 1, globalAlpha: this.opacity / 255 })
+                break
+            case 'offscreen':
+                OffscreenRenderer.circle(this.pos.x, this.pos.y, this.radius, { fillStyle: this.color, lineWidth: 1, globalAlpha: this.opacity / 255 })
+                break
+        }
     }
 }
 
@@ -66,10 +70,6 @@ class ParticuleGenerator {
             this.destroy()
             onDestroy()
         })
-    }
-
-    setRenderer(r: Renderer): void {
-        renderer = r
     }
 
     addParticles(array: Array<Particle>): Array<Particle> {

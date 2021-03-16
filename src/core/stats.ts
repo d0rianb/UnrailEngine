@@ -1,14 +1,14 @@
 import Stats from 'stats.js'
 
-const stats: Stats = new Stats()
-
-function showStats(): void {
+function showStats(): Stats {
+    const stats: Stats = new Stats()
     const el: HTMLDivElement = document.createElement('div')
     el.classList.toggle('stats')
     stats.showPanel(0)
     el.appendChild(stats.dom)
     document.body.appendChild(el)
+    return stats
 }
 
 
-export { stats, showStats }
+export { showStats, Stats }

@@ -153,7 +153,6 @@ class Env extends GameEnvironement {
             this.particles = PG.removeParticles(this.particles)
         })
         this.particles = PG.addParticles(this.particles)
-        PG.setRenderer(OffscreenRenderer)
 
     }
 

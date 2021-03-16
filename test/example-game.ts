@@ -109,31 +109,23 @@ class Env extends GameEnvironement {
     shots: Array<Shot>
     particles: Array<Particle>
     player: Player
-    canvas: HTMLCanvasElement
-    ctx: CanvasRenderingContext2D
     score: number
 
     constructor(width, height) {
         super(width, height)
         this.player = new Player(width / 2, height - 30)
-        this.canvas = createCanvas(width, height)
-        this.ctx = this.canvas.getContext('2d')
         this.shots = []
         this.enemies = []
         this.particles = []
         this.score = 0
         this.bindEvents()
-        Renderer.setContext(this.ctx)
 
         for (let i = 0; i < 5; i++) {
             this.enemies.push(new Enemy(150 * i, 10))
         }
 
-        // Temporary
-        const main = document.createElement('main')
-        main.setAttribute('id', 'app')
-        main.appendChild(this.canvas)
-        document.querySelector('body').appendChild(main)
+        let canvas = Renderer.create(width, height)
+
     }
 
     bindEvents() {

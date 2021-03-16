@@ -1,14 +1,27 @@
 import { Env } from './env'
 import { ES } from '../events/event'
-import { stats, showStats } from '../core/stats'
+import { showStats, Stats } from '../core/stats'
 import { Interface } from '../render/interface'
 
-class Game {
-    private env: Env
-    private gameLoop: FrameRequestCallback
+type RendererType = 'normal' | 'offscreen'
+let rendererType = 'normal'
 
-    constructor(env: Env) {
+class Game {
+    private env?: Env
+    private gameLoop: FrameRequestCallback
+    private stats: Stats
+
+    constructor(env?: Env) {
         this.env = env
+        this.stats = null
+    }
+
+    static setRendererType(type: RendererType) {
+        rendererType = type
+    }
+
+    static get rendererType() {
+        return rendererType
     }
 
     setMainLoop(func: Function): void {
@@ -16,10 +29,10 @@ class Game {
     }
 
     update(time: number): void {
-        stats.begin()
+        this.stats.begin()
         ES.tick()
         this.gameLoop(time)
-        stats.end()
+        this.stats.end()
         window.requestAnimationFrame(time => this.update(time))
     }
 
@@ -29,8 +42,9 @@ class Game {
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            ES.init() // Event System
             Interface.init(this)
-            showStats()
+            this.stats = showStats()
             this.update(0)
         })
     }

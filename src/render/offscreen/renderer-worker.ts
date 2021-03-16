@@ -5,6 +5,10 @@ let ctx = null
 // TODO : option to set resolution
 let canvasResolution = 2 // higher is better but cost much
 
+function log(...args) {
+    postMessage(args)
+}
+
 self.addEventListener('message', ({ data }) => {
     let content = data.content
     switch (data.title) {
@@ -13,7 +17,6 @@ self.addEventListener('message', ({ data }) => {
                 offscreenCanvas = content.canvas
                 ctx = offscreenCanvas.getContext('2d')
                 Renderer.setContext(ctx)
-
                 if (content.width && content.height) setSize(content.dpr, content.width, content.height)
             }
             break

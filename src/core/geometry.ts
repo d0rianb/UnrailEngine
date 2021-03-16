@@ -23,4 +23,13 @@ function createCanvas(w: number, h: number, ratio?: number, preventRightClick?: 
     return canvas
 }
 
-export { getWindowDimensions, createCanvas }
+function insertCanvas(canvas: HTMLCanvasElement, el: string): void {
+    window.onload = () => {
+        let element = document.querySelector(el)
+        if (!element) element = document.createElement(el)
+        element.appendChild(canvas)
+        document.querySelector('body').appendChild(element)
+    }
+}
+
+export { getWindowDimensions, createCanvas, insertCanvas }

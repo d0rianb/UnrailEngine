@@ -17,7 +17,10 @@ class EventSystem {
         this.customEvents = []
 
         this.currentKeyEvents = []
+    }
 
+    // Need the window variable to be defined
+    init(): void {
         window.addEventListener('keydown', e => {
             if (!this.currentKeyEvents.find(event => event.code === e.code)) {
                 this.currentKeyEvents.push(e)
@@ -32,7 +35,6 @@ class EventSystem {
             if (!this.currentKeyEvents.length) return
             this.currentKeyEvents = this.currentKeyEvents.filter(event => event.code !== e.code)
         })
-
     }
 
     addEvent(e: Event): void {
