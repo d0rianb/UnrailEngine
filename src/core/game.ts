@@ -7,11 +7,13 @@ type RendererType = 'normal' | 'offscreen'
 let rendererType = 'normal'
 
 class Game {
+    private name: string
     private env?: Env
     private gameLoop: FrameRequestCallback
     private stats: Stats
 
-    constructor(env?: Env) {
+    constructor(name?: string, env?: Env) {
+        this.name = name
         this.env = env
         this.stats = null
     }
@@ -42,6 +44,7 @@ class Game {
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            if (this.name) { document.title = this.name }
             ES.init() // Event System
             Interface.init(this)
             this.stats = showStats()

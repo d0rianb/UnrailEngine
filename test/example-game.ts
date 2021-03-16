@@ -173,7 +173,7 @@ Interface.addItem(game => `Health : ${game.env.player.health}`, { position: 'abs
 // main.ts
 const { width, height } = getWindowDimensions()
 const env = new Env(width, height)
-const game = new Game(env)
+const game = new Game('Space Invader', env)
 
 // const keyBinds = Config.load('keybinds.json')
 
