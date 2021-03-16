@@ -1,7 +1,7 @@
 import { Game, getWindowDimensions } from '../src'
 import { Random, Vector2 } from '../src/core/math'
 
-import { Renderer } from '../src/render'
+import { OffscreenRenderer as Renderer } from '../src/render'
 
 const { width, height } = getWindowDimensions()
 
