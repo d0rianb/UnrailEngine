@@ -1,3 +1,7 @@
+import Random from '@dorianb/random-js'
+
+export { Random }
+
 export class Vector2 {
     public x: number
     public y: number
