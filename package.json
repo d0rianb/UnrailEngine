@@ -1,6 +1,6 @@
 {
     "name": "unrail-engine",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "A lightweight 2D game engine written in typescript",
     "scripts": {
         "dev": "vite",
