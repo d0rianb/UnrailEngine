@@ -19,3 +19,12 @@ canvas {
   overflow: hidden;
   z-index: 2;
 }
+
+.ue-interface {
+  display: flex;
+}
+
+.ue-interface-items {
+  padding: .5em;
+}
+

@@ -76,6 +76,17 @@ Renderer.tint(color, x, y, width, height)      // tint a rect width a color
 
 ```
 
+### Interface
+
+```ts
+import { Interface } from 'unrail-engine/render'
+
+let value = 'some value'
+
+Interface.addItem(() => `Value : ${value}`, { CSSproperties })
+```
+
+
 ---
 
 2020 © Dorian Beauchesne

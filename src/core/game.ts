@@ -11,11 +11,13 @@ class Game {
     private env?: Env
     private gameLoop: FrameRequestCallback
     private stats: Stats
+    private showStatsPanel: boolean
 
     constructor(name?: string, env?: Env) {
         this.name = name
         this.env = env
         this.stats = null
+        this.showStatsPanel = true
     }
 
     static setRendererType(type: RendererType) {
@@ -26,15 +28,30 @@ class Game {
         return rendererType
     }
 
+    toggleStats(show?: boolean): void {
+        if (show !== undefined) {
+            this.showStatsPanel = show
+        } else {
+            this.showStatsPanel = !this.showStatsPanel
+        }
+        if (this.showStatsPanel) {
+            this.stats = showStats()
+        } else {
+            this.stats = null
+            if (document.querySelector('.stats')) document.querySelector('.stats').remove()
+        }
+    }
+
     setMainLoop(func: Function): void {
         this.gameLoop = func as FrameRequestCallback
     }
 
     update(time: number): void {
-        this.stats.begin()
+        this.stats?.begin()
         ES.tick()
         this.gameLoop(time)
-        this.stats.end()
+        Interface.update()
+        this.stats?.end()
         window.requestAnimationFrame(time => this.update(time))
     }
 
@@ -46,8 +63,10 @@ class Game {
         window.addEventListener('DOMContentLoaded', () => {
             if (this.name) { document.title = this.name }
             ES.init() // Event System
-            Interface.init(this)
-            this.stats = showStats()
+            Interface.init()
+            if (this.showStatsPanel) {
+                this.stats = showStats()
+            }
             this.update(0)
         })
     }

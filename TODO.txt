@@ -27,4 +27,4 @@ PARTS :
     - Particle System
 
  ISSUE :
-    - None
+    - Resize canvas
