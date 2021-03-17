@@ -61,8 +61,8 @@ class Path {
         }
     }
 
-    render(ctx: CanvasRenderingContext2D): void {
-        Renderer.poly(ctx, this.points, { lineWidth: 1, fillStyle: 'grey', globalAlpha: .25 })
+    render(): void {
+        Renderer.poly(this.points, { lineWidth: 1, fillStyle: 'grey', globalAlpha: .25 })
     }
 }
 

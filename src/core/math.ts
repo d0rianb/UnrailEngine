@@ -25,6 +25,7 @@ export class Vector2 {
 }
 
 export type Point = Vector2
+export const Point = Vector2
 
 export const V_NULL = new Vector2(0, 0)
 export const V_UNIT = new Vector2(1, 1)
