@@ -11,6 +11,6 @@ let i = 0
 window.setInterval(() => {
     i++
     Renderer.clear()
-    Renderer.circle(100 + i, 100, 50, { fillStyle: 'red' })
+    Renderer.circle(100 + i, 100, 50, { strokeStyle: 'red' })
 }, 100)
 

@@ -1,13 +1,12 @@
 {
-    "name": "js-game-engine",
-    "version": "0.0.4",
+    "name": "unrail-engine",
+    "version": "0.0.5",
     "description": "A lightweight 2D game engine written in typescript",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "serve": "vite preview",
-        "prepublish": "npm-auto-version",
-        "postpublish": "git push origin --tags"
+        "docs": "npx typedoc src/index.ts src/events/index.ts src/render/index.ts"
     },
     "dependencies": {
         "@dorianb/random-js": "^0.0.3",
@@ -24,7 +23,12 @@
         "vite": "^2.0.2",
         "vite-plugin-vue2": "^1.2.1"
     },
-    "keywords": [],
-    "author": "",
+    "keywords": [
+        "game-engine",
+        "engine",
+        "lightweight",
+        "typescript"
+    ],
+    "author": "d0rianb<dorian.beauchesne@icloud.com>",
     "license": "MIT"
 }

@@ -4,16 +4,17 @@ TODO :
     - Clean dependencies                                    - X
     - Find a name > Unrail Engine                           - X
     - Setup Vite for developement                           - X
-    - create a Github repository                            - X
+    - Create a Github repository                            - X
     - change webpack to rollup ? (for smaller bundle size)  - X
-    - Do not use Vue for interface
+    - Do not use Vue for interface                          - X
     - Camera System
     - Serialize
-    - Offscreen Canvas rendering
+    - Offscreen Canvas rendering                            - X
     - Version system                                        - X
-    - implement physic engine
+    - Implement physic engine
     - Physic interpolated rendering
     - WebGL for rendering ?
+    - Make OffscreenRenderer the default renderer
 
 PARTS :
     - Core

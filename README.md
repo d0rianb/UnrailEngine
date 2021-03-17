@@ -13,7 +13,7 @@ It contains (or will soon contains) :
 -   Physics
 -   Particle System
 
-Examples can be found at /test
+Examples can be found at [/test](./test/)
 
 ## Documentation
 
@@ -23,7 +23,7 @@ Examples can be found at /test
 // main.ts
 const { width, height } = getWindowDimensions() // Had to be imported
 const env: Env = new Env(width, height) // Create an environment for the game
-const game: Game = new Game(env)
+const game: Game = new Game('Game Name', env)
 
 game.setMainLoop(() => env.update()) // register a main loop
 game.start()
@@ -46,7 +46,9 @@ Event.on('custom-event-name', callback)
 ### Renderer
 
 ```ts
-import { Renderer } from 'unrail-engine/render'
+// Choose one or the other
+import { Renderer } from 'unrail-engine/render'                      // classic canvas renderer
+import { OffscreenRenderer as Renderer } from 'unrail-engine/render' // better performance
 
 let style: StyleObject = { // Canvas2DContext options from : https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D
     strokeStyle?: string,
@@ -57,11 +59,19 @@ let style: StyleObject = { // Canvas2DContext options from : https://developer.m
     globalCompositeOperation?: string
 }
 
-Renderer.clear(ctx)
-Renderer.rect(ctx, x, y, width, height, style?)
-Renderer.line(ctx, point1, point2, style?)
-Renderer.poly(ctx, pointArray, style?)
-Renderer.circle(ctx, x, y, radius, style?)
+// Create a canvas & init the Renderer
+Renderer.create(width, height)
+
+// Renderer is a static class. Here are the different methods
+Renderer.clear()
+Renderer.rect(x, y, width, height, style?)
+Renderer.line(point1, point2, style?)
+Renderer.poly(pointArray, style?)
+Renderer.circle(x, y, radius, style?)
+Renderer.point(x, y, style?)
+Renderer.rectSprite(x, y, width, height, texture)
+Renderer.circleSprite(x, y, radius, texture)
+Renderer.tint(color, x, y, width, height)      // tint a rect width a color 
 
 ```
 
