@@ -109,31 +109,22 @@ class Env extends GameEnvironement {
     shots: Array<Shot>
     particles: Array<Particle>
     player: Player
-    canvas: HTMLCanvasElement
-    ctx: CanvasRenderingContext2D
     score: number
 
     constructor(width, height) {
         super(width, height)
         this.player = new Player(width / 2, height - 30)
-        this.canvas = createCanvas(width, height, 1)
-        // this.ctx = this.canvas.getContext('2d')
         this.shots = []
         this.enemies = []
         this.particles = []
         this.score = 0
         this.bindEvents()
 
+        Renderer.create(width, height)
+
         for (let i = 0; i < 5; i++) {
             this.enemies.push(new Enemy(150 * i, 10))
         }
-
-        // Temporary
-        const main = document.createElement('main')
-        main.setAttribute('id', 'app')
-        main.appendChild(this.canvas)
-        document.querySelector('body').appendChild(main)
-        Renderer.transferTo(this.canvas, width, height)
     }
 
     bindEvents() {
@@ -174,8 +165,8 @@ class Env extends GameEnvironement {
 }
 
 // Interface.ts
-Interface.addItem(game => `Score : ${game.env.score}`, { position: 'absolute', top: '0', left: '0' })
-Interface.addItem(game => `Health : ${game.env.player.health}`, { position: 'absolute', top: '18px', left: '0' })
+Interface.addItem(game => `Score : ${game.env.score}`, 'top-left')
+Interface.addItem(game => `Health : ${game.env.player.health}`, 'top-right')
 
 
 // main.ts

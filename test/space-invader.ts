@@ -166,8 +166,8 @@ class Env extends GameEnvironement {
 }
 
 // Interface.ts
-Interface.addItem(game => `Score : ${game.env.score}`, { position: 'absolute', top: '0', left: '0' })
-Interface.addItem(game => `Health : ${game.env.player.health}`, { position: 'absolute', top: '18px', left: '0' })
+Interface.addItem(game => `Score : ${game.env.score}`, 'top-right')
+Interface.addItem(game => `Health : ${game.env.player.health}`, 'top-left')
 
 
 // main.ts

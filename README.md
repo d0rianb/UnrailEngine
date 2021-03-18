@@ -16,6 +16,7 @@ It contains (or will soon contains) :
 Examples can be found at [/test](./test/)
 
 ## Documentation
+
 The full documentation is available [here](https://d0rianb.github.io/UnrailEngine/).
 
 ### Create a game
@@ -72,7 +73,7 @@ Renderer.circle(x, y, radius, style?)
 Renderer.point(x, y, style?)
 Renderer.rectSprite(x, y, width, height, texture)
 Renderer.circleSprite(x, y, radius, texture)
-Renderer.tint(color, x, y, width, height)      // tint a rect width a color 
+Renderer.tint(color, x, y, width, height)      // tint a rect width a color
 
 ```
 
@@ -83,9 +84,13 @@ import { Interface } from 'unrail-engine/render'
 
 let value = 'some value'
 
-Interface.addItem(() => `Value : ${value}`, { CSSproperties })
-```
+Interface.addItem(() => `Value : ${value}`, position, { CSSproperties })
+// position is a string : 'top-left', 'top-right', 'bottom-left', 'bottom-right' or 'custom'
+// CSSproperties is an object containing { css-attribute: value }
 
+// Example :
+Interface.addItem(() => `Iteration : ${i++}`, 'top-left', { color: '#999' })
+```
 
 ---
 

@@ -6,7 +6,8 @@
         "dev": "vite",
         "build": "vite build",
         "serve": "vite preview",
-        "docs": "npx typedoc src/index.ts src/events/index.ts src/render/index.ts"
+        "docs": "npx typedoc src/index.ts src/events/index.ts src/render/index.ts",
+        "publish": "npm run docs; git add .; git commit -m 'publish to NPM'; git push; npm publish"
     },
     "dependencies": {
         "@dorianb/random-js": "^0.0.3",
