@@ -1,12 +1,12 @@
 {
     "name": "unrail-engine",
-    "version": "0.0.6",
+    "version": "0.1.0",
     "description": "A lightweight 2D game engine written in typescript",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "serve": "vite preview",
-        "docs": "npx typedoc src/index.ts src/events/index.ts src/render/index.ts",
+        "docs": "npx typedoc src/index.ts src/events/index.ts src/render/index.ts --exclude ./node_modules/",
         "publish": "npm run docs; git add .; git commit -m 'publish to NPM'; git push; npm publish"
     },
     "dependencies": {
