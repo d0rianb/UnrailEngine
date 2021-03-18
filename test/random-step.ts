@@ -11,9 +11,9 @@ Renderer.create(width, height)
 
 // TODO : add interface
 
-Interface.addItem(() => `Iteration : ${pos.length}`)
-Interface.addItem(() => `Sn : ${(pos[pos.length - 1].x - width / 2) / 5}`)
-Interface.addItem(() => `Nombre d'annulation : ${annulation}`)
+Interface.addItem(() => `Iteration : ${pos.length}`, 'top-left', { 'color': '#999' })
+Interface.addItem(() => `Sn : ${(pos[pos.length - 1].x - width / 2) / 5}`, 'top-left')
+Interface.addItem(() => `Nombre d'annulation : ${annulation}`, 'top-left')
 
 function update(ts: number) {
     let dir = Random.choice([-1, 1])

@@ -4,7 +4,7 @@
         "module": "esnext",
         "moduleResolution": "node",
         "outDir": "./dist",
-        "lib": ["webworker", "es2016", "scripthost", "DOM"],
+        "lib": ["webworker", "es2017", "scripthost", "DOM"],
         "skipLibCheck": true,
         "allowJs": true,
         "strict": false,

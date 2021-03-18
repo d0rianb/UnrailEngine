@@ -5,7 +5,7 @@ import { Point } from '../../core/math'
 import { Renderer, StyleObject } from '../renderer'
 import { WorkerMessage } from './workerMessage'
 
-const WORKER_PATH: string = './src/render/offscreen/renderer-worker.ts'
+const WORKER_PATH: string = './src/render/offscreen-renderer/renderer-worker.ts'
 
 let offscreenCanvas: OffscreenCanvas = null
 let worker: Worker = null

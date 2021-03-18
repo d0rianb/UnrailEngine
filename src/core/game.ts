@@ -9,6 +9,7 @@ let rendererType = 'normal'
 class Game {
     private name: string
     private env?: Env
+    private tick: number
     private gameLoop: FrameRequestCallback
     private stats: Stats
     private showStatsPanel: boolean
@@ -16,6 +17,7 @@ class Game {
     constructor(name?: string, env?: Env) {
         this.name = name
         this.env = env
+        this.tick = 0
         this.stats = null
         this.showStatsPanel = true
     }
@@ -50,7 +52,7 @@ class Game {
         this.stats?.begin()
         ES.tick()
         this.gameLoop(time)
-        Interface.update()
+        if (this.tick % Interface.updateInterval === 0) Interface.update()
         this.stats?.end()
         window.requestAnimationFrame(time => this.update(time))
     }
