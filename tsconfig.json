@@ -3,7 +3,7 @@
         "target": "esnext",
         "module": "esnext",
         "moduleResolution": "node",
-        "outDir": "./dist",
+        "outDir": "dist",
         "lib": ["webworker", "es2017", "scripthost", "DOM"],
         "skipLibCheck": true,
         "allowJs": true,
@@ -13,6 +13,8 @@
         "isolatedModules": false,
         "noEmit": true,
         "esModuleInterop": true,
-        "resolveJsonModule": true
-    }
+        "resolveJsonModule": true,
+        "declaration": true
+    },
+    "include": ["src"]
 }

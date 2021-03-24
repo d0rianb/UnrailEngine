@@ -1,12 +1,10 @@
-import { createVuePlugin } from 'vite-plugin-vue2'
-
 /**
  * @type {import('vite').UserConfig}
  */
 // build the engine
 export default ({ command }) => {
     const config = {
-        plugins: [createVuePlugin()]
+        plugins: []
     }
     if (command == 'build') {
         const buildOptions = {
@@ -16,7 +14,7 @@ export default ({ command }) => {
                 assetDist: './resources/',
                 lib: {
                     name: 'unrail-engine',
-                    entry: './src/index.ts',
+                    entry: 'src/index.ts',
                     formats: ['es']
                 },
                 minify: 'terser'
