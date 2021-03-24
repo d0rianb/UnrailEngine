@@ -9,9 +9,13 @@ const WORKER_PATH: string = './src/render/offscreen-renderer/renderer-worker.ts'
 
 let offscreenCanvas: OffscreenCanvas = null
 let worker: Worker = null
+let canvas: HTMLCanvasElement = null
+
+const textureAlias: Map<number, Texture> = new Map()
 
 function sendMessageToWorker(title: string, data: any, transfer?: Transferable[]) {
     worker.postMessage(new WorkerMessage(title, data), transfer || [])
+    return
 }
 
 function sendRenderRequest(methodName: string, args: any) {
@@ -22,7 +26,7 @@ class OffscreenRenderer {
 
     // Create a canvas and insert it to <main>
     static create(width: number, height: number): HTMLCanvasElement {
-        const canvas: HTMLCanvasElement = createCanvas(width, height, 1)
+        canvas = createCanvas(width, height, 1)
         OffscreenRenderer.transferTo(canvas, width, height)
         insertCanvas(canvas, 'main')
         return canvas
@@ -67,9 +71,24 @@ class OffscreenRenderer {
 
     static point(x: number, y: number, obj?: StyleObject): void { sendRenderRequest('point', { x, y, obj }) }
 
-    static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void { sendRenderRequest('rectSprite', { x, y, width, height, texture }) }
+    // <img> object is not serializable
+    static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
+        if (texture.id in textureAlias) {
+            sendRenderRequest('rectSprite', { x, y, width, height, texture: textureAlias[texture.id] })
+        } else {
+            texture.convertToBitmap().then(adaptedTexture => textureAlias[texture.id] = adaptedTexture)
+        }
+    }
 
-    static circleSprite(x: number, y: number, radius: number, texture: Texture): void { sendRenderRequest('circleSprite', { x, y, radius, texture }) }
+    static async circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void> {
+        if (texture.id in textureAlias) {
+            sendRenderRequest('circleSprite', { x, y, radius, texture: textureAlias[texture.id] })
+        } else {
+            const adaptedTexture: Texture = await texture.convertToBitmap()
+            textureAlias[texture.id] = adaptedTexture
+            sendRenderRequest('circleSprite', { x, y, radius, texture: adaptedTexture })
+        }
+    }
 
     static tint(color: string, x: number, y: number, width: number, height: number): void { sendRenderRequest('circle', { color, x, y, width, height }) }
 }

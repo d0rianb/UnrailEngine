@@ -5,7 +5,7 @@
 It contains (or will soon contains) :
 
 -   Core
--   Renderer (based on canvas rendering & _Vue_ for the interface)
+-   Renderer (based on Canvas/OffscreenCanvas rendering & dynamics html `<span>` for the interface)
 -   Event System (native and custom events)
 -   Grid System
 -   Stats
@@ -46,6 +46,9 @@ Event.on('custom-event-name', callback)
 ```
 
 ### Renderer
+
+-   The `Renderer` object is a classic optimize canvas 2D renderer.
+-   The `OffscreenRenderer` uses the `OffscreenCanvas` API and web worker to run in a different thread.
 
 ```ts
 // Choose one or the other

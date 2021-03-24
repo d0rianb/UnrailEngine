@@ -32,7 +32,7 @@ function round(num: number): number {
     return ~~(num * precision) / precision
 }
 
-let ctx: CanvasRenderingContext2D = null
+let ctx: RenderingContext = null
 
 
 class Renderer {
@@ -45,8 +45,12 @@ class Renderer {
         return canvas
     }
 
-    static setContext(context: CanvasRenderingContext2D): void {
+    static setContext(context: RenderingContext): void {
         ctx = context
+    }
+
+    static getContext(): RenderingContext {
+        return ctx
     }
 
     static style(obj?: StyleObject): void {

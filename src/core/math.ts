@@ -34,10 +34,6 @@ export function clamp(min: number, x: number, max: number): number {
     return Math.max(min, Math.min(x, max))
 }
 
-export function sign(x: number): number {
-    return x < 0 ? -1 : 1
-}
-
 export function inRange(x: number, min: number, max: number): boolean {
     return clamp(min, x, max) === x
 }

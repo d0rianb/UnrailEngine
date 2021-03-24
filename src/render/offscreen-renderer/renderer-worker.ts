@@ -1,12 +1,13 @@
+import { Texture } from '..'
 import { Renderer } from '../renderer'
 
-let offscreenCanvas = null
-let ctx = null
+let offscreenCanvas: OffscreenCanvas = null
+let ctx: OffscreenRenderingContext = null
 // TODO : option to set resolution
-let canvasResolution = 2 // higher is better but cost much
+let canvasResolution: number = 2 // higher is better but cost much
 
-function log(...args) {
-    postMessage(args)
+function log(...args: any[]) {
+    self.postMessage(args)
 }
 
 self.addEventListener('message', ({ data }) => {
@@ -36,7 +37,7 @@ function setSize(dpr, width, height) {
 function handleDrawRequest(method, args) {
     switch (method) {
         case 'style':
-            Renderer.style(args.obj)
+            Renderer.style(args?.obj)
             break
         case 'clear':
             Renderer.clear(args?.color)

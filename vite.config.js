@@ -15,7 +15,7 @@ export default ({ command }) => {
                 lib: {
                     name: 'unrail-engine',
                     entry: 'src/index.ts',
-                    formats: ['es']
+                    formats: ['es', 'umd']
                 },
                 minify: 'terser'
             }

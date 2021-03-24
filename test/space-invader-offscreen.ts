@@ -12,7 +12,7 @@ import {
     Particle
 } from '../src'
 import { clamp, Vector2 } from '../src/core/math'
-import { OffscreenRenderer as Renderer, Interface, OffscreenRenderer } from '../src/render'
+import { OffscreenRenderer as Renderer, Interface, Texture } from '../src/render'
 import { Event } from '../src/events'
 import { Config } from '../src/config'
 
@@ -20,13 +20,15 @@ import { Config } from '../src/config'
 class Enemy extends GameObject {
     health: number
     alive: boolean
+    texture: Texture
 
     constructor(x, y) {
         super(x, y)
         this.health = 100
         this.alive = true
         this.width = 80
-        this.height = 10
+        this.height = 50
+        this.texture = new Texture('ressources/assets/InvaderA2.png')
     }
 
     isDead() {
@@ -39,7 +41,8 @@ class Enemy extends GameObject {
     }
 
     render() {
-        Renderer.rect(this.x, this.y, this.width, this.height)
+        // Renderer.rect(this.x, this.y, this.width, this.height)
+        Renderer.rectSprite(this.x, this.y, this.width, this.height, this.texture)
     }
 }
 
@@ -76,6 +79,7 @@ class Player extends PlayerObject {
         Renderer.rect(this.x, this.y, 30, 30)
     }
 }
+
 
 class Shot extends GameObject {
     speed: number
@@ -165,8 +169,8 @@ class Env extends GameEnvironement {
 }
 
 // Interface.ts
-Interface.addItem(game => `Score : ${game.env.score}`, 'top-left')
-Interface.addItem(game => `Health : ${game.env.player.health}`, 'top-right')
+Interface.addItem(() => `Score : ${env.score}`, 'top-left')
+Interface.addItem(() => `Health : ${env.player.health}`, 'top-right')
 
 
 // main.ts
@@ -177,4 +181,5 @@ const game = new Game('Space Invader', env)
 // const keyBinds = Config.load('keybinds.json')
 
 game.setMainLoop(() => env.update())
+// env.update()
 game.start()

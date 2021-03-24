@@ -12,7 +12,7 @@ import {
     Particle
 } from '../src'
 import { clamp, Vector2 } from '../src/core/math'
-import { Renderer, Interface } from '../src/render'
+import { Renderer, Interface, Texture } from '../src/render'
 import { Event } from '../src/events'
 import { Config } from '../src/config'
 
@@ -20,13 +20,15 @@ import { Config } from '../src/config'
 class Enemy extends GameObject {
     health: number
     alive: boolean
+    texture: Texture
 
     constructor(x, y) {
         super(x, y)
         this.health = 100
         this.alive = true
-        this.width = 80
-        this.height = 10
+        this.width = 50
+        this.height = 20
+        this.texture = new Texture('ressources/assets/InvaderA1.png')
     }
 
     isDead() {
@@ -39,7 +41,9 @@ class Enemy extends GameObject {
     }
 
     render() {
-        Renderer.rect(this.x, this.y, this.width, this.height)
+        // Renderer.rect(this.x, this.y, this.width, this.height)
+        Renderer.rectSprite(this.x, this.y, this.width, this.height, this.texture)
+
     }
 }
 
@@ -120,7 +124,7 @@ class Env extends GameEnvironement {
         this.score = 0
         this.bindEvents()
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 8; i++) {
             this.enemies.push(new Enemy(150 * i, 10))
         }
 
@@ -157,7 +161,7 @@ class Env extends GameEnvironement {
     }
 
     render() {
-        Renderer.clear()
+        Renderer.clear('#aaa')
         this.player.render()
         this.shots.forEach(shot => shot.render())
         this.enemies.forEach(enemy => enemy.render())
@@ -166,8 +170,8 @@ class Env extends GameEnvironement {
 }
 
 // Interface.ts
-Interface.addItem(game => `Score : ${game.env.score}`, 'top-right')
-Interface.addItem(game => `Health : ${game.env.player.health}`, 'top-left')
+Interface.addItem(() => `Score : ${env.score}`, 'top-right')
+Interface.addItem(() => `Health : ${env.player.health}`, 'top-left')
 
 
 // main.ts

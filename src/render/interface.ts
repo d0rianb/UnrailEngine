@@ -16,7 +16,6 @@ type ItemPosition = typeof itemPositions[number]
 
 class Interface {
 
-    // TODO: properly define options as CSS properties
     static addItem(callback: Function, position?: ItemPosition, options?: CSSOptions): void {
         const item: InterfaceItem = { callback, position, options } as InterfaceItem
         items.push(item)
@@ -42,8 +41,8 @@ class Interface {
         element.id = `item-${index}`
         element.innerText = value
         Object.entries(item.options || {}).forEach(([key, value]) => element.style[key] = value)
-        if (item.position) document.querySelector(`.ue-container > .${item.position}`).appendChild(element)
-        else document.querySelector(`.ue-container > .custom`).appendChild(element)
+        if (item.position) document.querySelector(`.ue-container > .${item.position}`)?.appendChild(element)
+        else document.querySelector(`.ue-container > .custom`)?.appendChild(element)
     }
 
     static update(): void {
@@ -56,6 +55,14 @@ class Interface {
         })
     }
 
+    // height is a css property
+    static statsShift(height: number): void {
+        const TLContainer: HTMLElement = document.querySelector('.top-left')
+        if (TLContainer) {
+            TLContainer.style.top = `${height}px`
+        }
+    }
+
     static setUpdateInterval(rate: number): void {
         updateInterval = rate
     }
@@ -63,8 +70,6 @@ class Interface {
     static get updateInterval(): number {
         return updateInterval
     }
-
-    // TODO : handle CSS properties
 
 }
 

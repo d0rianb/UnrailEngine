@@ -15,7 +15,8 @@ TODO :
     - Physic interpolated rendering
     - WebGL for rendering ?
     - Make OffscreenRenderer the default renderer
-    - Random.sign()
+    - Random.sign()                                         - X
+    - Resources Manager
 
 PARTS :
     - Core
