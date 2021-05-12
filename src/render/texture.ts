@@ -31,7 +31,8 @@ class Texture {
     }
 
     // Create Bitmap image for worker 
-    async convertToBitmap(): Promise<Texture> {
+    async convertToBitmap(): Promise<Texture> | null {
+        if (!this.image.width || !this.image.height) return
         const image: ImageBitmap = await createImageBitmap(this.image)
         return { ...this, image } as Texture
     }

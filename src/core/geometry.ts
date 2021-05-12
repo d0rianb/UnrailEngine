@@ -10,11 +10,11 @@ function getWindowDimensions(): SizeObject {
 function createCanvas(w: number, h: number, ratio?: number, preventRightClick?: boolean): HTMLCanvasElement {
     const pixelRatio: number = ratio || window.devicePixelRatio || 1
     const canvas: HTMLCanvasElement = document.createElement('canvas')
+    canvas.width = w * pixelRatio
+    canvas.height = h * pixelRatio
+    canvas.style.width = w + 'px'
+    canvas.style.height = h + 'px'
     if (pixelRatio != 1) {
-        canvas.width = w * pixelRatio
-        canvas.height = h * pixelRatio
-        canvas.style.width = w + 'px'
-        canvas.style.height = h + 'px'
         canvas.getContext('2d').setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
     }
     if (!!preventRightClick) {

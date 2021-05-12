@@ -3,21 +3,32 @@ import { Game } from '../core/game'
 interface InterfaceItem {
     callback(game?: Game): string
     position?: ItemPosition
-    options?: CSSOptions
+    options?: CSSOptions,
+    onClick?: InterfaceClickCallback
 }
 
 let items: Array<InterfaceItem> = []
 let updateInterval: number = 4 // Each 2 frames
 
 type CSSOptions = Object
+type InterfaceTextFunction = () => string
+type InterfaceClickCallback = (e: MouseEvent) => any
 
 const itemPositions = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'custom'] as const
-type ItemPosition = typeof itemPositions[number]
+type ItemPosition = typeof itemPositions[number] // Type itemPositions
 
 class Interface {
 
-    static addItem(callback: Function, position?: ItemPosition, options?: CSSOptions): void {
-        const item: InterfaceItem = { callback, position, options } as InterfaceItem
+    static addItem(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions): void {
+        Interface.internalAddItem(callback, position, options)
+    }
+
+    static addButton(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions, onClick?: InterfaceClickCallback): void {
+        Interface.internalAddItem(callback, position, options, onClick)
+    }
+
+    private static internalAddItem(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions, onClick?: InterfaceClickCallback): void {
+        const item: InterfaceItem = { callback, position, options, onClick } as InterfaceItem
         items.push(item)
         const index: number = items.length
         window.addEventListener('load', () => Interface.addToDom(item, index))
@@ -43,6 +54,10 @@ class Interface {
         Object.entries(item.options || {}).forEach(([key, value]) => element.style[key] = value)
         if (item.position) document.querySelector(`.ue-container > .${item.position}`)?.appendChild(element)
         else document.querySelector(`.ue-container > .custom`)?.appendChild(element)
+        if (!!item.onClick) {
+            element.addEventListener('click', e => item.onClick(e))
+            element.classList.add('ue-interface-button')
+        }
     }
 
     static update(): void {

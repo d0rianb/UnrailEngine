@@ -16,6 +16,8 @@ import { OffscreenRenderer as Renderer, Interface, Texture } from '../src/render
 import { Event } from '../src/events'
 import { Config } from '../src/config'
 
+let paused: boolean = false
+
 // enemy.ts
 class Enemy extends GameObject {
     health: number
@@ -28,7 +30,7 @@ class Enemy extends GameObject {
         this.alive = true
         this.width = 80
         this.height = 50
-        this.texture = new Texture('ressources/assets/InvaderA2.png')
+        this.texture = new Texture('resources/assets/InvaderA2.png')
     }
 
     isDead() {
@@ -152,6 +154,7 @@ class Env extends GameEnvironement {
     }
 
     update() {
+        if (paused) return
         this.player.update()
         this.shots.forEach(shot => shot.update(this.enemies))
         this.enemies.forEach(enemy => enemy.update())
@@ -160,17 +163,20 @@ class Env extends GameEnvironement {
     }
 
     render() {
-        Renderer.clear()
+        // ISSUE: the renderer clear the canvas before it is render due to asynchronous worker render
+        Renderer.clear('')
         this.player.render()
         this.shots.forEach(shot => shot.render())
         this.enemies.forEach(enemy => enemy.render())
         this.particles.forEach(particle => particle.render())
+        Renderer.endFrame()
     }
 }
 
 // Interface.ts
 Interface.addItem(() => `Score : ${env.score}`, 'top-left')
 Interface.addItem(() => `Health : ${env.player.health}`, 'top-right')
+Interface.addButton(() => paused ? '||' : '>', 'top-left', {}, e => paused = !paused)
 
 
 // main.ts
@@ -181,5 +187,6 @@ const game = new Game('Space Invader', env)
 // const keyBinds = Config.load('keybinds.json')
 
 game.setMainLoop(() => env.update())
+game.setFPS(25)
 // env.update()
 game.start()

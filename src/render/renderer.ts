@@ -3,6 +3,8 @@ import { insertCanvas } from '../core/geometry'
 import { Point } from '../core/math'
 import { Texture } from './texture'
 
+type CanvasRenderContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
+
 interface StyleObject {
     strokeStyle?: string,
     lineWidth?: number,
@@ -32,8 +34,7 @@ function round(num: number): number {
     return ~~(num * precision) / precision
 }
 
-let ctx: RenderingContext = null
-
+let ctx: CanvasRenderContext = null
 
 class Renderer {
 
@@ -45,11 +46,11 @@ class Renderer {
         return canvas
     }
 
-    static setContext(context: RenderingContext): void {
+    static setContext(context: CanvasRenderContext): void {
         ctx = context
     }
 
-    static getContext(): RenderingContext {
+    static getContext(): CanvasRenderContext {
         return ctx
     }
 

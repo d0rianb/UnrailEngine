@@ -14,14 +14,17 @@ class Game {
     private gameLoop: Function
     private stats: Stats
     private showStatsPanel: boolean
+    private animationFrame: AnimationFrame
+    private fps: number = 60
 
-    constructor(name?: string, env?: Env) {
+    constructor(name?: string, env?: Env, fps: number = 60) {
         this.name = name
         this.env = env
         this.tick = 0
         this.stats = null
         this.showStatsPanel = true
         this.gameLoop = null
+        this.fps = fps
     }
 
     static setRendererType(type: RendererType) {
@@ -46,8 +49,18 @@ class Game {
         }
     }
 
+    private makeAnimationFrame(): void {
+        this.animationFrame = new AnimationFrame(time => this.update(time), this.fps)
+    }
+
     setMainLoop(func: Function): void {
         this.gameLoop = func
+        this.makeAnimationFrame()
+    }
+
+    setFPS(fps: number) {
+        this.fps = fps
+        this.makeAnimationFrame()
     }
 
     update(time: number): void {
@@ -57,13 +70,11 @@ class Game {
         if (this.tick % Interface.updateInterval === 0) Interface.update()
         this.stats?.end()
         this.tick++
-        // window.requestAnimationFrame(time => this.update(time))
     }
 
     start(): void {
-        if (!this.gameLoop) {
-            throw new Error('No game loop')
-        }
+        if (!this.gameLoop) throw new Error('No game loop')
+        if (!this.animationFrame) throw new Error('AnimationFrame')
 
         window.addEventListener('DOMContentLoaded', () => {
             if (this.name) { document.title = this.name }
@@ -72,7 +83,7 @@ class Game {
             if (this.showStatsPanel) {
                 this.stats = showStats()
             }
-            new AnimationFrame(time => this.update(time), 1).start()
+            this.animationFrame.start()
         })
     }
 }

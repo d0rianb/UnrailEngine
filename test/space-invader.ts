@@ -28,7 +28,7 @@ class Enemy extends GameObject {
         this.alive = true
         this.width = 50
         this.height = 20
-        this.texture = new Texture('ressources/assets/InvaderA1.png')
+        this.texture = new Texture('resources/assets/InvaderA1.png')
     }
 
     isDead() {
