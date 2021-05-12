@@ -1,7 +1,8 @@
 import { Env } from './env'
 import { ES } from '../events/event'
 import { showStats, Stats } from '../core/stats'
-import { Interface } from '../render/interface'
+import { Interface } from '../render'
+import { AnimationFrame } from './animationFrame'
 
 type RendererType = 'normal' | 'offscreen'
 let rendererType = 'normal'
@@ -10,7 +11,7 @@ class Game {
     private name: string
     private env?: Env
     private tick: number
-    private gameLoop: FrameRequestCallback
+    private gameLoop: Function
     private stats: Stats
     private showStatsPanel: boolean
 
@@ -20,14 +21,15 @@ class Game {
         this.tick = 0
         this.stats = null
         this.showStatsPanel = true
+        this.gameLoop = null
     }
 
     static setRendererType(type: RendererType) {
         rendererType = type
     }
 
-    static get rendererType() {
-        return rendererType
+    static get rendererType(): RendererType {
+        return rendererType as RendererType
     }
 
     toggleStats(show?: boolean): void {
@@ -45,16 +47,17 @@ class Game {
     }
 
     setMainLoop(func: Function): void {
-        this.gameLoop = func as FrameRequestCallback
+        this.gameLoop = func
     }
 
     update(time: number): void {
         this.stats?.begin()
         ES.tick()
-        this.gameLoop(time)
+        if (this.gameLoop) this.gameLoop(time)
         if (this.tick % Interface.updateInterval === 0) Interface.update()
         this.stats?.end()
-        window.requestAnimationFrame(time => this.update(time))
+        this.tick++
+        // window.requestAnimationFrame(time => this.update(time))
     }
 
     start(): void {
@@ -69,7 +72,7 @@ class Game {
             if (this.showStatsPanel) {
                 this.stats = showStats()
             }
-            this.update(0)
+            new AnimationFrame(time => this.update(time), 1).start()
         })
     }
 }
