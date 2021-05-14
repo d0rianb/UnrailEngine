@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Vector2 | unrail-engine</title>
+	<title>Grid | unrail-engine</title>
 	<meta name="description" content="Documentation for unrail-engine">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/index.html">index</a>
 				</li>
 				<li>
-					<a href="index.vector2.html">Vector2</a>
+					<a href="index.grid.html">Grid</a>
 				</li>
 			</ul>
-			<h1>Class Vector2</h1>
+			<h1>Class Grid</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Vector2</span>
+						<span class="target">Grid</span>
 					</li>
 				</ul>
 			</section>
@@ -83,22 +83,24 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="index.vector2.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="index.grid.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.vector2.html#x" class="tsd-kind-icon">x</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.vector2.html#y" class="tsd-kind-icon">y</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.grid.html#cells" class="tsd-kind-icon">cells</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.grid.html#cols" class="tsd-kind-icon">cols</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.grid.html#focuscell" class="tsd-kind-icon">focus<wbr>Cell</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.grid.html#rows" class="tsd-kind-icon">rows</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.vector2.html#add" class="tsd-kind-icon">add</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.vector2.html#clone" class="tsd-kind-icon">clone</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.vector2.html#dist" class="tsd-kind-icon">dist</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.grid.html#createcells" class="tsd-kind-icon">create<wbr>Cells</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.grid.html#defineneighboors" class="tsd-kind-icon">define<wbr>Neighboors</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.grid.html#updatecell" class="tsd-kind-icon">update<wbr>Cell</a></li>
 							</ul>
 						</section>
 					</div>
@@ -110,25 +112,25 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Vector2<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Grid<span class="tsd-signature-symbol">(</span>cols<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, rows<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.grid.html" class="tsd-signature-type" data-tsd-kind="Class">Grid</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/math.ts#L7">core/math.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/grid.ts#L22">core/grid.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>x: <span class="tsd-signature-type">number</span></h5>
+									<h5>cols: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
-									<h5>y: <span class="tsd-signature-type">number</span></h5>
+									<h5>rows: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="index.vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="index.grid.html" class="tsd-signature-type" data-tsd-kind="Class">Grid</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -136,22 +138,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="x" class="tsd-anchor"></a>
-					<h3>x</h3>
-					<div class="tsd-signature tsd-kind-icon">x<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="cells" class="tsd-anchor"></a>
+					<h3>cells</h3>
+					<div class="tsd-signature tsd-kind-icon">cells<span class="tsd-signature-symbol">:</span> <a href="index.cell.html" class="tsd-signature-type" data-tsd-kind="Class">Cell</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/math.ts#L6">core/math.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/grid.ts#L21">core/grid.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="y" class="tsd-anchor"></a>
-					<h3>y</h3>
-					<div class="tsd-signature tsd-kind-icon">y<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="cols" class="tsd-anchor"></a>
+					<h3>cols</h3>
+					<div class="tsd-signature tsd-kind-icon">cols<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/math.ts#L7">core/math.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/grid.ts#L20">core/grid.ts:20</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="focuscell" class="tsd-anchor"></a>
+					<h3>focus<wbr>Cell</h3>
+					<div class="tsd-signature tsd-kind-icon">focus<wbr>Cell<span class="tsd-signature-symbol">:</span> <a href="index.cell.html" class="tsd-signature-type" data-tsd-kind="Class">Cell</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/grid.ts#L22">core/grid.ts:22</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="rows" class="tsd-anchor"></a>
+					<h3>rows</h3>
+					<div class="tsd-signature tsd-kind-icon">rows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/grid.ts#L19">core/grid.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -159,65 +181,59 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="add" class="tsd-anchor"></a>
-					<h3>add</h3>
+					<a name="createcells" class="tsd-anchor"></a>
+					<h3>create<wbr>Cells</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>vec<span class="tsd-signature-symbol">: </span><a href="index.vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Cells<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/math.ts#L14">core/math.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/grid.ts#L33">core/grid.ts:33</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="defineneighboors" class="tsd-anchor"></a>
+					<h3>define<wbr>Neighboors</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">define<wbr>Neighboors<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/grid.ts#L59">core/grid.ts:59</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="updatecell" class="tsd-anchor"></a>
+					<h3>update<wbr>Cell</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Cell<span class="tsd-signature-symbol">(</span>newCell<span class="tsd-signature-symbol">: </span><a href="index.cell.html" class="tsd-signature-type" data-tsd-kind="Class">Cell</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/grid.ts#L41">core/grid.ts:41</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>vec: <a href="index.vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></h5>
+									<h5>newCell: <a href="index.cell.html" class="tsd-signature-type" data-tsd-kind="Class">Cell</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="index.vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="clone" class="tsd-anchor"></a>
-					<h3>clone</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">clone<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/math.ts#L18">core/math.ts:18</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="index.vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="dist" class="tsd-anchor"></a>
-					<h3>dist</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">dist<span class="tsd-signature-symbol">(</span>vec<span class="tsd-signature-symbol">: </span><a href="index.vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/math.ts#L22">core/math.ts:22</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>vec: <a href="index.vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -260,9 +276,39 @@
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="index.gameobject.html" class="tsd-kind-icon">Game<wbr>Object</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="index.grid.html" class="tsd-kind-icon">Grid</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="index.grid.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="index.grid.html#cells" class="tsd-kind-icon">cells</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="index.grid.html#cols" class="tsd-kind-icon">cols</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="index.grid.html#focuscell" class="tsd-kind-icon">focus<wbr>Cell</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="index.grid.html#rows" class="tsd-kind-icon">rows</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="index.grid.html#createcells" class="tsd-kind-icon">create<wbr>Cells</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="index.grid.html#defineneighboors" class="tsd-kind-icon">define<wbr>Neighboors</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="index.grid.html#updatecell" class="tsd-kind-icon">update<wbr>Cell</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="index.interface.html" class="tsd-kind-icon">Interface</a>
 					</li>
@@ -284,33 +330,9 @@
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="index.texture.html" class="tsd-kind-icon">Texture</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-module">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="index.vector2.html" class="tsd-kind-icon">Vector2</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="index.vector2.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="index.vector2.html#x" class="tsd-kind-icon">x</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="index.vector2.html#y" class="tsd-kind-icon">y</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="index.vector2.html#add" class="tsd-kind-icon">add</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="index.vector2.html#clone" class="tsd-kind-icon">clone</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="index.vector2.html#dist" class="tsd-kind-icon">dist</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="../modules/index.html#point" class="tsd-kind-icon">Point</a>
 					</li>

@@ -130,7 +130,7 @@ declare module "src/render/renderer" {
         static getContext(): CanvasRenderContext;
         static style(obj?: StyleObject): void;
         static clear(color?: string): void;
-        static line(point1: Point, point2: Point, obj?: StyleObject): void;
+        static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void;
         static rect(x: number, y: number, width: number, height: number, obj?: StyleObject, noStyle?: boolean): void;
         static poly(points: Array<Point>, obj?: StyleObject): void;
         static circle(x: number, y: number, radius: number, obj?: StyleObject): void;
@@ -145,7 +145,7 @@ declare module "src/render/offscreen-renderer/workerMessage" {
     export class WorkerMessage {
         title: string;
         content: any;
-        constructor(title: string, content: any);
+        constructor(title: string, content: object);
     }
 }
 declare module "src/render/offscreen-renderer/renderCall" {
@@ -166,7 +166,7 @@ declare module "src/render/offscreen-renderer/index" {
         static sendMessageToWorker(title: string, data?: any, transfer?: Transferable[]): void;
         static style(obj?: StyleObject): void;
         static clear(color?: string): void;
-        static line(point1: Point, point2: Point, obj?: StyleObject): void;
+        static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void;
         static rect(x: number, y: number, width: number, height: number, obj?: StyleObject, noStyle?: boolean): void;
         static poly(points: Array<Point>, obj?: StyleObject): void;
         static circle(x: number, y: number, radius: number, obj?: StyleObject): void;

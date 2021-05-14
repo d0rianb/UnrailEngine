@@ -187,6 +187,6 @@ const game = new Game('Space Invader', env)
 // const keyBinds = Config.load('keybinds.json')
 
 game.setMainLoop(() => env.update())
-game.setFPS(25)
+game.setFPS(60)
 // env.update()
 game.start()

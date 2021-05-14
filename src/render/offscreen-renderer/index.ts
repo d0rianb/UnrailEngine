@@ -19,9 +19,6 @@ const textureAlias: Map<number, Texture> = new Map()
 
 
 class OffscreenRenderer {
-    /* ISSUE
-    * The main thread and the renderer worker are not synchronised so the image draws even if it's not constructed by the Renderer
-    */
 
     // Create a canvas and insert it to <main>
     static create(width: number, height: number): HTMLCanvasElement {
@@ -40,7 +37,6 @@ class OffscreenRenderer {
 
         worker = new Worker(WORKER_PATH, { type: 'module' })
         offscreenCanvas = canvas.transferControlToOffscreen()
-        console.log(offscreenCanvas)
         this.sendMessageToWorker('initCanvas', {
             width: width || clientWidth,
             height: height || clientHeight,
@@ -56,10 +52,6 @@ class OffscreenRenderer {
                 case 'workerIsInitialized':
                     workerIsInitialized = true
                     break
-                case 'sendFrame':
-                    console.log(data)
-                    // ctx.transferFromImageBitmap(data)
-                    break
             }
         }
     }
@@ -72,12 +64,11 @@ class OffscreenRenderer {
         return worker.postMessage(new WorkerMessage(title, data), transfer || [])
     }
 
-
     static style(obj?: StyleObject): void { this.addRenderCall('style', { obj }) }
 
     static clear(color?: string): void { this.addRenderCall('clear', { color }) }
 
-    static line(point1: Point, point2: Point, obj?: StyleObject): void { this.addRenderCall('line', { point1, point2, obj }) }
+    static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void { this.addRenderCall('line', { x1, y1, x2, y2, obj }) }
 
     static rect(x: number, y: number, width: number, height: number, obj?: StyleObject, noStyle?: boolean): void { this.addRenderCall('rect', { x, y, width, height, obj, noStyle }) }
 
@@ -90,19 +81,22 @@ class OffscreenRenderer {
     // <img> object is not serializable
     static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
         if (texture.id in textureAlias) {
-            this.addRenderCall('rectSprite', { x, y, width, height, texture: textureAlias[texture.id] })
+            this.addRenderCall('rectSprite', { x, y, width, height, textureId: texture.id })
         } else {
-            texture.convertToBitmap().then(adaptedTexture => textureAlias[texture.id] = adaptedTexture)
+            texture.convertToBitmap().then(adaptedTexture => {
+                textureAlias[texture.id] = adaptedTexture
+                this.sendMessageToWorker('newTexture', { id: texture.id, texture: adaptedTexture })
+            })
         }
     }
 
     static async circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void> {
         if (texture.id in textureAlias) {
-            this.addRenderCall('circleSprite', { x, y, radius, texture: textureAlias[texture.id] })
+            this.addRenderCall('circleSprite', { x, y, radius, textureId: texture.id })
         } else {
             const adaptedTexture: Texture = await texture.convertToBitmap()
             textureAlias[texture.id] = adaptedTexture
-            this.addRenderCall('circleSprite', { x, y, radius, texture: adaptedTexture })
+            this.sendMessageToWorker('newTexture', { id: texture.id, texture: adaptedTexture })
         }
     }
 

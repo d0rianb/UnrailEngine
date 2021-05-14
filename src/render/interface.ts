@@ -8,8 +8,9 @@ interface InterfaceItem {
 }
 
 let items: Array<InterfaceItem> = []
-let updateInterval: number = 4 // Each 2 frames
+let updateInterval: number = 4 // Each 4 frames
 
+// Types needed for the Interface Class
 type CSSOptions = Object
 type InterfaceTextFunction = () => string
 type InterfaceClickCallback = (e: MouseEvent) => any

@@ -2,6 +2,7 @@ import { createCanvas } from '..'
 import { insertCanvas } from '../core/geometry'
 import { Point } from '../core/math'
 import { Texture } from './texture'
+import { isWorker } from '../core/utils'
 
 type CanvasRenderContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
 
@@ -23,11 +24,7 @@ const defaultStyleObject: StyleObject = {
     globalCompositeOperation: 'add'
 }
 
-// TODO: refactor
-let precision: number = 4
-try {
-    precision = 2 * (window.devicePixelRatio || 1)
-} catch (e) { }
+let precision: number =  isWorker() ? 4 : 2 * (window.devicePixelRatio || 1)
 
 // Move to math file ?
 function round(num: number): number {
@@ -73,11 +70,11 @@ class Renderer {
         }
     }
 
-    static line(point1: Point, point2: Point, obj?: StyleObject): void {
+    static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void {
         Renderer.style(obj)
         ctx.beginPath()
-        ctx.moveTo(round(point1.x), round(point1.y))
-        ctx.lineTo(round(point2.x), round(point2.y))
+        ctx.moveTo(round(x1), round(y1))
+        ctx.lineTo(round(x2), round(y2))
         ctx.stroke()
     }
 

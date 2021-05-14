@@ -65,7 +65,7 @@
 				<p>It contains (or will soon contains) :</p>
 				<ul>
 					<li>  Core</li>
-					<li>  Renderer (based on canvas rendering &amp; <em>Vue</em> for the interface)</li>
+					<li>  Renderer (based on Canvas/OffscreenCanvas rendering &amp; dynamics html <code>&lt;span&gt;</code> for the interface)</li>
 					<li>  Event System (native and custom events)</li>
 					<li>  Grid System</li>
 					<li>  Stats</li>
@@ -105,6 +105,10 @@
 				<a href="#renderer" id="renderer" style="color: inherit; text-decoration: none;">
 					<h3>Renderer</h3>
 				</a>
+				<ul>
+					<li>  The <code>Renderer</code> object is a classic optimize canvas 2D renderer.</li>
+					<li>  The <code>OffscreenRenderer</code> uses the <code>OffscreenCanvas</code> API and web worker to run in a different thread.</li>
+				</ul>
 				<pre><code class="language-ts"><span style="color: #008000">// Choose one or the other</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Renderer</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine/render&#039;</span><span style="color: #000000">                      </span><span style="color: #008000">// classic canvas renderer</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">OffscreenRenderer</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">Renderer</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine/render&#039;</span><span style="color: #000000"> </span><span style="color: #008000">// better performance</span>
@@ -130,7 +134,7 @@
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">point</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">style</span><span style="color: #000000">?)</span>
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">rectSprite</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">, </span><span style="color: #001080">texture</span><span style="color: #000000">)</span>
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">circleSprite</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">radius</span><span style="color: #000000">, </span><span style="color: #001080">texture</span><span style="color: #000000">)</span>
-<span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">tint</span><span style="color: #000000">(</span><span style="color: #001080">color</span><span style="color: #000000">, </span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">)      </span><span style="color: #008000">// tint a rect width a color </span>
+<span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">tint</span><span style="color: #000000">(</span><span style="color: #001080">color</span><span style="color: #000000">, </span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">)      </span><span style="color: #008000">// tint a rect width a color</span>
 
 </code></pre>
 				<a href="#interface" id="interface" style="color: inherit; text-decoration: none;">
@@ -140,7 +144,12 @@
 
 <span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">value</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;some value&#039;</span>
 
-<span style="color: #001080">Interface</span><span style="color: #000000">.</span><span style="color: #795E26">addItem</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #A31515">`Value : </span><span style="color: #0000FF">${</span><span style="color: #001080">value</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">, { </span><span style="color: #001080">CSSproperties</span><span style="color: #000000"> })</span>
+<span style="color: #001080">Interface</span><span style="color: #000000">.</span><span style="color: #795E26">addItem</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #A31515">`Value : </span><span style="color: #0000FF">${</span><span style="color: #001080">value</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">, </span><span style="color: #001080">position</span><span style="color: #000000">, { </span><span style="color: #001080">CSSproperties</span><span style="color: #000000"> })</span>
+<span style="color: #008000">// position is a string : &#039;top-left&#039;, &#039;top-right&#039;, &#039;bottom-left&#039;, &#039;bottom-right&#039; or &#039;custom&#039;</span>
+<span style="color: #008000">// CSSproperties is an object containing { css-attribute: value }</span>
+
+<span style="color: #008000">// Example :</span>
+<span style="color: #001080">Interface</span><span style="color: #000000">.</span><span style="color: #795E26">addItem</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #A31515">`Iteration : </span><span style="color: #0000FF">${</span><span style="color: #001080">i</span><span style="color: #000000">++</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;top-left&#039;</span><span style="color: #000000">, { </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#999&#039;</span><span style="color: #000000"> })</span>
 </code></pre>
 				<hr>
 				<p>2020 © Dorian Beauchesne</p>

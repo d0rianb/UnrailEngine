@@ -89,11 +89,14 @@
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="index.game.html#animationframe" class="tsd-kind-icon">animation<wbr>Frame</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="index.game.html#env" class="tsd-kind-icon">env</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="index.game.html#fps" class="tsd-kind-icon">fps</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="index.game.html#gameloop" class="tsd-kind-icon">game<wbr>Loop</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="index.game.html#name" class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="index.game.html#showstatspanel" class="tsd-kind-icon">show<wbr>Stats<wbr>Panel</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="index.game.html#stats" class="tsd-kind-icon">stats</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="index.game.html#tick" class="tsd-kind-icon">tick</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -105,6 +108,8 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="index.game.html#makeanimationframe" class="tsd-kind-icon">make<wbr>Animation<wbr>Frame</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.game.html#setfps" class="tsd-kind-icon">setFPS</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.game.html#setmainloop" class="tsd-kind-icon">set<wbr>Main<wbr>Loop</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.game.html#start" class="tsd-kind-icon">start</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.game.html#togglestats" class="tsd-kind-icon">toggle<wbr>Stats</a></li>
@@ -121,13 +126,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Game<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, env<span class="tsd-signature-symbol">?: </span><a href="index.gameenvironement.html" class="tsd-signature-type" data-tsd-kind="Class">GameEnvironement</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Game<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, env<span class="tsd-signature-symbol">?: </span><a href="index.gameenvironement.html" class="tsd-signature-type" data-tsd-kind="Class">GameEnvironement</a>, fps<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L14">core/game.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L18">core/game.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -138,6 +143,9 @@
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> env: <a href="index.gameenvironement.html" class="tsd-signature-type" data-tsd-kind="Class">GameEnvironement</a></h5>
 								</li>
+								<li>
+									<h5>fps: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 60</span></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="index.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h4>
 						</li>
@@ -147,22 +155,42 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="animationframe" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> animation<wbr>Frame</h3>
+					<div class="tsd-signature tsd-kind-icon">animation<wbr>Frame<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AnimationFrame</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L17">core/game.ts:17</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="env" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> env</h3>
 					<div class="tsd-signature tsd-kind-icon">env<span class="tsd-signature-symbol">:</span> <a href="index.gameenvironement.html" class="tsd-signature-type" data-tsd-kind="Class">GameEnvironement</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L11">core/game.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L12">core/game.ts:12</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="fps" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> fps</h3>
+					<div class="tsd-signature tsd-kind-icon">fps<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 60</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L18">core/game.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="gameloop" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> game<wbr>Loop</h3>
-					<div class="tsd-signature tsd-kind-icon">game<wbr>Loop<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FrameRequestCallback</span></div>
+					<div class="tsd-signature tsd-kind-icon">game<wbr>Loop<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L12">core/game.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L14">core/game.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -172,7 +200,7 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L10">core/game.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L11">core/game.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -182,7 +210,7 @@
 					<div class="tsd-signature tsd-kind-icon">show<wbr>Stats<wbr>Panel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L14">core/game.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L16">core/game.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -192,7 +220,17 @@
 					<div class="tsd-signature tsd-kind-icon">stats<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L13">core/game.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L15">core/game.ts:15</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="tick" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> tick</h3>
+					<div class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L13">core/game.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -203,22 +241,62 @@
 					<a name="renderertype" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> renderer<wbr>Type</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> rendererType<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> rendererType<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RendererType</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L27">core/game.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L34">core/game.ts:34</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RendererType</span></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="makeanimationframe" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> make<wbr>Animation<wbr>Frame</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">make<wbr>Animation<wbr>Frame<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L52">core/game.ts:52</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setfps" class="tsd-anchor"></a>
+					<h3>setFPS</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">setFPS<span class="tsd-signature-symbol">(</span>fps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L61">core/game.ts:61</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fps: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="setmainloop" class="tsd-anchor"></a>
 					<h3>set<wbr>Main<wbr>Loop</h3>
@@ -229,7 +307,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L45">core/game.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L56">core/game.ts:56</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -252,7 +330,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L58">core/game.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L75">core/game.ts:75</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -269,7 +347,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L31">core/game.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L38">core/game.ts:38</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -292,7 +370,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L49">core/game.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L66">core/game.ts:66</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -315,7 +393,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/990a3ce/src/core/game.ts#L23">core/game.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/cb85a85/src/core/game.ts#L30">core/game.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -349,6 +427,15 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="index.cell.html" class="tsd-kind-icon">Cell</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="index.cooldown.html" class="tsd-kind-icon">Cooldown</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="index.event.html" class="tsd-kind-icon">Event</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
@@ -358,7 +445,13 @@
 								<a href="index.game.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="index.game.html#animationframe" class="tsd-kind-icon">animation<wbr>Frame</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="index.game.html#env" class="tsd-kind-icon">env</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="index.game.html#fps" class="tsd-kind-icon">fps</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="index.game.html#gameloop" class="tsd-kind-icon">game<wbr>Loop</a>
@@ -372,8 +465,17 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="index.game.html#stats" class="tsd-kind-icon">stats</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="index.game.html#tick" class="tsd-kind-icon">tick</a>
+							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-static">
 								<a href="index.game.html#renderertype" class="tsd-kind-icon">renderer<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="index.game.html#makeanimationframe" class="tsd-kind-icon">make<wbr>Animation<wbr>Frame</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="index.game.html#setfps" class="tsd-kind-icon">setFPS</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="index.game.html#setmainloop" class="tsd-kind-icon">set<wbr>Main<wbr>Loop</a>
@@ -401,6 +503,15 @@
 						<a href="index.gameobject.html" class="tsd-kind-icon">Game<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="index.grid.html" class="tsd-kind-icon">Grid</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="index.interface.html" class="tsd-kind-icon">Interface</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="index.offscreenrenderer.html" class="tsd-kind-icon">Offscreen<wbr>Renderer</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="index.particle.html" class="tsd-kind-icon">Particle</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
@@ -410,10 +521,19 @@
 						<a href="index.playerobject.html" class="tsd-kind-icon">Player<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="index.renderer.html" class="tsd-kind-icon">Renderer</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="index.texture.html" class="tsd-kind-icon">Texture</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="index.vector2.html" class="tsd-kind-icon">Vector2</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="../modules/index.html#point" class="tsd-kind-icon">Point</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/index.html#config" class="tsd-kind-icon">Config</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="../modules/index.html#point-1" class="tsd-kind-icon">Point</a>
@@ -442,9 +562,6 @@
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="../modules/index.html#inrange" class="tsd-kind-icon">in<wbr>Range</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/index.html#sign" class="tsd-kind-icon">sign</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -466,6 +583,7 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>

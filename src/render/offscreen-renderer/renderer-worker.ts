@@ -1,16 +1,21 @@
 import { Renderer } from '../renderer'
 import { ThreadWorker } from '../../helpers/threadHelper'
+import { WorkerMessage } from "./workerMessage";
+import {Texture} from "../texture";
 
 class RendererWorker extends ThreadWorker {
-    private canvasResolution: number
+    private readonly canvasResolution: number
     private offscreenCanvas: OffscreenCanvas
     private ctx: OffscreenRenderingContext
+    private textureAlias: Map<number, Texture>
+
 
     constructor() {
         super()
         this.canvasResolution = 1
         this.offscreenCanvas = null
         this.ctx = null
+        this.textureAlias = new Map()
     }
 
     onMessage(title: string, content: any) {
@@ -27,6 +32,9 @@ class RendererWorker extends ThreadWorker {
                     this.handleDrawRequest(renderCall.methodName, renderCall.args)
                 }
                 break
+            case 'newTexture':
+                this.textureAlias[content.id] = content.texture
+                break
         }
     }
 
@@ -35,6 +43,10 @@ class RendererWorker extends ThreadWorker {
         this.offscreenCanvas.width = width * pixelRatio
         this.offscreenCanvas.height = height * pixelRatio
         'setTransform' in this.ctx ? this.ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0) : null
+    }
+
+    getTexture(textureId: number): Texture {
+        return this.textureAlias[textureId]
     }
 
     handleDrawRequest(method: string, args: any) {
@@ -46,7 +58,7 @@ class RendererWorker extends ThreadWorker {
                 Renderer.clear(args?.color)
                 break
             case 'line':
-                Renderer.line(args.point1, args.point2, args.obj)
+                Renderer.line(args.x1, args.y1, args.x2, args.y2, args.obj)
                 break
             case 'rect':
                 Renderer.rect(args.x, args.y, args.width, args.height, args.obj)
@@ -61,10 +73,10 @@ class RendererWorker extends ThreadWorker {
                 Renderer.point(args.x, args.y, args.obj)
                 break
             case 'rectSprite':
-                Renderer.rectSprite(args.x, args.y, args.width, args.height, args.texture)
+                Renderer.rectSprite(args.x, args.y, args.width, args.height, this.getTexture(args.textureId))
                 break
             case 'circleSprite':
-                Renderer.circleSprite(args.x, args.y, args.radius, args.texture)
+                Renderer.circleSprite(args.x, args.y, args.radius, this.getTexture(args.textureId))
                 break
             case 'tint':
                 Renderer.tint(args.color, args.x, args.y, args.width, args.height)
@@ -75,4 +87,6 @@ class RendererWorker extends ThreadWorker {
 
 const renderer: RendererWorker = new RendererWorker()
 
-self.addEventListener('message', ({ data }) => renderer.onMessage(data.title, data.content))
+self.addEventListener('message', ({data}) => {
+    renderer.onMessage(data.title, data.content)
+})
