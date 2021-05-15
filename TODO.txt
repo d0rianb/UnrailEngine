@@ -17,6 +17,8 @@ TODO :
     - Make OffscreenRenderer the default renderer
     - Random.sign()                                         - X
     - Resources Manager
+    - Update the doc / give examples --> examples/ folder
+
 
 PARTS :
     - Core

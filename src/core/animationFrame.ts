@@ -9,15 +9,16 @@ class AnimationFrame {
         this.requestId = 0
         this.animate = animate
         this.fps = fps
+        if (!window) throw new Error('No window context')
     }
 
     start() {
-        let then = performance.now()
-        const interval = 1000 / this.fps
-        const tolerance = 0.1
+        let then: number = performance.now()
+        const interval: number = 1000 / this.fps
+        const tolerance: number = 0.1
 
         const animateLoop = time => {
-            this.requestId = requestAnimationFrame(animateLoop)
+            this.requestId = window.requestAnimationFrame(animateLoop)
             const delta = time - then
 
             if (delta >= interval - tolerance) {
@@ -25,11 +26,11 @@ class AnimationFrame {
                 this.animate(delta)
             }
         }
-        this.requestId = requestAnimationFrame(animateLoop)
+        this.requestId = window.requestAnimationFrame(animateLoop)
     }
 
     stop() {
-        cancelAnimationFrame(this.requestId)
+        window.cancelAnimationFrame(this.requestId)
     }
 
 }

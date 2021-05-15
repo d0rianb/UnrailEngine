@@ -37,8 +37,9 @@ function update(ts: number) {
         pos.forEach(p => p.y += step)
     }
     Renderer.clear()
-    Renderer.line(new Vector2(width / 2, 0), new Vector2(width / 2, height), { strokeStyle: 'red', globalAlpha: .25 })
+    Renderer.line(width / 2, 0, width / 2, height, { strokeStyle: 'red', globalAlpha: .25 })
     Renderer.poly(pos)
+    Renderer.endFrame()
 }
 
 let game = new Game('Random Step')

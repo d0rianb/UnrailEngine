@@ -1,7 +1,6 @@
 import { Renderer } from '../renderer'
 import { ThreadWorker } from '../../helpers/threadHelper'
-import { WorkerMessage } from "./workerMessage";
-import {Texture} from "../texture";
+import { Texture } from "../texture";
 
 class RendererWorker extends ThreadWorker {
     private readonly canvasResolution: number
@@ -87,6 +86,4 @@ class RendererWorker extends ThreadWorker {
 
 const renderer: RendererWorker = new RendererWorker()
 
-self.addEventListener('message', ({data}) => {
-    renderer.onMessage(data.title, data.content)
-})
+self.addEventListener('message', ({ data }) => renderer.onMessage(data.title, data.content))

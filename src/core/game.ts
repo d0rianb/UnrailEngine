@@ -5,7 +5,9 @@ import { Interface } from '../render'
 import { AnimationFrame } from './animationFrame'
 
 type RendererType = 'normal' | 'offscreen'
-let rendererType = 'normal'
+
+// Static property
+let rendererType: RendererType = 'normal'
 
 class Game {
     private name: string
