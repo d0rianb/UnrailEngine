@@ -127,8 +127,6 @@ class Env extends GameEnvironement {
         this.bindEvents()
 
         Renderer.create(width, height)
-        console.log(Renderer.worker)
-
 
         for (let i = 0; i < 5; i++) {
             this.enemies.push(new Enemy(150 * i, 10))

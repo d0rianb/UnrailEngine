@@ -7,12 +7,11 @@ import { WorkerMessage } from './workerMessage'
 import { RenderCall } from './renderCall'
 
 // ISSUE : relative path not resolved when execute from node_modules
-const WORKER_PATH: string = './src/render/offscreen-renderer/renderer-worker.ts'
+const WORKER_PATH: string = './src/render/offscreen-renderer/rendererWorker.ts'
 
 let offscreenCanvas: OffscreenCanvas = null
 let worker: Worker = null
 let canvas: HTMLCanvasElement = null
-let ctx: CanvasRenderingContext2D = null
 let workerIsInitialized = false
 let renderStack: Array<RenderCall> = []
 
@@ -20,6 +19,14 @@ const textureAlias: Map<number, Texture> = new Map()
 
 
 class OffscreenRenderer {
+
+    static get worker() { return worker }
+
+    static get offscreenCanvas() { return offscreenCanvas }
+
+    static get workerIsInitialized() { return workerIsInitialized }
+
+    static get renderStack() { return renderStack }
 
     // Create a canvas and insert it to <main>
     static create(width: number, height: number): HTMLCanvasElement {
@@ -29,18 +36,13 @@ class OffscreenRenderer {
         return canvas
     }
 
-    static get worker() {
-        return worker
-    }
-
     static initRenderWorker(canvas, width: number, height: number): void {
         if (Game.rendererType !== 'offscreen') {
             Game.setRendererType('offscreen')
         }
-
         let { clientWidth, clientHeight } = canvas
-
-        worker = new Worker(WORKER_PATH, { type: 'module' })
+        const workerUrl = new URL(WORKER_PATH, window.location.origin)
+        worker = new Worker(workerUrl, { type: 'module' })
         offscreenCanvas = canvas.transferControlToOffscreen()
         this.sendMessageToWorker('initCanvas', {
             width: width || clientWidth,
@@ -54,15 +56,15 @@ class OffscreenRenderer {
                 case 'log':
                     console.log('message from the renderer worker : ', data)
                     break
-                case 'workerIsInitialized':
+                case 'initialized':
                     workerIsInitialized = true
                     break
             }
         }
     }
 
-    static addRenderCall(name: string, args: object) {
-        renderStack.push(new RenderCall(name, args))
+    static addRenderCall(name: string, args?: object) {
+        renderStack.push(new RenderCall(name, args || {}))
     }
 
     static sendMessageToWorker(title: string, data?: any, transfer?: Transferable[]): void {
@@ -106,6 +108,11 @@ class OffscreenRenderer {
     }
 
     static tint(color: string, x: number, y: number, width: number, height: number): void { this.addRenderCall('circle', { color, x, y, width, height }) }
+
+    static beginFrame(): void {
+        renderStack = []
+        this.addRenderCall('clear')
+    }
 
     static endFrame(): void {
         if (!workerIsInitialized) return

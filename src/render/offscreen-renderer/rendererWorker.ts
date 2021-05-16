@@ -24,7 +24,7 @@ class RendererWorker extends ThreadWorker {
                 this.ctx = this.offscreenCanvas.getContext('2d')
                 Renderer.setContext(this.ctx)
                 this.setSize(content.dpr, content.width, content.height)
-                this.sendMessageToMainThread('workerIsInitialized')
+                this.sendMessageToMainThread('initialized')
                 break
             case 'render':
                 for (let renderCall of content.renderStack) {
