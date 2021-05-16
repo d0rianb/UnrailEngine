@@ -1,11 +1,12 @@
 import { Texture } from '..'
-import { Game } from '../../core/game'
-import { createCanvas, insertCanvas } from '../../core/geometry'
-import { Point } from '../../core/math'
+import { Game } from '@/core/game'
+import { createCanvas, insertCanvas } from '@/core/geometry'
+import { Point } from '@/core/math'
 import { StyleObject } from '../renderer'
 import { WorkerMessage } from './workerMessage'
 import { RenderCall } from './renderCall'
 
+// ISSUE : relative path not resolved when execute from node_modules
 const WORKER_PATH: string = './src/render/offscreen-renderer/renderer-worker.ts'
 
 let offscreenCanvas: OffscreenCanvas = null
@@ -26,6 +27,10 @@ class OffscreenRenderer {
         OffscreenRenderer.initRenderWorker(canvas, width, height)
         insertCanvas(canvas, 'main')
         return canvas
+    }
+
+    static get worker() {
+        return worker
     }
 
     static initRenderWorker(canvas, width: number, height: number): void {

@@ -1,6 +1,6 @@
 import { Renderer } from '../renderer'
 import { ThreadWorker } from '../../helpers/threadHelper'
-import { Texture } from "../texture";
+import { Texture } from '../texture'
 
 class RendererWorker extends ThreadWorker {
     private readonly canvasResolution: number

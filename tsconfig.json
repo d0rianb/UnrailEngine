@@ -3,6 +3,7 @@
         "target": "esnext",
         "module": "esnext",
         "moduleResolution": "node",
+        "baseUrl": ".",
         "outDir": "dist",
         "lib": ["webworker", "es2017", "scripthost", "DOM"],
         "skipLibCheck": true,
@@ -17,9 +18,13 @@
         "declaration": true,
         "emitDeclarationOnly": true,
         "outFile": "./dist/unrail-engine.d.ts",
+        "paths": {
+          "@/*": ["./src/*"]
+        },
     },
     "include": [
-        "./src/**/*"
+        "./src",
+        "./test"
     ],
     "exclude": [
         "./node_modules/**/*"

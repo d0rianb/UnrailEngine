@@ -127,6 +127,8 @@ class Env extends GameEnvironement {
         this.bindEvents()
 
         Renderer.create(width, height)
+        console.log(Renderer.worker)
+
 
         for (let i = 0; i < 5; i++) {
             this.enemies.push(new Enemy(150 * i, 10))
@@ -188,5 +190,4 @@ const game = new Game('Space Invader', env)
 
 game.setMainLoop(() => env.update())
 game.setFPS(60)
-// env.update()
 game.start()

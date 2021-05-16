@@ -18,7 +18,7 @@ TODO :
     - Random.sign()                                         - X
     - Resources Manager
     - Update the doc / give examples --> examples/ folder
-
+    - Error --> Engine failure
 
 PARTS :
     - Core
@@ -26,9 +26,11 @@ PARTS :
     - Event System
     - Grid System
     - Stats
-    - Configuration
+    - Configuration --> Local Storage API
     - Physics
     - Particle System
 
  ISSUE :
     - Resize canvas
+    - Texture preserve ratio
+    - Inject CSS

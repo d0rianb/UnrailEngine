@@ -28,6 +28,7 @@
     },
     "devDependencies": {
         "@types/offscreencanvas": "^2019.6.2",
+        "rollup-plugin-visualizer": "^5.5.0",
         "auto-version-js": "^0.3.7",
         "typedoc": "^0.20.27",
         "typescript": "^4.2.3",

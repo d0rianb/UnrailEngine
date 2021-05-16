@@ -161,6 +161,7 @@ declare module "src/render/offscreen-renderer/index" {
     import { StyleObject } from "src/render/renderer";
     class OffscreenRenderer {
         static create(width: number, height: number): HTMLCanvasElement;
+        static get worker(): Worker;
         static initRenderWorker(canvas: any, width: number, height: number): void;
         static addRenderCall(name: string, args: object): void;
         static sendMessageToWorker(title: string, data?: any, transfer?: Transferable[]): void;
@@ -398,3 +399,10 @@ declare module "src/helpers/threadHelper" {
     }
 }
 declare module "src/render/offscreen-renderer/renderer-worker" { }
+declare module "test/offscreen-render" { }
+declare module "test/perf" {
+    import '../src/core/utils.ts';
+}
+declare module "test/random-step" { }
+declare module "test/space-invader-offscreen" { }
+declare module "test/space-invader" { }
