@@ -28,6 +28,8 @@ class OffscreenRenderer {
 
     static get renderStack() { return renderStack }
 
+    static get workerUrl() { return new URL(WORKER_PATH, window.location.origin) }
+
     // Create a canvas and insert it to <main>
     static create(width: number, height: number): HTMLCanvasElement {
         canvas = createCanvas(width, height, 1)

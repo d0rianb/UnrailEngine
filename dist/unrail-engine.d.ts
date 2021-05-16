@@ -159,11 +159,16 @@ declare module "src/render/offscreen-renderer/index" {
     import { Texture } from "src/render/index";
     import { Point } from "src/core/math";
     import { StyleObject } from "src/render/renderer";
+    import { RenderCall } from "src/render/offscreen-renderer/renderCall";
     class OffscreenRenderer {
-        static create(width: number, height: number): HTMLCanvasElement;
         static get worker(): Worker;
+        static get offscreenCanvas(): OffscreenCanvas;
+        static get workerIsInitialized(): boolean;
+        static get renderStack(): RenderCall[];
+        static get workerUrl(): URL;
+        static create(width: number, height: number): HTMLCanvasElement;
         static initRenderWorker(canvas: any, width: number, height: number): void;
-        static addRenderCall(name: string, args: object): void;
+        static addRenderCall(name: string, args?: object): void;
         static sendMessageToWorker(title: string, data?: any, transfer?: Transferable[]): void;
         static style(obj?: StyleObject): void;
         static clear(color?: string): void;
@@ -175,6 +180,7 @@ declare module "src/render/offscreen-renderer/index" {
         static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void;
         static circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void>;
         static tint(color: string, x: number, y: number, width: number, height: number): void;
+        static beginFrame(): void;
         static endFrame(): void;
     }
     export { OffscreenRenderer };
@@ -398,7 +404,7 @@ declare module "src/helpers/threadHelper" {
         log(...args: any[]): void;
     }
 }
-declare module "src/render/offscreen-renderer/renderer-worker" { }
+declare module "src/render/offscreen-renderer/rendererWorker" { }
 declare module "test/offscreen-render" { }
 declare module "test/perf" {
     import '../src/core/utils.ts';
