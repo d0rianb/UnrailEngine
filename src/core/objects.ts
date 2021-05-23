@@ -2,7 +2,7 @@ interface GameObjectInterface {
     x?: number
     y?: number
     update: (...args: any[]) => void
-    render: (ctx: CanvasRenderingContext2D, ...args: any[]) => void
+    render: (...args: any[]) => void
     [propName: string]: any
 }
 
@@ -28,7 +28,7 @@ class GameObject implements GameObjectInterface {
 
     public update(...args: any[]) { }
 
-    public render(ctx: CanvasRenderingContext2D, ...args: any[]) { }
+    public render(...args: any[]) { }
 }
 
 class PlayerObject extends GameObject {
@@ -38,7 +38,7 @@ class PlayerObject extends GameObject {
 
     public update(...args: any[]) { }
 
-    public render(ctx: CanvasRenderingContext2D, ...args: any[]) { }
+    public render(...args: any[]) { }
 }
 
 export { GameObject, PlayerObject }
