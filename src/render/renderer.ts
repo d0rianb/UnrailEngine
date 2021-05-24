@@ -24,7 +24,8 @@ const defaultStyleObject: StyleObject = {
     globalCompositeOperation: 'add'
 }
 
-let precision: number =  isWorker() ? 4 : 2 * (window.devicePixelRatio || 1)
+const TWOPI = 2 * Math.PI
+let precision: number = isWorker() ? 4 : 2 * (window.devicePixelRatio || 1)
 
 // Move to math file ?
 function round(num: number): number {
@@ -99,7 +100,7 @@ class Renderer {
     static circle(x: number, y: number, radius: number, obj?: StyleObject): void {
         Renderer.style(obj)
         ctx.beginPath()
-        ctx.arc(round(x), round(y), radius, 0, 2 * Math.PI)
+        ctx.arc(round(x), round(y), radius, 0, TWOPI)
         ctx.stroke()
     }
 
@@ -126,7 +127,7 @@ class Renderer {
     static circleSprite(x: number, y: number, radius: number, texture: Texture): void {
         ctx.save()
         ctx.beginPath()
-        ctx.arc(round(x), round(y), radius, 0, 2 * Math.PI)
+        ctx.arc(round(x), round(y), radius, 0, TWOPI)
         ctx.clip()
         Renderer.rectSprite(x - radius, y - radius, 2 * radius, 2 * radius, texture)
         ctx.restore()
