@@ -5,13 +5,11 @@ import { Point } from '@/core/math'
 import { StyleObject } from '../renderer'
 import { WorkerMessage } from './workerMessage'
 import { RenderCall } from './renderCall'
+import RendererWorker from './rendererWorker?worker&inline'
 
-// ISSUE : relative path not resolved when execute from node_modules
-const WORKER_PATH: string = './src/render/offscreen-renderer/rendererWorker.ts'
-
-let offscreenCanvas: OffscreenCanvas = null
-let worker: Worker = null
-let canvas: HTMLCanvasElement = null
+let offscreenCanvas: OffscreenCanvas
+let worker: any | typeof RendererWorker
+let canvas: HTMLCanvasElement
 let workerIsInitialized = false
 let renderStack: Array<RenderCall> = []
 
@@ -22,13 +20,11 @@ class OffscreenRenderer {
 
     static get worker() { return worker }
 
-    static get offscreenCanvas() { return offscreenCanvas }
-
     static get workerIsInitialized() { return workerIsInitialized }
 
-    static get renderStack() { return renderStack }
+    static get offscreenCanvas() { return offscreenCanvas }
 
-    static get workerUrl() { return new URL(WORKER_PATH, window.location.origin) }
+    static get renderStack() { return renderStack }
 
     // Create a canvas and insert it to <main>
     static create(width: number, height: number): HTMLCanvasElement {
@@ -38,13 +34,12 @@ class OffscreenRenderer {
         return canvas
     }
 
-    static initRenderWorker(canvas, width: number, height: number): void {
+    static initRenderWorker(canvas: HTMLCanvasElement, width: number, height: number): void {
         if (Game.rendererType !== 'offscreen') {
             Game.setRendererType('offscreen')
         }
         let { clientWidth, clientHeight } = canvas
-        const workerUrl = new URL(WORKER_PATH, window.location.origin)
-        worker = new Worker(workerUrl, { type: 'module' })
+        worker = new RendererWorker()
         offscreenCanvas = canvas.transferControlToOffscreen()
         this.sendMessageToWorker('initCanvas', {
             width: width || clientWidth,
@@ -70,7 +65,7 @@ class OffscreenRenderer {
     }
 
     static sendMessageToWorker(title: string, data?: any, transfer?: Transferable[]): void {
-        return worker.postMessage(new WorkerMessage(title, data), transfer || [])
+        return worker!.postMessage(new WorkerMessage(title, data), transfer || [])
     }
 
     static style(obj?: StyleObject): void { this.addRenderCall('style', { obj }) }
@@ -89,23 +84,24 @@ class OffscreenRenderer {
 
     // <img> object is not serializable
     static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
-        if (texture.id in textureAlias) {
+        if (textureAlias.has(texture.id)) {
             this.addRenderCall('rectSprite', { x, y, width, height, textureId: texture.id })
         } else {
-            texture.convertToBitmap().then(adaptedTexture => {
-                textureAlias[texture.id] = adaptedTexture
+            texture.convertToBitmap()?.then(adaptedTexture => {
+                textureAlias.set(texture.id, adaptedTexture)
                 this.sendMessageToWorker('newTexture', { id: texture.id, texture: adaptedTexture })
             })
         }
     }
 
     static async circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void> {
-        if (texture.id in textureAlias) {
+        if (textureAlias.has(texture.id)) {
             this.addRenderCall('circleSprite', { x, y, radius, textureId: texture.id })
         } else {
-            const adaptedTexture: Texture = await texture.convertToBitmap()
-            textureAlias[texture.id] = adaptedTexture
-            this.sendMessageToWorker('newTexture', { id: texture.id, texture: adaptedTexture })
+            texture.convertToBitmap()?.then(adaptedTexture => {
+                textureAlias.set(texture.id, adaptedTexture)
+                this.sendMessageToWorker('newTexture', { id: texture.id, texture: adaptedTexture })
+            })
         }
     }
 

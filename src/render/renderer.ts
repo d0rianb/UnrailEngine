@@ -1,5 +1,4 @@
-import { createCanvas } from '..'
-import { insertCanvas } from '../core/geometry'
+import { createCanvas, insertCanvas } from '../core/geometry'
 import { Point } from '../core/math'
 import { Texture } from './texture'
 import { isWorker } from '../core/utils'
@@ -32,7 +31,7 @@ function round(num: number): number {
     return ~~(num * precision) / precision
 }
 
-let ctx: CanvasRenderContext = null
+let ctx: CanvasRenderContext
 
 class Renderer {
 
@@ -40,7 +39,7 @@ class Renderer {
     static create(width: number, height: number): HTMLCanvasElement {
         const canvas: HTMLCanvasElement = createCanvas(width, height)
         insertCanvas(canvas, 'main')
-        Renderer.setContext(canvas.getContext('2d'))
+        Renderer.setContext(canvas.getContext('2d')!)
         return canvas
     }
 
@@ -140,6 +139,12 @@ class Renderer {
             globalAlpha: .25
         })
     }
+
+    // For the compatibility with OffscreenRenderer
+    static beginFrame(): void { }
+
+    // For the compatibility with OffscreenRenderer
+    static endFrame(): void { }
 }
 
 export { Renderer, StyleObject }

@@ -19,6 +19,7 @@ TODO :
     - Resources Manager
     - Update the doc / give examples --> examples/ folder
     - Error --> Engine failure
+    - Animation Class
 
 PARTS :
     - Core

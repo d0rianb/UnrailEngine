@@ -41,19 +41,23 @@ class EventSystem {
         switch (e.type) {
             case EventType.KeyboardDown:
                 this.keyboardDownEvents.push(e)
+                break
             case EventType.KeyboardPressed:
                 this.keyboardPressedEvents.push(e)
+                break
             case EventType.Mouse:
                 break
             case EventType.Window:
                 this.windowEvents.push(e)
                 this.bindEvents()
+                break
             case EventType.Custom:
                 this.customEvents.push(e)
+                break
         }
     }
 
-    getCustomEvent(name: string): Event {
+    getCustomEvent(name: string): Event | undefined {
         return this.customEvents.find(e => e.name === name)
     }
 

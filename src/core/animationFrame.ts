@@ -1,4 +1,4 @@
-type AnimationFunction = (number) => any
+type AnimationFunction = (time: number) => any
 
 class AnimationFrame {
     requestId: number

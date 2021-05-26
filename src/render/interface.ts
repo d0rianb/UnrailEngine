@@ -56,7 +56,7 @@ class Interface {
         if (item.position) document.querySelector(`.ue-container > .${item.position}`)?.appendChild(element)
         else document.querySelector(`.ue-container > .custom`)?.appendChild(element)
         if (!!item.onClick) {
-            element.addEventListener('click', e => item.onClick(e))
+            element.addEventListener('click', e => item.onClick!(e))
             element.classList.add('ue-interface-button')
         }
     }
@@ -64,7 +64,7 @@ class Interface {
     static update(): void {
         items.forEach((item, i) => {
             const value: string = item.callback()
-            const element: HTMLSpanElement = document.querySelector(`.ue-interface #item-${i + 1}`)
+            const element: HTMLSpanElement | null = document.querySelector(`.ue-interface #item-${i + 1}`)
             if (element && element.innerText !== value) {
                 element.innerText = value
             }
@@ -73,7 +73,7 @@ class Interface {
 
     // height is a css property
     static statsShift(height: number): void {
-        const TLContainer: HTMLElement = document.querySelector('.top-left')
+        const TLContainer: HTMLElement | null = document.querySelector('.top-left')
         if (TLContainer) {
             TLContainer.style.top = `${height}px`
         }

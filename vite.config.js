@@ -1,18 +1,16 @@
-import { resolve } from 'path'
+import * as path from 'path'
 import visualizer from 'rollup-plugin-visualizer'
-
 
 /**
  * @type {import('vite').UserConfig}
  */
-// build the engine
 export default ({ command }) => {
     const config = {
-        root: resolve(__dirname, '.'),
+        root: '.',
         plugins: [],
         resolve: {
             alias: {
-                '@': resolve(__dirname, 'src')
+                '@': path.resolve(__dirname, 'src')
             }
         }
     }
@@ -20,21 +18,21 @@ export default ({ command }) => {
         const buildOptions = {
             build: {
                 target: 'modules',
-                outDir: resolve(__dirname, 'dist'),
-                assetDist: resolve(__dirname, 'resources'),
+                outDir: './dist',
+                assetDist: './resources',
                 lib: {
                     name: 'unrail-engine',
-                    entry: resolve(__dirname, 'src/index.ts'),
+                    entry: './src/index.ts',
                     formats: ['es', 'umd']
                 },
                 minify: 'terser',
-                sourcemap: true,
                 rollupOptions: {
+                    manualChunks: {},
                     plugins: [
                         visualizer({
-                            filename: resolve(__dirname, 'dist/stats/treemap.html'),
+                            filename: './dist/stats/treemap.html',
                             template: 'treemap', // sunburst|treemap|network
-                            sourcemap: true
+                            sourcemap: false
                         })
                     ]
                 }

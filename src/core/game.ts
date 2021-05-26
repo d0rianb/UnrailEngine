@@ -10,13 +10,13 @@ type RendererType = 'normal' | 'offscreen'
 let rendererType: RendererType = 'normal'
 
 class Game {
-    private name: string
+    private name?: string
     private env?: Env
     private tick: number
-    private gameLoop: Function
+    private gameLoop: Function | null
     private stats: Stats
     private showStatsPanel: boolean
-    private animationFrame: AnimationFrame
+    private animationFrame?: AnimationFrame
     private fps: number = 60
 
     constructor(name?: string, env?: Env, fps: number = 60) {
@@ -47,7 +47,7 @@ class Game {
             this.stats = showStats()
         } else {
             this.stats = null
-            if (document.querySelector('.stats')) document.querySelector('.stats').remove()
+            if (document.querySelector('.stats')) document.querySelector('.stats')!.remove()
         }
     }
 
@@ -85,7 +85,7 @@ class Game {
             if (this.showStatsPanel) {
                 this.stats = showStats()
             }
-            this.animationFrame.start()
+            this.animationFrame?.start()
         })
     }
 }

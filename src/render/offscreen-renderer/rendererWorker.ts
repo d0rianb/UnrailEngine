@@ -4,10 +4,9 @@ import { Texture } from '../texture'
 
 class RendererWorker extends ThreadWorker {
     private readonly canvasResolution: number
-    private offscreenCanvas: OffscreenCanvas
-    private ctx: OffscreenRenderingContext
+    private offscreenCanvas: OffscreenCanvas | null
+    private ctx: OffscreenRenderingContext | null
     private textureAlias: Map<number, Texture>
-
 
     constructor() {
         super()
@@ -15,6 +14,7 @@ class RendererWorker extends ThreadWorker {
         this.offscreenCanvas = null
         this.ctx = null
         this.textureAlias = new Map()
+        self.addEventListener('message', ({ data }) => this.onMessage(data.title, data.content))
     }
 
     onMessage(title: string, content: any) {
@@ -83,7 +83,4 @@ class RendererWorker extends ThreadWorker {
         }
     }
 }
-
-const renderer: RendererWorker = new RendererWorker()
-
-self.addEventListener('message', ({ data }) => renderer.onMessage(data.title, data.content))
+const worker: RendererWorker = new RendererWorker()

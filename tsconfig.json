@@ -4,12 +4,11 @@
         "module": "esnext",
         "moduleResolution": "node",
         "baseUrl": ".",
-        "outDir": "dist",
         "lib": ["webworker", "es2017", "scripthost", "DOM"],
         "skipLibCheck": true,
         "allowJs": true,
         "strict": false,
-        "sourceMap": true,
+        "sourceMap": false,
         "importHelpers": true,
         "isolatedModules": false,
         "noEmit": false,
@@ -17,16 +16,15 @@
         "resolveJsonModule": true,
         "declaration": true,
         "emitDeclarationOnly": true,
-        "outFile": "./dist/unrail-engine.d.ts",
+        "outDir": "./dist/types",
         "paths": {
           "@/*": ["./src/*"]
-        },
+        }
     },
     "include": [
-        "./src",
-        "./test"
+        "./src"
     ],
     "exclude": [
         "./node_modules/**/*"
-      ]
+    ]
 }

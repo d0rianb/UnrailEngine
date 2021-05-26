@@ -15,7 +15,7 @@ function createCanvas(w: number, h: number, ratio?: number, preventRightClick?: 
     canvas.style.width = w + 'px'
     canvas.style.height = h + 'px'
     if (pixelRatio != 1) {
-        canvas.getContext('2d').setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
+        canvas.getContext('2d')!.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
     }
     if (!!preventRightClick) {
         canvas.oncontextmenu = e => e.preventDefault()
@@ -28,7 +28,7 @@ function insertCanvas(canvas: HTMLCanvasElement, el: string): void {
         let element = document.querySelector(el)
         if (!element) element = document.createElement(el)
         element.appendChild(canvas)
-        document.querySelector('body').appendChild(element)
+        document.querySelector('body')!.appendChild(element)
     }
 }
 

@@ -163,8 +163,7 @@ class Env extends GameEnvironement {
     }
 
     render() {
-        // ISSUE: the renderer clear the canvas before it is render due to asynchronous worker render
-        Renderer.clear('')
+        Renderer.clear()
         this.player.render()
         this.shots.forEach(shot => shot.render())
         this.enemies.forEach(enemy => enemy.render())
@@ -183,8 +182,6 @@ Interface.addButton(() => paused ? '||' : '>', 'top-left', {}, e => paused = !pa
 const { width, height } = getWindowDimensions()
 const env = new Env(width, height)
 const game = new Game('Space Invader', env)
-
-// const keyBinds = Config.load('keybinds.json')
 
 game.setMainLoop(() => env.update())
 game.setFPS(60)

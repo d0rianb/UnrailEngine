@@ -68,7 +68,7 @@ class ParticuleGenerator {
         }
         let cd: Cooldown = new Cooldown(this.lifeDuration, () => {
             this.destroy()
-            onDestroy()
+            if (onDestroy) onDestroy()
         })
     }
 
