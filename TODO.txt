@@ -35,4 +35,4 @@ PARTS :
  ISSUE :
     - Resize canvas
     - Texture preserve ratio
-    - Inject CSS
+    - Inject CSS                    - X

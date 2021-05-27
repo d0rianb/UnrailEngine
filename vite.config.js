@@ -1,6 +1,11 @@
 import * as path from 'path'
 import visualizer from 'rollup-plugin-visualizer'
 
+import * as tsconfig from './tsconfig.json'
+
+const customAlias = {}
+Object.entries(tsconfig.default.compilerOptions.paths).forEach(([key, value]) => customAlias[key.replace('/*', '')] = path.resolve(__dirname, value[0].replace('*', '')))
+
 /**
  * @type {import('vite').UserConfig}
  */
@@ -9,9 +14,7 @@ export default ({ command }) => {
         root: '.',
         plugins: [],
         resolve: {
-            alias: {
-                '@': path.resolve(__dirname, 'src')
-            }
+            alias: customAlias
         }
     }
     if (command == 'build') {

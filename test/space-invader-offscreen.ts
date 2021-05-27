@@ -35,10 +35,14 @@ class Enemy extends GameObject {
 
     isDead() {
         this.alive = false
+        Event.emit('kill')
     }
 
     update() {
-        if (this.health <= 0) return this.isDead()
+        if (this.health <= 0) {
+            if (!this.alive) this.isDead()
+            return
+        }
         this.y += .25
     }
 
@@ -61,7 +65,6 @@ class Player extends PlayerObject {
 
     isDead() {
         this.alive = false
-        Event.emit('kill')
     }
 
     move(dx, dy) {
@@ -138,7 +141,7 @@ class Env extends GameEnvironement {
         Event.onKeyDown('ArrowLeft', e => this.player.move(-5 * speed, 0))
         Event.onKeyDown('ArrowRight', e => this.player.move(5 * speed, 0))
         Event.onKeyPressed('Space', e => this.player.shoot())
-        Event.on('kill', () => this.score++)
+        Event.on('kill', () => this.score += 5)
         Event.on('new-shot', ({ x, y }) => { this.shots.push(new Shot(x, y)) })
         Event.on('hit', ({ shot, enemy }) => this.hit(shot, enemy))
     }

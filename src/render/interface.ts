@@ -1,4 +1,5 @@
 import { Game } from '../core/game'
+import * as CSSstyle from '@style/main.css'
 
 interface InterfaceItem {
     callback(game?: Game): string
@@ -36,6 +37,7 @@ class Interface {
     }
 
     static init(): void {
+        Interface.addStyle(CSSstyle.default)
         const container: HTMLDivElement = document.createElement('div')
         container.classList.add('ue-interface', 'ue-container')
         for (let pos of itemPositions) {
@@ -44,6 +46,12 @@ class Interface {
             container.appendChild(positionedContainer)
         }
         document.body.appendChild(container)
+    }
+
+    static addStyle(style: string) {
+        const styleElement: HTMLStyleElement = document.createElement('style')
+        styleElement.textContent = style
+        document.head.append(style)
     }
 
     static addToDom(item: InterfaceItem, index: number): void {

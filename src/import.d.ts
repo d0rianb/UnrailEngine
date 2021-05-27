@@ -13,6 +13,11 @@ declare module "*.png" {
     export default value
 }
 
+declare module "*.css" {
+    const value: any
+    export default value
+}
+
 // web worker
 declare module '*?worker' {
     const workerConstructor: {
