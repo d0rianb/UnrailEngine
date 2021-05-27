@@ -5,16 +5,18 @@ type Callback = (this: Window, ev: any) => any
 // TODO: move the keyboardEvents in its own file
 class EventSystem {
     windowEvents: Array<Event>
-    keyboardDownEvents: Array<Event>
     customEvents: Array<Event>
+    mouseEvents: Array<Event>
+    keyboardDownEvents: Array<Event>
     keyboardPressedEvents: Array<Event>
     currentKeyEvents: Array<KeyboardEvent>
 
     constructor() {
         this.windowEvents = []
+        this.customEvents = []
+        this.mouseEvents = []
         this.keyboardDownEvents = []
         this.keyboardPressedEvents = []
-        this.customEvents = []
 
         this.currentKeyEvents = []
     }
@@ -35,6 +37,7 @@ class EventSystem {
             if (!this.currentKeyEvents.length) return
             this.currentKeyEvents = this.currentKeyEvents.filter(event => event.code !== e.code)
         })
+        this.bindEvents()
     }
 
     addEvent(e: Event): void {
@@ -46,6 +49,8 @@ class EventSystem {
                 this.keyboardPressedEvents.push(e)
                 break
             case EventType.Mouse:
+                this.mouseEvents.push(e)
+                window.addEventListener(e.name, windowEvent => e.callback(windowEvent))
                 break
             case EventType.Window:
                 this.windowEvents.push(e)

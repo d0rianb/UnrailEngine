@@ -173,7 +173,6 @@ class Env extends GameEnvironement {
 Interface.addItem(() => `Score : ${env.score}`, 'top-right')
 Interface.addItem(() => `Health : ${env.player.health}`, 'top-left')
 
-
 // main.ts
 const { width, height } = getWindowDimensions()
 const env = new Env(width, height)

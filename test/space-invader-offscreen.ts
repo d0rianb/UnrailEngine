@@ -177,7 +177,6 @@ Interface.addItem(() => `Score : ${env.score}`, 'top-left')
 Interface.addItem(() => `Health : ${env.player.health}`, 'top-right')
 Interface.addButton(() => paused ? '||' : '>', 'top-left', {}, e => paused = !paused)
 
-
 // main.ts
 const { width, height } = getWindowDimensions()
 const env = new Env(width, height)

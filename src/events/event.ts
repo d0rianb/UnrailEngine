@@ -1,8 +1,11 @@
 import { EventSystem } from './eventSystem'
 
 enum EventType {
-    KeyboardPressed, KeyboardDown, Mouse, Window, Custom
+    KeyboardPressed, KeyboardDown, Mouse, Window, Custom, All
 }
+
+type KeyboardEventCallback = (e: KeyboardEvent) => any
+type MouseCallback = (e: MouseEvent) => any
 
 class Event {
     name: string
@@ -34,16 +37,20 @@ class Event {
         }
     }
 
-    static onKeyDown(name: string, callback: Function): void {
+    static onKeyDown(name: string, callback: KeyboardEventCallback): void {
         ES.addEvent(new Event(name, callback, EventType.KeyboardDown))
     }
 
-    static onKeyPressed(name: string, callback: Function): void {
+    static onKeyPressed(name: string, callback: KeyboardEventCallback): void {
         ES.addEvent(new Event(name, callback, EventType.KeyboardPressed))
     }
 
-    static onMouseClick(callback: Function) {
+    static onMouseClick(callback: MouseCallback) {
         ES.addEvent(new Event('click', callback, EventType.Mouse))
+    }
+
+    static onMouseMove(callback: MouseCallback) {
+        ES.addEvent(new Event('mousemove', callback, EventType.Mouse))
     }
 }
 
