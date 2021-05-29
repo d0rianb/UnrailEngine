@@ -7,11 +7,13 @@ import { WorkerMessage } from './workerMessage'
 import { RenderCall } from './renderCall'
 import RendererWorker from './rendererWorker?worker&inline'
 
+type RenderStack = Array<RenderCall>
+
 let offscreenCanvas: OffscreenCanvas
 let worker: any | typeof RendererWorker
 let canvas: HTMLCanvasElement
 let workerIsInitialized = false
-let renderStack: Array<RenderCall> = []
+let renderStack: RenderStack = []
 
 const textureAlias: Map<number, Texture> = new Map()
 
@@ -121,4 +123,3 @@ class OffscreenRenderer {
 
 
 export { OffscreenRenderer }
-

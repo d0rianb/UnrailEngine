@@ -34,7 +34,7 @@ class Particle extends GameObject {
     update(): void {
         this.velocity.y += GRAVITY
         this.pos = this.pos.add(this.velocity)
-        this.opacity--
+        this.opacity -= 2
     }
 
     render(): void {

@@ -15,6 +15,7 @@ import { clamp, Vector2 } from '../src/core/math'
 import { OffscreenRenderer as Renderer, Interface, Texture } from '../src/render'
 import { Event } from '../src/events'
 import { Config } from '../src/config'
+import { textChangeRangeIsUnchanged } from 'typescript'
 
 let paused: boolean = false
 
@@ -34,20 +35,21 @@ class Enemy extends GameObject {
     }
 
     isDead() {
+        if (!this.alive) return
         this.alive = false
-        Event.emit('kill')
+        Event.emit('enemy-kill', this)
     }
 
     update() {
         if (this.health <= 0) {
-            if (!this.alive) this.isDead()
+            this.isDead()
             return
         }
         this.y += .25
     }
 
     render() {
-        // Renderer.rect(this.x, this.y, this.width, this.height)
+        if (!this.alive) return
         Renderer.rectSprite(this.x, this.y, this.width, this.height, this.texture)
     }
 }
@@ -56,11 +58,13 @@ class Enemy extends GameObject {
 class Player extends PlayerObject {
     health: number
     alive: boolean
+    texture: Texture
 
     constructor(x, y) {
         super(x, y)
         this.health = 100
         this.alive = true
+        this.texture = new Texture('resources/assets/space-invader-player.png')
     }
 
     isDead() {
@@ -73,7 +77,7 @@ class Player extends PlayerObject {
     }
 
     shoot() {
-        Event.emit('new-shot', { x: this.x + 15, y: this.y })
+        Event.emit('new-shot', { x: this.x + 30, y: this.y })
     }
 
     update() {
@@ -81,7 +85,7 @@ class Player extends PlayerObject {
     }
 
     render() {
-        Renderer.rect(this.x, this.y, 30, 30)
+        Renderer.rectSprite(this.x, this.y, 60, 30, this.texture)
     }
 }
 
@@ -130,9 +134,13 @@ class Env extends GameEnvironement {
         this.bindEvents()
 
         Renderer.create(width, height)
+        this.generateEnemies()
+        window.setInterval(() => this.generateEnemies(), 3000)
+    }
 
+    generateEnemies() {
         for (let i = 0; i < 5; i++) {
-            this.enemies.push(new Enemy(150 * i, 10))
+            this.enemies.push(new Enemy(150 * i, -50))
         }
     }
 
@@ -140,8 +148,12 @@ class Env extends GameEnvironement {
         const speed = 3
         Event.onKeyDown('ArrowLeft', e => this.player.move(-5 * speed, 0))
         Event.onKeyDown('ArrowRight', e => this.player.move(5 * speed, 0))
-        Event.onKeyPressed('Space', e => this.player.shoot())
-        Event.on('kill', () => this.score += 5)
+        // Event.onKeyPressed('Space', e => this.player.shoot())
+        Event.onKeyDown('Space', e => this.player.shoot())
+        Event.on('enemy-kill', enemy => {
+            this.score += 5
+            this.enemies = this.enemies.filter(e => e !== enemy)
+        })
         Event.on('new-shot', ({ x, y }) => { this.shots.push(new Shot(x, y)) })
         Event.on('hit', ({ shot, enemy }) => this.hit(shot, enemy))
     }
@@ -149,7 +161,7 @@ class Env extends GameEnvironement {
     hit(shot: Shot, enemy: Enemy) {
         enemy.health -= 20
         this.shots = this.shots.filter(s => s !== shot)
-        const PG: ParticuleGenerator = new ParticuleGenerator(25, new Vector2(shot.x, shot.y), 600, () => {
+        const PG: ParticuleGenerator = new ParticuleGenerator(50, new Vector2(shot.x, shot.y), 700, () => {
             this.particles = PG.removeParticles(this.particles)
         })
         this.particles = PG.addParticles(this.particles)

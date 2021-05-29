@@ -1,3 +1,5 @@
+import { hashObject } from '@/core/utils'
+
 export class RenderCall {
     public methodName: string
     public args: object

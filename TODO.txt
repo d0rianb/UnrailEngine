@@ -21,6 +21,8 @@ TODO :
     - Error --> Engine failure
     - Animation Class
     - centered rect
+    - Event once
+    - Optimize particles
 
 PARTS :
     - Core

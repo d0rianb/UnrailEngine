@@ -32,6 +32,7 @@ function round(num: number): number {
 }
 
 let ctx: CanvasRenderContext
+let lastStyleObject: StyleObject
 
 class Renderer {
 
@@ -54,11 +55,13 @@ class Renderer {
     static style(obj?: StyleObject): void {
         if (!ctx) throw new Error('Context has not been initialize. Please use Renderer.setContext')
         const styleObject = { ...defaultStyleObject, ...obj }
+        if (styleObject === lastStyleObject) return
         for (let prop in styleObject) {
             if (ctx[prop] !== styleObject[prop]) {
                 ctx[prop] = styleObject[prop]
             }
         }
+        lastStyleObject = styleObject
     }
 
     static clear(color?: string): void {

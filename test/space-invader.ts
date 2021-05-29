@@ -178,7 +178,6 @@ const { width, height } = getWindowDimensions()
 const env = new Env(width, height)
 const game = new Game('Space Invader', env)
 
-// const keyBinds = Config.load('keybinds.json')
 
 game.setMainLoop(() => env.update())
 game.start()
