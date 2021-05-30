@@ -1,4 +1,4 @@
-import { hashObject } from '@/core/utils'
+import { hashObject } from '@/helpers/utils'
 
 export class RenderCall {
     public methodName: string

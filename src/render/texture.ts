@@ -1,5 +1,5 @@
-import { Vector2, V_UNIT, V_NULL } from '../core/math'
-import { isWorker } from '../core/utils'
+import { Vector2, V_UNIT, V_NULL } from '@/core/math'
+import { isWorker } from '@/helpers/utils'
 
 interface TextureOptions {
     rotation?: number, // radians
