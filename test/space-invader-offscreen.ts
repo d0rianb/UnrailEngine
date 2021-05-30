@@ -202,5 +202,5 @@ const env = new Env(width, height)
 const game = new Game('Space Invader', env)
 
 game.setMainLoop(() => env.update())
-game.setFPS(1)
+game.setFPS(60)
 game.start()
