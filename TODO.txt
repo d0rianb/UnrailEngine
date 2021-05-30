@@ -20,7 +20,6 @@ TODO :
     - Update the doc / give examples --> examples/ folder
     - Error --> Engine failure
     - Animation Class
-    - centered rect
     - Event once
     - Optimize particles
 

@@ -1,7 +1,7 @@
-import { createCanvas, insertCanvas } from '../core/geometry'
-import { Point } from '../core/math'
+import { createCanvas, getWindowDimensions, insertCanvas } from '@/core/geometry'
+import { Point } from '@/core/math'
 import { Texture } from './texture'
-import { isWorker } from '../helpers/utils'
+import { isWorker } from '@/helpers/utils'
 import { RendererError } from '@/helpers/errors'
 
 type CanvasRenderContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
@@ -38,8 +38,9 @@ let lastStyleObject: StyleObject
 class Renderer {
 
     // Create a canvas and insert it to <main>
-    static create(width: number, height: number): HTMLCanvasElement {
-        const canvas: HTMLCanvasElement = createCanvas(width, height)
+    static create(width?: number, height?: number): HTMLCanvasElement {
+        let [windowWidth, windowHeight] = [getWindowDimensions().width, getWindowDimensions().height]
+        const canvas: HTMLCanvasElement = createCanvas(width || windowWidth, height || windowHeight)
         insertCanvas(canvas, 'main')
         Renderer.setContext(canvas.getContext('2d')!)
         return canvas
@@ -82,12 +83,24 @@ class Renderer {
         ctx.stroke()
     }
 
-    static rect(x: number, y: number, width: number, height: number, obj?: StyleObject, noStyle?: boolean): void {
-        if (!noStyle) Renderer.style(obj)
+    /* Draw a rect from its top-left corner */
+    static rect(x: number, y: number, width: number, height: number, obj?: StyleObject): void {
+        Renderer.style(obj)
         const [r_x, r_y, r_w, r_h] = [round(x), round(y), round(width), round(height)]
         ctx.fillRect(r_x, r_y, r_w, r_h)
         ctx.strokeRect(r_x, r_y, r_w, r_h)
     }
+
+    /* Draw a rect from its center */
+    static rectFromCenter(x: number, y: number, width: number, height: number, obj?: StyleObject): void {
+        return Renderer.rect(x - width / 2, y - height / 2, width, height, obj)
+    }
+
+    /* Draw a rect from its top-left corner to its bottom-right corner */
+    static rectFromPoints(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void {
+        return Renderer.rect(x1, y1, x2 - x1, y2 - y1, obj)
+    }
+
 
     static poly(points: Array<Point>, obj?: StyleObject): void {
         if (!points.length) return
@@ -105,6 +118,11 @@ class Renderer {
         ctx.beginPath()
         ctx.arc(round(x), round(y), radius, 0, TWOPI)
         ctx.stroke()
+    }
+
+    /* Draw the circle included in the rect */
+    static circleFromRect(x: number, y: number, width: number, height: number, obj: StyleObject): void {
+        return Renderer.circle(x + width / 2, y + height / 2, Math.min(width, height) / 2, obj)
     }
 
     static point(x: number, y: number, obj?: StyleObject): void {

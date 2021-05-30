@@ -62,11 +62,20 @@ class RendererWorker extends ThreadWorker {
             case 'rect':
                 Renderer.rect(args.x, args.y, args.width, args.height, args.obj)
                 break
+            case 'rectFromCenter':
+                Renderer.rectFromCenter(args.x, args.y, args.width, args.height, args.obj)
+                break
+            case 'rectFromPoints':
+                Renderer.rectFromPoints(args.x1, args.y1, args.x2, args.y2, args.obj)
+                break
             case 'poly':
                 Renderer.poly(args.points, args.obj)
                 break
             case 'circle':
                 Renderer.circle(args.x, args.y, args.radius, args.obj)
+                break
+            case 'circleFromRect':
+                Renderer.circleFromRect(args.x, args.y, args.width, args.height, args.obj)
                 break
             case 'point':
                 Renderer.point(args.x, args.y, args.obj)

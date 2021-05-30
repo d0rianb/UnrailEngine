@@ -76,15 +76,21 @@ class OffscreenRenderer {
 
     static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void { this.addRenderCall('line', { x1, y1, x2, y2, obj }) }
 
-    static rect(x: number, y: number, width: number, height: number, obj?: StyleObject, noStyle?: boolean): void { this.addRenderCall('rect', { x, y, width, height, obj, noStyle }) }
+    static rect(x: number, y: number, width: number, height: number, obj?: StyleObject): void { this.addRenderCall('rect', { x, y, width, height, obj }) }
+
+    static rectFromCenter(x: number, y: number, width: number, height: number, obj?: StyleObject): void { this.addRenderCall('rectFromCenter', { x, y, width, height, obj }) }
+
+    static rectFromPoints(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void { this.addRenderCall('rectFromPoints', { x1, y1, x2, y2, obj }) }
 
     static poly(points: Array<Point>, obj?: StyleObject): void { this.addRenderCall('poly', { points, obj }) }
 
     static circle(x: number, y: number, radius: number, obj?: StyleObject): void { this.addRenderCall('circle', { x, y, radius, obj }) }
 
+    static circleFromRect(x: number, y: number, width: number, height: number, obj: StyleObject): void { this.addRenderCall('circleFromRect', { x, y, width, height, obj }) }
+
     static point(x: number, y: number, obj?: StyleObject): void { this.addRenderCall('point', { x, y, obj }) }
 
-    // <img> object is not serializable
+    // texture is only tranfered once to the worker
     static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
         if (textureAlias.has(texture.id)) {
             this.addRenderCall('rectSprite', { x, y, width, height, textureId: texture.id })
