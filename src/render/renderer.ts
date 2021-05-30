@@ -1,7 +1,8 @@
 import { createCanvas, insertCanvas } from '../core/geometry'
 import { Point } from '../core/math'
 import { Texture } from './texture'
-import { isWorker } from '../core/utils'
+import { isWorker } from '../helpers/utils'
+import { RendererError } from '@/helpers/errors'
 
 type CanvasRenderContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
 
@@ -53,7 +54,7 @@ class Renderer {
     }
 
     static style(obj?: StyleObject): void {
-        if (!ctx) throw new Error('Context has not been initialize. Please use Renderer.setContext')
+        if (!ctx) throw new RendererError('Context has not been initialize. Please use Renderer.setContext')
         const styleObject = { ...defaultStyleObject, ...obj }
         if (styleObject === lastStyleObject) return
         for (let prop in styleObject) {

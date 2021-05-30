@@ -5,7 +5,7 @@ export function blink(el: string, className: string, interval: number = 300): vo
 
 export function isWorker(): boolean {
     // return self instanceof DedicatedWorkerGlobalScope
-    return (self.document == undefined && self.window == undefined)
+    return self.document == undefined && self.window == undefined
 }
 
 

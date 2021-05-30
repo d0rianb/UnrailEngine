@@ -18,6 +18,7 @@ import { Config } from '../src/config'
 import { textChangeRangeIsUnchanged } from 'typescript'
 
 let paused: boolean = false
+let rendererObjetNumber: number = 0
 
 // enemy.ts
 class Enemy extends GameObject {
@@ -171,6 +172,7 @@ class Env extends GameEnvironement {
     update() {
         if (paused) return
         this.player.update()
+        this.shots = this.shots.filter(shot => shot.y > 0)
         this.shots.forEach(shot => shot.update(this.enemies))
         this.enemies.forEach(enemy => enemy.update())
         this.particles.forEach(particle => particle.update())
@@ -183,12 +185,14 @@ class Env extends GameEnvironement {
         this.shots.forEach(shot => shot.render())
         this.enemies.forEach(enemy => enemy.render())
         this.particles.forEach(particle => particle.render())
+        rendererObjetNumber = Renderer.renderStack.length
         Renderer.endFrame()
     }
 }
 
 // Interface.ts
 Interface.addItem(() => `Score : ${env.score}`, 'top-left')
+Interface.addItem(() => `Renderered objects : ${rendererObjetNumber}`, 'top-left')
 Interface.addItem(() => `Health : ${env.player.health}`, 'top-right')
 Interface.addButton(() => paused ? '||' : '>', 'top-left', {}, e => paused = !paused)
 
@@ -198,5 +202,5 @@ const env = new Env(width, height)
 const game = new Game('Space Invader', env)
 
 game.setMainLoop(() => env.update())
-game.setFPS(60)
+game.setFPS(1)
 game.start()
