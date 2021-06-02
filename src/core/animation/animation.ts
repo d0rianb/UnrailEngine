@@ -54,6 +54,7 @@ class Animation {
     update(): void {
         if (!this.hasStarted) return
         if (!this.startTimeStamp) throw new EngineFailure('You must call start() before update()', 'animation')
+        // ISSUE: this version does not support pausing
         let t: number = (now() - this.startTimeStamp) / this.duration // t in  range [0, 1]
         if (t >= 1) {
             this.isEnded = true
