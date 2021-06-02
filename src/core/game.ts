@@ -1,5 +1,6 @@
 import { Env } from './env'
-import { ES } from '../events/event'
+import { ES } from '@/events/event'
+import { AS } from '@/core/animation/animationSystem'
 import { showStats, Stats } from '../core/stats'
 import { Interface } from '../render'
 import { AnimationFrame } from './animationFrame'
@@ -68,6 +69,7 @@ class Game {
     update(time: number): void {
         this.stats?.begin()
         ES.tick()
+        AS.tick()
         if (this.gameLoop) this.gameLoop(time)
         if (this.tick % Interface.updateInterval === 0) Interface.update()
         this.stats?.end()
@@ -79,12 +81,11 @@ class Game {
         if (!this.animationFrame) throw new Error('AnimationFrame')
 
         window.addEventListener('DOMContentLoaded', () => {
-            if (this.name) { document.title = this.name }
+            if (this.name) document.title = this.name
             ES.init() // Event System
+            AS.init() // Animation System
             Interface.init()
-            if (this.showStatsPanel) {
-                this.stats = showStats()
-            }
+            if (this.showStatsPanel) this.stats = showStats()
             this.animationFrame?.start()
         })
     }
