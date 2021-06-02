@@ -22,6 +22,8 @@ TODO :
     - Animation Class
     - Event once
     - Optimize particles
+    - Use existing canvas
+    - Custom logger --> for debug purpose
 
 PARTS :
     - Core
