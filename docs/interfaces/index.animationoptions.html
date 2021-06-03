@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Cooldown | unrail-engine</title>
+	<title>AnimationOptions | unrail-engine</title>
 	<meta name="description" content="Documentation for unrail-engine">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/index.html">index</a>
 				</li>
 				<li>
-					<a href="index.cooldown.html">Cooldown</a>
+					<a href="index.animationoptions.html">AnimationOptions</a>
 				</li>
 			</ul>
-			<h1>Class Cooldown</h1>
+			<h1>Interface AnimationOptions</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Cooldown</span>
+						<span class="target">AnimationOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -81,96 +81,34 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="index.cooldown.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.cooldown.html#callback" class="tsd-kind-icon">callback</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.cooldown.html#delay" class="tsd-kind-icon">delay</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.animationoptions.html#autostart" class="tsd-kind-icon">autostart</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.animationoptions.html#loop" class="tsd-kind-icon">loop</a></li>
 							</ul>
 						</section>
 					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Cooldown<span class="tsd-signature-symbol">(</span>delay<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.cooldown.html" class="tsd-signature-type" data-tsd-kind="Class">Cooldown</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/c6b884c/src/events/cooldown.ts#L3">events/cooldown.ts:3</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>delay: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>callback: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="index.cooldown.html" class="tsd-signature-type" data-tsd-kind="Class">Cooldown</a></h4>
-						</li>
-					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="callback" class="tsd-anchor"></a>
-					<h3>callback</h3>
-					<div class="tsd-signature tsd-kind-icon">callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="autostart" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> autostart</h3>
+					<div class="tsd-signature tsd-kind-icon">autostart<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/c6b884c/src/events/cooldown.ts#L3">events/cooldown.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/c6b884c/src/animation/animation.ts#L6">animation/animation.ts:6</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-signature">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="delay" class="tsd-anchor"></a>
-					<h3>delay</h3>
-					<div class="tsd-signature tsd-kind-icon">delay<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="loop" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> loop</h3>
+					<div class="tsd-signature tsd-kind-icon">loop<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/c6b884c/src/events/cooldown.ts#L2">events/cooldown.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/c6b884c/src/animation/animation.ts#L7">animation/animation.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -196,71 +134,68 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.animation.html" class="tsd-kind-icon">Animation</a>
+						<a href="../classes/index.animation.html" class="tsd-kind-icon">Animation</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.cell.html" class="tsd-kind-icon">Cell</a>
+						<a href="../classes/index.cell.html" class="tsd-kind-icon">Cell</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.cooldown.html" class="tsd-kind-icon">Cooldown</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.event.html" class="tsd-kind-icon">Event</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.game.html" class="tsd-kind-icon">Game</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.gameenvironement.html" class="tsd-kind-icon">Game<wbr>Environement</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.gameobject.html" class="tsd-kind-icon">Game<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.grid.html" class="tsd-kind-icon">Grid</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.interface.html" class="tsd-kind-icon">Interface</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.offscreenrenderer.html" class="tsd-kind-icon">Offscreen<wbr>Renderer</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.particle.html" class="tsd-kind-icon">Particle</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.particulegenerator.html" class="tsd-kind-icon">Particule<wbr>Generator</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.playerobject.html" class="tsd-kind-icon">Player<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.renderer.html" class="tsd-kind-icon">Renderer</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.texture.html" class="tsd-kind-icon">Texture</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/index.vector2.html" class="tsd-kind-icon">Vector2</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="index.cooldown.html" class="tsd-kind-icon">Cooldown</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="index.animationoptions.html" class="tsd-kind-icon">Animation<wbr>Options</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="index.cooldown.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="index.animationoptions.html#autostart" class="tsd-kind-icon">autostart</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="index.cooldown.html#callback" class="tsd-kind-icon">callback</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="index.cooldown.html#delay" class="tsd-kind-icon">delay</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="index.animationoptions.html#loop" class="tsd-kind-icon">loop</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.event.html" class="tsd-kind-icon">Event</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.game.html" class="tsd-kind-icon">Game</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.gameenvironement.html" class="tsd-kind-icon">Game<wbr>Environement</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.gameobject.html" class="tsd-kind-icon">Game<wbr>Object</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.grid.html" class="tsd-kind-icon">Grid</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.interface.html" class="tsd-kind-icon">Interface</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.offscreenrenderer.html" class="tsd-kind-icon">Offscreen<wbr>Renderer</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.particle.html" class="tsd-kind-icon">Particle</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.particulegenerator.html" class="tsd-kind-icon">Particule<wbr>Generator</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.playerobject.html" class="tsd-kind-icon">Player<wbr>Object</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.renderer.html" class="tsd-kind-icon">Renderer</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.texture.html" class="tsd-kind-icon">Texture</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="index.vector2.html" class="tsd-kind-icon">Vector2</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/index.animationoptions.html" class="tsd-kind-icon">Animation<wbr>Options</a>
-					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="../modules/index.html#point" class="tsd-kind-icon">Point</a>
 					</li>
@@ -312,12 +247,11 @@
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 			</ul>
 		</div>
 	</div>

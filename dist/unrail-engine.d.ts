@@ -47,7 +47,7 @@ declare class Game {
     private makeAnimationFrame;
     setMainLoop(func: Function): void;
     setFPS(fps: number): void;
-    update(time: number): void;
+    update(deltaTime: number): void;
     start(): void;
 }
 
@@ -138,6 +138,43 @@ declare class Cell {
     neighboor: NeihboorObject;
     constructor(x: number, y: number, width?: number, height?: number);
     toggleHighlight(): void;
+}
+
+declare type EasingFunction = (t: number) => number;
+declare const Easing: {
+    linear: (t: any) => any;
+    easeIn: (t: any) => number;
+    easeOut: (t: any) => number;
+    easeInOut: (t: any) => number;
+    easeInBack: (t: any) => number;
+    easeOutBack: (t: any) => number;
+    easeInOutBack: (t: any) => number;
+};
+
+interface AnimationOptions {
+    autostart?: boolean;
+    loop?: boolean;
+}
+declare class Animation {
+    from: number;
+    to: number;
+    duration: number;
+    easing: EasingFunction;
+    options: AnimationOptions;
+    value: number;
+    hasStarted: boolean;
+    isPaused: boolean;
+    isEnded: boolean;
+    isReversed: boolean;
+    speed: number;
+    lastT: number;
+    constructor(from: number, to: number, duration: number, easing?: EasingFunction, options?: AnimationOptions);
+    start(): void;
+    reset(): void;
+    toggle(pause?: boolean): void;
+    pause(): void;
+    resume(): void;
+    update(deltaTime: number): void;
 }
 
 declare enum EventType {
@@ -263,7 +300,7 @@ declare const itemPositions: readonly ["top-left", "top-right", "bottom-left", "
 declare type ItemPosition = typeof itemPositions[number];
 declare class Interface {
     static addItem(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions): void;
-    static addButton(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions, onClick?: InterfaceClickCallback): void;
+    static addButton(callback: InterfaceTextFunction, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void;
     private static internalAddItem;
     static init(): void;
     static addStyle(style: string): void;
@@ -278,4 +315,4 @@ declare const Config: {};
 
 declare const VERSION: string;
 
-export { Cell, Config, Cooldown, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, clamp, createCanvas, getWindowDimensions, inRange };
+export { Animation, AnimationOptions, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, clamp, createCanvas, getWindowDimensions, inRange };
