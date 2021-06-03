@@ -20,10 +20,9 @@ class AnimationSystem {
         }
     }
 
-    tick(): void {
+    tick(deltaTime: number): void {
         for (let animation of this.animations) {
-            animation.update()
-
+            animation.update(deltaTime)
         }
     }
 }

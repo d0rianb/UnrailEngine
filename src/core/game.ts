@@ -1,6 +1,6 @@
 import { Env } from './env'
 import { ES } from '@/events/event'
-import { AS } from '@/core/animation/animationSystem'
+import { AS } from '@/animation/animationSystem'
 import { showStats, Stats } from '../core/stats'
 import { Interface } from '../render'
 import { AnimationFrame } from './animationFrame'
@@ -53,7 +53,7 @@ class Game {
     }
 
     private makeAnimationFrame(): void {
-        this.animationFrame = new AnimationFrame(time => this.update(time), this.fps)
+        this.animationFrame = new AnimationFrame(deltaTime => this.update(deltaTime), this.fps)
     }
 
     setMainLoop(func: Function): void {
@@ -66,11 +66,11 @@ class Game {
         this.makeAnimationFrame()
     }
 
-    update(time: number): void {
+    update(deltaTime: number): void {
         this.stats?.begin()
         ES.tick()
-        AS.tick()
-        if (this.gameLoop) this.gameLoop(time)
+        AS.tick(deltaTime)
+        if (this.gameLoop) this.gameLoop(deltaTime)
         if (this.tick % Interface.updateInterval === 0) Interface.update()
         this.stats?.end()
         this.tick++

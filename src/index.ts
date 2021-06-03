@@ -8,10 +8,10 @@ export { GameObject, PlayerObject } from './core/objects'
 export { getWindowDimensions, createCanvas } from './core/geometry'
 export { Particle, ParticuleGenerator } from './core/particles'
 export { Grid, Cell } from './core/grid'
-export * from './core/animation/animation'
 
 
 // Modules exports
+export * from './animation/animation'
 export * from './events'
 export * from './render'
 export * from './config'
