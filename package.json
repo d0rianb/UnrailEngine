@@ -1,6 +1,6 @@
 {
     "name": "unrail-engine",
-    "version": "0.4.1",
+    "version": "0.4.4",
     "description": "A lightweight 2D game engine written in typescript",
     "main": "./dist/unrail-engine.umd.js",
     "module": "./dist/unrail-engine.es.js",
@@ -15,7 +15,7 @@
         "build-declaration": "rollup -c",
         "serve": "vite preview",
         "docs": "npx typedoc src/index.ts src/events/index.ts src/render/index.ts --exclude ./node_modules/",
-        "publish-to-npm": "npm run build && npx auto-version --patch npm run docs; git add .; git commit -m 'Publish $npm_package_version to NPM'; npm publish --tag=v$npm_package_version",
+        "publish-to-npm": "npm run build && npx auto-version --patch npm run docs; git add .; git tag -a 'v$npm_package_version' -m 'Version $npm_package_version'; git commit -m 'Publish $npm_package_version to NPM'; npm publish",
         "postpublish": "git push origin --all; git push origin --tags"
     },
     "dependencies": {
