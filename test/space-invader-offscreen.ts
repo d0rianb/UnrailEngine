@@ -194,7 +194,7 @@ class Env extends GameEnvironement {
 Interface.addItem(() => `Score : ${env.score}`, 'top-left')
 Interface.addItem(() => `Renderered objects : ${rendererObjetNumber}`, 'top-left')
 Interface.addItem(() => `Health : ${env.player.health}`, 'top-right')
-Interface.addButton(() => paused ? '||' : '>', 'top-left', {}, e => paused = !paused)
+Interface.addButton(() => paused ? '||' : '>', e => paused = !paused)
 
 // main.ts
 const { width, height } = getWindowDimensions()

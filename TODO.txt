@@ -24,6 +24,7 @@ TODO :
     - Optimize particles
     - Use existing canvas
     - Custom logger --> for debug purpose
+    - Add text rendering
 
 PARTS :
     - Core

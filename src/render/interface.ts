@@ -25,7 +25,7 @@ class Interface {
         Interface.internalAddItem(callback, position, options)
     }
 
-    static addButton(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions, onClick?: InterfaceClickCallback): void {
+    static addButton(callback: InterfaceTextFunction, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void {
         Interface.internalAddItem(callback, position, options, onClick)
     }
 

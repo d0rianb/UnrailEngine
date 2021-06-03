@@ -37,13 +37,13 @@ function draw(ts) {
 
 let pause = false
 
-Interface.addButton(() => pause ? '||' : '>', 'top-left', {}, e => {
+Interface.addButton(() => pause ? '||' : '>', e => {
     pause = !pause
     linear_x.toggle()
     linear_y.toggle()
 })
 
-Interface.addButton(() => 'Reset', 'top-left', {}, e => {
+Interface.addButton(() => 'Reset', e => {
     linear_x.reset()
     linear_y.reset()
 })
