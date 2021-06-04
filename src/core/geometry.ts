@@ -8,8 +8,18 @@ function getWindowDimensions(): SizeObject {
 }
 
 function createCanvas(w: number, h: number, ratio?: number, preventRightClick?: boolean): HTMLCanvasElement {
-    const pixelRatio: number = ratio || window.devicePixelRatio || 1
     const canvas: HTMLCanvasElement = document.createElement('canvas')
+    adaptCanvasToDevicePixelRatio(canvas, w, h, ratio)
+    if (!!preventRightClick) {
+        canvas.oncontextmenu = e => e.preventDefault()
+    }
+    return canvas
+}
+
+function adaptCanvasToDevicePixelRatio(canvas: HTMLCanvasElement, width?: number, height?: number, ratio?: number): void {
+    const pixelRatio: number = ratio || window.devicePixelRatio || 1
+    let w: number = width || canvas.width
+    let h: number = height || canvas.height
     canvas.width = w * pixelRatio
     canvas.height = h * pixelRatio
     canvas.style.width = w + 'px'
@@ -17,10 +27,7 @@ function createCanvas(w: number, h: number, ratio?: number, preventRightClick?: 
     if (pixelRatio != 1) {
         canvas.getContext('2d')!.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
     }
-    if (!!preventRightClick) {
-        canvas.oncontextmenu = e => e.preventDefault()
-    }
-    return canvas
+
 }
 
 function insertCanvas(canvas: HTMLCanvasElement, el: string): void {
@@ -32,4 +39,4 @@ function insertCanvas(canvas: HTMLCanvasElement, el: string): void {
     })
 }
 
-export { getWindowDimensions, createCanvas, insertCanvas }
+export { getWindowDimensions, createCanvas, adaptCanvasToDevicePixelRatio, insertCanvas }

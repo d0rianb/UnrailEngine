@@ -1,11 +1,12 @@
 import { Texture } from '..'
 import { Game } from '@/core/game'
-import { createCanvas, insertCanvas } from '@/core/geometry'
+import { adaptCanvasToDevicePixelRatio, createCanvas, getWindowDimensions, insertCanvas } from '@/core/geometry'
 import { Point } from '@/core/math'
 import { StyleObject } from '../renderer'
 import { WorkerMessage } from './workerMessage'
 import { RenderCall } from './renderCall'
 import RendererWorker from './rendererWorker?worker&inline'
+import { RendererError } from '@/helpers/errors'
 
 type RenderStack = Array<RenderCall>
 
@@ -29,10 +30,19 @@ class OffscreenRenderer {
     static get renderStack() { return renderStack }
 
     // Create a canvas and insert it to <main>
-    static create(width: number, height: number): HTMLCanvasElement {
-        canvas = createCanvas(width, height, 1)
-        OffscreenRenderer.initRenderWorker(canvas, width, height)
+    static create(width?: number, height?: number): HTMLCanvasElement {
+        let [windowWidth, windowHeight] = [getWindowDimensions().width, getWindowDimensions().height]
+        canvas = createCanvas(width || windowWidth, height || windowHeight, 1)
+        OffscreenRenderer.initRenderWorker(canvas, width || windowWidth, height || windowHeight)
         insertCanvas(canvas, 'main')
+        return canvas
+    }
+
+    static createFromCanvas(selector: string): HTMLCanvasElement {
+        canvas = document.querySelector(selector)
+        if (!canvas || !(canvas instanceof HTMLCanvasElement)) throw new RendererError('The selected element is not a canvas')
+        adaptCanvasToDevicePixelRatio(canvas, canvas.width, canvas.height, 1)
+        OffscreenRenderer.initRenderWorker(canvas, canvas.width, canvas.height)
         return canvas
     }
 

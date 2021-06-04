@@ -1,4 +1,4 @@
-import { createCanvas, getWindowDimensions, insertCanvas } from '@/core/geometry'
+import { adaptCanvasToDevicePixelRatio, createCanvas, getWindowDimensions, insertCanvas } from '@/core/geometry'
 import { Point } from '@/core/math'
 import { Texture } from './texture'
 import { isWorker } from '@/helpers/utils'
@@ -54,6 +54,14 @@ class Renderer {
         let [windowWidth, windowHeight] = [getWindowDimensions().width, getWindowDimensions().height]
         const canvas: HTMLCanvasElement = createCanvas(width || windowWidth, height || windowHeight)
         insertCanvas(canvas, 'main')
+        Renderer.setContext(canvas.getContext('2d')!)
+        return canvas
+    }
+
+    static createFromCanvas(selector: string): HTMLCanvasElement {
+        let canvas = document.querySelector(selector)
+        if (!canvas || !(canvas instanceof HTMLCanvasElement)) throw new RendererError('The selected element is not a canvas')
+        adaptCanvasToDevicePixelRatio(canvas)
         Renderer.setContext(canvas.getContext('2d')!)
         return canvas
     }

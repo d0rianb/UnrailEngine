@@ -14,8 +14,6 @@ import {
 import { clamp, Vector2 } from '../src/core/math'
 import { OffscreenRenderer as Renderer, Interface, Texture } from '../src/render'
 import { Event } from '../src/events'
-import { Config } from '../src/config'
-import { textChangeRangeIsUnchanged } from 'typescript'
 
 let paused: boolean = false
 let rendererObjetNumber: number = 0
@@ -134,7 +132,6 @@ class Env extends GameEnvironement {
         this.score = 0
         this.bindEvents()
 
-        Renderer.create(width, height)
         this.generateEnemies()
         window.setInterval(() => this.generateEnemies(), 3000)
     }
@@ -197,7 +194,10 @@ Interface.addItem(() => `Health : ${env.player.health}`, 'top-right')
 Interface.addButton(() => paused ? '||' : '>', e => paused = !paused)
 
 // main.ts
-const { width, height } = getWindowDimensions()
+// const { width, height } = getWindowDimensions()
+const canvas = Renderer.createFromCanvas('#canvas')
+const { width, height } = canvas
+// Renderer.create()
 const env = new Env(width, height)
 const game = new Game('Space Invader', env)
 
