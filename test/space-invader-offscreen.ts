@@ -149,8 +149,8 @@ class Env extends GameEnvironement {
         const speed = 3
         Event.onKeyDown('ArrowLeft', e => this.player.move(-5 * speed, 0))
         Event.onKeyDown('ArrowRight', e => this.player.move(5 * speed, 0))
-        // Event.onKeyPressed('Space', e => this.player.shoot())
-        Event.onKeyDown('Space', e => this.player.shoot())
+        Event.onKeyPressed('Space', e => this.player.shoot())
+        // Event.onKeyDown('Space', e => this.player.shoot())
         Event.on('enemy-kill', enemy => {
             this.score += 5
             this.enemies = this.enemies.filter(e => e !== enemy)

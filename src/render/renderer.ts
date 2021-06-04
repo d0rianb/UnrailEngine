@@ -15,6 +15,12 @@ interface StyleObject {
     globalCompositeOperation?: string
 }
 
+interface TextStyleObject {
+    font?: string,
+    size?: number,
+    color?: string
+}
+
 const defaultStyleObject: StyleObject = {
     strokeStyle: 'black',
     lineWidth: 2,
@@ -22,6 +28,12 @@ const defaultStyleObject: StyleObject = {
     fillStyle: 'transparent',
     globalAlpha: 1,
     globalCompositeOperation: 'add'
+}
+
+const defaultTextStyleObject: TextStyleObject = {
+    font: 'Roboto',
+    size: 16, // in px
+    color: 'black'
 }
 
 const TWOPI = 2 * Math.PI
@@ -152,6 +164,15 @@ class Renderer {
         ctx.clip()
         Renderer.rectSprite(x - radius, y - radius, 2 * radius, 2 * radius, texture)
         ctx.restore()
+    }
+
+    static text(text: string, x: number, y: number, style?: TextStyleObject): void {
+        if (!!ctx) {
+            let styleObject = { ...defaultTextStyleObject, ...style }
+            ctx.font = `${styleObject.size}px ${styleObject.font}`
+            Renderer.style({ fillStyle: styleObject.color })
+        }
+        ctx.fillText(text, x, y)
     }
 
     static tint(color: string, x: number, y: number, width: number, height: number): void {

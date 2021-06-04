@@ -25,6 +25,7 @@ TODO :
     - Use existing canvas
     - Custom logger --> for debug purpose
     - Add text rendering
+    - Rework doc system
 
 PARTS :
     - Core

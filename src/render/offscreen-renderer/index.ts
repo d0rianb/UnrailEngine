@@ -113,6 +113,8 @@ class OffscreenRenderer {
         }
     }
 
+    static text(text: string, x: number, y: number, font?: string): void { this.addRenderCall('text', { text, x, y, font }) }
+
     static tint(color: string, x: number, y: number, width: number, height: number): void { this.addRenderCall('circle', { color, x, y, width, height }) }
 
     static beginFrame(): void {

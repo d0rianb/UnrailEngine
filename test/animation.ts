@@ -18,6 +18,8 @@ let speed3 = new Animation(0, width - 2 * offset, 2500, Easing.easeIn, { autosta
 function draw(ts) {
     Renderer.clear()
 
+    Renderer.text('Linear', offset, offset + dimension + 20, { size: 16 })
+
     Renderer.rect(offset, offset, dimension, dimension, { lineWidth: .5 })
     Renderer.circle(offset + linear_x.value, offset + linear_y.value, .5)
 
