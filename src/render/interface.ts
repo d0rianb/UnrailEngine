@@ -51,7 +51,7 @@ class Interface {
     static addStyle(style: string) {
         const styleElement: HTMLStyleElement = document.createElement('style')
         styleElement.textContent = style
-        document.head.append(style)
+        document.head.append(styleElement)
     }
 
     static addToDom(item: InterfaceItem, index: number): void {

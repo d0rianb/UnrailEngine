@@ -10,10 +10,10 @@ It contains (or will soon contains) :
 -   Grid System
 -   Stats
 -   Configuration
--   Physics
+-   Physics (maybe)
 -   Particle System
 
-Examples can be found at [/test](./test/)
+Examples can be found at [/test](./test/). The engine is written using test driven development. Currently there is no test automatisation but the aim is to developp 2E2 efficient tests.
 
 ## Documentation
 

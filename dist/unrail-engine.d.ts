@@ -240,6 +240,7 @@ interface TextStyleObject {
 }
 declare class Renderer {
     static create(width?: number, height?: number): HTMLCanvasElement;
+    static createFromCanvas(selector: string): HTMLCanvasElement;
     static setContext(context: CanvasRenderContext): void;
     static getContext(): CanvasRenderContext;
     static style(obj?: StyleObject): void;
@@ -272,7 +273,8 @@ declare class OffscreenRenderer {
     static get workerIsInitialized(): boolean;
     static get offscreenCanvas(): OffscreenCanvas;
     static get renderStack(): RenderStack;
-    static create(width: number, height: number): HTMLCanvasElement;
+    static create(width?: number, height?: number): HTMLCanvasElement;
+    static createFromCanvas(selector: string): HTMLCanvasElement;
     static initRenderWorker(canvas: HTMLCanvasElement, width: number, height: number): void;
     static addRenderCall(name: string, args?: object): void;
     static sendMessageToWorker(title: string, data?: any, transfer?: Transferable[]): void;
