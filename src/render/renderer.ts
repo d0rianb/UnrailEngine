@@ -137,6 +137,7 @@ class Renderer {
         Renderer.style(obj)
         ctx.beginPath()
         ctx.arc(round(x), round(y), radius, 0, TWOPI)
+        ctx.fill()
         ctx.stroke()
     }
 
@@ -192,7 +193,9 @@ class Renderer {
     }
 
     // For the compatibility with OffscreenRenderer
-    static beginFrame(): void { }
+    static beginFrame(color?: string): void {
+        Renderer.clear(color)
+    }
 
     // For the compatibility with OffscreenRenderer
     static endFrame(): void { }

@@ -127,9 +127,9 @@ class OffscreenRenderer {
 
     static tint(color: string, x: number, y: number, width: number, height: number): void { this.addRenderCall('circle', { color, x, y, width, height }) }
 
-    static beginFrame(): void {
+    static beginFrame(color?: string): void {
         renderStack = []
-        this.addRenderCall('clear')
+        this.clear(color)
     }
 
     static endFrame(): void {

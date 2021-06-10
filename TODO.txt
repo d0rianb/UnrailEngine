@@ -41,3 +41,4 @@ PARTS :
     - Resize canvas
     - Texture preserve ratio
     - Inject CSS                    - X
+    - Offscreen Renderer "Non-origin-clean ImageBitmap cannot be cloned"
