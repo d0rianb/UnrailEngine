@@ -26,7 +26,7 @@ class Particle extends GameObject {
         this.pos = pos.clone()
         this.angle = (angle && angle != 'random') ? (angle % 2 * Math.PI) : (Math.PI / 2 + Math.random() * 2 * Math.PI)
         this.velocity = new Vector2(Math.random() * speed * Math.cos(this.angle), Math.random() * speed * Math.sin(this.angle))
-        this.color = color || 'red'
+        this.color = color || 'transparent'
         this.opacity = clamp(100, Math.random() * 255, 255)
         this.radius = 2
     }
