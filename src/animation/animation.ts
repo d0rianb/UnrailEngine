@@ -14,18 +14,18 @@ const defaultOptions: AnimationOptions = {
 
 
 class Animation {
-    from: number
-    to: number
-    duration: number
-    easing: EasingFunction
-    options: AnimationOptions
-    value: number
-    hasStarted: boolean = false
-    isPaused: boolean = false
-    isEnded: boolean = false
-    isReversed: boolean = false
-    speed: number
-    lastT: number
+    public from: number
+    public to: number
+    public duration: number
+    public easing: EasingFunction
+    public options: AnimationOptions
+    public value: number
+    private hasStarted: boolean = false
+    private isPaused: boolean = false
+    private isEnded: boolean = false
+    private isReversed: boolean = false
+    private speed: number
+    private lastT: number
 
     constructor(from: number, to: number, duration: number, easing: EasingFunction = Easing.linear, options: AnimationOptions = {}) {
         this.from = from
