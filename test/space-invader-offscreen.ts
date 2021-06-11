@@ -13,7 +13,7 @@ import {
     Particle
 } from '../src'
 import { clamp, Vector2 } from '../src/core/math'
-import { Renderer, Interface, Texture } from '../src/render'
+import { OffscreenRenderer as Renderer, Interface, Texture } from '../src/render'
 import { Event } from '../src/events'
 
 let paused: boolean = false

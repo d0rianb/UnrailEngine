@@ -1,4 +1,9 @@
-# Unrail Engine
+<div align="center">
+    <div> <img width="180" src="./resources/logo/unrail-engine.svg" alt="Unrail Engine logo"></div>
+    <h1 style="margin: .5em"><b>Unrail Engine</b></h1>
+    <a href="https://badge.fury.io/js/unrail-engine"><img src="https://badge.fury.io/js/unrail-engine.svg" alt="npm version"/></a>
+    <a href="https://www.npmjs.com/package/unrail-engine"><img src="https://badgen.net/npm/dt/unrail-engine" alt="npm downloads"/></a>
+</div>
 
 **Unrail Engine** is a lightweight 2D game engine written in Typescript during a train ride.
 
