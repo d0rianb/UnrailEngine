@@ -18,16 +18,19 @@
         "emitDeclarationOnly": true,
         "outDir": "./dist/types",
         "paths": {
-          "@/*": ["./src/*"],
-          "@root/*": ["./*"],
-          "@style/*": ["./style/*"],
-          "@resources/*": ["./resources/*"]
+            "@/*": ["./src/*"],
+            "@root/*": ["./*"],
+            "@style/*": ["./style/*"],
+            "@resources/*": ["./resources/*"]
         }
     },
-    "include": [
-        "./src"
-    ],
-    "exclude": [
-        "./node_modules/**/*"
-    ]
+    "include": ["./src"],
+    "exclude": ["./node_modules"],
+    "typedocOptions": {
+        "name": "unrail-engine",
+        "entryPoints": ["src/index.ts"],
+        "media": "resources/logo",
+        "readme": false,
+        "theme": "minimal"
+    }
 }

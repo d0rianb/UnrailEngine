@@ -1,3 +1,6 @@
+import { EngineFailure } from '@/helpers/errors'
+import { now } from '@/helpers/utils'
+
 type AnimationFunction = (time: number) => any
 
 class AnimationFrame {
@@ -9,11 +12,11 @@ class AnimationFrame {
         this.requestId = 0
         this.animate = animate
         this.fps = fps
-        if (!window) throw new Error('No window context')
+        if (!window) throw new EngineFailure('No window context', 'core')
     }
 
     start() {
-        let then: number = performance.now()
+        let then: number = now()
         const interval: number = 1000 / this.fps
         const tolerance: number = 0.1
 

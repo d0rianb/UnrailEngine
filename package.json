@@ -14,7 +14,7 @@
         "build": "vite build && npm run build-declaration && npm run docs",
         "build-declaration": "rollup -c",
         "serve": "vite preview",
-        "docs": "npx typedoc src/index.ts src/events/index.ts src/render/index.ts --exclude ./node_modules/",
+        "docs": "npx typedoc --tsconfig .",
         "patch": "npx auto-version --patch",
         "publish-to-npm": "npm run build && npm run docs && git add . && git tag -a 'v'$npm_package_version -m 'Version '$npm_package_version && git commit -m 'Publish '$npm_package_version' to NPM' && npm publish",
         "postpublish": "git push origin --all; git push origin --tags"

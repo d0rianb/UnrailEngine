@@ -1,6 +1,7 @@
 import { AS } from './animationSystem'
 import { clamp } from '@/index'
-import { EasingFunction, Easing } from './easing'
+import { Easing, EasingFunction, EasingFunctionName } from './easing'
+import { EngineFailure } from '@/helpers/errors'
 
 interface AnimationOptions {
     autostart?: boolean
@@ -27,11 +28,13 @@ class Animation {
     private speed: number
     private lastT: number
 
-    constructor(from: number, to: number, duration: number, easing: EasingFunction = Easing.linear, options: AnimationOptions = {}) {
+    constructor(from: number, to: number, duration: number, easing: EasingFunction | EasingFunctionName = Easing.linear, options: AnimationOptions = {}) {
         this.from = from
         this.to = to
         this.duration = duration
-        this.easing = easing
+        if (easing instanceof Function) { this.easing = easing }
+        else if (typeof easing === 'string' && easing in Easing) this.easing = Easing[easing]
+        else throw new EngineFailure('Unknow easing parameter', 'animation')
         this.options = { ...defaultOptions, ...options }
         this.value = this.from
         this.speed = (this.to - this.from) / this.duration

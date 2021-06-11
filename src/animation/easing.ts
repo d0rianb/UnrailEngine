@@ -10,4 +10,7 @@ const Easing = {
     easeInOutBack: t => t < 0.5 ? (Math.pow(2 * t, 2) * ((2.5949095 + 1) * 2 * t - 2.5949095)) / 2 : (Math.pow(2 * t - 2, 2) * ((2.5949095 + 1) * (t * 2 - 2) + 2.5949095) + 2) / 2
 }
 
-export { EasingFunction, Easing }
+const easingName: Array<string> = Object.keys(Easing)
+type EasingFunctionName = typeof easingName[number]
+
+export { Easing, EasingFunction, EasingFunctionName }

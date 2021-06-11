@@ -6,8 +6,8 @@ const offset = 25
 const dimension = (width - 2 * NB_TEST * offset) / NB_TEST
 
 let linear_x = new Animation(0, dimension, 2000, Easing.linear, { autostart: true, loop: true })
-let linear_y = new Animation(dimension, 0, 2000, Easing.linear, { autostart: true, loop: true })
-let easeIn_y = new Animation(dimension, 0, 2000, Easing.easeIn, { autostart: true, loop: true })
+let linear_y = new Animation(dimension, 0, 2000, 'linear', { autostart: true, loop: true })
+let easeIn_y = new Animation(dimension, 0, 2000, 'easeIn', { autostart: true, loop: true })
 let easeOut_y = new Animation(dimension, 0, 2000, Easing.easeOut, { autostart: true, loop: true })
 let easeInOut_y = new Animation(dimension, 0, 2000, Easing.easeInOutBack, { autostart: true, loop: true })
 
