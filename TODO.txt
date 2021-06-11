@@ -22,9 +22,9 @@ TODO :
     - Animation Class                                       - X
     - Event once
     - Optimize particles
-    - Use existing canvas
+    - Use existing canvas                                   - X
     - Custom logger --> for debug purpose
-    - Add text rendering
+    - Add text rendering                                    - X
     - Rework doc system
 
 PARTS :

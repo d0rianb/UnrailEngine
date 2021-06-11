@@ -41,7 +41,7 @@ class OffscreenRenderer {
     static createFromCanvas(selector: string): HTMLCanvasElement {
         canvas = document.querySelector(selector)
         if (!canvas || !(canvas instanceof HTMLCanvasElement)) throw new RendererError('The selected element is not a canvas')
-        adaptCanvasToDevicePixelRatio(canvas, canvas.width, canvas.height, 1)
+        adaptCanvasToDevicePixelRatio(canvas, canvas.clientWidth, canvas.clientHeight, 1)
         OffscreenRenderer.initRenderWorker(canvas, canvas.width, canvas.height)
         return canvas
     }

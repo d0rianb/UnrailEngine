@@ -3,6 +3,7 @@
 
 import {
     getWindowDimensions,
+    getCanvasDimensions,
     createCanvas,
     Game,
     GameObject,
@@ -12,7 +13,7 @@ import {
     Particle
 } from '../src'
 import { clamp, Vector2 } from '../src/core/math'
-import { OffscreenRenderer as Renderer, Interface, Texture } from '../src/render'
+import { Renderer, Interface, Texture } from '../src/render'
 import { Event } from '../src/events'
 
 let paused: boolean = false
@@ -182,7 +183,7 @@ class Env extends GameEnvironement {
         this.shots.forEach(shot => shot.render())
         this.enemies.forEach(enemy => enemy.render())
         this.particles.forEach(particle => particle.render())
-        rendererObjetNumber = Renderer.renderStack.length
+        // rendererObjetNumber = Renderer.renderStack.length
         Renderer.endFrame()
     }
 }
@@ -196,8 +197,9 @@ Interface.addButton(() => paused ? '||' : '>', e => paused = !paused)
 // main.ts
 // const { width, height } = getWindowDimensions()
 const canvas = Renderer.createFromCanvas('#canvas')
-const { width, height } = canvas
+const { width, height } = getCanvasDimensions(canvas)
 // Renderer.create()
+
 const env = new Env(width, height)
 const game = new Game('Space Invader', env)
 
