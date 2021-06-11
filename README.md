@@ -3,7 +3,6 @@
 **Unrail Engine** is a lightweight 2D game engine written in Typescript during a train ride.
 
 It contains (or will soon contains) :
-
 -   Core
 -   Renderer (based on Canvas/OffscreenCanvas rendering & dynamics html `<span>` for the interface)
 -   Event System (native and custom events)
@@ -13,7 +12,7 @@ It contains (or will soon contains) :
 -   Physics (maybe)
 -   Particle System
 
-Examples can be found at [/test](./test/). The engine is written using test driven development. Currently there is no test automatisation but the aim is to developp 2E2 efficient tests.
+Examples can be found at [/test](./test/). The engine is written using test driven development. Currently there is no test automatisation but the aim is to develop E2E efficient tests.
 
 ## Documentation
 

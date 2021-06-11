@@ -162,12 +162,12 @@ declare class Animation {
     easing: EasingFunction;
     options: AnimationOptions;
     value: number;
-    hasStarted: boolean;
-    isPaused: boolean;
-    isEnded: boolean;
-    isReversed: boolean;
-    speed: number;
-    lastT: number;
+    private hasStarted;
+    private isPaused;
+    private isEnded;
+    private isReversed;
+    private speed;
+    private lastT;
     constructor(from: number, to: number, duration: number, easing?: EasingFunction, options?: AnimationOptions);
     start(): void;
     reset(): void;
@@ -257,7 +257,7 @@ declare class Renderer {
     static circleSprite(x: number, y: number, radius: number, texture: Texture): void;
     static text(text: string, x: number, y: number, style?: TextStyleObject): void;
     static tint(color: string, x: number, y: number, width: number, height: number): void;
-    static beginFrame(): void;
+    static beginFrame(color?: string): void;
     static endFrame(): void;
 }
 
@@ -292,7 +292,7 @@ declare class OffscreenRenderer {
     static circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void>;
     static text(text: string, x: number, y: number, font?: string): void;
     static tint(color: string, x: number, y: number, width: number, height: number): void;
-    static beginFrame(): void;
+    static beginFrame(color?: string): void;
     static endFrame(): void;
 }
 
