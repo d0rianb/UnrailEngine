@@ -79,7 +79,10 @@ interface SizeObject {
     height?: number;
 }
 declare function getWindowDimensions(): SizeObject;
+declare function getCanvasDimensions(canvas: HTMLCanvasElement): SizeObject;
 declare function createCanvas(w: number, h: number, ratio?: number, preventRightClick?: boolean): HTMLCanvasElement;
+declare function adaptCanvasToDevicePixelRatio(canvas: HTMLCanvasElement, width?: number, height?: number, ratio?: number): void;
+declare function insertCanvas(canvas: HTMLCanvasElement, el: string): void;
 
 declare type ParticleAngle = number | 'random';
 declare type Callback = () => void;
@@ -324,4 +327,4 @@ declare const Config: {};
 
 declare const VERSION: string;
 
-export { Animation, AnimationOptions, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, clamp, createCanvas, getWindowDimensions, inRange };
+export { Animation, AnimationOptions, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, inRange, insertCanvas };

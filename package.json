@@ -1,6 +1,6 @@
 {
     "name": "unrail-engine",
-    "version": "0.4.3",
+    "version": "0.4.4",
     "description": "A lightweight 2D game engine written in typescript",
     "main": "./dist/unrail-engine.umd.js",
     "module": "./dist/unrail-engine.es.js",
