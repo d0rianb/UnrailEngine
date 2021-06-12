@@ -2,6 +2,8 @@ type EasingFunction = (t: number) => number
 
 const Easing = {
     linear: t => t,
+    smoothStep: t => (3 - 2 * t) * t ** 2,
+    smootherStep: t => (6 * t * t - 15 * t + 10) * t ** 3,
     easeIn: t => t ** 2,
     easeOut: t => 1 - (1 - t) ** 2,
     easeInOut: t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2,
