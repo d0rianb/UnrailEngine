@@ -11,12 +11,20 @@ export class Vector2 {
         this.y = y
     }
 
+    public clone(): Vector2 {
+        return new Vector2(this.x, this.y)
+    }
+
     public add(vec: Vector2): Vector2 {
         return new Vector2(this.x + vec.x, this.y + vec.y)
     }
 
-    public clone(): Vector2 {
-        return new Vector2(this.x, this.y)
+    public multiply(scalar: number): Vector2 {
+        return new Vector2(this.x * scalar, this.y * scalar)
+    }
+
+    public dot(vec: Vector2): number {
+        return this.x * vec.x + this.y * vec.y
     }
 
     public dist(vec: Vector2): number {

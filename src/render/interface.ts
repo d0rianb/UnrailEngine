@@ -48,7 +48,7 @@ class Interface {
         document.body.appendChild(container)
     }
 
-    static addStyle(style: string) {
+    static addStyle(style: string): void {
         const styleElement: HTMLStyleElement = document.createElement('style')
         styleElement.textContent = style
         document.head.append(styleElement)

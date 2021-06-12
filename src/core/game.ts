@@ -1,8 +1,8 @@
 import { Env } from './env'
 import { ES } from '@/events/event'
 import { AS } from '@/animation/animationSystem'
-import { showStats, Stats } from '../core/stats'
-import { Interface } from '../render'
+import { showStats, Stats } from './stats'
+import { Interface } from '@/render'
 import { AnimationFrame } from './animationFrame'
 
 type RendererType = 'normal' | 'offscreen'

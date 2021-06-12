@@ -1,7 +1,7 @@
 import PathBuilder from 'svg-path-builder'
 
 import { Point, Vector2, V_UNIT } from './math'
-import { Renderer } from '../render/renderer'
+import { Renderer } from '@/render/renderer'
 
 // [[x, y], [x, y], ...]
 interface JSONPath {
@@ -36,7 +36,7 @@ class Path {
         this.recalculate()
     }
 
-    pointAt(percent) {
+    pointAt(percent): Point {
         return this.svg.getPointAtLength(this.length * percent / 100)
     }
 

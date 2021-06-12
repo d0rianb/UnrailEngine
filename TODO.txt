@@ -1,31 +1,21 @@
 TODO :
     - life cycle
     - Splash Screen
-    - Clean dependencies                                    - X
-    - Find a name > Unrail Engine                           - X
-    - Setup Vite for development                            - X
-    - Create a Github repository                            - X
-    - change webpack to rollup ? (for smaller bundle size)  - X
-    - Do not use Vue for interface                          - X
     - Camera System
     - Serialize
-    - Offscreen Canvas rendering                            - X
-    - Version system                                        - X
     - Implement physic engine
     - Physic interpolated rendering
     - WebGL for rendering ?
     - Make OffscreenRenderer the default renderer
-    - Random.sign()                                         - X
     - Resources Manager
     - Update the doc / give examples --> examples/ folder
     - Error --> Engine failure
-    - Animation Class                                       - X
     - Event once
     - Optimize particles
-    - Use existing canvas                                   - X
     - Custom logger --> for debug purpose
-    - Add text rendering                                    - X
     - Rework doc system
+    - Add text centering (CanvasRenderingContext2D.measureText())
+    - Render gradient
 
 PARTS :
     - Core
@@ -34,11 +24,10 @@ PARTS :
     - Grid System
     - Stats
     - Configuration --> Local Storage API
-    - Physics
+    - Physics ?
     - Particle System
 
  ISSUE :
     - Resize canvas
     - Texture preserve ratio
-    - Inject CSS                    - X
     - Offscreen Renderer "Non-origin-clean ImageBitmap cannot be cloned"

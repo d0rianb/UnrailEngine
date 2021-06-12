@@ -26,7 +26,7 @@ class Animation {
     private isEnded: boolean = false
     private isReversed: boolean = false
     private speed: number
-    private lastT: number
+    private lastT: number = 0
 
     constructor(from: number, to: number, duration: number, easing: EasingFunction | EasingFunctionName = Easing.linear, options: AnimationOptions = {}) {
         this.from = from
@@ -38,8 +38,6 @@ class Animation {
         this.options = { ...defaultOptions, ...options }
         this.value = this.from
         this.speed = (this.to - this.from) / this.duration
-        this.isReversed = false // (this.to - this.from) > 0
-        this.lastT = 0
         AS.add(this)
     }
 
@@ -77,7 +75,6 @@ class Animation {
         if (t >= 1 || t <= 0) {
             if (!this.options.loop) {
                 this.isEnded = true
-                this.lastT = 1
                 return
             }
             // Reverse the animation
@@ -86,6 +83,10 @@ class Animation {
         }
         this.lastT = t
         this.value = this.from + (this.to - this.from) * this.easing(t)
+    }
+
+    get isRunning(): boolean {
+        return !(this.isEnded || this.isPaused)
     }
 }
 

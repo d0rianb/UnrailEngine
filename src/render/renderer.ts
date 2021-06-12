@@ -18,7 +18,8 @@ interface StyleObject {
 interface TextStyleObject {
     font?: string,
     size?: number,
-    color?: string
+    color?: string,
+    align?: 'end' | 'left' | 'right' | 'center'
 }
 
 const defaultStyleObject: StyleObject = {

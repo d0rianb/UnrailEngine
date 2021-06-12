@@ -2,8 +2,8 @@ import Random from '@dorianb/random-js'
 
 import { GameObject } from './objects'
 import { Vector2, clamp, inRange } from './math'
-import { Cooldown } from '../events'
-import { OffscreenRenderer, Renderer } from '../render'
+import { Cooldown } from '@/events'
+import { OffscreenRenderer, Renderer } from '@/render'
 import { Game } from '..'
 
 const GRAVITY: number = .01 // N
@@ -17,7 +17,7 @@ class Particle extends GameObject {
     public velocity: Vector2
     public color: string
     public angle: ParticleAngle
-    public radius: number
+    public radius: number = 2
     public opacity: number
 
     constructor(id: number, pos: Vector2, speed: number = 5, angle?: ParticleAngle, color?: string) {
@@ -28,7 +28,6 @@ class Particle extends GameObject {
         this.velocity = new Vector2(Math.random() * speed * Math.cos(this.angle), Math.random() * speed * Math.sin(this.angle))
         this.color = color || 'transparent'
         this.opacity = clamp(100, Math.random() * 255, 255)
-        this.radius = 2
     }
 
     update(): void {
