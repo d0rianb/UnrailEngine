@@ -2811,30 +2811,60 @@ img {
 				<a href="https://badge.fury.io/js/unrail-engine"><img src="https://badge.fury.io/js/unrail-engine.svg" alt="npm version"/></a>
 				<a href="https://www.npmjs.com/package/unrail-engine"><img src="https://badgen.net/npm/dt/unrail-engine" alt="npm downloads"/></a>
 			</div>
-			<p><strong>Unrail Engine</strong> is a lightweight 2D game engine written in Typescript during a train ride.</p>
-			<p>It contains (or will soon contains) :</p>
-			<ul>
-				<li>  Core</li>
-				<li>  Renderer (based on Canvas/OffscreenCanvas rendering &amp; dynamics html <code>&lt;span&gt;</code> for the interface)</li>
-				<li>  Event System (native and custom events)</li>
-				<li>  Grid System</li>
-				<li>  Stats</li>
-				<li>  Configuration</li>
-				<li>  Physics (maybe)</li>
-				<li>  Particle System</li>
-			</ul>
-			<p>Examples can be found at <a href="./test/">/test</a>. The engine is written using test driven development. Currently there is no test automatisation but the aim is to develop E2E efficient tests.</p>
+			<p><strong>Unrail Engine</strong> is a modern and lightweight 2D game engine written in Typescript during a train ride.</p>
+			<p>This engine is not only for games, its modules can be used independently. For instance, the <code>render</code> module and the <code>interface</code> one can be used for an animated project.</p>
+			<p>The renderer is based on the <strong>OffscreenCanvas API</strong> (currently not supported by Safari &amp; Firefox). The render process is done in a DedicatedWorker which threads the process and speed up the operation.</p>
+			<p>Examples can be found at <a href="./test/">/test</a>. <br>
+			The engine is written using test driven development. Currently there is no test automatisation but the aim is to develop E2E efficient tests.</p>
+			<p>I   - <a href="#getting-started">Getting Started</a><br>
+				II  - <a href="#documentation">Documentation</a><br>
+			III - <a href="#uses">Uses</a><br></p>
+			<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+				<h2><a name="getting-started"></a>Getting Started</h2>
+			</a>
+			<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+				<h3>Installation</h3>
+			</a>
+			<p>To import the engine, you can include the script in your <code>index.html</code> file : </p>
+			<pre><code class="language-html"><span style="color: #008000">&lt;!-- Production minified ~10kB gzipped --&gt;</span>
+<span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;module&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;./unrail-engine.es.js&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">defer</span><span style="color: #800000">&gt;&lt;/script&gt;</span><span style="color: #000000"> </span>
+</code></pre>
+			<p>Then import it like a regular moduel in your <code>.js</code> file : </p>
+			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #008000">/* Stuff you need */</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./unrail-engine/dist/unrail-engine.es.js&#039;</span>
+</code></pre>
+			<p>or via <a href="https://www.npmjs.com/package/unrail-engine">NPM</a>: </p>
+			<pre><code class="language-bash"><span style="color: #000000">npm i --save unrail-engine</span>
+</code></pre>
+			<p>and import it as an ES module : (the types are included in the package)</p>
+			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #008000">/* Stuff you need */</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine&#039;</span>
+</code></pre>
+			<a href="#starting-a-game" id="starting-a-game" style="color: inherit; text-decoration: none;">
+				<h3>Starting a game</h3>
+			</a>
+			<p>The UnrailEngine entry point is the <code>Game</code> object. With this object, all the modules will be instantiated and will work properly.
+			All the objects have to be imported first.</p>
+			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Game</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine&#039;</span>
+
+<span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">game</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Game</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Game name&#039;</span><span style="color: #000000">)</span>
+</code></pre>
+			<p>Then you can register a main loop which will be called the right amout of time to respecct the fps limitation (which can be set by the <code>game.setFPS(fpsNumber)</code> method - default is 60fps)</p>
+			<pre><code class="language-ts"><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">update</span><span style="color: #000000">(</span><span style="color: #001080">deltaTime</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #008000">// Do the update &amp; render job here</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #001080">game</span><span style="color: #000000">.</span><span style="color: #795E26">setMainLoop</span><span style="color: #000000">(</span><span style="color: #001080">update</span><span style="color: #000000">)</span>
+</code></pre>
+			<p>Then just call <code>game.start()</code> and there you go.</p>
 			<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
-				<h2>Documentation</h2>
+				<h2><a name="documentation"></a>Documentation</h2>
 			</a>
-			<p>The full documentation is available <a href="https://d0rianb.github.io/UnrailEngine/">here</a>.</p>
-			<a href="#create-a-game" id="create-a-game" style="color: inherit; text-decoration: none;">
-				<h3>Create a game</h3>
-			</a>
+			<blockquote>
+				<p>The full documentation is available <a href="https://d0rianb.github.io/UnrailEngine/">here</a>.</p>
+			</blockquote>
 			<pre><code class="language-ts"><span style="color: #008000">// main.ts</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">width</span><span style="color: #000000">, </span><span style="color: #0070C1">height</span><span style="color: #000000"> } = </span><span style="color: #795E26">getWindowDimensions</span><span style="color: #000000">() </span><span style="color: #008000">// Had to be imported</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">env</span><span style="color: #000000">: </span><span style="color: #267F99">Env</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Env</span><span style="color: #000000">(</span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">) </span><span style="color: #008000">// Create an environment for the game</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">game</span><span style="color: #000000">: </span><span style="color: #267F99">Game</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Game</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Game Name&#039;</span><span style="color: #000000">, </span><span style="color: #001080">env</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">env</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Env</span><span style="color: #000000">(</span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">) </span><span style="color: #008000">// Create an environment for the game</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">game</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Game</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Game Name&#039;</span><span style="color: #000000">, </span><span style="color: #001080">env</span><span style="color: #000000">)</span>
 
 <span style="color: #001080">game</span><span style="color: #000000">.</span><span style="color: #795E26">setMainLoop</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">env</span><span style="color: #000000">.</span><span style="color: #795E26">update</span><span style="color: #000000">()) </span><span style="color: #008000">// register a main loop</span>
 <span style="color: #001080">game</span><span style="color: #000000">.</span><span style="color: #795E26">start</span><span style="color: #000000">()</span>
@@ -2842,7 +2872,10 @@ img {
 			<a href="#event-system" id="event-system" style="color: inherit; text-decoration: none;">
 				<h3>Event System</h3>
 			</a>
-			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Event</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine/events&#039;</span>
+			<p>The event system is usefull to communicate between differente classes or objects.<br>
+				Native events are handled by the system.<br>
+			The keydown management ideo comes from <a href="https://github.com/jeremyckahn/keydrown">keydrown</a> and eliminate the delay when long pressing a key.<br></p>
+			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Event</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine&#039;</span>
 
 <span style="color: #008000">// Key Events</span>
 <span style="color: #001080">Event</span><span style="color: #000000">.</span><span style="color: #795E26">onKeyDown</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;ArrowLeft&#039;</span><span style="color: #000000">, </span><span style="color: #001080">e</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">callback</span><span style="color: #000000">(</span><span style="color: #001080">e</span><span style="color: #000000">)) </span><span style="color: #008000">// While key is down</span>
@@ -2855,15 +2888,17 @@ img {
 			<a href="#renderer" id="renderer" style="color: inherit; text-decoration: none;">
 				<h3>Renderer</h3>
 			</a>
+			<p>The UnrailEngine currently supports 2 render methods : (<em>WebGL</em> rendering is planned) <br></p>
 			<ul>
-				<li>  The <code>Renderer</code> object is a classic optimize canvas 2D renderer.</li>
-				<li>  The <code>OffscreenRenderer</code> uses the <code>OffscreenCanvas</code> API and web worker to run in a different thread.</li>
+				<li>  The <code>Renderer</code> object is a classic optimized canvas 2D renderer.<br></li>
+				<li>  The <code>OffscreenRenderer</code> uses the <code>OffscreenCanvas</code> API and web worker to run in a different thread.<br>
+					Both renderer uses the same methods name so switching from one to another is as simple as replacing an import alias.<br><pre><code class="language-ts"><span style="color: #008000">// Choose one or another</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Renderer</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine&#039;</span><span style="color: #000000">                      </span><span style="color: #008000">// to use the regular renderer</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">OffscreenRenderer</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">Renderer</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine&#039;</span><span style="color: #000000"> </span><span style="color: #008000">// to use the multithreaded renderer for better performances</span>
+</code></pre>
+				</li>
 			</ul>
-			<pre><code class="language-ts"><span style="color: #008000">// Choose one or the other</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Renderer</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine/render&#039;</span><span style="color: #000000">                      </span><span style="color: #008000">// classic canvas renderer</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">OffscreenRenderer</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">Renderer</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine/render&#039;</span><span style="color: #000000"> </span><span style="color: #008000">// better performance</span>
-
-<span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">style</span><span style="color: #000000">: </span><span style="color: #267F99">StyleObject</span><span style="color: #000000"> = { </span><span style="color: #008000">// Canvas2DContext options from : https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D</span>
+			<pre><code class="language-ts"><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">style</span><span style="color: #000000">: </span><span style="color: #267F99">StyleObject</span><span style="color: #000000"> = { </span><span style="color: #008000">// Canvas2DContext options from : https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D</span>
 <span style="color: #000000">    strokeStyle?</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">string</span><span style="color: #000000">,</span>
 <span style="color: #000000">    lineWidth?</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">number</span><span style="color: #000000">,</span>
 <span style="color: #000000">    lineJoin?</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">CanvasLineJoin</span><span style="color: #000000">,</span>
@@ -2873,24 +2908,25 @@ img {
 <span style="color: #000000">}</span>
 
 <span style="color: #008000">// Create a canvas &amp; init the Renderer</span>
-<span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">)</span>
+<span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">()               </span><span style="color: #008000">// To create a canvas with the dimension of the window</span>
+<span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">)  </span><span style="color: #008000">// To create a canvas with custom dimensions</span>
+<span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">createFromCanvas</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;#canvas&#039;</span><span style="color: #000000">)  </span><span style="color: #008000">// To create a Renderer from an existing canvas</span>
 
 <span style="color: #008000">// Renderer is a static class. Here are the different methods</span>
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">clear</span><span style="color: #000000">()</span>
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">rect</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">, </span><span style="color: #001080">style</span><span style="color: #000000">?)</span>
-<span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">line</span><span style="color: #000000">(</span><span style="color: #001080">point1</span><span style="color: #000000">, </span><span style="color: #001080">point2</span><span style="color: #000000">, </span><span style="color: #001080">style</span><span style="color: #000000">?)</span>
+<span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">line</span><span style="color: #000000">(</span><span style="color: #001080">x1</span><span style="color: #000000">, </span><span style="color: #001080">y1</span><span style="color: #000000">, </span><span style="color: #001080">x2</span><span style="color: #000000">, </span><span style="color: #001080">y2</span><span style="color: #000000">, </span><span style="color: #001080">style</span><span style="color: #000000">?)</span>
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">poly</span><span style="color: #000000">(</span><span style="color: #001080">pointArray</span><span style="color: #000000">, </span><span style="color: #001080">style</span><span style="color: #000000">?)</span>
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">circle</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">radius</span><span style="color: #000000">, </span><span style="color: #001080">style</span><span style="color: #000000">?)</span>
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">point</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">style</span><span style="color: #000000">?)</span>
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">rectSprite</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">, </span><span style="color: #001080">texture</span><span style="color: #000000">)</span>
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">circleSprite</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">radius</span><span style="color: #000000">, </span><span style="color: #001080">texture</span><span style="color: #000000">)</span>
 <span style="color: #001080">Renderer</span><span style="color: #000000">.</span><span style="color: #795E26">tint</span><span style="color: #000000">(</span><span style="color: #001080">color</span><span style="color: #000000">, </span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">)      </span><span style="color: #008000">// tint a rect width a color</span>
-
 </code></pre>
 			<a href="#interface" id="interface" style="color: inherit; text-decoration: none;">
 				<h3>Interface</h3>
 			</a>
-			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Interface</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine/render&#039;</span>
+			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Interface</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine&#039;</span>
 
 <span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">value</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;some value&#039;</span>
 
@@ -2901,8 +2937,15 @@ img {
 <span style="color: #008000">// Example :</span>
 <span style="color: #001080">Interface</span><span style="color: #000000">.</span><span style="color: #795E26">addItem</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #A31515">`Iteration : </span><span style="color: #0000FF">${</span><span style="color: #001080">i</span><span style="color: #000000">++</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;top-left&#039;</span><span style="color: #000000">, { </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#999&#039;</span><span style="color: #000000"> })</span>
 </code></pre>
+			<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+				<h2><a name="uses"></a>Example</h2>
+			</a>
+			<ul>
+				<li>The <a href="https://github.com/d0rianb/SwatchDemo">Swatch Demo</a> uses the UnrailEngine for rendering &amp; handling the update loop.</li>
+				<li>The <a href="https://github.com/d0rianb/TowerDefenseGame">TowerDefenseGame</a> &amp; <a href="https://github.com/d0rianb/RunAndGun">Run&amp;Gun</a> will soon use the UnrailEngine too.</li>
+			</ul>
 			<hr>
-			<p>2020 © Dorian Beauchesne</p>
+			<p>2021 © Dorian Beauchesne</p>
 		</div>
 		<section class="tsd-panel-group tsd-index-group">
 			<h2>Index</h2>
@@ -2976,7 +3019,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Point<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/math.ts#L27">core/math.ts:27</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/math.ts#L27">core/math.ts:27</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2989,7 +3032,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = {}</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/config/index.ts#L3">config/index.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/config/index.ts#L3">config/index.ts:3</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -3004,7 +3047,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Easing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>easeIn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInOutBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeOutBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>linear<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/animation/easing.ts#L3">animation/easing.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/animation/easing.ts#L3">animation/easing.ts:3</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -3166,7 +3209,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Point<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/math.ts#L28">core/math.ts:28</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/math.ts#L28">core/math.ts:28</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3176,7 +3219,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">VERSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/index.ts#L19">index.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/index.ts#L19">index.ts:19</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3186,7 +3229,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">V_<wbr>NULL<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/math.ts#L30">core/math.ts:30</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/math.ts#L30">core/math.ts:30</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3196,7 +3239,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">V_<wbr>UNIT<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/math.ts#L31">core/math.ts:31</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/math.ts#L31">core/math.ts:31</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3220,7 +3263,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/geometry.ts#L23">core/geometry.ts:23</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/geometry.ts#L23">core/geometry.ts:23</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3252,7 +3295,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/math.ts#L33">core/math.ts:33</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/math.ts#L33">core/math.ts:33</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3281,7 +3324,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/geometry.ts#L14">core/geometry.ts:14</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/geometry.ts#L14">core/geometry.ts:14</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3313,7 +3356,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/geometry.ts#L10">core/geometry.ts:10</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/geometry.ts#L10">core/geometry.ts:10</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3336,7 +3379,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/geometry.ts#L6">core/geometry.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/geometry.ts#L6">core/geometry.ts:6</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SizeObject</span></h4>
@@ -3353,7 +3396,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/math.ts#L37">core/math.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/math.ts#L37">core/math.ts:37</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3382,7 +3425,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/18504e6/src/core/geometry.ts#L37">core/geometry.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/fba218f/src/core/geometry.ts#L37">core/geometry.ts:37</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>

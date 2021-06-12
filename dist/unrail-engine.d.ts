@@ -153,6 +153,8 @@ declare const Easing: {
     easeOutBack: (t: any) => number;
     easeInOutBack: (t: any) => number;
 };
+declare const easingName: Array<string>;
+declare type EasingFunctionName = typeof easingName[number];
 
 interface AnimationOptions {
     autostart?: boolean;
@@ -171,7 +173,7 @@ declare class Animation {
     private isReversed;
     private speed;
     private lastT;
-    constructor(from: number, to: number, duration: number, easing?: EasingFunction, options?: AnimationOptions);
+    constructor(from: number, to: number, duration: number, easing?: EasingFunction | EasingFunctionName, options?: AnimationOptions);
     start(): void;
     reset(): void;
     toggle(pause?: boolean): void;
