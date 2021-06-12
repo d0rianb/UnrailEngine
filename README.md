@@ -5,7 +5,7 @@
     <a href="https://www.npmjs.com/package/unrail-engine"><img src="https://badgen.net/npm/dt/unrail-engine" alt="npm downloads"/></a>
 </div>
 
-**Unrail Engine** is a lightweight 2D game engine written in Typescript during a train ride.
+**Unrail Engine** is a modern and lightweight 2D game engine written in Typescript during a train ride.
 
 This engine is not only for games, its modules can be used independently. For instance, the `render` module and the `interface` one can be used for an animated project.
 
@@ -25,7 +25,7 @@ To import the engine, you can include the script in your `index.html` file :
 
 ```html
 <!-- Production minified ~10kB gzipped -->
-<script type="module" src="./test/animation.ts" defer></script> 
+<script type="module" src="./unrail-engine.es.js" defer></script> 
 ```
 Then import it like a regular moduel in your `.js` file : 
 ```ts 
