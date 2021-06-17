@@ -3,8 +3,8 @@ TODO :
     - Splash Screen
     - Camera System
     - Serialize
-    - Implement physic engine
-    - Physic interpolated rendering
+    - Implement physic engine ?
+    - Physic interpolated rendering ?
     - WebGL for rendering ?
     - Make OffscreenRenderer the default renderer
     - Resources Manager
@@ -16,6 +16,8 @@ TODO :
     - Rework doc system
     - Add text centering (CanvasRenderingContext2D.measureText())
     - Render gradient
+    - Add a lighting system
+
 
 PARTS :
     - Core
@@ -31,3 +33,6 @@ PARTS :
     - Resize canvas
     - Texture preserve ratio
     - Offscreen Renderer "Non-origin-clean ImageBitmap cannot be cloned"
+
+REFERENCE : 
+    - Glaze Engine

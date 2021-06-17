@@ -26,7 +26,7 @@ class Game {
         this.tick = 0
         this.stats = null
         this.showStatsPanel = true
-        this.gameLoop = null
+        this.gameLoop = this.env ? () => env.update() : null
         this.fps = fps
     }
 

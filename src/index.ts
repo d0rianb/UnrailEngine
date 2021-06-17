@@ -3,6 +3,7 @@ import { version } from '../package.json'
 // Core exports
 export * from './core/math'
 export * from './core/geometry'
+export * from './helpers/utils'
 export { Game } from './core/game'
 export { Env as GameEnvironement } from './core/env'
 export { GameObject, PlayerObject } from './core/objects'

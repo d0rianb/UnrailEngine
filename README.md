@@ -64,12 +64,13 @@ game.setMainLoop(update)
 Then just call `game.start()` and there you go.
 ## <a name="documentation"></a>Documentation
 
->The full documentation is available [here](https://d0rianb.github.io/UnrailEngine/).
+> The full documentation is available [here](https://d0rianb.github.io/UnrailEngine/).
 
+All the entities are built around two methods : `update` and `render`. The `update` method is used to handle the logic of the entity and the `render` method aims at doing the rendering job and should only use the `Renderer` static methods.
 
 ```ts
 // main.ts
-const { width, height } = getWindowDimensions() // Had to be imported
+const { width, height } = getWindowDimensions() 
 const env = new Env(width, height) // Create an environment for the game
 const game = new Game('Game Name', env)
 
@@ -107,7 +108,8 @@ import { OffscreenRenderer as Renderer } from 'unrail-engine' // to use the mult
 ```
 
 ```ts
-let style: StyleObject = { // Canvas2DContext options from : https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D
+// Canvas2DContext options from : https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D
+let style: StyleObject = { 
     strokeStyle?: string,
     lineWidth?: number,
     lineJoin?: CanvasLineJoin,
