@@ -17,6 +17,7 @@ TODO :
     - Add text centering (CanvasRenderingContext2D.measureText())
     - Render gradient
     - Add a lighting system
+    - Add slider button to the interface
 
 
 PARTS :
@@ -31,6 +32,7 @@ PARTS :
 
  ISSUE :
     - Resize canvas
+    - OffscreenRenderer should return Renderer if OffscreenCanvas PI is not supported
     - Texture preserve ratio
     - Offscreen Renderer "Non-origin-clean ImageBitmap cannot be cloned"
 

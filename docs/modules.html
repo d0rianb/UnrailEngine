@@ -2732,9 +2732,6 @@ img {
 			<a href="classes/interface.html" class="tsd-kind-icon">Interface</a>
 		</li>
 		<li class=" tsd-kind-class">
-			<a href="classes/offscreenrenderer.html" class="tsd-kind-icon">Offscreen<wbr>Renderer</a>
-		</li>
-		<li class=" tsd-kind-class">
 			<a href="classes/particle.html" class="tsd-kind-icon">Particle</a>
 		</li>
 		<li class=" tsd-kind-class">
@@ -2765,6 +2762,9 @@ img {
 			<a href="modules.html#easing" class="tsd-kind-icon">Easing</a>
 		</li>
 		<li class=" tsd-kind-variable">
+			<a href="modules.html#offscreenrenderer" class="tsd-kind-icon">Offscreen<wbr>Renderer</a>
+		</li>
+		<li class=" tsd-kind-variable">
 			<a href="modules.html#point" class="tsd-kind-icon">Point</a>
 		</li>
 		<li class=" tsd-kind-variable">
@@ -2777,10 +2777,16 @@ img {
 			<a href="modules.html#v_unit" class="tsd-kind-icon">V_<wbr>UNIT</a>
 		</li>
 		<li class=" tsd-kind-function">
+			<a href="modules.html#apiissupported" class="tsd-kind-icon">Api<wbr>IsSupported</a>
+		</li>
+		<li class=" tsd-kind-function">
 			<a href="modules.html#random" class="tsd-kind-icon">Random</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="modules.html#adaptcanvastodevicepixelratio" class="tsd-kind-icon">adapt<wbr>Canvas<wbr>ToDevice<wbr>Pixel<wbr>Ratio</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="modules.html#blink" class="tsd-kind-icon">blink</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="modules.html#clamp" class="tsd-kind-icon">clamp</a>
@@ -2795,10 +2801,19 @@ img {
 			<a href="modules.html#getwindowdimensions" class="tsd-kind-icon">get<wbr>Window<wbr>Dimensions</a>
 		</li>
 		<li class=" tsd-kind-function">
+			<a href="modules.html#hashobject" class="tsd-kind-icon">hash<wbr>Object</a>
+		</li>
+		<li class=" tsd-kind-function">
 			<a href="modules.html#inrange" class="tsd-kind-icon">in<wbr>Range</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="modules.html#insertcanvas" class="tsd-kind-icon">insert<wbr>Canvas</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="modules.html#isworker" class="tsd-kind-icon">is<wbr>Worker</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="modules.html#now" class="tsd-kind-icon">now</a>
 		</li>
 	</ul>
 </nav>
@@ -2861,8 +2876,9 @@ img {
 			<blockquote>
 				<p>The full documentation is available <a href="https://d0rianb.github.io/UnrailEngine/">here</a>.</p>
 			</blockquote>
+			<p>All the entities are built around two methods : <code>update</code> and <code>render</code>. The <code>update</code> method is used to handle the logic of the entity and the <code>render</code> method aims at doing the rendering job and should only use the <code>Renderer</code> static methods.</p>
 			<pre><code class="language-ts"><span style="color: #008000">// main.ts</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">width</span><span style="color: #000000">, </span><span style="color: #0070C1">height</span><span style="color: #000000"> } = </span><span style="color: #795E26">getWindowDimensions</span><span style="color: #000000">() </span><span style="color: #008000">// Had to be imported</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">width</span><span style="color: #000000">, </span><span style="color: #0070C1">height</span><span style="color: #000000"> } = </span><span style="color: #795E26">getWindowDimensions</span><span style="color: #000000">() </span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">env</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Env</span><span style="color: #000000">(</span><span style="color: #001080">width</span><span style="color: #000000">, </span><span style="color: #001080">height</span><span style="color: #000000">) </span><span style="color: #008000">// Create an environment for the game</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">game</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Game</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Game Name&#039;</span><span style="color: #000000">, </span><span style="color: #001080">env</span><span style="color: #000000">)</span>
 
@@ -2898,7 +2914,8 @@ img {
 </code></pre>
 				</li>
 			</ul>
-			<pre><code class="language-ts"><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">style</span><span style="color: #000000">: </span><span style="color: #267F99">StyleObject</span><span style="color: #000000"> = { </span><span style="color: #008000">// Canvas2DContext options from : https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D</span>
+			<pre><code class="language-ts"><span style="color: #008000">// Canvas2DContext options from : https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D</span>
+<span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">style</span><span style="color: #000000">: </span><span style="color: #267F99">StyleObject</span><span style="color: #000000"> = { </span>
 <span style="color: #000000">    strokeStyle?</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">string</span><span style="color: #000000">,</span>
 <span style="color: #000000">    lineWidth?</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">number</span><span style="color: #000000">,</span>
 <span style="color: #000000">    lineJoin?</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">CanvasLineJoin</span><span style="color: #000000">,</span>
@@ -2963,7 +2980,6 @@ img {
 							<li class="tsd-kind-class"><a href="classes/gameobject.html" class="tsd-kind-icon">Game<wbr>Object</a></li>
 							<li class="tsd-kind-class"><a href="classes/grid.html" class="tsd-kind-icon">Grid</a></li>
 							<li class="tsd-kind-class"><a href="classes/interface.html" class="tsd-kind-icon">Interface</a></li>
-							<li class="tsd-kind-class"><a href="classes/offscreenrenderer.html" class="tsd-kind-icon">Offscreen<wbr>Renderer</a></li>
 							<li class="tsd-kind-class"><a href="classes/particle.html" class="tsd-kind-icon">Particle</a></li>
 							<li class="tsd-kind-class"><a href="classes/particulegenerator.html" class="tsd-kind-icon">Particule<wbr>Generator</a></li>
 							<li class="tsd-kind-class"><a href="classes/playerobject.html" class="tsd-kind-icon">Player<wbr>Object</a></li>
@@ -2989,6 +3005,7 @@ img {
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-variable"><a href="modules.html#config" class="tsd-kind-icon">Config</a></li>
 							<li class="tsd-kind-variable"><a href="modules.html#easing" class="tsd-kind-icon">Easing</a></li>
+							<li class="tsd-kind-variable"><a href="modules.html#offscreenrenderer" class="tsd-kind-icon">Offscreen<wbr>Renderer</a></li>
 							<li class="tsd-kind-variable"><a href="modules.html#point" class="tsd-kind-icon">Point</a></li>
 							<li class="tsd-kind-variable"><a href="modules.html#version" class="tsd-kind-icon">VERSION</a></li>
 							<li class="tsd-kind-variable"><a href="modules.html#v_null" class="tsd-kind-icon">V_<wbr>NULL</a></li>
@@ -2998,14 +3015,19 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-function"><a href="modules.html#apiissupported" class="tsd-kind-icon">Api<wbr>IsSupported</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#random" class="tsd-kind-icon">Random</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#adaptcanvastodevicepixelratio" class="tsd-kind-icon">adapt<wbr>Canvas<wbr>ToDevice<wbr>Pixel<wbr>Ratio</a></li>
+							<li class="tsd-kind-function"><a href="modules.html#blink" class="tsd-kind-icon">blink</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#clamp" class="tsd-kind-icon">clamp</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#createcanvas" class="tsd-kind-icon">create<wbr>Canvas</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#getcanvasdimensions" class="tsd-kind-icon">get<wbr>Canvas<wbr>Dimensions</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#getwindowdimensions" class="tsd-kind-icon">get<wbr>Window<wbr>Dimensions</a></li>
+							<li class="tsd-kind-function"><a href="modules.html#hashobject" class="tsd-kind-icon">hash<wbr>Object</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#inrange" class="tsd-kind-icon">in<wbr>Range</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#insertcanvas" class="tsd-kind-icon">insert<wbr>Canvas</a></li>
+							<li class="tsd-kind-function"><a href="modules.html#isworker" class="tsd-kind-icon">is<wbr>Worker</a></li>
+							<li class="tsd-kind-function"><a href="modules.html#now" class="tsd-kind-icon">now</a></li>
 						</ul>
 					</section>
 				</div>
@@ -3019,7 +3041,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Point<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/math.ts#L27">core/math.ts:27</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L35">core/math.ts:35</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3032,7 +3054,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = {}</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/config/index.ts#L3">config/index.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/config/index.ts#L3">config/index.ts:3</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -3044,10 +3066,10 @@ img {
 			<section class="tsd-panel tsd-member tsd-kind-variable">
 				<a name="easing" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagConst">Const</span> Easing</h3>
-				<div class="tsd-signature tsd-kind-icon">Easing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>easeIn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInOutBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeOutBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>linear<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = ...</span></div>
+				<div class="tsd-signature tsd-kind-icon">Easing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>easeIn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInOutBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeOutBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>linear<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>smoothStep<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>smootherStep<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/animation/easing.ts#L3">animation/easing.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/animation/easing.ts#L3">animation/easing.ts:3</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -3200,8 +3222,60 @@ img {
 								</li>
 							</ul>
 						</li>
+						<li class="tsd-parameter">
+							<h5>smooth<wbr>Step<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span></h5>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-signature">
+									<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>t: <span class="tsd-signature-type">any</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="tsd-parameter">
+							<h5>smoother<wbr>Step<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span></h5>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-signature">
+									<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>t: <span class="tsd-signature-type">any</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
 					</ul>
 				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-variable">
+				<a name="offscreenrenderer" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> Offscreen<wbr>Renderer</h3>
+				<div class="tsd-signature tsd-kind-icon">Offscreen<wbr>Renderer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="classes/renderer.html" class="tsd-signature-type" data-tsd-kind="Class">Renderer</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">OffscreenRenderer</span><span class="tsd-signature-symbol"> = ...</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/render/offscreen-renderer/index.ts#L144">render/offscreen-renderer/index.ts:144</a></li>
+					</ul>
+				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-variable">
 				<a name="point" class="tsd-anchor"></a>
@@ -3209,7 +3283,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Point<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/math.ts#L28">core/math.ts:28</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L36">core/math.ts:36</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3219,7 +3293,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">VERSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/index.ts#L19">index.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/index.ts#L20">index.ts:20</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3229,7 +3303,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">V_<wbr>NULL<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/math.ts#L30">core/math.ts:30</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L38">core/math.ts:38</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3239,13 +3313,36 @@ img {
 				<div class="tsd-signature tsd-kind-icon">V_<wbr>UNIT<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/math.ts#L31">core/math.ts:31</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L39">core/math.ts:39</a></li>
 					</ul>
 				</aside>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Functions</h2>
+			<section class="tsd-panel tsd-member tsd-kind-function">
+				<a name="apiissupported" class="tsd-anchor"></a>
+				<h3>Api<wbr>IsSupported</h3>
+				<ul class="tsd-signatures tsd-kind-function">
+					<li class="tsd-signature tsd-kind-icon">Api<wbr>IsSupported<span class="tsd-signature-symbol">(</span>APIname<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/helpers/utils.ts#L25">helpers/utils.ts:25</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>APIname: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-function">
 				<a name="random" class="tsd-anchor"></a>
 				<h3>Random</h3>
@@ -3263,7 +3360,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/geometry.ts#L23">core/geometry.ts:23</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/geometry.ts#L23">core/geometry.ts:23</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3286,6 +3383,35 @@ img {
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-function">
+				<a name="blink" class="tsd-anchor"></a>
+				<h3>blink</h3>
+				<ul class="tsd-signatures tsd-kind-function">
+					<li class="tsd-signature tsd-kind-icon">blink<span class="tsd-signature-symbol">(</span>el<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, className<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, interval<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/helpers/utils.ts#L1">helpers/utils.ts:1</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>el: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>className: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>interval: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 300</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function">
 				<a name="clamp" class="tsd-anchor"></a>
 				<h3>clamp</h3>
 				<ul class="tsd-signatures tsd-kind-function">
@@ -3295,7 +3421,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/math.ts#L33">core/math.ts:33</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L41">core/math.ts:41</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3324,7 +3450,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/geometry.ts#L14">core/geometry.ts:14</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/geometry.ts#L14">core/geometry.ts:14</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3356,7 +3482,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/geometry.ts#L10">core/geometry.ts:10</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/geometry.ts#L10">core/geometry.ts:10</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3379,10 +3505,33 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/geometry.ts#L6">core/geometry.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/geometry.ts#L6">core/geometry.ts:6</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SizeObject</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function">
+				<a name="hashobject" class="tsd-anchor"></a>
+				<h3>hash<wbr>Object</h3>
+				<ul class="tsd-signatures tsd-kind-function">
+					<li class="tsd-signature tsd-kind-icon">hash<wbr>Object<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/helpers/utils.ts#L12">helpers/utils.ts:12</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>obj: <span class="tsd-signature-type">object</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -3396,7 +3545,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/math.ts#L37">core/math.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L45">core/math.ts:45</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3425,7 +3574,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/geometry.ts#L37">core/geometry.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/geometry.ts#L37">core/geometry.ts:37</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3438,6 +3587,40 @@ img {
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function">
+				<a name="isworker" class="tsd-anchor"></a>
+				<h3>is<wbr>Worker</h3>
+				<ul class="tsd-signatures tsd-kind-function">
+					<li class="tsd-signature tsd-kind-icon">is<wbr>Worker<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/helpers/utils.ts#L6">helpers/utils.ts:6</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function">
+				<a name="now" class="tsd-anchor"></a>
+				<h3>now</h3>
+				<ul class="tsd-signatures tsd-kind-function">
+					<li class="tsd-signature tsd-kind-icon">now<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/helpers/utils.ts#L21">helpers/utils.ts:21</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 					</li>
 				</ul>
 			</section>

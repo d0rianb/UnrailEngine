@@ -195,10 +195,10 @@ Interface.addItem(() => `Health : ${env.player.health}`, 'top-right')
 Interface.addButton(() => paused ? '||' : '>', e => paused = !paused)
 
 // main.ts
-// const { width, height } = getWindowDimensions()
-const canvas = Renderer.createFromCanvas('#canvas')
-const { width, height } = getCanvasDimensions(canvas)
-// Renderer.create()
+const { width, height } = getWindowDimensions()
+// const canvas = Renderer.createFromCanvas('#canvas')
+// const { width, height } = getCanvasDimensions(canvas)
+Renderer.create()
 
 const env = new Env(width, height)
 const game = new Game('Space Invader', env)

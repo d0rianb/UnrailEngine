@@ -21,3 +21,7 @@ export function hashObject(obj: object): string {
 export function now() {
     return performance.now() || Date.now()
 }
+
+export function ApiIsSupported(APIname: string): boolean {
+    return window && APIname in window
+}

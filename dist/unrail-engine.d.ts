@@ -5,8 +5,10 @@ declare class Vector2 {
     x: number;
     y: number;
     constructor(x: number, y: number);
-    add(vec: Vector2): Vector2;
     clone(): Vector2;
+    add(vec: Vector2): Vector2;
+    multiply(scalar: number): Vector2;
+    dot(vec: Vector2): number;
     dist(vec: Vector2): number;
 }
 declare type Point = Vector2;
@@ -16,16 +18,32 @@ declare const V_UNIT: Vector2;
 declare function clamp(min: number, x: number, max: number): number;
 declare function inRange(x: number, min: number, max: number): boolean;
 
+interface SizeObject {
+    width?: number;
+    height?: number;
+}
+declare function getWindowDimensions(): SizeObject;
+declare function getCanvasDimensions(canvas: HTMLCanvasElement): SizeObject;
+declare function createCanvas(w: number, h: number, ratio?: number, preventRightClick?: boolean): HTMLCanvasElement;
+declare function adaptCanvasToDevicePixelRatio(canvas: HTMLCanvasElement, width?: number, height?: number, ratio?: number): void;
+declare function insertCanvas(canvas: HTMLCanvasElement, el: string): void;
+
+declare function blink(el: string, className: string, interval?: number): void;
+declare function isWorker(): boolean;
+declare function hashObject(obj: object): string;
+declare function now(): number;
+declare function ApiIsSupported(APIname: string): boolean;
+
 interface EnvInterface {
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
     update: (deltaTime?: number, ...args: any[]) => void;
     render: (...args: any[]) => void;
 }
 declare class Env implements EnvInterface {
     width: number;
     height: number;
-    constructor(width: number, height: number);
+    constructor(width?: number, height?: number);
     update(): void;
     render(): void;
 }
@@ -73,16 +91,6 @@ declare class PlayerObject extends GameObject {
     update(...args: any[]): void;
     render(...args: any[]): void;
 }
-
-interface SizeObject {
-    width?: number;
-    height?: number;
-}
-declare function getWindowDimensions(): SizeObject;
-declare function getCanvasDimensions(canvas: HTMLCanvasElement): SizeObject;
-declare function createCanvas(w: number, h: number, ratio?: number, preventRightClick?: boolean): HTMLCanvasElement;
-declare function adaptCanvasToDevicePixelRatio(canvas: HTMLCanvasElement, width?: number, height?: number, ratio?: number): void;
-declare function insertCanvas(canvas: HTMLCanvasElement, el: string): void;
 
 declare type ParticleAngle = number | 'random';
 declare type Callback = () => void;
@@ -146,6 +154,8 @@ declare class Cell {
 declare type EasingFunction = (t: number) => number;
 declare const Easing: {
     linear: (t: any) => any;
+    smoothStep: (t: any) => number;
+    smootherStep: (t: any) => number;
     easeIn: (t: any) => number;
     easeOut: (t: any) => number;
     easeInOut: (t: any) => number;
@@ -180,6 +190,7 @@ declare class Animation {
     pause(): void;
     resume(): void;
     update(deltaTime: number): void;
+    get isRunning(): boolean;
 }
 
 declare enum EventType {
@@ -206,10 +217,11 @@ declare class Event {
     static onMouseMove(callback: MouseCallback): void;
 }
 
+declare type CooldownCallback = () => any;
 declare class Cooldown {
     delay: number;
-    callback: () => any | void;
-    constructor(delay: number, callback: () => any | void);
+    callback: CooldownCallback;
+    constructor(delay: number, callback: CooldownCallback);
 }
 
 interface TextureOptions {
@@ -242,6 +254,7 @@ interface TextStyleObject {
     font?: string;
     size?: number;
     color?: string;
+    align?: 'end' | 'left' | 'right' | 'center';
 }
 declare class Renderer {
     static create(width?: number, height?: number): HTMLCanvasElement;
@@ -300,6 +313,7 @@ declare class OffscreenRenderer {
     static beginFrame(color?: string): void;
     static endFrame(): void;
 }
+declare const OffscreenRendererWraper: typeof Renderer | typeof OffscreenRenderer;
 
 interface InterfaceItem {
     callback(game?: Game): string;
@@ -329,4 +343,4 @@ declare const Config: {};
 
 declare const VERSION: string;
 
-export { Animation, AnimationOptions, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, inRange, insertCanvas };
+export { Animation, AnimationOptions, ApiIsSupported, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWraper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now };

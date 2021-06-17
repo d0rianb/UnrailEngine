@@ -2749,9 +2749,6 @@ img {
 			<a href="interface.html" class="tsd-kind-icon">Interface</a>
 		</li>
 		<li class=" tsd-kind-class">
-			<a href="offscreenrenderer.html" class="tsd-kind-icon">Offscreen<wbr>Renderer</a>
-		</li>
-		<li class=" tsd-kind-class">
 			<a href="particle.html" class="tsd-kind-icon">Particle</a>
 		</li>
 		<li class=" tsd-kind-class">
@@ -2782,6 +2779,9 @@ img {
 			<a href="../modules.html#easing" class="tsd-kind-icon">Easing</a>
 		</li>
 		<li class=" tsd-kind-variable">
+			<a href="../modules.html#offscreenrenderer" class="tsd-kind-icon">Offscreen<wbr>Renderer</a>
+		</li>
+		<li class=" tsd-kind-variable">
 			<a href="../modules.html#point" class="tsd-kind-icon">Point</a>
 		</li>
 		<li class=" tsd-kind-variable">
@@ -2794,10 +2794,16 @@ img {
 			<a href="../modules.html#v_unit" class="tsd-kind-icon">V_<wbr>UNIT</a>
 		</li>
 		<li class=" tsd-kind-function">
+			<a href="../modules.html#apiissupported" class="tsd-kind-icon">Api<wbr>IsSupported</a>
+		</li>
+		<li class=" tsd-kind-function">
 			<a href="../modules.html#random" class="tsd-kind-icon">Random</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="../modules.html#adaptcanvastodevicepixelratio" class="tsd-kind-icon">adapt<wbr>Canvas<wbr>ToDevice<wbr>Pixel<wbr>Ratio</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="../modules.html#blink" class="tsd-kind-icon">blink</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="../modules.html#clamp" class="tsd-kind-icon">clamp</a>
@@ -2812,10 +2818,19 @@ img {
 			<a href="../modules.html#getwindowdimensions" class="tsd-kind-icon">get<wbr>Window<wbr>Dimensions</a>
 		</li>
 		<li class=" tsd-kind-function">
+			<a href="../modules.html#hashobject" class="tsd-kind-icon">hash<wbr>Object</a>
+		</li>
+		<li class=" tsd-kind-function">
 			<a href="../modules.html#inrange" class="tsd-kind-icon">in<wbr>Range</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="../modules.html#insertcanvas" class="tsd-kind-icon">insert<wbr>Canvas</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="../modules.html#isworker" class="tsd-kind-icon">is<wbr>Worker</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="../modules.html#now" class="tsd-kind-icon">now</a>
 		</li>
 	</ul>
 </nav>
@@ -2868,22 +2883,22 @@ img {
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Game<wbr>Environement<span class="tsd-signature-symbol">(</span>width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gameenvironement.html" class="tsd-signature-type" data-tsd-kind="Class">GameEnvironement</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Game<wbr>Environement<span class="tsd-signature-symbol">(</span>width<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, height<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gameenvironement.html" class="tsd-signature-type" data-tsd-kind="Class">GameEnvironement</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/env.ts#L12">core/env.ts:12</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/env.ts#L12">core/env.ts:12</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>width: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> width: <span class="tsd-signature-type">number</span></h5>
 							</li>
 							<li>
-								<h5>height: <span class="tsd-signature-type">number</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> height: <span class="tsd-signature-type">number</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="gameenvironement.html" class="tsd-signature-type" data-tsd-kind="Class">GameEnvironement</a></h4>
@@ -2900,7 +2915,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Implementation of EnvInterface.height</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/env.ts#L12">core/env.ts:12</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/env.ts#L12">core/env.ts:12</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2911,7 +2926,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Implementation of EnvInterface.width</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/env.ts#L11">core/env.ts:11</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/env.ts#L11">core/env.ts:11</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2929,7 +2944,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Implementation of EnvInterface.render</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/env.ts#L21">core/env.ts:21</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/env.ts#L21">core/env.ts:21</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -2947,7 +2962,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Implementation of EnvInterface.update</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/e668c97/src/core/env.ts#L19">core/env.ts:19</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/env.ts#L19">core/env.ts:19</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

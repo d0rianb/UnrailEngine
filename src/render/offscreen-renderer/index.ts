@@ -2,11 +2,13 @@ import { Texture } from '..'
 import { Game } from '@/core/game'
 import { adaptCanvasToDevicePixelRatio, createCanvas, getWindowDimensions, insertCanvas } from '@/core/geometry'
 import { Point } from '@/core/math'
-import { StyleObject } from '../renderer'
+import { Renderer, StyleObject } from '../renderer'
 import { WorkerMessage } from './workerMessage'
 import { RenderCall } from './renderCall'
-import RendererWorker from './rendererWorker?worker&inline'
 import { RendererError } from '@/helpers/errors'
+import { ApiIsSupported } from '@/helpers/utils'
+
+import RendererWorker from './rendererWorker?worker&inline'
 
 type RenderStack = Array<RenderCall>
 
@@ -17,7 +19,6 @@ let workerIsInitialized = false
 let renderStack: RenderStack = []
 
 const textureAlias: Map<number, Texture> = new Map()
-
 
 class OffscreenRenderer {
 
@@ -140,4 +141,6 @@ class OffscreenRenderer {
 }
 
 
-export { OffscreenRenderer }
+const OffscreenRendererWraper = ApiIsSupported('OffscreenCanvas') ? OffscreenRenderer : Renderer
+
+export { OffscreenRendererWraper as OffscreenRenderer }
