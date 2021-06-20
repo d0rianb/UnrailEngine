@@ -80,10 +80,10 @@ Event.onClick(({ x, y }) => {
     const [X, Y] = [Math.floor(x / cellWidth), Math.floor(y / cellWidth)]
     if (X > 2 && Y > 2) return
     const cell = grid.get(X, Y)
-    if (cell.state) return
+    if (!cell || (cell && cell.state)) return
     const filledCells = grid.cells.filter(cell => cell.state).length
-    if (cell && filledCells % 2 == 0) cell.state = 'cross'
-    else if (cell && filledCells % 2 == 1) cell.state = 'circle'
+    if (filledCells % 2 == 0) cell.state = 'cross'
+    else if (filledCells % 2 == 1) cell.state = 'circle'
     let win = checkWins()
     if (win) {
         if ('column' in win) line = { x: (win.column + 1 / 2) * cellWidth, y: cellWidth / 3, x2: (win.column + 1 / 2) * cellWidth, y2: 2 * cellWidth + 2 * cellWidth / 3 }
