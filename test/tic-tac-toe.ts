@@ -1,4 +1,4 @@
-import { Game, Renderer, Event, Grid } from '../src'
+import { Game, OffscreenRenderer as Renderer, Event, Grid } from '../src'
 
 const cellWidth = 400 / 3
 const grid = new Grid(3, 3)
