@@ -140,7 +140,6 @@ class OffscreenRenderer {
     }
 }
 
+const OffscreenRendererWrapper = ApiIsSupported('OffscreenCanvas') ? OffscreenRenderer : Renderer
 
-const OffscreenRendererWraper = ApiIsSupported('OffscreenCanvas') ? OffscreenRenderer : Renderer
-
-export { OffscreenRendererWraper as OffscreenRenderer }
+export { OffscreenRendererWrapper as OffscreenRenderer }

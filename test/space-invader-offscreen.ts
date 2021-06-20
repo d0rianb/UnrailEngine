@@ -183,7 +183,7 @@ class Env extends GameEnvironement {
         this.shots.forEach(shot => shot.render())
         this.enemies.forEach(enemy => enemy.render())
         this.particles.forEach(particle => particle.render())
-        // rendererObjetNumber = Renderer.renderStack.length
+        rendererObjetNumber = 0
         Renderer.endFrame()
     }
 }

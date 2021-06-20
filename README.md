@@ -21,6 +21,7 @@ III - [Uses](#uses)<br>
 
 ## <a name="getting-started"></a>Getting Started
 ### Installation
+#### Via `<script>`
 To import the engine, you can include the script in your `index.html` file : 
 
 ```html
@@ -32,7 +33,7 @@ Then import it like a regular moduel in your `.js` file :
 import { /* Stuff you need */ } from './unrail-engine/dist/unrail-engine.es.js'
 ```
 
-or via [NPM](https://www.npmjs.com/package/unrail-engine): 
+#### Via [NPM](https://www.npmjs.com/package/unrail-engine): 
 ```bash
 npm i --save unrail-engine
 ```

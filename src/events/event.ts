@@ -45,11 +45,15 @@ class Event {
         ES.addEvent(new Event(name, callback, EventType.KeyboardPressed))
     }
 
-    static onMouseClick(callback: MouseCallback) {
+    static onClick(callback: MouseCallback): void {
+        Event.onMouseClick(callback)
+    }
+
+    static onMouseClick(callback: MouseCallback): void {
         ES.addEvent(new Event('click', callback, EventType.Mouse))
     }
 
-    static onMouseMove(callback: MouseCallback) {
+    static onMouseMove(callback: MouseCallback): void {
         ES.addEvent(new Event('mousemove', callback, EventType.Mouse))
     }
 }

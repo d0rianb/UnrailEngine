@@ -36,8 +36,7 @@ function adaptCanvasToDevicePixelRatio(canvas: HTMLCanvasElement, width?: number
 
 function insertCanvas(canvas: HTMLCanvasElement, el: string): void {
     window.addEventListener('DOMContentLoaded', () => {
-        let element = document.querySelector(el)
-        if (!element) element = document.createElement(el)
+        const element = document.querySelector(el) ?? document.createElement(el)
         element.appendChild(canvas)
         document.querySelector('body')!.appendChild(element)
     })

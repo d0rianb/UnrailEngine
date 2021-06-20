@@ -10,6 +10,7 @@ interface StyleObject {
     strokeStyle?: string,
     lineWidth?: number,
     lineJoin?: CanvasLineJoin,
+    lineCap?: CanvasLineCap,
     fillStyle?: string,
     globalAlpha?: number
     globalCompositeOperation?: string
@@ -26,6 +27,7 @@ const defaultStyleObject: StyleObject = {
     strokeStyle: 'black',
     lineWidth: 2,
     lineJoin: 'round',
+    lineCap: 'round',
     fillStyle: 'transparent',
     globalAlpha: 1,
     globalCompositeOperation: 'add'

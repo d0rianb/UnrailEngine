@@ -5,15 +5,7 @@ interface NeihboorObject {
     left?: Cell
 }
 
-
-// TODO: Remove 
-enum CellType {
-    Turret,
-    Road,
-    Ground,
-    Empty
-}
-
+// TODO : rename this class AbstractGrid
 // TODO: add properties scope
 class Grid {
     rows: number
@@ -56,13 +48,21 @@ class Grid {
         this.cells[this.cells.indexOf(newCell)] = newCell
     }
 
-    defineNeighboors() {
+    defineNeighboors(): void {
         this.cells.forEach(cell => {
             cell.neighboor.top = cell.y >= 1 ? this.cells.filter(othercell => othercell.x <= cell.x && othercell.x + othercell.width > cell.x && othercell.y === cell.y - cell.height)[0] : null
             cell.neighboor.bottom = cell.y <= this.rows - 1 ? this.cells.filter(othercell => othercell.x <= cell.x && othercell.x + othercell.width > cell.x && othercell.y === cell.y + cell.height)[0] : null
             cell.neighboor.left = cell.x >= 1 ? this.cells.filter(othercell => othercell.y <= cell.y && othercell.y + othercell.height > cell.y && othercell.x === cell.x - cell.width)[0] : null
             cell.neighboor.right = cell.x <= this.cols - 1 ? this.cells.filter(othercell => othercell.y <= cell.y && othercell.y + othercell.height > cell.y && othercell.x === cell.x + cell.width)[0] : null
         })
+    }
+
+    get(x, y): Cell {
+        return this.cells[x * this.cols + y]
+    }
+
+    clear(): void {
+        this.cells.forEach(cell => cell.state = null)
     }
 
 }
@@ -72,8 +72,7 @@ class Cell {
     y: number
     width: number
     height: number
-    highlight: boolean
-    type: CellType
+    state: any // can be use for any purpose
     neighboor: NeihboorObject
 
     constructor(x: number, y: number, width = 1, height = 1) {
@@ -81,14 +80,9 @@ class Cell {
         this.y = y
         this.width = width
         this.height = height
-        this.highlight = false
-        this.type = CellType.Ground
+        this.state = null
         this.neighboor = {}
-    }
-
-    toggleHighlight() {
-        this.highlight = !this.highlight
     }
 }
 
-export { Grid, Cell, CellType }
+export { Grid, Cell }
