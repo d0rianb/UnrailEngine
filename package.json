@@ -2,8 +2,8 @@
     "name": "unrail-engine",
     "version": "0.4.7",
     "description": "A lightweight 2D game engine written in typescript",
-    "main": "./dist/unrail-engine.umd.js",
-    "module": "./dist/unrail-engine.es.js",
+    "main": "dist/unrail-engine.umd.js",
+    "module": "dist/unrail-engine.es.js",
     "files": [
         "dist",
         "src"
@@ -11,7 +11,7 @@
     "types": "dist/unrail-engine.d.ts",
     "scripts": {
         "dev": "vite .",
-        "build": "vite build && npm run build-declaration && npm run docs",
+        "build": "vite build && npm run build-declaration",
         "build-declaration": "rollup -c",
         "serve": "vite preview",
         "docs": "npx typedoc --tsconfig .",

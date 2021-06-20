@@ -21,7 +21,7 @@ class Animation {
     public easing: EasingFunction
     public options: AnimationOptions
     public value: number
-    private hasStarted: boolean = false
+    public hasStarted: boolean = false
     private isPaused: boolean = false
     private isEnded: boolean = false
     private isReversed: boolean = false
@@ -86,7 +86,7 @@ class Animation {
     }
 
     get isRunning(): boolean {
-        return !(this.isEnded || this.isPaused)
+        return this.hasStarted && !(this.isEnded || this.isPaused)
     }
 }
 

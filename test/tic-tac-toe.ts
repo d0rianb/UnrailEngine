@@ -1,9 +1,10 @@
-import { Game, OffscreenRenderer as Renderer, Event, Grid } from '../src'
+import { Game, OffscreenRenderer as Renderer, Event, Grid, Animation } from '../src'
 
 const cellWidth = 400 / 3
 const grid = new Grid(3, 3)
 const game = new Game('Tic Tac Toe')
 let line = null
+let lineAnimation = new Animation(0, 1, 1000, 'smoothStep')
 
 function cross(x, y) {
     const padding = cellWidth / 4
@@ -67,7 +68,7 @@ function render() {
         cell.state && cell.state == 'circle' && Renderer.circle(cell.x * cellWidth + cellWidth / 2, cell.y * cellWidth + cellWidth / 2, cell.width * cellWidth / 3)
         cell.state && cell.state == 'cross' && cross(cell.x * cellWidth, cell.y * cellWidth)
     }
-    if (line) Renderer.line(line.x, line.y, line.x2, line.y2, { strokeStyle: 'red', lineWidth: 6 })
+    if (line) Renderer.line(line.x, line.y, line.x + (line.x2 - line.x) * lineAnimation.value, line.y + (line.y2 - line.y) * lineAnimation.value, { strokeStyle: 'red', lineWidth: 6 })
     Renderer.endFrame()
 }
 
@@ -86,6 +87,7 @@ Event.onClick(({ x, y }) => {
     else if (filledCells % 2 == 1) cell.state = 'circle'
     let win = checkWins()
     if (win) {
+        if (!lineAnimation.hasStarted) lineAnimation.start()
         if ('column' in win) line = { x: (win.column + 1 / 2) * cellWidth, y: cellWidth / 3, x2: (win.column + 1 / 2) * cellWidth, y2: 2 * cellWidth + 2 * cellWidth / 3 }
         else if ('row' in win) line = { x: cellWidth / 3, y: (win.row + 1 / 2) * cellWidth, x2: 2 * cellWidth + 2 * cellWidth / 3, y2: (win.row + 1 / 2) * cellWidth }
         else if ('diagonal' in win && win.diagonal == 1) line = { x: cellWidth / 3, y: cellWidth / 3, x2: 2 * cellWidth + 2 / 3 * cellWidth, y2: 2 * cellWidth + 2 / 3 * cellWidth }
