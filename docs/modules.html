@@ -2840,6 +2840,9 @@ img {
 			<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 				<h3>Installation</h3>
 			</a>
+			<a href="#via-ltscriptgt" id="via-ltscriptgt" style="color: inherit; text-decoration: none;">
+				<h4>Via <code>&lt;script&gt;</code></h4>
+			</a>
 			<p>To import the engine, you can include the script in your <code>index.html</code> file : </p>
 			<pre><code class="language-html"><span style="color: #008000">&lt;!-- Production minified ~10kB gzipped --&gt;</span>
 <span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;module&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;./unrail-engine.es.js&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">defer</span><span style="color: #800000">&gt;&lt;/script&gt;</span><span style="color: #000000"> </span>
@@ -2847,7 +2850,9 @@ img {
 			<p>Then import it like a regular moduel in your <code>.js</code> file : </p>
 			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #008000">/* Stuff you need */</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./unrail-engine/dist/unrail-engine.es.js&#039;</span>
 </code></pre>
-			<p>or via <a href="https://www.npmjs.com/package/unrail-engine">NPM</a>: </p>
+			<a href="#via-npm" id="via-npm" style="color: inherit; text-decoration: none;">
+				<h4>Via <a href="https://www.npmjs.com/package/unrail-engine">NPM</a>:</h4>
+			</a>
 			<pre><code class="language-bash"><span style="color: #000000">npm i --save unrail-engine</span>
 </code></pre>
 			<p>and import it as an ES module : (the types are included in the package)</p>
@@ -3041,7 +3046,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Point<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L35">core/math.ts:35</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L35">core/math.ts:35</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3054,7 +3059,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = {}</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/config/index.ts#L3">config/index.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/config/index.ts#L3">config/index.ts:3</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -3069,7 +3074,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Easing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>easeIn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInOutBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeOutBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>linear<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>smoothStep<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>smootherStep<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/animation/easing.ts#L3">animation/easing.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/animation/easing.ts#L3">animation/easing.ts:3</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -3273,7 +3278,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Offscreen<wbr>Renderer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="classes/renderer.html" class="tsd-signature-type" data-tsd-kind="Class">Renderer</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">OffscreenRenderer</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/render/offscreen-renderer/index.ts#L144">render/offscreen-renderer/index.ts:144</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/offscreen-renderer/index.ts#L143">render/offscreen-renderer/index.ts:143</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3283,7 +3288,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Point<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L36">core/math.ts:36</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L36">core/math.ts:36</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3293,7 +3298,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">VERSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/index.ts#L20">index.ts:20</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/index.ts#L20">index.ts:20</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3303,7 +3308,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">V_<wbr>NULL<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L38">core/math.ts:38</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L38">core/math.ts:38</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3313,7 +3318,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">V_<wbr>UNIT<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L39">core/math.ts:39</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L39">core/math.ts:39</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3330,7 +3335,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/helpers/utils.ts#L25">helpers/utils.ts:25</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/helpers/utils.ts#L25">helpers/utils.ts:25</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3360,7 +3365,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/geometry.ts#L23">core/geometry.ts:23</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/geometry.ts#L23">core/geometry.ts:23</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3392,7 +3397,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/helpers/utils.ts#L1">helpers/utils.ts:1</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/helpers/utils.ts#L1">helpers/utils.ts:1</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3421,7 +3426,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L41">core/math.ts:41</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L41">core/math.ts:41</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3450,7 +3455,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/geometry.ts#L14">core/geometry.ts:14</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/geometry.ts#L14">core/geometry.ts:14</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3482,7 +3487,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/geometry.ts#L10">core/geometry.ts:10</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/geometry.ts#L10">core/geometry.ts:10</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3505,7 +3510,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/geometry.ts#L6">core/geometry.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/geometry.ts#L6">core/geometry.ts:6</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SizeObject</span></h4>
@@ -3522,7 +3527,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/helpers/utils.ts#L12">helpers/utils.ts:12</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/helpers/utils.ts#L12">helpers/utils.ts:12</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3545,7 +3550,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/math.ts#L45">core/math.ts:45</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L45">core/math.ts:45</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3574,7 +3579,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/core/geometry.ts#L37">core/geometry.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/geometry.ts#L37">core/geometry.ts:37</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3600,7 +3605,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/helpers/utils.ts#L6">helpers/utils.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/helpers/utils.ts#L6">helpers/utils.ts:6</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -3617,7 +3622,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/2c117e3/src/helpers/utils.ts#L21">helpers/utils.ts:21</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/helpers/utils.ts#L21">helpers/utils.ts:21</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>

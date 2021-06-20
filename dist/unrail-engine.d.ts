@@ -123,12 +123,6 @@ interface NeihboorObject {
     bottom?: Cell;
     left?: Cell;
 }
-declare enum CellType {
-    Turret = 0,
-    Road = 1,
-    Ground = 2,
-    Empty = 3
-}
 declare class Grid {
     rows: number;
     cols: number;
@@ -138,17 +132,17 @@ declare class Grid {
     createCells(): void;
     updateCell(newCell: Cell): void;
     defineNeighboors(): void;
+    get(x: any, y: any): Cell;
+    clear(): void;
 }
 declare class Cell {
     x: number;
     y: number;
     width: number;
     height: number;
-    highlight: boolean;
-    type: CellType;
+    state: any;
     neighboor: NeihboorObject;
     constructor(x: number, y: number, width?: number, height?: number);
-    toggleHighlight(): void;
 }
 
 declare type EasingFunction = (t: number) => number;
@@ -213,6 +207,7 @@ declare class Event {
     static on(name: string, callback: Function): void;
     static onKeyDown(name: string, callback: KeyboardEventCallback): void;
     static onKeyPressed(name: string, callback: KeyboardEventCallback): void;
+    static onClick(callback: MouseCallback): void;
     static onMouseClick(callback: MouseCallback): void;
     static onMouseMove(callback: MouseCallback): void;
 }
@@ -246,6 +241,7 @@ interface StyleObject {
     strokeStyle?: string;
     lineWidth?: number;
     lineJoin?: CanvasLineJoin;
+    lineCap?: CanvasLineCap;
     fillStyle?: string;
     globalAlpha?: number;
     globalCompositeOperation?: string;
@@ -313,7 +309,7 @@ declare class OffscreenRenderer {
     static beginFrame(color?: string): void;
     static endFrame(): void;
 }
-declare const OffscreenRendererWraper: typeof Renderer | typeof OffscreenRenderer;
+declare const OffscreenRendererWrapper: typeof Renderer | typeof OffscreenRenderer;
 
 interface InterfaceItem {
     callback(game?: Game): string;
@@ -343,4 +339,4 @@ declare const Config: {};
 
 declare const VERSION: string;
 
-export { Animation, AnimationOptions, ApiIsSupported, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWraper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now };
+export { Animation, AnimationOptions, ApiIsSupported, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWrapper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now };
