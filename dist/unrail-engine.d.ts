@@ -171,7 +171,7 @@ declare class Animation {
     easing: EasingFunction;
     options: AnimationOptions;
     value: number;
-    private hasStarted;
+    hasStarted: boolean;
     private isPaused;
     private isEnded;
     private isReversed;

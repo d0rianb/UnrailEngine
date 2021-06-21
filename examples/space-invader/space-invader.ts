@@ -15,7 +15,7 @@ import {
     Interface,
     OffscreenRenderer as Renderer,
     Texture
-} from '../../src'
+} from '../../dist/unrail-engine.es.js'
 
 let paused: boolean = false
 

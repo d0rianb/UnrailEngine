@@ -1,4 +1,4 @@
-import { Game, OffscreenRenderer as Renderer, Event, Grid, Animation } from '../../src'
+import { Game, OffscreenRenderer as Renderer, Event, Grid, Animation } from '../../dist/unrail-engine.es.js'
 
 const cellWidth = 400 / 3
 const grid = new Grid(3, 3)

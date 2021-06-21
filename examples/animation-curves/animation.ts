@@ -1,4 +1,4 @@
-import { Animation, Easing, Game, getWindowDimensions, Interface, Renderer } from '../../src'
+import { Animation, Easing, Game, getWindowDimensions, Interface, Renderer } from '../../dist/unrail-engine.es.js'
 
 const { width, height } = getWindowDimensions()
 const NB_TEST = 4
