@@ -16,7 +16,7 @@ The engine is written using test driven development. Currently there is no test 
 
 I   - [Getting Started](#getting-started)<br>
 II  - [Documentation](#documentation)<br>
-III - [Uses](#uses)<br>
+III - [Examples](#examples)<br>
 
 
 ## <a name="getting-started"></a>Getting Started
@@ -65,7 +65,7 @@ game.setMainLoop(update)
 Then just call `game.start()` and there you go.
 ## <a name="documentation"></a>Documentation
 
-> The full documentation is available [here](https://d0rianb.github.io/UnrailEngine/).
+> The full documentation is available [here](https://d0rianb.github.io/UnrailEngine/docs).
 
 All the entities are built around two methods : `update` and `render`. The `update` method is used to handle the logic of the entity and the `render` method aims at doing the rendering job and should only use the `Renderer` static methods.
 
@@ -151,7 +151,10 @@ Interface.addItem(() => `Value : ${value}`, position, { CSSproperties })
 Interface.addItem(() => `Iteration : ${i++}`, 'top-left', { color: '#999' })
 ```
 
-## <a name="uses"></a>Example
+## <a name="examples"></a>Examples
+- Space Invader : [Code](./examples/space-invader/space-invader.ts) | [Demo](https://d0rianb.github.io/UnrailEngine/examples/space-invader/index.html)
+- Tic-Tac-Toe : [Code](./examples/tic-tac-toe/tic-tac-toe.ts) | [Demo](https://d0rianb.github.io/UnrailEngine/examples/tic-tac-toe/index.html)
+- Animation : [Code](./examples/animation-curves/animation.ts) | [Demo](https://d0rianb.github.io/UnrailEngine/examples/animation-curves/index.html)
 - The [Swatch Demo](https://github.com/d0rianb/SwatchDemo) uses the UnrailEngine for rendering & handling the update loop.
 - The [TowerDefenseGame](https://github.com/d0rianb/TowerDefenseGame) & [Run&Gun](https://github.com/d0rianb/RunAndGun) will soon use the UnrailEngine too.
 

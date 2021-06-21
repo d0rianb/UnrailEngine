@@ -1,4 +1,4 @@
-import { Game, OffscreenRenderer as Renderer, Event, Grid, Animation } from '../src'
+import { Game, OffscreenRenderer as Renderer, Event, Grid, Animation } from '../../src'
 
 const cellWidth = 400 / 3
 const grid = new Grid(3, 3)
@@ -75,6 +75,7 @@ function render() {
 function reset() {
     line = null
     grid.clear()
+    lineAnimation.reset()
 }
 
 Event.onClick(({ x, y }) => {
