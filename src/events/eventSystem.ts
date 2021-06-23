@@ -4,12 +4,12 @@ type Callback = (this: Window, ev: any) => any
 
 // TODO: move the keyboardEvents in its own file
 class EventSystem {
-    windowEvents: Array<Event>
-    customEvents: Array<Event>
-    mouseEvents: Array<Event>
-    keyboardDownEvents: Array<Event>
-    keyboardPressedEvents: Array<Event>
-    currentKeyEvents: Array<KeyboardEvent>
+    private windowEvents: Array<Event>
+    private customEvents: Array<Event>
+    private mouseEvents: Array<Event>
+    private keyboardDownEvents: Array<Event>
+    private keyboardPressedEvents: Array<Event>
+    private currentKeyEvents: Array<KeyboardEvent>
 
     constructor() {
         this.windowEvents = []
@@ -22,7 +22,7 @@ class EventSystem {
     }
 
     // Need the window variable to be defined
-    init(): void {
+    public init(): void {
         window.addEventListener('keydown', e => {
             if (!this.currentKeyEvents.find(event => event.code === e.code)) {
                 this.currentKeyEvents.push(e)
@@ -40,7 +40,7 @@ class EventSystem {
         this.bindEvents()
     }
 
-    addEvent(e: Event): void {
+    public addEvent(e: Event): void {
         switch (e.type) {
             case EventType.KeyboardDown:
                 this.keyboardDownEvents.push(e)
@@ -62,16 +62,16 @@ class EventSystem {
         }
     }
 
-    getCustomEvent(name: string): Event | undefined {
+    public getCustomEvent(name: string): Event | undefined {
         return this.customEvents.find(e => e.name === name)
     }
 
-    bindEvents(): void {
+    private bindEvents(): void {
         // TODO: check if event exist on window
         this.windowEvents.forEach(event => window.addEventListener(event.name as any, event.callback as Callback))
     }
 
-    tick(): void {
+    public tick(): void {
         if (!this.currentKeyEvents.length) return
         this.keyboardDownEvents.forEach(keyEvent => {
             this.currentKeyEvents.forEach(e => {

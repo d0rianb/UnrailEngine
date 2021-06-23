@@ -21,11 +21,11 @@ type ItemPosition = typeof itemPositions[number] // Type itemPositions
 
 class Interface {
 
-    static addItem(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions): void {
+    public static addItem(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions): void {
         Interface.internalAddItem(callback, position, options)
     }
 
-    static addButton(callback: InterfaceTextFunction, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void {
+    public static addButton(callback: InterfaceTextFunction, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void {
         Interface.internalAddItem(callback, position, options, onClick)
     }
 
@@ -36,7 +36,7 @@ class Interface {
         window.addEventListener('load', () => Interface.addToDom(item, index))
     }
 
-    static init(): void {
+    public static init(): void {
         Interface.addStyle(CSSstyle.default)
         const container: HTMLDivElement = document.createElement('div')
         container.classList.add('ue-interface', 'ue-container')
@@ -48,13 +48,13 @@ class Interface {
         document.body.appendChild(container)
     }
 
-    static addStyle(style: string): void {
+    private static addStyle(style: string): void {
         const styleElement: HTMLStyleElement = document.createElement('style')
         styleElement.textContent = style
         document.head.append(styleElement)
     }
 
-    static addToDom(item: InterfaceItem, index: number): void {
+    private static addToDom(item: InterfaceItem, index: number): void {
         const value: string = item.callback()
         const element: HTMLSpanElement = document.createElement('span')
         element.classList.add('ue-interface-items')
@@ -69,7 +69,7 @@ class Interface {
         }
     }
 
-    static update(): void {
+    public static update(): void {
         items.forEach((item, i) => {
             const value: string = item.callback()
             const element: HTMLSpanElement | null = document.querySelector(`.ue-interface #item-${i + 1}`)
@@ -80,18 +80,18 @@ class Interface {
     }
 
     // height is a css property
-    static statsShift(height: number): void {
+    public static statsShift(height: number): void {
         const TLContainer: HTMLElement | null = document.querySelector('.top-left')
         if (TLContainer) {
             TLContainer.style.top = `${height}px`
         }
     }
 
-    static setUpdateInterval(rate: number): void {
+    public static setUpdateInterval(rate: number): void {
         updateInterval = rate
     }
 
-    static get updateInterval(): number {
+    public static get updateInterval(): number {
         return updateInterval
     }
 

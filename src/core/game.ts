@@ -2,7 +2,7 @@ import { Env } from './env'
 import { ES } from '@/events/event'
 import { AS } from '@/animation/animationSystem'
 import { showStats, Stats } from './stats'
-import { Interface } from '@/render'
+import { Interface, OffscreenRenderer, Renderer } from '@/render'
 import { AnimationFrame } from './animationFrame'
 
 type RendererType = 'normal' | 'offscreen'
@@ -30,15 +30,15 @@ class Game {
         this.fps = fps
     }
 
-    static setRendererType(type: RendererType) {
+    public static setRendererType(type: RendererType) {
         rendererType = type
     }
 
-    static get rendererType(): RendererType {
-        return rendererType as RendererType
+    public static get renderer(): typeof Renderer | typeof OffscreenRenderer {
+        return rendererType === 'normal' ? Renderer : OffscreenRenderer
     }
 
-    toggleStats(show?: boolean): void {
+    public toggleStats(show?: boolean): void {
         if (show !== undefined) {
             this.showStatsPanel = show
         } else {
@@ -56,17 +56,17 @@ class Game {
         this.animationFrame = new AnimationFrame(deltaTime => this.update(deltaTime), this.fps)
     }
 
-    setMainLoop(func: Function): void {
+    public setMainLoop(func: Function): void {
         this.gameLoop = func
         this.makeAnimationFrame()
     }
 
-    setFPS(fps: number) {
+    public setFPS(fps: number) {
         this.fps = fps
         this.makeAnimationFrame()
     }
 
-    update(deltaTime: number): void {
+    private update(deltaTime: number): void {
         this.stats?.begin()
         ES.tick()
         AS.tick(deltaTime)
@@ -76,7 +76,7 @@ class Game {
         this.tick++
     }
 
-    start(): void {
+    public start(): void {
         if (!this.gameLoop) throw new Error('No game loop')
         if (!this.animationFrame) throw new Error('AnimationFrame')
 

@@ -1,7 +1,6 @@
 import Stats from 'stats.js'
 import { Interface } from '../render'
 
-
 function showStats(): Stats {
     const stats: Stats = new Stats()
     const el: HTMLDivElement = document.createElement('div')

@@ -1,22 +1,29 @@
 import { Vector2, V_UNIT, V_NULL } from '@/core/math'
 import { isWorker } from '@/helpers/utils'
 
-interface TextureOptions {
-    rotation?: number, // radians
-    offset?: Vector2,
-    scale?: Vector2
+class TextureOptions {
+    public rotation?: number // radians
+    public offset?: Vector2
+    public scale?: Vector2
+
+    public static from(texture: Texture): TextureOptions {
+        return {
+            rotation: texture?.rotation,
+            offset: texture?.offset,
+            scale: texture?.scale,
+        } as TextureOptions
+    }
 }
 
 let textureId: number = 0
 
 class Texture {
-    id: number
-    image: HTMLImageElement
-    rotation: number
-    offset: Vector2
-    size: Vector2
-    scale: Vector2
-    options: TextureOptions
+    public id: number
+    public image: HTMLImageElement
+    public rotation: number
+    public offset: Vector2
+    public size: Vector2
+    public scale: Vector2
 
     constructor(source: string, options?: TextureOptions) {
         if (!source) throw new Error('A source path to the resource must be provided')
@@ -24,19 +31,19 @@ class Texture {
         this.image = new Image()
         this.image.src = source
         this.size = new Vector2(this.image.width, this.image.height)
-        this.options = options || {}
-        this.rotation = this.options.rotation || 0
-        this.offset = this.options.offset || V_NULL // relative to the size
-        this.scale = this.options.scale || V_UNIT
+        this.rotation = options?.rotation || 0
+        this.offset = options?.offset || V_NULL // relative to the size
+        this.scale = options?.scale || V_UNIT
     }
 
     // Create Bitmap image for worker 
-    async convertToBitmap(): Promise<Texture> | null {
+    public async convertToBitmap(): Promise<Texture> | null {
         if (!this.image.width || !this.image.height) return
         const image: ImageBitmap = await createImageBitmap(this.image)
         return { ...this, image } as Texture
     }
 }
+
 
 class Sprite extends Texture {
     constructor(source: string, options?: TextureOptions) {
@@ -44,4 +51,4 @@ class Sprite extends Texture {
     }
 }
 
-export { Sprite, Texture }
+export { Sprite, Texture, TextureOptions }

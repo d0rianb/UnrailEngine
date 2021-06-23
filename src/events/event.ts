@@ -1,17 +1,15 @@
 import { EventSystem } from './eventSystem'
 
-enum EventType {
-    KeyboardPressed, KeyboardDown, Mouse, Window, Custom, All
-}
+enum EventType { KeyboardPressed, KeyboardDown, Mouse, Window, Custom, All }
 
 type KeyboardEventCallback = (e: KeyboardEvent) => any
 type MouseCallback = (e: MouseEvent) => any
 
 class Event {
-    name: string
-    callback: Function // TODO: properly define callback type
-    listeners: Array<Function>
-    type: EventType
+    public name: string
+    public callback: Function // TODO: properly define callback type
+    public listeners: Array<Function>
+    public type: EventType
 
     constructor(name: string, callback: Function, type: EventType = EventType.Custom) {
         this.name = name
@@ -20,14 +18,14 @@ class Event {
         this.listeners = [this.callback]
     }
 
-    static emit(name: string, params?: any): void {
+    public static emit(name: string, params?: any): void {
         const event: Event = ES.getCustomEvent(name)
         if (event) {
             event.listeners.forEach(callback => callback(params))
         }
     }
 
-    static on(name: string, callback: Function): void {
+    public static on(name: string, callback: Function): void {
         const existingEvent: Event = ES.getCustomEvent(name)
         if (existingEvent) {
             existingEvent.listeners.push(callback)
@@ -37,23 +35,23 @@ class Event {
         }
     }
 
-    static onKeyDown(name: string, callback: KeyboardEventCallback): void {
+    public static onKeyDown(name: string, callback: KeyboardEventCallback): void {
         ES.addEvent(new Event(name, callback, EventType.KeyboardDown))
     }
 
-    static onKeyPressed(name: string, callback: KeyboardEventCallback): void {
+    public static onKeyPressed(name: string, callback: KeyboardEventCallback): void {
         ES.addEvent(new Event(name, callback, EventType.KeyboardPressed))
     }
 
-    static onClick(callback: MouseCallback): void {
+    public static onClick(callback: MouseCallback): void {
         Event.onMouseClick(callback)
     }
 
-    static onMouseClick(callback: MouseCallback): void {
+    public static onMouseClick(callback: MouseCallback): void {
         ES.addEvent(new Event('click', callback, EventType.Mouse))
     }
 
-    static onMouseMove(callback: MouseCallback): void {
+    public static onMouseMove(callback: MouseCallback): void {
         ES.addEvent(new Event('mousemove', callback, EventType.Mouse))
     }
 }

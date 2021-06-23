@@ -53,7 +53,7 @@ let lastStyleObject: StyleObject
 class Renderer {
 
     // Create a canvas and insert it to <main>
-    static create(width?: number, height?: number): HTMLCanvasElement {
+    public static create(width?: number, height?: number): HTMLCanvasElement {
         let [windowWidth, windowHeight] = [getWindowDimensions().width, getWindowDimensions().height]
         const canvas: HTMLCanvasElement = createCanvas(width || windowWidth, height || windowHeight)
         insertCanvas(canvas, 'main')
@@ -61,7 +61,7 @@ class Renderer {
         return canvas
     }
 
-    static createFromCanvas(selector: string): HTMLCanvasElement {
+    public static createFromCanvas(selector: string): HTMLCanvasElement {
         let canvas = document.querySelector(selector)
         if (!canvas || !(canvas instanceof HTMLCanvasElement)) throw new RendererError('The selected element is not a canvas')
         adaptCanvasToDevicePixelRatio(canvas)
@@ -69,15 +69,15 @@ class Renderer {
         return canvas
     }
 
-    static setContext(context: CanvasRenderContext): void {
+    public static setContext(context: CanvasRenderContext): void {
         ctx = context
     }
 
-    static getContext(): CanvasRenderContext {
+    public static getContext(): CanvasRenderContext {
         return ctx
     }
 
-    static style(obj?: StyleObject): void {
+    public static style(obj?: StyleObject): void {
         if (!ctx) throw new RendererError('Context has not been initialize. Please use Renderer.setContext')
         const styleObject = { ...defaultStyleObject, ...obj }
         if (styleObject === lastStyleObject) return
@@ -89,7 +89,7 @@ class Renderer {
         lastStyleObject = styleObject
     }
 
-    static clear(color?: string): void {
+    public static clear(color?: string): void {
         if (color) {
             Renderer.style({ fillStyle: color })
             ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
@@ -98,7 +98,7 @@ class Renderer {
         }
     }
 
-    static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void {
+    public static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void {
         Renderer.style(obj)
         ctx.beginPath()
         ctx.moveTo(round(x1), round(y1))
@@ -107,7 +107,7 @@ class Renderer {
     }
 
     /* Draw a rect from its top-left corner */
-    static rect(x: number, y: number, width: number, height: number, obj?: StyleObject): void {
+    public static rect(x: number, y: number, width: number, height: number, obj?: StyleObject): void {
         Renderer.style(obj)
         const [r_x, r_y, r_w, r_h] = [round(x), round(y), round(width), round(height)]
         ctx.fillRect(r_x, r_y, r_w, r_h)
@@ -115,17 +115,17 @@ class Renderer {
     }
 
     /* Draw a rect from its center */
-    static rectFromCenter(x: number, y: number, width: number, height: number, obj?: StyleObject): void {
+    public static rectFromCenter(x: number, y: number, width: number, height: number, obj?: StyleObject): void {
         return Renderer.rect(x - width / 2, y - height / 2, width, height, obj)
     }
 
     /* Draw a rect from its top-left corner to its bottom-right corner */
-    static rectFromPoints(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void {
+    public static rectFromPoints(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void {
         return Renderer.rect(x1, y1, x2 - x1, y2 - y1, obj)
     }
 
 
-    static poly(points: Array<Point>, obj?: StyleObject): void {
+    public static poly(points: Array<Point>, obj?: StyleObject): void {
         if (!points.length) return
         Renderer.style(obj)
         ctx.beginPath()
@@ -136,7 +136,7 @@ class Renderer {
         ctx.stroke()
     }
 
-    static circle(x: number, y: number, radius: number, obj?: StyleObject): void {
+    public static circle(x: number, y: number, radius: number, obj?: StyleObject): void {
         Renderer.style(obj)
         ctx.beginPath()
         ctx.arc(round(x), round(y), radius, 0, TWOPI)
@@ -145,15 +145,15 @@ class Renderer {
     }
 
     /* Draw the circle included in the rect */
-    static circleFromRect(x: number, y: number, width: number, height: number, obj: StyleObject): void {
+    public static circleFromRect(x: number, y: number, width: number, height: number, obj: StyleObject): void {
         return Renderer.circle(x + width / 2, y + height / 2, Math.min(width, height) / 2, obj)
     }
 
-    static point(x: number, y: number, obj?: StyleObject): void {
+    public static point(x: number, y: number, obj?: StyleObject): void {
         Renderer.circle(x, y, 5, obj)
     }
 
-    static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
+    public static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
         Renderer.style({})
         ctx.save()
         ctx.translate(round(x + width / 2), round(y + height / 2))
@@ -169,7 +169,7 @@ class Renderer {
         ctx.restore()
     }
 
-    static circleSprite(x: number, y: number, radius: number, texture: Texture): void {
+    public static circleSprite(x: number, y: number, radius: number, texture: Texture): void {
         ctx.save()
         ctx.beginPath()
         ctx.arc(round(x), round(y), radius, 0, TWOPI)
@@ -178,7 +178,7 @@ class Renderer {
         ctx.restore()
     }
 
-    static text(text: string, x: number, y: number, style?: TextStyleObject): void {
+    public static text(text: string, x: number, y: number, style?: TextStyleObject): void {
         if (!!ctx) {
             let styleObject = { ...defaultTextStyleObject, ...style }
             ctx.font = `${styleObject.size}px ${styleObject.font}`
@@ -187,7 +187,7 @@ class Renderer {
         ctx.fillText(text, x, y)
     }
 
-    static tint(color: string, x: number, y: number, width: number, height: number): void {
+    public static tint(color: string, x: number, y: number, width: number, height: number): void {
         Renderer.rect(x, y, width, height, {
             fillStyle: color,
             globalCompositeOperation: 'multiply',
@@ -196,12 +196,12 @@ class Renderer {
     }
 
     // For the compatibility with OffscreenRenderer
-    static beginFrame(color?: string): void {
+    public static beginFrame(color?: string): void {
         Renderer.clear(color)
     }
 
     // For the compatibility with OffscreenRenderer
-    static endFrame(): void { }
+    public static endFrame(): void { }
 }
 
 export { Renderer, StyleObject }

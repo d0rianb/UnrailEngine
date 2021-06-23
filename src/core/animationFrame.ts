@@ -4,9 +4,9 @@ import { now } from '@/helpers/utils'
 type AnimationFunction = (time: number) => any
 
 class AnimationFrame {
-    requestId: number
-    fps: number
-    animate: AnimationFunction
+    private requestId: number
+    public fps: number
+    private animate: AnimationFunction
 
     constructor(animate: AnimationFunction, fps: number = 60) {
         this.requestId = 0

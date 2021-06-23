@@ -1,3 +1,4 @@
+import { Renderer as Renderer$1, OffscreenRenderer as OffscreenRenderer$1 } from '@/render';
 import { Vector2 as Vector2$1, Point as Point$1 } from '@/core/math';
 export { default as Random } from '@dorianb/random-js';
 
@@ -60,12 +61,12 @@ declare class Game {
     private fps;
     constructor(name?: string, env?: Env, fps?: number);
     static setRendererType(type: RendererType): void;
-    static get rendererType(): RendererType;
+    static get renderer(): typeof Renderer$1 | typeof OffscreenRenderer$1;
     toggleStats(show?: boolean): void;
     private makeAnimationFrame;
     setMainLoop(func: Function): void;
     setFPS(fps: number): void;
-    update(deltaTime: number): void;
+    private update;
     start(): void;
 }
 
@@ -129,9 +130,9 @@ declare class Grid {
     cells: Array<Cell>;
     focusCell: Cell;
     constructor(cols: number, rows: number);
-    createCells(): void;
-    updateCell(newCell: Cell): void;
-    defineNeighboors(): void;
+    private createCells;
+    private updateCell;
+    private defineNeighboors;
     get(x: any, y: any): Cell;
     clear(): void;
 }
@@ -141,7 +142,7 @@ declare class Cell {
     width: number;
     height: number;
     state: any;
-    neighboor: NeihboorObject;
+    neighboors: NeihboorObject;
     constructor(x: number, y: number, width?: number, height?: number);
 }
 
@@ -214,15 +215,16 @@ declare class Event {
 
 declare type CooldownCallback = () => any;
 declare class Cooldown {
-    delay: number;
-    callback: CooldownCallback;
+    private delay;
+    private callback;
     constructor(delay: number, callback: CooldownCallback);
 }
 
-interface TextureOptions {
+declare class TextureOptions {
     rotation?: number;
     offset?: Vector2$1;
     scale?: Vector2$1;
+    static from(texture: Texture): TextureOptions;
 }
 declare class Texture {
     id: number;
@@ -231,7 +233,6 @@ declare class Texture {
     offset: Vector2$1;
     size: Vector2$1;
     scale: Vector2$1;
-    options: TextureOptions;
     constructor(source: string, options?: TextureOptions);
     convertToBitmap(): Promise<Texture> | null;
 }
@@ -309,14 +310,8 @@ declare class OffscreenRenderer {
     static beginFrame(color?: string): void;
     static endFrame(): void;
 }
-declare const OffscreenRendererWrapper: typeof Renderer | typeof OffscreenRenderer;
+declare const OffscreenRendererWrapper: typeof OffscreenRenderer | typeof Renderer;
 
-interface InterfaceItem {
-    callback(game?: Game): string;
-    position?: ItemPosition;
-    options?: CSSOptions;
-    onClick?: InterfaceClickCallback;
-}
 declare type CSSOptions = Object;
 declare type InterfaceTextFunction = () => string;
 declare type InterfaceClickCallback = (e: MouseEvent) => any;
@@ -327,8 +322,8 @@ declare class Interface {
     static addButton(callback: InterfaceTextFunction, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void;
     private static internalAddItem;
     static init(): void;
-    static addStyle(style: string): void;
-    static addToDom(item: InterfaceItem, index: number): void;
+    private static addStyle;
+    private static addToDom;
     static update(): void;
     static statsShift(height: number): void;
     static setUpdateInterval(rate: number): void;

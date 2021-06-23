@@ -41,17 +41,17 @@ class Animation {
         AS.add(this)
     }
 
-    start(): void {
+    public start(): void {
         this.isEnded = false
         this.hasStarted = true
     }
 
-    reset(): void {
+    public reset(): void {
         this.lastT = 0
         this.isPaused = false
     }
 
-    toggle(pause?: boolean): void {
+    public toggle(pause?: boolean): void {
         if (pause !== undefined) {
             if (pause) this.pause()
             else this.resume()
@@ -60,15 +60,15 @@ class Animation {
         else this.pause()
     }
 
-    pause(): void {
+    public pause(): void {
         this.isPaused = true
     }
 
-    resume(): void {
+    public resume(): void {
         this.isPaused = false
     }
 
-    update(deltaTime: number): void {
+    public update(deltaTime: number): void {
         if (!this.hasStarted || this.isPaused) return
         // t in  range [0, 1]
         let t = clamp(0, this.lastT + deltaTime * this.speed / Math.abs(this.to - this.from), 1)
@@ -85,7 +85,7 @@ class Animation {
         this.value = this.from + (this.to - this.from) * this.easing(t)
     }
 
-    get isRunning(): boolean {
+    public get isRunning(): boolean {
         return this.hasStarted && !(this.isEnded || this.isPaused)
     }
 }

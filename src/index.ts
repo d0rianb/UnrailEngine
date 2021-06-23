@@ -17,4 +17,4 @@ export * from './events'
 export * from './render'
 export * from './config'
 
-export const VERSION = version
+export const VERSION: string = version

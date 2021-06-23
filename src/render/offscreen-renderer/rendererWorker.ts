@@ -17,7 +17,7 @@ class RendererWorker extends ThreadWorker {
         self.addEventListener('message', ({ data }) => this.onMessage(data.title, data.content))
     }
 
-    onMessage(title: string, content: any) {
+    public onMessage(title: string, content: any) {
         switch (title) {
             case 'initCanvas':
                 this.offscreenCanvas = content.canvas
@@ -32,23 +32,28 @@ class RendererWorker extends ThreadWorker {
                 }
                 break
             case 'newTexture':
-                this.textureAlias[content.id] = content.texture
+                this.textureAlias.set(content.id, content.texture)
+                break
+            case 'updateTexture':
+                this.textureAlias.get(content.id).offset = content.offset
+                this.textureAlias.get(content.id).scale = content.scale
+                this.textureAlias.get(content.id).rotation = content.rotation
                 break
         }
     }
 
-    setSize(dpr, width, height) {
+    private setSize(dpr, width, height) {
         const pixelRatio: number = (dpr || 1) * this.canvasResolution
         this.offscreenCanvas.width = width * pixelRatio
         this.offscreenCanvas.height = height * pixelRatio
         'setTransform' in this.ctx ? this.ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0) : null
     }
 
-    getTexture(textureId: number): Texture {
-        return this.textureAlias[textureId]
+    private getTexture(textureId: number): Texture {
+        return this.textureAlias.get(textureId)
     }
 
-    handleDrawRequest(method: string, args: any) {
+    private handleDrawRequest(method: string, args: any) {
         switch (method) {
             case 'style':
                 Renderer.style(args?.obj)

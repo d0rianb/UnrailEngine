@@ -1,8 +1,8 @@
 type CooldownCallback = () => any
 
 class Cooldown {
-    delay: number // ms
-    callback: CooldownCallback // TODO : add params support
+    private delay: number // ms
+    private callback: CooldownCallback // TODO : add params support
 
     constructor(delay: number, callback: CooldownCallback) {
         this.delay = delay

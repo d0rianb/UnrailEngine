@@ -9,6 +9,7 @@ import { RendererError } from '@/helpers/errors'
 import { ApiIsSupported } from '@/helpers/utils'
 
 import RendererWorker from './rendererWorker?worker&inline'
+import { TextureOptions } from '../texture'
 
 type RenderStack = Array<RenderCall>
 
@@ -22,16 +23,16 @@ const textureAlias: Map<number, Texture> = new Map()
 
 class OffscreenRenderer {
 
-    static get worker() { return worker }
+    public static get worker() { return worker }
 
-    static get workerIsInitialized() { return workerIsInitialized }
+    public static get workerIsInitialized() { return workerIsInitialized }
 
-    static get offscreenCanvas() { return offscreenCanvas }
+    public static get offscreenCanvas() { return offscreenCanvas }
 
-    static get renderStack() { return renderStack }
+    public static get renderStack() { return renderStack }
 
     // Create a canvas and insert it to <main>
-    static create(width?: number, height?: number): HTMLCanvasElement {
+    public static create(width?: number, height?: number): HTMLCanvasElement {
         let [windowWidth, windowHeight] = [getWindowDimensions().width, getWindowDimensions().height]
         canvas = createCanvas(width || windowWidth, height || windowHeight, 1)
         OffscreenRenderer.initRenderWorker(canvas, width || windowWidth, height || windowHeight)
@@ -39,7 +40,7 @@ class OffscreenRenderer {
         return canvas
     }
 
-    static createFromCanvas(selector: string): HTMLCanvasElement {
+    public static createFromCanvas(selector: string): HTMLCanvasElement {
         canvas = document.querySelector(selector)
         if (!canvas || !(canvas instanceof HTMLCanvasElement)) throw new RendererError('The selected element is not a canvas')
         adaptCanvasToDevicePixelRatio(canvas, canvas.clientWidth, canvas.clientHeight, 1)
@@ -47,8 +48,8 @@ class OffscreenRenderer {
         return canvas
     }
 
-    static initRenderWorker(canvas: HTMLCanvasElement, width: number, height: number): void {
-        if (Game.rendererType !== 'offscreen') {
+    public static initRenderWorker(canvas: HTMLCanvasElement, width: number, height: number): void {
+        if (!(Game.renderer instanceof OffscreenRenderer)) {
             Game.setRendererType('offscreen')
         }
         let { clientWidth, clientHeight } = canvas
@@ -73,37 +74,41 @@ class OffscreenRenderer {
         }
     }
 
-    static addRenderCall(name: string, args?: object) {
+    public static addRenderCall(name: string, args?: object) {
         renderStack.push(new RenderCall(name, args || {}))
     }
 
-    static sendMessageToWorker(title: string, data?: any, transfer?: Transferable[]): void {
+    public static sendMessageToWorker(title: string, data?: any, transfer?: Transferable[]): void {
         return worker!.postMessage(new WorkerMessage(title, data), transfer || [])
     }
 
-    static style(obj?: StyleObject): void { this.addRenderCall('style', { obj }) }
+    public static style(obj?: StyleObject): void { this.addRenderCall('style', { obj }) }
 
-    static clear(color?: string): void { this.addRenderCall('clear', { color }) }
+    public static clear(color?: string): void { this.addRenderCall('clear', { color }) }
 
-    static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void { this.addRenderCall('line', { x1, y1, x2, y2, obj }) }
+    public static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void { this.addRenderCall('line', { x1, y1, x2, y2, obj }) }
 
-    static rect(x: number, y: number, width: number, height: number, obj?: StyleObject): void { this.addRenderCall('rect', { x, y, width, height, obj }) }
+    public static rect(x: number, y: number, width: number, height: number, obj?: StyleObject): void { this.addRenderCall('rect', { x, y, width, height, obj }) }
 
-    static rectFromCenter(x: number, y: number, width: number, height: number, obj?: StyleObject): void { this.addRenderCall('rectFromCenter', { x, y, width, height, obj }) }
+    public static rectFromCenter(x: number, y: number, width: number, height: number, obj?: StyleObject): void { this.addRenderCall('rectFromCenter', { x, y, width, height, obj }) }
 
-    static rectFromPoints(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void { this.addRenderCall('rectFromPoints', { x1, y1, x2, y2, obj }) }
+    public static rectFromPoints(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void { this.addRenderCall('rectFromPoints', { x1, y1, x2, y2, obj }) }
 
-    static poly(points: Array<Point>, obj?: StyleObject): void { this.addRenderCall('poly', { points, obj }) }
+    public static poly(points: Array<Point>, obj?: StyleObject): void { this.addRenderCall('poly', { points, obj }) }
 
-    static circle(x: number, y: number, radius: number, obj?: StyleObject): void { this.addRenderCall('circle', { x, y, radius, obj }) }
+    public static circle(x: number, y: number, radius: number, obj?: StyleObject): void { this.addRenderCall('circle', { x, y, radius, obj }) }
 
-    static circleFromRect(x: number, y: number, width: number, height: number, obj: StyleObject): void { this.addRenderCall('circleFromRect', { x, y, width, height, obj }) }
+    public static circleFromRect(x: number, y: number, width: number, height: number, obj: StyleObject): void { this.addRenderCall('circleFromRect', { x, y, width, height, obj }) }
 
-    static point(x: number, y: number, obj?: StyleObject): void { this.addRenderCall('point', { x, y, obj }) }
+    public static point(x: number, y: number, obj?: StyleObject): void { this.addRenderCall('point', { x, y, obj }) }
 
     // texture is only tranfered once to the worker
-    static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
+    public static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
         if (textureAlias.has(texture.id)) {
+            const textureFromAlias: Texture = textureAlias.get(texture.id)
+            if (TextureOptions.from(textureFromAlias) != TextureOptions.from(texture)) {
+                this.sendMessageToWorker('updateTexture', { id: texture.id, scale: texture.scale, rotation: texture.rotation, offset: texture.offset })
+            }
             this.addRenderCall('rectSprite', { x, y, width, height, textureId: texture.id })
         } else {
             texture.convertToBitmap()?.then(adaptedTexture => {
@@ -113,8 +118,13 @@ class OffscreenRenderer {
         }
     }
 
-    static async circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void> {
+    public static async circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void> {
         if (textureAlias.has(texture.id)) {
+            // TODO: duplicate with rectSprite code
+            const textureFromAlias: Texture = textureAlias.get(texture.id)
+            if (TextureOptions.from(textureFromAlias) != TextureOptions.from(texture)) {
+                this.sendMessageToWorker('updateTexture', { id: texture.id, scale: texture.scale, rotation: texture.rotation, offset: texture.offset })
+            }
             this.addRenderCall('circleSprite', { x, y, radius, textureId: texture.id })
         } else {
             texture.convertToBitmap()?.then(adaptedTexture => {
@@ -124,22 +134,22 @@ class OffscreenRenderer {
         }
     }
 
-    static text(text: string, x: number, y: number, font?: string): void { this.addRenderCall('text', { text, x, y, font }) }
+    public static text(text: string, x: number, y: number, font?: string): void { this.addRenderCall('text', { text, x, y, font }) }
 
-    static tint(color: string, x: number, y: number, width: number, height: number): void { this.addRenderCall('circle', { color, x, y, width, height }) }
+    public static tint(color: string, x: number, y: number, width: number, height: number): void { this.addRenderCall('circle', { color, x, y, width, height }) }
 
-    static beginFrame(color?: string): void {
+    public static beginFrame(color?: string): void {
         renderStack = []
         this.clear(color)
     }
 
-    static endFrame(): void {
+    public static endFrame(): void {
         if (!workerIsInitialized) return
         this.sendMessageToWorker('render', { renderStack })
         renderStack = []
     }
 }
 
-const OffscreenRendererWrapper = ApiIsSupported('OffscreenCanvas') ? OffscreenRenderer : Renderer
+const OffscreenRendererWrapper: typeof OffscreenRenderer | typeof Renderer = ApiIsSupported('OffscreenCanvas') ? OffscreenRenderer : Renderer
 
 export { OffscreenRendererWrapper as OffscreenRenderer }

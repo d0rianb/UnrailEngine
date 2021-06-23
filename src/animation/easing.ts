@@ -12,6 +12,7 @@ const Easing = {
     easeInOutBack: t => t < 0.5 ? (Math.pow(2 * t, 2) * ((2.5949095 + 1) * 2 * t - 2.5949095)) / 2 : (Math.pow(2 * t - 2, 2) * ((2.5949095 + 1) * (t * 2 - 2) + 2.5949095) + 2) / 2
 }
 
+// Type for using string as easing functions name
 const easingName: Array<string> = Object.keys(Easing)
 type EasingFunctionName = typeof easingName[number]
 

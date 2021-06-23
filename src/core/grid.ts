@@ -8,10 +8,10 @@ interface NeihboorObject {
 // TODO : rename this class AbstractGrid
 // TODO: add properties scope
 class Grid {
-    rows: number
-    cols: number
-    cells: Array<Cell>
-    focusCell: Cell
+    public rows: number
+    public cols: number
+    public cells: Array<Cell>
+    public focusCell: Cell
 
     constructor(cols: number, rows: number) {
         this.rows = rows
@@ -22,7 +22,7 @@ class Grid {
         this.defineNeighboors()
     }
 
-    createCells() {
+    private createCells() {
         for (let col = 0; col < this.cols; col++) {
             for (let row = 0; row < this.rows; row++) {
                 this.cells.push(new Cell(col, row))
@@ -30,7 +30,7 @@ class Grid {
         }
     }
 
-    updateCell(newCell: Cell) {
+    private updateCell(newCell: Cell) {
         if (!this.cells.includes(newCell)) return
         if (newCell.width !== 1 || newCell.height !== 1) {
             if (newCell.width > 1) {
@@ -48,32 +48,32 @@ class Grid {
         this.cells[this.cells.indexOf(newCell)] = newCell
     }
 
-    defineNeighboors(): void {
+    private defineNeighboors(): void {
         this.cells.forEach(cell => {
-            cell.neighboor.top = cell.y >= 1 ? this.cells.filter(othercell => othercell.x <= cell.x && othercell.x + othercell.width > cell.x && othercell.y === cell.y - cell.height)[0] : null
-            cell.neighboor.bottom = cell.y <= this.rows - 1 ? this.cells.filter(othercell => othercell.x <= cell.x && othercell.x + othercell.width > cell.x && othercell.y === cell.y + cell.height)[0] : null
-            cell.neighboor.left = cell.x >= 1 ? this.cells.filter(othercell => othercell.y <= cell.y && othercell.y + othercell.height > cell.y && othercell.x === cell.x - cell.width)[0] : null
-            cell.neighboor.right = cell.x <= this.cols - 1 ? this.cells.filter(othercell => othercell.y <= cell.y && othercell.y + othercell.height > cell.y && othercell.x === cell.x + cell.width)[0] : null
+            cell.neighboors.top = cell.y >= 1 ? this.cells.filter(othercell => othercell.x <= cell.x && othercell.x + othercell.width > cell.x && othercell.y === cell.y - cell.height)[0] : null
+            cell.neighboors.bottom = cell.y <= this.rows - 1 ? this.cells.filter(othercell => othercell.x <= cell.x && othercell.x + othercell.width > cell.x && othercell.y === cell.y + cell.height)[0] : null
+            cell.neighboors.left = cell.x >= 1 ? this.cells.filter(othercell => othercell.y <= cell.y && othercell.y + othercell.height > cell.y && othercell.x === cell.x - cell.width)[0] : null
+            cell.neighboors.right = cell.x <= this.cols - 1 ? this.cells.filter(othercell => othercell.y <= cell.y && othercell.y + othercell.height > cell.y && othercell.x === cell.x + cell.width)[0] : null
         })
     }
 
-    get(x, y): Cell {
+    public get(x, y): Cell {
         return this.cells[x * this.cols + y]
     }
 
-    clear(): void {
+    public clear(): void {
         this.cells.forEach(cell => cell.state = null)
     }
 
 }
 
 class Cell {
-    x: number
-    y: number
-    width: number
-    height: number
-    state: any // can be use for any purpose
-    neighboor: NeihboorObject
+    public x: number
+    public y: number
+    public width: number
+    public height: number
+    public state: any // can be use for any purpose
+    public neighboors: NeihboorObject
 
     constructor(x: number, y: number, width = 1, height = 1) {
         this.x = x
@@ -81,7 +81,7 @@ class Cell {
         this.width = width
         this.height = height
         this.state = null
-        this.neighboor = {}
+        this.neighboors = {}
     }
 }
 

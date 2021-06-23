@@ -18,7 +18,7 @@ export function hashObject(obj: object): string {
 }
 
 
-export function now() {
+export function now(): number {
     return performance.now() || Date.now()
 }
 

@@ -24,30 +24,30 @@ class Path {
         this.length = this.svg.getTotalLength()
     }
 
-    static fromJSON(json: JSONPath, scaleFactor: Vector2 = V_UNIT) {
+    public static fromJSON(json: JSONPath, scaleFactor: Vector2 = V_UNIT): Path {
         const points: Array<Point> = json.points.map(tuple => new Point(tuple[0] * scaleFactor.x, tuple[1] * scaleFactor.y))
         return new Path(points)
     }
 
-    addPoint(point: Point): void {
+    public addPoint(point: Point): void {
         if (!this.entry) this.entry = point
         this.points.push(point)
         this.end = this.points[this.points.length - 1]
         this.recalculate()
     }
 
-    pointAt(percent): Point {
+    public pointAt(percent): Point {
         return this.svg.getPointAtLength(this.length * percent / 100)
     }
 
-    recalculate(): void {
+    private recalculate(): void {
         this.end = this.points[this.points.length - 1]
         this.svg = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         this.svg.setAttribute('d', this.toSVGPath())
         this.length = this.svg.getTotalLength()
     }
 
-    toSVGPath(): string {
+    private toSVGPath(): string {
         const builder: PathBuilder = new PathBuilder()
         if (this.points.length) {
             const path = builder.moveTo(this.entry.x, this.entry.y)
@@ -61,7 +61,7 @@ class Path {
         }
     }
 
-    render(): void {
+    public render(): void {
         Renderer.poly(this.points, { lineWidth: 1, fillStyle: 'grey', globalAlpha: .25 })
     }
 }

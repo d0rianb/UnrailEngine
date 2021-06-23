@@ -1,6 +1,6 @@
 export class WorkerMessage {
-    title: string
-    content: any
+    public title: string
+    public content: any
 
     constructor(title: string, content: object) {
         this.title = title

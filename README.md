@@ -151,6 +151,28 @@ Interface.addItem(() => `Value : ${value}`, position, { CSSproperties })
 Interface.addItem(() => `Iteration : ${i++}`, 'top-left', { color: '#999' })
 ```
 
+### Animation
+
+The Unrail Engine comes with a built-in animation system.
+To use it, simply declare a new `Animation` : 
+```ts
+import { Easing } from 'unrail-engine'
+const options = { autostart?: true, loop?: false }
+const animation = new Animation(from, to, duration, Easing.linear, options) // duration in ms
+Event.onClick(() => animation.start())
+```
+
+The default easing function is linear, but others are available in the `Easing` object. To specify an easing function, you can pass the function in the animation constructor or simply its name if the fonction belong to the `Easing` object.
+
+The available methods of the animation class are :
+ - `.start()`  to begin the animation
+ - `.pause()`  to stop the animation
+ - `.resume()` to resume the animation
+ - `.reset()`  to reset the animation to its initial state
+ - `.toggle()` to toggle the animation state (pause if the state is play and the inverse)
+ - `.isRunning` returns true if the animation is running, else false
+
+
 ## <a name="examples"></a>Examples
 - Space Invader : [Code](./examples/space-invader/space-invader.ts) | [Demo](https://d0rianb.github.io/UnrailEngine/examples/space-invader/index.html)
 - Tic-Tac-Toe : [Code](./examples/tic-tac-toe/tic-tac-toe.ts) | [Demo](https://d0rianb.github.io/UnrailEngine/examples/tic-tac-toe/index.html)

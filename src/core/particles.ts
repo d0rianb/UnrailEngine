@@ -1,9 +1,8 @@
-import Random from '@dorianb/random-js'
+import { Random } from '@/core/math'
 
 import { GameObject } from './objects'
 import { Vector2, clamp, inRange } from './math'
 import { Cooldown } from '@/events'
-import { OffscreenRenderer, Renderer } from '@/render'
 import { Game } from '..'
 
 const GRAVITY: number = .01 // N
@@ -30,21 +29,14 @@ class Particle extends GameObject {
         this.opacity = clamp(100, Math.random() * 255, 255)
     }
 
-    update(): void {
+    public update(): void {
         this.velocity.y += GRAVITY
         this.pos = this.pos.add(this.velocity)
         this.opacity -= 2
     }
 
-    render(): void {
-        switch (Game.rendererType) {
-            case 'normal':
-                Renderer.circle(this.pos.x, this.pos.y, this.radius, { fillStyle: this.color, lineWidth: 1, globalAlpha: this.opacity / 255 })
-                break
-            case 'offscreen':
-                OffscreenRenderer.circle(this.pos.x, this.pos.y, this.radius, { fillStyle: this.color, lineWidth: 1, globalAlpha: this.opacity / 255 })
-                break
-        }
+    public render(): void {
+        Game.renderer.circle(this.pos.x, this.pos.y, this.radius, { fillStyle: this.color, lineWidth: 1, globalAlpha: this.opacity / 255 })
     }
 }
 
@@ -71,16 +63,16 @@ class ParticuleGenerator {
         })
     }
 
-    addParticles(array: Array<Particle>): Array<Particle> {
+    public addParticles(array: Array<Particle>): Array<Particle> {
         return array.concat(this.particles)
     }
 
-    removeParticles(array: Array<Particle>): Array<Particle> {
+    public removeParticles(array: Array<Particle>): Array<Particle> {
         const nbParticles: number = this.particles.length
         return array.filter(el => !inRange(el.id, this.UUID, this.UUID + nbParticles))
     }
 
-    destroy(): void {
+    public destroy(): void {
         // this.particles = []
     }
 }
