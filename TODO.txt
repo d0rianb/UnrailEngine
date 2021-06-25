@@ -8,8 +8,6 @@ TODO :
     - WebGL for rendering ?
     - Make OffscreenRenderer the default renderer
     - Resources Manager
-    - Update the doc / give examples --> examples/ folder
-    - Error --> Engine failure
     - Event once
     - Optimize particles
     - Custom logger --> for debug purpose

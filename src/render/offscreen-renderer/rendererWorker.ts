@@ -97,7 +97,10 @@ class RendererWorker extends ThreadWorker {
                 Renderer.circleSprite(args.x, args.y, args.radius, this.getTexture(args as TextureArguments))
                 break
             case 'text':
-                Renderer.text(args.text, args.x, args.y, args.font)
+                Renderer.text(args.text, args.x, args.y, args?.style)
+                break
+            case 'centeredText':
+                Renderer.centeredText(args.text, args.x, args.y, args?.style)
                 break
             case 'tint':
                 Renderer.tint(args.color, args.x, args.y, args.width, args.height)

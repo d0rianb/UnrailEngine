@@ -20,7 +20,8 @@ interface TextStyleObject {
     font?: string,
     size?: number,
     color?: string,
-    align?: 'end' | 'left' | 'right' | 'center'
+    textAlign?: 'end' | 'left' | 'right' | 'center',
+    textBaseline?: 'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom'
 }
 
 const defaultStyleObject: StyleObject = {
@@ -36,7 +37,9 @@ const defaultStyleObject: StyleObject = {
 const defaultTextStyleObject: TextStyleObject = {
     font: 'Roboto',
     size: 16, // in px
-    color: 'black'
+    color: 'black',
+    textAlign: 'left',
+    textBaseline: 'alphabetic'
 }
 
 const TWOPI = 2 * Math.PI
@@ -87,6 +90,16 @@ class Renderer {
             }
         }
         lastStyleObject = styleObject
+    }
+
+    private static textStyle(obj?: TextStyleObject): void {
+        if (!!ctx) {
+            let styleObject = { ...defaultTextStyleObject, ...obj }
+            ctx.font = `${styleObject.size}px ${styleObject.font}`
+            delete styleObject.size
+            delete styleObject.font
+            Renderer.style({ fillStyle: styleObject.color, ...styleObject })
+        }
     }
 
     public static clear(color?: string): void {
@@ -179,12 +192,12 @@ class Renderer {
     }
 
     public static text(text: string, x: number, y: number, style?: TextStyleObject): void {
-        if (!!ctx) {
-            let styleObject = { ...defaultTextStyleObject, ...style }
-            ctx.font = `${styleObject.size}px ${styleObject.font}`
-            Renderer.style({ fillStyle: styleObject.color })
-        }
+        Renderer.textStyle(style)
         ctx.fillText(text, x, y)
+    }
+
+    public static centeredText(text: string, x: number, y: number, style?: TextStyleObject): void {
+        Renderer.text(text, x, y, { ...style, textAlign: 'center', textBaseline: 'middle' })
     }
 
     public static tint(color: string, x: number, y: number, width: number, height: number): void {
@@ -204,4 +217,4 @@ class Renderer {
     public static endFrame(): void { }
 }
 
-export { Renderer, StyleObject }
+export { Renderer, StyleObject, TextStyleObject }

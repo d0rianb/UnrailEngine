@@ -2,14 +2,13 @@ import { Texture } from '..'
 import { Game } from '@/core/game'
 import { adaptCanvasToDevicePixelRatio, createCanvas, getWindowDimensions, insertCanvas } from '@/core/geometry'
 import { Point } from '@/core/math'
-import { Renderer, StyleObject } from '../renderer'
+import { Renderer, StyleObject, TextStyleObject } from '../renderer'
 import { WorkerMessage } from './workerMessage'
 import { RenderCall } from './renderCall'
 import { RendererError } from '@/helpers/errors'
 import { ApiIsSupported } from '@/helpers/utils'
 
 import RendererWorker from './rendererWorker?worker&inline'
-import { TextureOptions } from '../texture'
 
 type RenderStack = Array<RenderCall>
 
@@ -69,7 +68,10 @@ class OffscreenRenderer {
                     break
                 case 'initialized':
                     workerIsInitialized = true
+                    this.endFrame()
                     break
+                default:
+                    console.log(title)
             }
         }
     }
@@ -102,6 +104,7 @@ class OffscreenRenderer {
 
     public static point(x: number, y: number, obj?: StyleObject): void { this.addRenderCall('point', { x, y, obj }) }
 
+    // texture is only tranfered once to the worker
     private static handleTexture(texture: Texture, drawCall: string, args: object): void {
         if (textureAlias.has(texture.id)) {
             const { scale, rotation, offset } = texture
@@ -114,12 +117,13 @@ class OffscreenRenderer {
         }
     }
 
-    // texture is only tranfered once to the worker
     public static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void { this.handleTexture(texture, 'rectSprite', { x, y, width, height }) }
 
     public static async circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void> { this.handleTexture(texture, 'circleSprite', { x, y, radius }) }
 
-    public static text(text: string, x: number, y: number, font?: string): void { this.addRenderCall('text', { text, x, y, font }) }
+    public static text(text: string, x: number, y: number, style?: TextStyleObject): void { this.addRenderCall('text', { text, x, y, style }) }
+
+    public static centeredText(text: string, x: number, y: number, style?: TextStyleObject): void { this.addRenderCall('centeredText', { text, x, y, style }) }
 
     public static tint(color: string, x: number, y: number, width: number, height: number): void { this.addRenderCall('circle', { color, x, y, width, height }) }
 
