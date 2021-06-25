@@ -2815,6 +2815,9 @@ img {
 		<li class=" tsd-kind-function">
 			<a href="modules.html#now" class="tsd-kind-icon">now</a>
 		</li>
+		<li class=" tsd-kind-function">
+			<a href="modules.html#setcanvasdimensions" class="tsd-kind-icon">set<wbr>Canvas<wbr>Dimensions</a>
+		</li>
 	</ul>
 </nav>
 <div class="container container-main">
@@ -2833,7 +2836,7 @@ img {
 			The engine is written using test driven development. Currently there is no test automatisation but the aim is to develop E2E efficient tests.</p>
 			<p>I   - <a href="#getting-started">Getting Started</a><br>
 				II  - <a href="#documentation">Documentation</a><br>
-			III - <a href="#uses">Uses</a><br></p>
+			III - <a href="#examples">Examples</a><br></p>
 			<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
 				<h2><a name="getting-started"></a>Getting Started</h2>
 			</a>
@@ -2879,7 +2882,7 @@ img {
 				<h2><a name="documentation"></a>Documentation</h2>
 			</a>
 			<blockquote>
-				<p>The full documentation is available <a href="https://d0rianb.github.io/UnrailEngine/">here</a>.</p>
+				<p>The full documentation is available <a href="https://d0rianb.github.io/UnrailEngine/docs">here</a>.</p>
 			</blockquote>
 			<p>All the entities are built around two methods : <code>update</code> and <code>render</code>. The <code>update</code> method is used to handle the logic of the entity and the <code>render</code> method aims at doing the rendering job and should only use the <code>Renderer</code> static methods.</p>
 			<pre><code class="language-ts"><span style="color: #008000">// main.ts</span>
@@ -2959,10 +2962,33 @@ img {
 <span style="color: #008000">// Example :</span>
 <span style="color: #001080">Interface</span><span style="color: #000000">.</span><span style="color: #795E26">addItem</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #A31515">`Iteration : </span><span style="color: #0000FF">${</span><span style="color: #001080">i</span><span style="color: #000000">++</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;top-left&#039;</span><span style="color: #000000">, { </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;#999&#039;</span><span style="color: #000000"> })</span>
 </code></pre>
-			<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-				<h2><a name="uses"></a>Example</h2>
+			<a href="#animation" id="animation" style="color: inherit; text-decoration: none;">
+				<h3>Animation</h3>
+			</a>
+			<p>The Unrail Engine comes with a built-in animation system.
+			To use it, simply declare a new <code>Animation</code> : </p>
+			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Easing</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;unrail-engine&#039;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">options</span><span style="color: #000000"> = { autostart?</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">, loop?</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000"> }</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">animation</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Animation</span><span style="color: #000000">(</span><span style="color: #001080">from</span><span style="color: #000000">, </span><span style="color: #001080">to</span><span style="color: #000000">, </span><span style="color: #001080">duration</span><span style="color: #000000">, </span><span style="color: #001080">Easing</span><span style="color: #000000">.</span><span style="color: #001080">linear</span><span style="color: #000000">, </span><span style="color: #001080">options</span><span style="color: #000000">) </span><span style="color: #008000">// duration in ms</span>
+<span style="color: #001080">Event</span><span style="color: #000000">.</span><span style="color: #795E26">onClick</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">animation</span><span style="color: #000000">.</span><span style="color: #795E26">start</span><span style="color: #000000">())</span>
+</code></pre>
+			<p>The default easing function is linear, but others are available in the <code>Easing</code> object. To specify an easing function, you can pass the function in the animation constructor or simply its name if the fonction belong to the <code>Easing</code> object.</p>
+			<p>The available methods of the animation class are :</p>
+			<ul>
+				<li><code>.start()</code>  to begin the animation</li>
+				<li><code>.pause()</code>  to stop the animation</li>
+				<li><code>.resume()</code> to resume the animation</li>
+				<li><code>.reset()</code>  to reset the animation to its initial state</li>
+				<li><code>.toggle()</code> to toggle the animation state (pause if the state is play and the inverse)</li>
+				<li><code>.isRunning</code> returns true if the animation is running, else false</li>
+			</ul>
+			<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+				<h2><a name="examples"></a>Examples</h2>
 			</a>
 			<ul>
+				<li>Space Invader : <a href="./examples/space-invader/space-invader.ts">Code</a> | <a href="https://d0rianb.github.io/UnrailEngine/examples/space-invader/index.html">Demo</a></li>
+				<li>Tic-Tac-Toe : <a href="./examples/tic-tac-toe/tic-tac-toe.ts">Code</a> | <a href="https://d0rianb.github.io/UnrailEngine/examples/tic-tac-toe/index.html">Demo</a></li>
+				<li>Animation : <a href="./examples/animation-curves/animation.ts">Code</a> | <a href="https://d0rianb.github.io/UnrailEngine/examples/animation-curves/index.html">Demo</a></li>
 				<li>The <a href="https://github.com/d0rianb/SwatchDemo">Swatch Demo</a> uses the UnrailEngine for rendering &amp; handling the update loop.</li>
 				<li>The <a href="https://github.com/d0rianb/TowerDefenseGame">TowerDefenseGame</a> &amp; <a href="https://github.com/d0rianb/RunAndGun">Run&amp;Gun</a> will soon use the UnrailEngine too.</li>
 			</ul>
@@ -3034,6 +3060,7 @@ img {
 							<li class="tsd-kind-function"><a href="modules.html#insertcanvas" class="tsd-kind-icon">insert<wbr>Canvas</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#isworker" class="tsd-kind-icon">is<wbr>Worker</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#now" class="tsd-kind-icon">now</a></li>
+							<li class="tsd-kind-function"><a href="modules.html#setcanvasdimensions" class="tsd-kind-icon">set<wbr>Canvas<wbr>Dimensions</a></li>
 						</ul>
 					</section>
 				</div>
@@ -3047,7 +3074,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Point<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L35">core/math.ts:35</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/math.ts#L35">core/math.ts:35</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3060,7 +3087,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = {}</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/config/index.ts#L3">config/index.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/config/index.ts#L3">config/index.ts:3</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -3075,7 +3102,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Easing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>easeIn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeInOutBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeOut<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>easeOutBack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>linear<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>smoothStep<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>smootherStep<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/animation/easing.ts#L3">animation/easing.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/animation/easing.ts#L3">animation/easing.ts:3</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -3276,10 +3303,10 @@ img {
 			<section class="tsd-panel tsd-member tsd-kind-variable">
 				<a name="offscreenrenderer" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagConst">Const</span> Offscreen<wbr>Renderer</h3>
-				<div class="tsd-signature tsd-kind-icon">Offscreen<wbr>Renderer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="classes/renderer.html" class="tsd-signature-type" data-tsd-kind="Class">Renderer</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">OffscreenRenderer</span><span class="tsd-signature-symbol"> = ...</span></div>
+				<div class="tsd-signature tsd-kind-icon">Offscreen<wbr>Renderer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">OffscreenRenderer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">typeof </span><a href="classes/renderer.html" class="tsd-signature-type" data-tsd-kind="Class">Renderer</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/offscreen-renderer/index.ts#L143">render/offscreen-renderer/index.ts:143</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/render/offscreen-renderer/index.ts#L138">render/offscreen-renderer/index.ts:138</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3289,7 +3316,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Point<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L36">core/math.ts:36</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/math.ts#L36">core/math.ts:36</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3299,7 +3326,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">VERSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/index.ts#L20">index.ts:20</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/index.ts#L20">index.ts:20</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3309,7 +3336,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">V_<wbr>NULL<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L38">core/math.ts:38</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/math.ts#L38">core/math.ts:38</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3319,7 +3346,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">V_<wbr>UNIT<span class="tsd-signature-symbol">:</span> <a href="classes/vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L39">core/math.ts:39</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/math.ts#L39">core/math.ts:39</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3336,7 +3363,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/helpers/utils.ts#L25">helpers/utils.ts:25</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/helpers/utils.ts#L25">helpers/utils.ts:25</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3366,7 +3393,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/geometry.ts#L23">core/geometry.ts:23</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/geometry.ts#L30">core/geometry.ts:30</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3398,7 +3425,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/helpers/utils.ts#L1">helpers/utils.ts:1</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/helpers/utils.ts#L1">helpers/utils.ts:1</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3427,7 +3454,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L41">core/math.ts:41</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/math.ts#L41">core/math.ts:41</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3456,7 +3483,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/geometry.ts#L14">core/geometry.ts:14</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/geometry.ts#L21">core/geometry.ts:21</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3488,7 +3515,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/geometry.ts#L10">core/geometry.ts:10</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/geometry.ts#L10">core/geometry.ts:10</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3511,7 +3538,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/geometry.ts#L6">core/geometry.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/geometry.ts#L6">core/geometry.ts:6</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SizeObject</span></h4>
@@ -3528,7 +3555,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/helpers/utils.ts#L12">helpers/utils.ts:12</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/helpers/utils.ts#L12">helpers/utils.ts:12</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3551,7 +3578,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/math.ts#L45">core/math.ts:45</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/math.ts#L45">core/math.ts:45</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3580,7 +3607,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/core/geometry.ts#L37">core/geometry.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/geometry.ts#L41">core/geometry.ts:41</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3606,7 +3633,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/helpers/utils.ts#L6">helpers/utils.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/helpers/utils.ts#L6">helpers/utils.ts:6</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -3623,10 +3650,42 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/helpers/utils.ts#L21">helpers/utils.ts:21</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/helpers/utils.ts#L21">helpers/utils.ts:21</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function">
+				<a name="setcanvasdimensions" class="tsd-anchor"></a>
+				<h3>set<wbr>Canvas<wbr>Dimensions</h3>
+				<ul class="tsd-signatures tsd-kind-function">
+					<li class="tsd-signature tsd-kind-icon">set<wbr>Canvas<wbr>Dimensions<span class="tsd-signature-symbol">(</span>canvas<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLCanvasElement</span>, width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, pixelRatio<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/core/geometry.ts#L14">core/geometry.ts:14</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>canvas: <span class="tsd-signature-type">HTMLCanvasElement</span></h5>
+							</li>
+							<li>
+								<h5>width: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>height: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> pixelRatio: <span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 					</li>
 				</ul>
 			</section>

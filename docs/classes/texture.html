@@ -2759,9 +2759,6 @@ img {
 					<a href="texture.html#offset" class="tsd-kind-icon">offset</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="texture.html#options" class="tsd-kind-icon">options</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="texture.html#rotation" class="tsd-kind-icon">rotation</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -2844,6 +2841,9 @@ img {
 		<li class=" tsd-kind-function">
 			<a href="../modules.html#now" class="tsd-kind-icon">now</a>
 		</li>
+		<li class=" tsd-kind-function">
+			<a href="../modules.html#setcanvasdimensions" class="tsd-kind-icon">set<wbr>Canvas<wbr>Dimensions</a>
+		</li>
 	</ul>
 </nav>
 <div class="container container-main">
@@ -2872,7 +2872,6 @@ img {
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.html#id" class="tsd-kind-icon">id</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.html#image" class="tsd-kind-icon">image</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.html#offset" class="tsd-kind-icon">offset</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.html#options" class="tsd-kind-icon">options</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.html#rotation" class="tsd-kind-icon">rotation</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.html#scale" class="tsd-kind-icon">scale</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.html#size" class="tsd-kind-icon">size</a></li>
@@ -2899,7 +2898,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/texture.ts#L19">render/texture.ts:19</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/render/texture.ts#L26">render/texture.ts:26</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2924,17 +2923,17 @@ img {
 				<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/texture.ts#L13">render/texture.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/render/texture.ts#L21">render/texture.ts:21</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="image" class="tsd-anchor"></a>
 				<h3>image</h3>
-				<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLImageElement</span></div>
+				<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLImageElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ImageBitmap</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/texture.ts#L14">render/texture.ts:14</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/render/texture.ts#L22">render/texture.ts:22</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2944,17 +2943,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">offset<span class="tsd-signature-symbol">:</span> <a href="vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/texture.ts#L16">render/texture.ts:16</a></li>
-					</ul>
-				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="options" class="tsd-anchor"></a>
-				<h3>options</h3>
-				<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TextureOptions</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/texture.ts#L19">render/texture.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/render/texture.ts#L24">render/texture.ts:24</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2964,7 +2953,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/texture.ts#L15">render/texture.ts:15</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/render/texture.ts#L23">render/texture.ts:23</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2974,7 +2963,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">scale<span class="tsd-signature-symbol">:</span> <a href="vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/texture.ts#L18">render/texture.ts:18</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/render/texture.ts#L26">render/texture.ts:26</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2984,7 +2973,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <a href="vector2.html" class="tsd-signature-type" data-tsd-kind="Class">Vector2</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/texture.ts#L17">render/texture.ts:17</a></li>
+						<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/render/texture.ts#L25">render/texture.ts:25</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3001,7 +2990,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/1597486/src/render/texture.ts#L34">render/texture.ts:34</a></li>
+								<li>Defined in <a href="https://github.com/d0rianb/UnrailEngine/blob/4b319ff/src/render/texture.ts#L40">render/texture.ts:40</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="texture.html" class="tsd-signature-type" data-tsd-kind="Class">Texture</a><span class="tsd-signature-symbol">&gt;</span></h4>
