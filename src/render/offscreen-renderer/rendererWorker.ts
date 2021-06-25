@@ -2,6 +2,13 @@ import { Renderer } from '../renderer'
 import { ThreadWorker } from '../../helpers/threadHelper'
 import { Texture } from '../texture'
 
+type TextureArguments = {
+    textureId: number,
+    rotation: number,
+    scale: number,
+    offset: number
+}
+
 class RendererWorker extends ThreadWorker {
     private readonly canvasResolution: number
     private offscreenCanvas: OffscreenCanvas | null
@@ -34,11 +41,6 @@ class RendererWorker extends ThreadWorker {
             case 'newTexture':
                 this.textureAlias.set(content.id, content.texture)
                 break
-            case 'updateTexture':
-                this.textureAlias.get(content.id).offset = content.offset
-                this.textureAlias.get(content.id).scale = content.scale
-                this.textureAlias.get(content.id).rotation = content.rotation
-                break
         }
     }
 
@@ -49,8 +51,11 @@ class RendererWorker extends ThreadWorker {
         'setTransform' in this.ctx ? this.ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0) : null
     }
 
-    private getTexture(textureId: number): Texture {
-        return this.textureAlias.get(textureId)
+    // TODO : define the type
+    private getTexture(args: TextureArguments): Texture {
+        const texture: Texture = this.textureAlias.get(args.textureId)
+        const { scale, rotation, offset } = args
+        return { ...texture, scale, rotation, offset } as unknown as Texture
     }
 
     private handleDrawRequest(method: string, args: any) {
@@ -86,10 +91,10 @@ class RendererWorker extends ThreadWorker {
                 Renderer.point(args.x, args.y, args.obj)
                 break
             case 'rectSprite':
-                Renderer.rectSprite(args.x, args.y, args.width, args.height, this.getTexture(args.textureId))
+                Renderer.rectSprite(args.x, args.y, args.width, args.height, this.getTexture(args as TextureArguments))
                 break
             case 'circleSprite':
-                Renderer.circleSprite(args.x, args.y, args.radius, this.getTexture(args.textureId))
+                Renderer.circleSprite(args.x, args.y, args.radius, this.getTexture(args as TextureArguments))
                 break
             case 'text':
                 Renderer.text(args.text, args.x, args.y, args.font)

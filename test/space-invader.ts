@@ -9,7 +9,8 @@ import {
     PlayerObject,
     GameEnvironement,
     ParticuleGenerator,
-    Particle
+    Particle,
+    setCanvasDimensions
 } from '../src'
 import { clamp, Vector2 } from '../src/core/math'
 import { Renderer, Interface, Texture } from '../src/render'
@@ -128,7 +129,6 @@ class Env extends GameEnvironement {
             this.enemies.push(new Enemy(150 * i, 10))
         }
 
-        let canvas = Renderer.create(width, height)
 
     }
 
@@ -175,6 +175,8 @@ Interface.addItem(() => `Health : ${env.player.health}`, 'top-left')
 
 // main.ts
 const { width, height } = getWindowDimensions()
+const canvas = Renderer.createFromCanvas('canvas')
+setCanvasDimensions(canvas, width, height)
 const env = new Env(width, height)
 const game = new Game('Space Invader', env)
 

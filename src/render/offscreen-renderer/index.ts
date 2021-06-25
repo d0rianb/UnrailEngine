@@ -102,14 +102,10 @@ class OffscreenRenderer {
 
     public static point(x: number, y: number, obj?: StyleObject): void { this.addRenderCall('point', { x, y, obj }) }
 
-    // texture is only tranfered once to the worker
-    public static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
+    private static handleTexture(texture: Texture, drawCall: string, args: object): void {
         if (textureAlias.has(texture.id)) {
-            const textureFromAlias: Texture = textureAlias.get(texture.id)
-            if (TextureOptions.from(textureFromAlias) != TextureOptions.from(texture)) {
-                this.sendMessageToWorker('updateTexture', { id: texture.id, scale: texture.scale, rotation: texture.rotation, offset: texture.offset })
-            }
-            this.addRenderCall('rectSprite', { x, y, width, height, textureId: texture.id })
+            const { scale, rotation, offset } = texture
+            this.addRenderCall(drawCall, { ...args, textureId: texture.id, scale, rotation, offset })
         } else {
             texture.convertToBitmap()?.then(adaptedTexture => {
                 textureAlias.set(texture.id, adaptedTexture)
@@ -118,21 +114,10 @@ class OffscreenRenderer {
         }
     }
 
-    public static async circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void> {
-        if (textureAlias.has(texture.id)) {
-            // TODO: duplicate with rectSprite code
-            const textureFromAlias: Texture = textureAlias.get(texture.id)
-            if (TextureOptions.from(textureFromAlias) != TextureOptions.from(texture)) {
-                this.sendMessageToWorker('updateTexture', { id: texture.id, scale: texture.scale, rotation: texture.rotation, offset: texture.offset })
-            }
-            this.addRenderCall('circleSprite', { x, y, radius, textureId: texture.id })
-        } else {
-            texture.convertToBitmap()?.then(adaptedTexture => {
-                textureAlias.set(texture.id, adaptedTexture)
-                this.sendMessageToWorker('newTexture', { id: texture.id, texture: adaptedTexture })
-            })
-        }
-    }
+    // texture is only tranfered once to the worker
+    public static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void { this.handleTexture(texture, 'rectSprite', { x, y, width, height }) }
+
+    public static async circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void> { this.handleTexture(texture, 'circleSprite', { x, y, radius }) }
 
     public static text(text: string, x: number, y: number, font?: string): void { this.addRenderCall('text', { text, x, y, font }) }
 

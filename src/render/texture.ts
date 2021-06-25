@@ -19,7 +19,7 @@ let textureId: number = 0
 
 class Texture {
     public id: number
-    public image: HTMLImageElement
+    public image: HTMLImageElement | ImageBitmap
     public rotation: number
     public offset: Vector2
     public size: Vector2

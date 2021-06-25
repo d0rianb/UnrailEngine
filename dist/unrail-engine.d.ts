@@ -25,6 +25,7 @@ interface SizeObject {
 }
 declare function getWindowDimensions(): SizeObject;
 declare function getCanvasDimensions(canvas: HTMLCanvasElement): SizeObject;
+declare function setCanvasDimensions(canvas: HTMLCanvasElement, width: number, height: number, pixelRatio?: number): void;
 declare function createCanvas(w: number, h: number, ratio?: number, preventRightClick?: boolean): HTMLCanvasElement;
 declare function adaptCanvasToDevicePixelRatio(canvas: HTMLCanvasElement, width?: number, height?: number, ratio?: number): void;
 declare function insertCanvas(canvas: HTMLCanvasElement, el: string): void;
@@ -228,7 +229,7 @@ declare class TextureOptions {
 }
 declare class Texture {
     id: number;
-    image: HTMLImageElement;
+    image: HTMLImageElement | ImageBitmap;
     rotation: number;
     offset: Vector2$1;
     size: Vector2$1;
@@ -303,6 +304,7 @@ declare class OffscreenRenderer {
     static circle(x: number, y: number, radius: number, obj?: StyleObject): void;
     static circleFromRect(x: number, y: number, width: number, height: number, obj: StyleObject): void;
     static point(x: number, y: number, obj?: StyleObject): void;
+    private static handleTexture;
     static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void;
     static circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void>;
     static text(text: string, x: number, y: number, font?: string): void;
@@ -334,4 +336,4 @@ declare const Config: {};
 
 declare const VERSION: string;
 
-export { Animation, AnimationOptions, ApiIsSupported, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWrapper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now };
+export { Animation, AnimationOptions, ApiIsSupported, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWrapper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now, setCanvasDimensions };
