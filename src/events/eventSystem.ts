@@ -7,31 +7,24 @@ class EventSystem {
     private windowEvents: Array<Event>
     private customEvents: Array<Event>
     private mouseEvents: Array<Event>
-    private keyboardDownEvents: Array<Event>
-    private keyboardPressedEvents: Array<Event>
+    private keyboardEvents: Array<Event>
     private currentKeyEvents: Array<KeyboardEvent>
 
     constructor() {
         this.windowEvents = []
         this.customEvents = []
         this.mouseEvents = []
-        this.keyboardDownEvents = []
-        this.keyboardPressedEvents = []
-
+        this.keyboardEvents = []
         this.currentKeyEvents = []
     }
 
     // Need the window variable to be defined
     public init(): void {
         window.addEventListener('keydown', e => {
-            if (!this.currentKeyEvents.find(event => event.code === e.code)) {
-                this.currentKeyEvents.push(e)
-            }
-            this.keyboardPressedEvents.forEach(event => {
-                if (e.code === event.name) {
-                    event.callback(e)
-                }
-            })
+            if (!this.currentKeyEvents.find(event => event.code === e.code)) this.currentKeyEvents.push(e)
+            this.keyboardEvents
+                .filter(e => e.type === EventType.KeyboardPressed)
+                .forEach(event => { if (e.code === event.name) event.callback(e) })
         })
         window.addEventListener('keyup', e => {
             if (!this.currentKeyEvents.length) return
@@ -43,10 +36,10 @@ class EventSystem {
     public addEvent(e: Event): void {
         switch (e.type) {
             case EventType.KeyboardDown:
-                this.keyboardDownEvents.push(e)
+                this.keyboardEvents.push(e)
                 break
             case EventType.KeyboardPressed:
-                this.keyboardPressedEvents.push(e)
+                this.keyboardEvents.push(e)
                 break
             case EventType.Mouse:
                 this.mouseEvents.push(e)
@@ -73,13 +66,11 @@ class EventSystem {
 
     public tick(): void {
         if (!this.currentKeyEvents.length) return
-        this.keyboardDownEvents.forEach(keyEvent => {
-            this.currentKeyEvents.forEach(e => {
-                if (e.code === keyEvent.name) {
-                    keyEvent.callback(e)
-                }
+        this.keyboardEvents
+            .filter(e => e.type === EventType.KeyboardDown)
+            .forEach(keyEvent => {
+                this.currentKeyEvents.forEach(e => { if (e.code === keyEvent.name) keyEvent.callback(e) })
             })
-        })
     }
 }
 export { EventSystem }

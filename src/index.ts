@@ -16,5 +16,6 @@ export * from './animation/animation'
 export * from './events'
 export * from './render'
 export * from './config'
+export * from './audio/sound'
 
 export const VERSION: string = version

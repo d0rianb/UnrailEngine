@@ -2,9 +2,9 @@ import { Game } from '../core/game'
 import * as CSSstyle from '@style/main.css'
 
 interface InterfaceItem {
-    callback(game?: Game): string
+    callback: InterfaceTextFunction
     position?: ItemPosition
-    options?: CSSOptions,
+    options?: CSSOptions
     onClick?: InterfaceClickCallback
 }
 
@@ -21,16 +21,17 @@ type ItemPosition = typeof itemPositions[number] // Type itemPositions
 
 class Interface {
 
-    public static addItem(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions): void {
+    public static addItem(callback: InterfaceTextFunction | string, position?: ItemPosition, options?: CSSOptions): void {
         Interface.internalAddItem(callback, position, options)
     }
 
-    public static addButton(callback: InterfaceTextFunction, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void {
+    public static addButton(callback: InterfaceTextFunction | string, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void {
         Interface.internalAddItem(callback, position, options, onClick)
     }
 
-    private static internalAddItem(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions, onClick?: InterfaceClickCallback): void {
-        const item: InterfaceItem = { callback, position, options, onClick } as InterfaceItem
+    private static internalAddItem(callback: InterfaceTextFunction | string, position?: ItemPosition, options?: CSSOptions, onClick?: InterfaceClickCallback): void {
+        let textFunction: InterfaceTextFunction = (typeof callback === 'string') ? () => callback : callback
+        const item: InterfaceItem = { callback: textFunction, position, options, onClick } as InterfaceItem
         items.push(item)
         const index: number = items.length
         window.addEventListener('load', () => Interface.addToDom(item, index))

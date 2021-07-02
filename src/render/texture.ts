@@ -1,18 +1,10 @@
 import { Vector2, V_UNIT, V_NULL } from '@/core/math'
 import { isWorker } from '@/helpers/utils'
 
-class TextureOptions {
-    public rotation?: number // radians
-    public offset?: Vector2
-    public scale?: Vector2
-
-    public static from(texture: Texture): TextureOptions {
-        return {
-            rotation: texture?.rotation,
-            offset: texture?.offset,
-            scale: texture?.scale,
-        } as TextureOptions
-    }
+interface TextureOptions {
+    rotation?: number, // radians
+    offset?: Vector2,
+    scale?: Vector2
 }
 
 let textureId: number = 0
@@ -51,4 +43,4 @@ class Sprite extends Texture {
     }
 }
 
-export { Sprite, Texture, TextureOptions }
+export { Sprite, Texture }

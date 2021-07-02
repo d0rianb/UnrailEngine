@@ -12,10 +12,10 @@ TODO :
     - Optimize particles
     - Custom logger --> for debug purpose
     - Rework doc system
-    - Add text centering (CanvasRenderingContext2D.measureText())
     - Render gradient
     - Add a lighting system
     - Add slider button to the interface
+    - Audio System
 
 
 PARTS :

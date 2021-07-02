@@ -65,4 +65,5 @@ canvas {
 .ue-interface-button {
     cursor: pointer;
     user-select: none;
+    pointer-events: all;
 }

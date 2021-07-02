@@ -2,6 +2,7 @@ import { EventSystem } from './eventSystem'
 
 enum EventType { KeyboardPressed, KeyboardDown, Mouse, Window, Custom, All }
 
+type NoArgsCallback = () => any
 type KeyboardEventCallback = (e: KeyboardEvent) => any
 type MouseCallback = (e: MouseEvent) => any
 
@@ -41,6 +42,10 @@ class Event {
 
     public static onKeyPressed(name: string, callback: KeyboardEventCallback): void {
         ES.addEvent(new Event(name, callback, EventType.KeyboardPressed))
+    }
+
+    public static onAnyKeyReleased(callback: NoArgsCallback): void {
+        ES.addEvent(new Event('keyup', callback, EventType.Window))
     }
 
     public static onClick(callback: MouseCallback): void {

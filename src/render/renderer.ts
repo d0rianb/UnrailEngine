@@ -7,19 +7,19 @@ import { RendererError } from '@/helpers/errors'
 type CanvasRenderContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
 
 interface StyleObject {
-    strokeStyle?: string,
-    lineWidth?: number,
-    lineJoin?: CanvasLineJoin,
-    lineCap?: CanvasLineCap,
-    fillStyle?: string,
+    strokeStyle?: string
+    lineWidth?: number
+    lineJoin?: CanvasLineJoin
+    lineCap?: CanvasLineCap
+    fillStyle?: string
     globalAlpha?: number
     globalCompositeOperation?: string
 }
 
 interface TextStyleObject {
-    font?: string,
-    size?: number,
-    color?: string,
+    font?: string
+    size?: number
+    color?: string
     textAlign?: 'end' | 'left' | 'right' | 'center',
     textBaseline?: 'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom'
 }

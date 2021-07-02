@@ -13,9 +13,11 @@ class GameObject implements GameObjectInterface {
     public width?: number
     public height?: number
 
-    constructor(x: number, y: number) {
+    constructor(x: number, y: number, width?: number, height?: number) {
         this.x = x
         this.y = y
+        this.width = width || 100
+        this.height = height || width || 100
     }
 
     public collide(obj: GameObject): boolean { // AABB algorithm
@@ -32,8 +34,8 @@ class GameObject implements GameObjectInterface {
 }
 
 class PlayerObject extends GameObject {
-    constructor(x: number, y: number) {
-        super(x, y)
+    constructor(x: number, y: number, width?: number, height?: number) {
+        super(x, y, width, height)
     }
 
     public update(...args: any[]) { }
