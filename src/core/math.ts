@@ -39,6 +39,7 @@ export const V_NULL = new Vector2(0, 0)
 export const V_UNIT = new Vector2(1, 1)
 
 export function clamp(min: number, x: number, max: number): number {
+    if (min > max) return clamp(max, x, min)
     return Math.max(min, Math.min(x, max))
 }
 

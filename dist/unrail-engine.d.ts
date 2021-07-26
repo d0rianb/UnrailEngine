@@ -83,13 +83,13 @@ declare class GameObject implements GameObjectInterface {
     y: number;
     width?: number;
     height?: number;
-    constructor(x: number, y: number);
+    constructor(x: number, y: number, width?: number, height?: number);
     collide(obj: GameObject): boolean;
     update(...args: any[]): void;
     render(...args: any[]): void;
 }
 declare class PlayerObject extends GameObject {
-    constructor(x: number, y: number);
+    constructor(x: number, y: number, width?: number, height?: number);
     update(...args: any[]): void;
     render(...args: any[]): void;
 }
@@ -197,6 +197,7 @@ declare enum EventType {
     Custom = 4,
     All = 5
 }
+declare type NoArgsCallback = () => any;
 declare type KeyboardEventCallback = (e: KeyboardEvent) => any;
 declare type MouseCallback = (e: MouseEvent) => any;
 declare class Event {
@@ -209,6 +210,7 @@ declare class Event {
     static on(name: string, callback: Function): void;
     static onKeyDown(name: string, callback: KeyboardEventCallback): void;
     static onKeyPressed(name: string, callback: KeyboardEventCallback): void;
+    static onAnyKeyReleased(callback: NoArgsCallback): void;
     static onClick(callback: MouseCallback): void;
     static onMouseClick(callback: MouseCallback): void;
     static onMouseMove(callback: MouseCallback): void;
@@ -221,11 +223,10 @@ declare class Cooldown {
     constructor(delay: number, callback: CooldownCallback);
 }
 
-declare class TextureOptions {
+interface TextureOptions {
     rotation?: number;
     offset?: Vector2$1;
     scale?: Vector2$1;
-    static from(texture: Texture): TextureOptions;
 }
 declare class Texture {
     id: number;
@@ -252,14 +253,18 @@ interface TextStyleObject {
     font?: string;
     size?: number;
     color?: string;
-    align?: 'end' | 'left' | 'right' | 'center';
+    textAlign?: 'end' | 'left' | 'right' | 'center';
+    textBaseline?: 'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom';
 }
 declare class Renderer {
     static create(width?: number, height?: number): HTMLCanvasElement;
     static createFromCanvas(selector: string): HTMLCanvasElement;
     static setContext(context: CanvasRenderContext): void;
     static getContext(): CanvasRenderContext;
+    static setOffset(x: number, y: number): void;
+    static getOffset(): Vector2$1;
     static style(obj?: StyleObject): void;
+    private static textStyle;
     static clear(color?: string): void;
     static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void;
     static rect(x: number, y: number, width: number, height: number, obj?: StyleObject): void;
@@ -272,6 +277,7 @@ declare class Renderer {
     static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void;
     static circleSprite(x: number, y: number, radius: number, texture: Texture): void;
     static text(text: string, x: number, y: number, style?: TextStyleObject): void;
+    static centeredText(text: string, x: number, y: number, style?: TextStyleObject): void;
     static tint(color: string, x: number, y: number, width: number, height: number): void;
     static beginFrame(color?: string): void;
     static endFrame(): void;
@@ -307,7 +313,8 @@ declare class OffscreenRenderer {
     private static handleTexture;
     static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void;
     static circleSprite(x: number, y: number, radius: number, texture: Texture): Promise<void>;
-    static text(text: string, x: number, y: number, font?: string): void;
+    static text(text: string, x: number, y: number, style?: TextStyleObject): void;
+    static centeredText(text: string, x: number, y: number, style?: TextStyleObject): void;
     static tint(color: string, x: number, y: number, width: number, height: number): void;
     static beginFrame(color?: string): void;
     static endFrame(): void;
@@ -320,8 +327,8 @@ declare type InterfaceClickCallback = (e: MouseEvent) => any;
 declare const itemPositions: readonly ["top-left", "top-right", "bottom-left", "bottom-right", "custom"];
 declare type ItemPosition = typeof itemPositions[number];
 declare class Interface {
-    static addItem(callback: InterfaceTextFunction, position?: ItemPosition, options?: CSSOptions): void;
-    static addButton(callback: InterfaceTextFunction, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void;
+    static addItem(callback: InterfaceTextFunction | string, position?: ItemPosition, options?: CSSOptions): void;
+    static addButton(callback: InterfaceTextFunction | string, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void;
     private static internalAddItem;
     static init(): void;
     private static addStyle;
@@ -334,6 +341,15 @@ declare class Interface {
 
 declare const Config: {};
 
+interface SoundOptions {
+    volume?: number;
+    loop?: boolean;
+    autoplay?: boolean;
+}
+declare class Sound extends Audio {
+    constructor(src: string, options?: SoundOptions);
+}
+
 declare const VERSION: string;
 
-export { Animation, AnimationOptions, ApiIsSupported, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWrapper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now, setCanvasDimensions };
+export { Animation, AnimationOptions, ApiIsSupported, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWrapper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Sound, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now, setCanvasDimensions };

@@ -15,6 +15,7 @@ body {
 
 canvas {
     z-index: 10;
+    image-rendering: pixelated;
 }
 
 .ue-interface {

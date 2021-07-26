@@ -9,7 +9,7 @@
 
 This engine is not only for games, its modules can be used independently. For instance, the `render` module and the `interface` one can be used for an animated project.
 
-The renderer is based on the __OffscreenCanvas API__ (currently not supported by Safari & Firefox). The render process is done in a DedicatedWorker which threads the process and speed up the operation.
+The renderer is based on the __OffscreenCanvas API__ (currently not supported by Safari & Firefox). The render process is done in a DedicatedWorker which threads the process and speed up the operation ands adapts to the `devicePixelRatio`.
 
 Examples can be found at [/test](./test/). <br>
 The engine is written using test driven development. Currently there is no test automatisation but the aim is to develop E2E efficient tests.

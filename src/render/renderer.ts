@@ -1,5 +1,5 @@
 import { adaptCanvasToDevicePixelRatio, createCanvas, getWindowDimensions, insertCanvas } from '@/core/geometry'
-import { Point } from '@/core/math'
+import { Point, Vector2, V_NULL } from '@/core/math'
 import { Texture } from './texture'
 import { isWorker } from '@/helpers/utils'
 import { RendererError } from '@/helpers/errors'
@@ -44,6 +44,7 @@ const defaultTextStyleObject: TextStyleObject = {
 
 const TWOPI = 2 * Math.PI
 let precision: number = isWorker() ? 4 : 2 * (window.devicePixelRatio || 1)
+let offset: Vector2 = V_NULL
 
 // Move to math file ?
 function round(num: number): number {
@@ -80,6 +81,15 @@ class Renderer {
         return ctx
     }
 
+    // TODO: implement Camera
+    public static setOffset(x: number, y: number): void {
+        offset = new Vector2(x, y)
+    }
+
+    public static getOffset(): Vector2 {
+        return offset
+    }
+
     public static style(obj?: StyleObject): void {
         if (!ctx) throw new RendererError('Context has not been initialize. Please use Renderer.setContext')
         const styleObject = { ...defaultStyleObject, ...obj }
@@ -114,15 +124,15 @@ class Renderer {
     public static line(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void {
         Renderer.style(obj)
         ctx.beginPath()
-        ctx.moveTo(round(x1), round(y1))
-        ctx.lineTo(round(x2), round(y2))
+        ctx.moveTo(round(offset.x + x1), round(offset.y + y1))
+        ctx.lineTo(round(offset.x + x2), round(offset.y + y2))
         ctx.stroke()
     }
 
     /* Draw a rect from its top-left corner */
     public static rect(x: number, y: number, width: number, height: number, obj?: StyleObject): void {
         Renderer.style(obj)
-        const [r_x, r_y, r_w, r_h] = [round(x), round(y), round(width), round(height)]
+        const [r_x, r_y, r_w, r_h] = [round(x + offset.x), round(y + offset.y), round(width), round(height)]
         ctx.fillRect(r_x, r_y, r_w, r_h)
         ctx.strokeRect(r_x, r_y, r_w, r_h)
     }
@@ -142,9 +152,9 @@ class Renderer {
         if (!points.length) return
         Renderer.style(obj)
         ctx.beginPath()
-        ctx.moveTo(round(points[0].x), round(points[0].y))
+        ctx.moveTo(round(points[0].x + offset.x), round(points[0].y + offset.y))
         for (let i = 1; i < points.length; i++) {
-            ctx.lineTo(round(points[i].x), round(points[i].y))
+            ctx.lineTo(round(points[i].x + offset.x), round(points[i].y + offset.y))
         }
         ctx.stroke()
     }
@@ -152,7 +162,7 @@ class Renderer {
     public static circle(x: number, y: number, radius: number, obj?: StyleObject): void {
         Renderer.style(obj)
         ctx.beginPath()
-        ctx.arc(round(x), round(y), radius, 0, TWOPI)
+        ctx.arc(round(x + offset.x), round(y + offset.y), radius, 0, TWOPI)
         ctx.fill()
         ctx.stroke()
     }
@@ -169,7 +179,7 @@ class Renderer {
     public static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
         Renderer.style({})
         ctx.save()
-        ctx.translate(round(x + width / 2), round(y + height / 2))
+        ctx.translate(round(x + width / 2 + offset.x), round(y + height / 2 + offset.y))
         ctx.scale(texture.scale.x, texture.scale.y)
         ctx.rotate(texture.rotation)
         ctx.drawImage(
@@ -185,7 +195,7 @@ class Renderer {
     public static circleSprite(x: number, y: number, radius: number, texture: Texture): void {
         ctx.save()
         ctx.beginPath()
-        ctx.arc(round(x), round(y), radius, 0, TWOPI)
+        ctx.arc(round(x + offset.x), round(y + offset.y), radius, 0, TWOPI)
         ctx.clip()
         Renderer.rectSprite(x - radius, y - radius, 2 * radius, 2 * radius, texture)
         ctx.restore()

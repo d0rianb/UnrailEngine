@@ -19,21 +19,24 @@ const name = 'unrail-engine'
 const examples = []
 
 for (let example of fs.readdirSync(path.resolve(__dirname, 'examples'))) {
-    const tsFile = fs.readdirSync(path.resolve(__dirname, 'examples', example)).find(file => path.extname(file) === '.ts')
-    examples.push({
-        input: `./examples/${example}/${tsFile}`,
-        output: {
-            file: `./examples/${example}/${tsFile.replace('ts', 'js')}`,
-            format: 'es'
-        },
-        plugins: [
-            alias(customAlias),
-            esbuild(),
-            commonjs(),
-            json()
-        ],
-        external: [],
-    })
+    const examplePath = path.resolve(__dirname, 'examples', example)
+    if (fs.lstatSync(examplePath).isDirectory()) {
+        const tsFile = fs.readdirSync(examplePath).find(file => path.extname(file) === '.ts')
+        examples.push({
+            input: `./examples/${example}/${tsFile}`,
+            output: {
+                file: `./examples/${example}/${tsFile.replace('ts', 'js')}`,
+                format: 'es'
+            },
+            plugins: [
+                alias(customAlias),
+                esbuild(),
+                commonjs(),
+                json()
+            ],
+            external: [],
+        })
+    }
 }
 
 
