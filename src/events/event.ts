@@ -19,14 +19,30 @@ class Event {
         this.listeners = [this.callback]
     }
 
-    public static emit(name: string, params?: any): void {
+    public static emit(name: string | Array<string>, params?: any): void {
+        if (name instanceof Array) {
+            name.forEach(n => this.emitEvent(n, params))
+        } else {
+            this.emitEvent(name, params)
+        }
+    }
+
+    private static emitEvent(name: string, params?: any): void {
         const event: Event = ES.getCustomEvent(name)
         if (event) {
             event.listeners.forEach(callback => callback(params))
         }
     }
 
-    public static on(name: string, callback: Function): void {
+    public static on(name: string | Array<string>, callback: Function): void {
+        if (name instanceof Array) {
+            name.forEach(n => this.onEvent(n, callback))
+        } else {
+            this.onEvent(name, callback)
+        }
+    }
+
+    private static onEvent(name: string, callback: Function): void {
         const existingEvent: Event = ES.getCustomEvent(name)
         if (existingEvent) {
             existingEvent.listeners.push(callback)
@@ -36,12 +52,20 @@ class Event {
         }
     }
 
-    public static onKeyDown(name: string, callback: KeyboardEventCallback): void {
-        ES.addEvent(new Event(name, callback, EventType.KeyboardDown))
+    public static onKeyDown(name: string | Array<string>, callback: KeyboardEventCallback): void {
+        if (name instanceof Array) {
+            name.forEach(n => ES.addEvent(new Event(n, callback, EventType.KeyboardDown)))
+        } else {
+            ES.addEvent(new Event(name, callback, EventType.KeyboardDown))
+        }
     }
 
-    public static onKeyPressed(name: string, callback: KeyboardEventCallback): void {
-        ES.addEvent(new Event(name, callback, EventType.KeyboardPressed))
+    public static onKeyPressed(name: string | Array<string>, callback: KeyboardEventCallback): void {
+        if (name instanceof Array) {
+            name.forEach(n => ES.addEvent(new Event(n, callback, EventType.KeyboardPressed)))
+        } else {
+            ES.addEvent(new Event(name, callback, EventType.KeyboardPressed))
+        }
     }
 
     public static onAnyKeyReleased(callback: NoArgsCallback): void {

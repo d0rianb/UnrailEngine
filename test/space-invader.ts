@@ -134,8 +134,8 @@ class Env extends GameEnvironement {
 
     bindEvents() {
         const speed = 3
-        Event.onKeyDown('ArrowLeft', e => this.player.move(-5 * speed, 0))
-        Event.onKeyDown('ArrowRight', e => this.player.move(5 * speed, 0))
+        Event.onKeyDown(['ArrowLeft', 'KeyA'], e => this.player.move(-5 * speed, 0))
+        Event.onKeyDown(['ArrowRight', 'KeyD'], e => this.player.move(5 * speed, 0))
         Event.onKeyPressed('Space', e => this.player.shoot())
         Event.on('kill', () => this.score++)
         Event.on('new-shot', ({ x, y }) => { this.shots.push(new Shot(x, y)) })
