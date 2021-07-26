@@ -28,6 +28,7 @@ class Game {
         this.showStatsPanel = true
         this.gameLoop = this.env ? () => env.update() : null
         this.fps = fps
+        this.makeAnimationFrame()
     }
 
     public static setRendererType(type: RendererType) {
@@ -53,6 +54,7 @@ class Game {
     }
 
     private makeAnimationFrame(): void {
+        if (!this.update) return
         this.animationFrame = new AnimationFrame(deltaTime => this.update(deltaTime), this.fps)
     }
 
