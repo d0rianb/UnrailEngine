@@ -4,6 +4,7 @@ import { AS } from '@/animation/animationSystem'
 import { showStats, Stats } from './stats'
 import { Interface, OffscreenRenderer, Renderer } from '@/render'
 import { AnimationFrame } from './animationFrame'
+import { windowIsLoaded } from '@/helpers/utils'
 
 type RendererType = 'normal' | 'offscreen'
 
@@ -81,7 +82,7 @@ class Game {
     public start(): void {
         if (!this.gameLoop) throw new Error('No game loop')
         if (!this.animationFrame) throw new Error('AnimationFrame')
-        if (/complete|interactive|loaded/.test(document.readyState)) this.internalStart()
+        if (windowIsLoaded()) this.internalStart()
         else window.addEventListener('DOMContentLoaded', () => this.internalStart())
 
     }

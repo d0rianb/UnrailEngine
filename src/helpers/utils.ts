@@ -25,3 +25,7 @@ export function now(): number {
 export function ApiIsSupported(APIname: string): boolean {
     return window && APIname in window
 }
+
+export function windowIsLoaded(): boolean {
+    return /complete|interactive|loaded/.test(document.readyState)
+}

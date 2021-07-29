@@ -1,5 +1,6 @@
 import { Game } from '../core/game'
 import * as CSSstyle from '@style/main.css'
+import { windowIsLoaded } from '@/helpers/utils'
 
 interface InterfaceItem {
     callback: InterfaceTextFunction
@@ -34,7 +35,8 @@ class Interface {
         const item: InterfaceItem = { callback: textFunction, position, options, onClick } as InterfaceItem
         items.push(item)
         const index: number = items.length
-        window.addEventListener('load', () => Interface.addToDom(item, index))
+        if (windowIsLoaded()) Interface.addToDom(item, index)
+        else window.addEventListener('load', () => Interface.addToDom(item, index))
     }
 
     public static init(): void {
