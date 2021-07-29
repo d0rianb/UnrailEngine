@@ -16,12 +16,14 @@ class Texture {
     public offset: Vector2
     public size: Vector2
     public scale: Vector2
+    public isLoaded: boolean = false
 
     constructor(source: string, options?: TextureOptions) {
         if (!source) throw new Error('A source path to the resource must be provided')
         this.id = textureId++
         this.image = new Image()
         this.image.src = source
+        this.image.onload = () => this.isLoaded = true
         this.size = new Vector2(this.image.width, this.image.height)
         this.rotation = options?.rotation || 0
         this.offset = options?.offset || V_NULL // relative to the size

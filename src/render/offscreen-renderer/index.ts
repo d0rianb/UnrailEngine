@@ -106,6 +106,7 @@ class OffscreenRenderer {
 
     // texture is only tranfered once to the worker
     private static handleTexture(texture: Texture, drawCall: string, args: object): void {
+        if (!texture.isLoaded) return
         if (textureAlias.has(texture.id)) {
             const { scale, rotation, offset } = texture
             this.addRenderCall(drawCall, { ...args, textureId: texture.id, scale, rotation, offset })

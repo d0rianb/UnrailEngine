@@ -177,6 +177,7 @@ class Renderer {
     }
 
     public static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
+        if (!texture.isLoaded) return
         Renderer.style({})
         ctx.save()
         ctx.translate(round(x + width / 2 + offset.x), round(y + height / 2 + offset.y))
@@ -193,6 +194,7 @@ class Renderer {
     }
 
     public static circleSprite(x: number, y: number, radius: number, texture: Texture): void {
+        if (!texture.isLoaded) return
         ctx.save()
         ctx.beginPath()
         ctx.arc(round(x + offset.x), round(y + offset.y), radius, 0, TWOPI)

@@ -5,7 +5,7 @@ var t = Object.defineProperty, e = Object.defineProperties, s = Object.getOwnPro
     for (var s2 of i(e2))
       l.call(e2, s2) && a(t2, s2, e2[s2]);
   return t2;
-}, d = (t2, i2) => e(t2, s(i2));
+}, c = (t2, i2) => e(t2, s(i2));
 class h {
   constructor(t2, e2) {
     this.x = t2, this.y = e2;
@@ -57,21 +57,21 @@ function w(t2, e2) {
 function W() {
   return self.document == null && self.window == null;
 }
-function C() {
+function v() {
   return performance.now() || Date.now();
 }
-function R(t2) {
+function S(t2) {
   return window && t2 in window;
 }
-var S, v;
-(v = S || (S = {}))[v.KeyboardPressed = 0] = "KeyboardPressed", v[v.KeyboardDown = 1] = "KeyboardDown", v[v.Mouse = 2] = "Mouse", v[v.Window = 3] = "Window", v[v.Custom = 4] = "Custom", v[v.All = 5] = "All";
+var C, R;
+(R = C || (C = {}))[R.KeyboardPressed = 0] = "KeyboardPressed", R[R.KeyboardDown = 1] = "KeyboardDown", R[R.Mouse = 2] = "Mouse", R[R.Window = 3] = "Window", R[R.Custom = 4] = "Custom", R[R.All = 5] = "All";
 const Y = new class {
   constructor() {
     this.windowEvents = [], this.customEvents = [], this.mouseEvents = [], this.keyboardEvents = [], this.currentKeyEvents = [];
   }
   init() {
     window.addEventListener("keydown", (t2) => {
-      this.currentKeyEvents.find((e2) => e2.code === t2.code) || this.currentKeyEvents.push(t2), this.keyboardEvents.filter((t3) => t3.type === S.KeyboardPressed).forEach((e2) => {
+      this.currentKeyEvents.find((e2) => e2.code === t2.code) || this.currentKeyEvents.push(t2), this.keyboardEvents.filter((t3) => t3.type === C.KeyboardPressed).forEach((e2) => {
         t2.code === e2.name && e2.callback(t2);
       });
     }), window.addEventListener("keyup", (t2) => {
@@ -80,17 +80,17 @@ const Y = new class {
   }
   addEvent(t2) {
     switch (t2.type) {
-      case S.KeyboardDown:
-      case S.KeyboardPressed:
+      case C.KeyboardDown:
+      case C.KeyboardPressed:
         this.keyboardEvents.push(t2);
         break;
-      case S.Mouse:
+      case C.Mouse:
         this.mouseEvents.push(t2), window.addEventListener(t2.name, (e2) => t2.callback(e2));
         break;
-      case S.Window:
+      case C.Window:
         this.windowEvents.push(t2), this.bindEvents();
         break;
-      case S.Custom:
+      case C.Custom:
         this.customEvents.push(t2);
     }
   }
@@ -101,7 +101,7 @@ const Y = new class {
     this.windowEvents.forEach((t2) => window.addEventListener(t2.name, t2.callback));
   }
   tick() {
-    this.currentKeyEvents.length && this.keyboardEvents.filter((t2) => t2.type === S.KeyboardDown).forEach((t2) => {
+    this.currentKeyEvents.length && this.keyboardEvents.filter((t2) => t2.type === C.KeyboardDown).forEach((t2) => {
       this.currentKeyEvents.forEach((e2) => {
         e2.code === t2.name && t2.callback(e2);
       });
@@ -138,45 +138,45 @@ var V, I = ((V = function() {
   i2.style.cssText = "position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000", i2.addEventListener("click", function(t3) {
     t3.preventDefault(), e2(++s2 % i2.children.length);
   }, false);
-  var n2 = (performance || Date).now(), l2 = n2, a2 = 0, o2 = t2(new V.Panel("FPS", "#0ff", "#002")), d2 = t2(new V.Panel("MS", "#0f0", "#020"));
+  var n2 = (performance || Date).now(), l2 = n2, a2 = 0, o2 = t2(new V.Panel("FPS", "#0ff", "#002")), c2 = t2(new V.Panel("MS", "#0f0", "#020"));
   if (self.performance && self.performance.memory)
-    var c2 = t2(new V.Panel("MB", "#f08", "#201"));
+    var d2 = t2(new V.Panel("MB", "#f08", "#201"));
   return e2(0), { REVISION: 16, dom: i2, addPanel: t2, showPanel: e2, begin: function() {
     n2 = (performance || Date).now();
   }, end: function() {
     a2++;
     var t3 = (performance || Date).now();
-    if (d2.update(t3 - n2, 200), t3 > l2 + 1e3 && (o2.update(1e3 * a2 / (t3 - l2), 100), l2 = t3, a2 = 0, c2)) {
+    if (c2.update(t3 - n2, 200), t3 > l2 + 1e3 && (o2.update(1e3 * a2 / (t3 - l2), 100), l2 = t3, a2 = 0, d2)) {
       var e3 = performance.memory;
-      c2.update(e3.usedJSHeapSize / 1048576, e3.jsHeapSizeLimit / 1048576);
+      d2.update(e3.usedJSHeapSize / 1048576, e3.jsHeapSizeLimit / 1048576);
     }
     return t3;
   }, update: function() {
     n2 = this.end();
   }, domElement: i2, setMode: e2 };
 }).Panel = function(t2, e2, s2) {
-  var i2 = 1 / 0, n2 = 0, l2 = Math.round, a2 = l2(window.devicePixelRatio || 1), o2 = 80 * a2, d2 = 48 * a2, c2 = 3 * a2, r2 = 2 * a2, h2 = 3 * a2, u2 = 15 * a2, m2 = 74 * a2, p2 = 30 * a2, y2 = document.createElement("canvas");
-  y2.width = o2, y2.height = d2, y2.style.cssText = "width:80px;height:48px";
+  var i2 = 1 / 0, n2 = 0, l2 = Math.round, a2 = l2(window.devicePixelRatio || 1), o2 = 80 * a2, c2 = 48 * a2, d2 = 3 * a2, r2 = 2 * a2, h2 = 3 * a2, u2 = 15 * a2, m2 = 74 * a2, p2 = 30 * a2, y2 = document.createElement("canvas");
+  y2.width = o2, y2.height = c2, y2.style.cssText = "width:80px;height:48px";
   var b2 = y2.getContext("2d");
-  return b2.font = "bold " + 9 * a2 + "px Helvetica,Arial,sans-serif", b2.textBaseline = "top", b2.fillStyle = s2, b2.fillRect(0, 0, o2, d2), b2.fillStyle = e2, b2.fillText(t2, c2, r2), b2.fillRect(h2, u2, m2, p2), b2.fillStyle = s2, b2.globalAlpha = 0.9, b2.fillRect(h2, u2, m2, p2), { dom: y2, update: function(d3, Z2) {
-    i2 = Math.min(i2, d3), n2 = Math.max(n2, d3), b2.fillStyle = s2, b2.globalAlpha = 1, b2.fillRect(0, 0, o2, u2), b2.fillStyle = e2, b2.fillText(l2(d3) + " " + t2 + " (" + l2(i2) + "-" + l2(n2) + ")", c2, r2), b2.drawImage(y2, h2 + a2, u2, m2 - a2, p2, h2, u2, m2 - a2, p2), b2.fillRect(h2 + m2 - a2, u2, a2, p2), b2.fillStyle = s2, b2.globalAlpha = 0.9, b2.fillRect(h2 + m2 - a2, u2, a2, l2((1 - d3 / Z2) * p2));
+  return b2.font = "bold " + 9 * a2 + "px Helvetica,Arial,sans-serif", b2.textBaseline = "top", b2.fillStyle = s2, b2.fillRect(0, 0, o2, c2), b2.fillStyle = e2, b2.fillText(t2, d2, r2), b2.fillRect(h2, u2, m2, p2), b2.fillStyle = s2, b2.globalAlpha = 0.9, b2.fillRect(h2, u2, m2, p2), { dom: y2, update: function(c3, Z2) {
+    i2 = Math.min(i2, c3), n2 = Math.max(n2, c3), b2.fillStyle = s2, b2.globalAlpha = 1, b2.fillRect(0, 0, o2, u2), b2.fillStyle = e2, b2.fillText(l2(c3) + " " + t2 + " (" + l2(i2) + "-" + l2(n2) + ")", d2, r2), b2.drawImage(y2, h2 + a2, u2, m2 - a2, p2, h2, u2, m2 - a2, p2), b2.fillRect(h2 + m2 - a2, u2, a2, p2), b2.fillStyle = s2, b2.globalAlpha = 0.9, b2.fillRect(h2 + m2 - a2, u2, a2, l2((1 - c3 / Z2) * p2));
   } };
 }, V);
 String.prototype.capitalize = function() {
   return this.charAt(0).toUpperCase() + this.slice(1);
 };
-class Q extends Error {
+class F extends Error {
   constructor(t2, e2) {
     super(e2 ? `[${e2.capitalize()}] - ${t2}` : t2), this.name = "EngineFailure";
   }
 }
-class F extends Q {
+class Q extends F {
   constructor(t2) {
     super(t2, "renderer");
   }
 }
 const z = { strokeStyle: "black", lineWidth: 2, lineJoin: "round", lineCap: "round", fillStyle: "transparent", globalAlpha: 1, globalCompositeOperation: "add" }, M = { font: "Roboto", size: 16, color: "black", textAlign: "left", textBaseline: "alphabetic" }, U = 2 * Math.PI;
-let N, J, T, E, j, P = W() ? 4 : 2 * (window.devicePixelRatio || 1), B = m;
+let N, J, E, T, j, P = W() ? 4 : 2 * (window.devicePixelRatio || 1), B = m;
 function O(t2) {
   return ~~(t2 * P) / P;
 }
@@ -189,7 +189,7 @@ class D {
   static createFromCanvas(t2) {
     let e2 = document.querySelector(t2);
     if (!(e2 && e2 instanceof HTMLCanvasElement))
-      throw new F("The selected element is not a canvas");
+      throw new Q("The selected element is not a canvas");
     return g(e2), D.setContext(e2.getContext("2d")), e2;
   }
   static setContext(t2) {
@@ -206,7 +206,7 @@ class D {
   }
   static style(t2) {
     if (!N)
-      throw new F("Context has not been initialize. Please use Renderer.setContext");
+      throw new Q("Context has not been initialize. Please use Renderer.setContext");
     const e2 = o(o({}, z), t2);
     if (e2 !== J) {
       for (let t3 in e2)
@@ -228,8 +228,8 @@ class D {
   }
   static rect(t2, e2, s2, i2, n2) {
     D.style(n2);
-    const [l2, a2, o2, d2] = [O(t2 + B.x), O(e2 + B.y), O(s2), O(i2)];
-    N.fillRect(l2, a2, o2, d2), N.strokeRect(l2, a2, o2, d2);
+    const [l2, a2, o2, c2] = [O(t2 + B.x), O(e2 + B.y), O(s2), O(i2)];
+    N.fillRect(l2, a2, o2, c2), N.strokeRect(l2, a2, o2, c2);
   }
   static rectFromCenter(t2, e2, s2, i2, n2) {
     return D.rect(t2 - s2 / 2, e2 - i2 / 2, s2, i2, n2);
@@ -264,7 +264,7 @@ class D {
     D.textStyle(i2), N.fillText(t2, e2, s2);
   }
   static centeredText(t2, e2, s2, i2) {
-    D.text(t2, e2, s2, d(o({}, i2), { textAlign: "center", textBaseline: "middle" }));
+    D.text(t2, e2, s2, c(o({}, i2), { textAlign: "center", textBaseline: "middle" }));
   }
   static tint(t2, e2, s2, i2, n2) {
     D.rect(e2, s2, i2, n2, { fillStyle: t2, globalCompositeOperation: "multiply", globalAlpha: 0.25 });
@@ -292,13 +292,13 @@ let _ = false, tt = [];
 const et = new Map();
 class st {
   static get worker() {
-    return E;
+    return T;
   }
   static get workerIsInitialized() {
     return _;
   }
   static get offscreenCanvas() {
-    return T;
+    return E;
   }
   static get renderStack() {
     return tt;
@@ -309,13 +309,13 @@ class st {
   }
   static createFromCanvas(t2) {
     if (j = document.querySelector(t2), !(j && j instanceof HTMLCanvasElement))
-      throw new F("The selected element is not a canvas");
+      throw new Q("The selected element is not a canvas");
     return g(j, j.clientWidth, j.clientHeight, 1), st.initRenderWorker(j, j.width, j.height), j;
   }
   static initRenderWorker(t2, e2, s2) {
     mt.renderer instanceof st || mt.setRendererType("offscreen");
     let { clientWidth: i2, clientHeight: n2 } = t2;
-    E = new $(), T = t2.transferControlToOffscreen(), this.sendMessageToWorker("initCanvas", { width: e2 || i2, height: s2 || n2, canvas: T, dpr: window.devicePixelRatio || 1 }, [T]), E.onmessage = ({ data: { title: t3, data: e3 } }) => {
+    T = new $(), E = t2.transferControlToOffscreen(), this.sendMessageToWorker("initCanvas", { width: e2 || i2, height: s2 || n2, canvas: E, dpr: window.devicePixelRatio || 1 }, [E]), T.onmessage = ({ data: { title: t3, data: e3 } }) => {
       switch (t3) {
         case "log":
           console.log("message from the renderer worker : ", e3);
@@ -332,7 +332,7 @@ class st {
     tt.push(new q(t2, e2 || {}));
   }
   static sendMessageToWorker(t2, e2, s2) {
-    return E.postMessage(new A(t2, e2), s2 || []);
+    return T.postMessage(new A(t2, e2), s2 || []);
   }
   static style(t2) {
     this.addRenderCall("style", { obj: t2 });
@@ -368,7 +368,7 @@ class st {
     var i2;
     if (et.has(t2.id)) {
       const { scale: i3, rotation: n2, offset: l2 } = t2;
-      this.addRenderCall(e2, d(o({}, s2), { textureId: t2.id, scale: i3, rotation: n2, offset: l2 }));
+      this.addRenderCall(e2, c(o({}, s2), { textureId: t2.id, scale: i3, rotation: n2, offset: l2 }));
     } else
       (i2 = t2.convertToBitmap()) == null || i2.then((e3) => {
         et.set(t2.id, e3), this.sendMessageToWorker("newTexture", { id: t2.id, texture: e3 });
@@ -396,27 +396,27 @@ class st {
     _ && (this.sendMessageToWorker("render", { renderStack: tt }), tt = []);
   }
 }
-const it = R("OffscreenCanvas") ? st : D;
+const it = S("OffscreenCanvas") ? st : D;
 let at = [], ot = 4;
-const dt = ["top-left", "top-right", "bottom-left", "bottom-right", "custom"];
-class ct {
+const ct = ["top-left", "top-right", "bottom-left", "bottom-right", "custom"];
+class dt {
   static addItem(t2, e2, s2) {
-    ct.internalAddItem(t2, e2, s2);
+    dt.internalAddItem(t2, e2, s2);
   }
   static addButton(t2, e2, s2, i2) {
-    ct.internalAddItem(t2, s2, i2, e2);
+    dt.internalAddItem(t2, s2, i2, e2);
   }
   static internalAddItem(t2, e2, s2, i2) {
     const n2 = { callback: typeof t2 == "string" ? () => t2 : t2, position: e2, options: s2, onClick: i2 };
     at.push(n2);
     const l2 = at.length;
-    window.addEventListener("load", () => ct.addToDom(n2, l2));
+    window.addEventListener("load", () => dt.addToDom(n2, l2));
   }
   static init() {
-    ct.addStyle('*,\n*::after,\n*::before {\n    box-sizing: border-box;\n}\n\nbody {\n    margin: 0;\n    font-family: "Roboto";\n    font-weight: 400;\n    width: 100vw;\n    height: 100vh;\n    overflow: hidden;\n}\n\ncanvas {\n    z-index: 10;\n    image-rendering: pixelated;\n}\n\n.ue-interface {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    display: flex;\n    padding: 0.5em;\n    z-index: 10;\n    /* Make the click event pass through */\n    pointer-events: none;\n}\n\n.ue-container>div {\n    position: absolute;\n    display: flex;\n    flex-flow: column nowrap;\n}\n\n.ue-container>.top-left {\n    top: 0;\n    left: 0;\n}\n\n.ue-container>.top-right {\n    top: 0;\n    right: 0;\n    text-align: right;\n}\n\n.ue-container>.bottom-left {\n    bottom: 0;\n    left: 0;\n}\n\n.ue-container>.bottom-right {\n    bottom: 0;\n    right: 0;\n    text-align: right;\n}\n\n.ue-interface-items {\n    padding: .1em;\n}\n\n.ue-interface-button {\n    cursor: pointer;\n    user-select: none;\n    pointer-events: all;\n}');
+    dt.addStyle('*,\n*::after,\n*::before {\n    box-sizing: border-box;\n}\n\nbody {\n    margin: 0;\n    font-family: "Roboto";\n    font-weight: 400;\n    width: 100vw;\n    height: 100vh;\n    overflow: hidden;\n}\n\ncanvas {\n    z-index: 10;\n    image-rendering: pixelated;\n}\n\n.ue-interface {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    display: flex;\n    padding: 0.5em;\n    z-index: 10;\n    /* Make the click event pass through */\n    pointer-events: none;\n}\n\n.ue-container>div {\n    position: absolute;\n    display: flex;\n    flex-flow: column nowrap;\n}\n\n.ue-container>.top-left {\n    top: 0;\n    left: 0;\n}\n\n.ue-container>.top-right {\n    top: 0;\n    right: 0;\n    text-align: right;\n}\n\n.ue-container>.bottom-left {\n    bottom: 0;\n    left: 0;\n}\n\n.ue-container>.bottom-right {\n    bottom: 0;\n    right: 0;\n    text-align: right;\n}\n\n.ue-interface-items {\n    padding: .1em;\n}\n\n.ue-interface-button {\n    cursor: pointer;\n    user-select: none;\n    pointer-events: all;\n}');
     const t2 = document.createElement("div");
     t2.classList.add("ue-interface", "ue-container");
-    for (let e2 of dt) {
+    for (let e2 of ct) {
       const s2 = document.createElement("div");
       s2.classList.add(e2), t2.appendChild(s2);
     }
@@ -450,15 +450,15 @@ class ct {
 }
 function rt() {
   const t2 = new I(), e2 = document.createElement("div");
-  return e2.classList.toggle("stats"), t2.showPanel(0), e2.appendChild(t2.dom), document.body.appendChild(e2), ct.statsShift(48), t2;
+  return e2.classList.toggle("stats"), t2.showPanel(0), e2.appendChild(t2.dom), document.body.appendChild(e2), dt.statsShift(48), t2;
 }
 class ht {
   constructor(t2, e2 = 60) {
     if (this.requestId = 0, this.animate = t2, this.fps = e2, !window)
-      throw new Q("No window context", "core");
+      throw new F("No window context", "core");
   }
   start() {
-    let t2 = C();
+    let t2 = v();
     const e2 = 1e3 / this.fps, s2 = (i2) => {
       this.requestId = window.requestAnimationFrame(s2);
       const n2 = i2 - t2;
@@ -473,7 +473,7 @@ class ht {
 let ut = "normal";
 class mt {
   constructor(t2, e2, s2 = 60) {
-    this.fps = 60, this.name = t2, this.env = e2, this.tick = 0, this.stats = null, this.showStatsPanel = true, this.gameLoop = this.env ? () => e2.update() : null, this.fps = s2;
+    this.fps = 60, this.name = t2, this.env = e2, this.tick = 0, this.stats = null, this.showStatsPanel = true, this.gameLoop = this.env ? () => e2.update() : null, this.fps = s2, this.makeAnimationFrame();
   }
   static setRendererType(t2) {
     ut = t2;
@@ -485,7 +485,7 @@ class mt {
     this.showStatsPanel = t2 !== void 0 ? t2 : !this.showStatsPanel, this.showStatsPanel ? this.stats = rt() : (this.stats = null, document.querySelector(".stats") && document.querySelector(".stats").remove());
   }
   makeAnimationFrame() {
-    this.animationFrame = new ht((t2) => this.update(t2), this.fps);
+    this.update && (this.animationFrame = new ht((t2) => this.update(t2), this.fps));
   }
   setMainLoop(t2) {
     this.gameLoop = t2, this.makeAnimationFrame();
@@ -495,17 +495,17 @@ class mt {
   }
   update(t2) {
     var e2, s2;
-    (e2 = this.stats) == null || e2.begin(), Y.tick(), K.tick(t2), this.gameLoop && this.gameLoop(t2), this.tick % ct.updateInterval == 0 && ct.update(), (s2 = this.stats) == null || s2.end(), this.tick++;
+    (e2 = this.stats) == null || e2.begin(), Y.tick(), K.tick(t2), this.gameLoop && this.gameLoop(t2), this.tick % dt.updateInterval == 0 && dt.update(), (s2 = this.stats) == null || s2.end(), this.tick++;
   }
   start() {
     if (!this.gameLoop)
       throw new Error("No game loop");
     if (!this.animationFrame)
       throw new Error("AnimationFrame");
-    window.addEventListener("DOMContentLoaded", () => {
-      var t2;
-      this.name && (document.title = this.name), Y.init(), K.init(), ct.init(), this.showStatsPanel && (this.stats = rt()), (t2 = this.animationFrame) == null || t2.start();
-    });
+    /complete|interactive|loaded/.test(document.readyState) ? this.internalStart() : window.addEventListener("DOMContentLoaded", () => this.internalStart());
+  }
+  internalStart() {
+    this.name && (document.title = this.name), Y.init(), K.init(), dt.init(), this.showStatsPanel && (this.stats = rt()), this.animationFrame.start();
   }
 }
 const wt = { linear: (t2) => t2, smoothStep: (t2) => (3 - 2 * t2) * t2 ** 2, smootherStep: (t2) => (6 * t2 * t2 - 15 * t2 + 10) * t2 ** 3, easeIn: (t2) => t2 ** 2, easeOut: (t2) => 1 - (1 - t2) ** 2, easeInOut: (t2) => t2 < 0.5 ? 2 * t2 * t2 : 1 - Math.pow(-2 * t2 + 2, 2) / 2, easeInBack: (t2) => 2.70158 * t2 ** 3 - 1.70158 * t2 ** 2, easeOutBack: (t2) => 1 + 1.70158 * Math.pow(t2 - 1, 3) + 2.70158 * Math.pow(t2 - 1, 2), easeInOutBack: (t2) => t2 < 0.5 ? Math.pow(2 * t2, 2) * (7.189819 * t2 - 2.5949095) / 2 : (Math.pow(2 * t2 - 2, 2) * (3.5949095 * (2 * t2 - 2) + 2.5949095) + 2) / 2 }, Lt = { autostart: false, loop: false };
@@ -515,7 +515,7 @@ class Wt {
       this.easing = i2;
     else {
       if (typeof i2 != "string" || !(i2 in wt))
-        throw new Q("Unknow easing parameter", "animation");
+        throw new F("Unknow easing parameter", "animation");
       this.easing = wt[i2];
     }
     this.options = o(o({}, Lt), n2), this.value = this.from, this.speed = (this.to - this.from) / this.duration, K.add(this);
@@ -579,12 +579,12 @@ function draw(ts) {
   D.circle(offset + speed3.value, height / 2 + 50, 10);
 }
 let pause = false;
-ct.addButton(() => pause ? "||" : ">", (e) => {
+dt.addButton(() => pause ? "||" : ">", (e) => {
   pause = !pause;
   linear_x.toggle();
   linear_y.toggle();
 });
-ct.addButton(() => "Reset", (e) => {
+dt.addButton(() => "Reset", (e) => {
   linear_x.reset();
   linear_y.reset();
 });

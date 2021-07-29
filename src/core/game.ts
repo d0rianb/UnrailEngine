@@ -81,15 +81,18 @@ class Game {
     public start(): void {
         if (!this.gameLoop) throw new Error('No game loop')
         if (!this.animationFrame) throw new Error('AnimationFrame')
+        if (/complete|interactive|loaded/.test(document.readyState)) this.internalStart()
+        else window.addEventListener('DOMContentLoaded', () => this.internalStart())
 
-        window.addEventListener('DOMContentLoaded', () => {
-            if (this.name) document.title = this.name
-            ES.init() // Event System
-            AS.init() // Animation System
-            Interface.init()
-            if (this.showStatsPanel) this.stats = showStats()
-            this.animationFrame?.start()
-        })
+    }
+
+    private internalStart(): void {
+        if (this.name) document.title = this.name
+        ES.init() // Event System
+        AS.init() // Animation System
+        Interface.init()
+        if (this.showStatsPanel) this.stats = showStats()
+        this.animationFrame!.start()
     }
 }
 
