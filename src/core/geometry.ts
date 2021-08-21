@@ -3,6 +3,20 @@ interface SizeObject {
     height?: number
 }
 
+class Box {
+    x: number
+    y: number
+    width: number
+    height: number
+
+    constructor(x: number, y: number, width: number, height: number) {
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+    }
+}
+
 function getWindowDimensions(): SizeObject {
     return { width: window.innerWidth, height: window.innerHeight }
 }
@@ -46,4 +60,13 @@ function insertCanvas(canvas: HTMLCanvasElement, el: string): void {
     })
 }
 
-export { getWindowDimensions, getCanvasDimensions, setCanvasDimensions, createCanvas, adaptCanvasToDevicePixelRatio, insertCanvas }
+export {
+    SizeObject,
+    Box,
+    getWindowDimensions,
+    getCanvasDimensions,
+    setCanvasDimensions,
+    createCanvas,
+    adaptCanvasToDevicePixelRatio,
+    insertCanvas,
+}

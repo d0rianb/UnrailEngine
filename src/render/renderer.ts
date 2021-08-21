@@ -1,8 +1,9 @@
-import { adaptCanvasToDevicePixelRatio, createCanvas, getWindowDimensions, insertCanvas } from '@/core/geometry'
+import { Box, adaptCanvasToDevicePixelRatio, createCanvas, getWindowDimensions, insertCanvas } from '@/core/geometry'
 import { Point, Vector2, V_NULL } from '@/core/math'
 import { Texture } from './texture'
 import { isWorker } from '@/helpers/utils'
 import { RendererError } from '@/helpers/errors'
+import { AnimatedSprite } from '@/animation'
 
 type CanvasRenderContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
 
@@ -176,15 +177,23 @@ class Renderer {
         Renderer.circle(x, y, 5, obj)
     }
 
-    public static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void {
+    public static rectSprite(x: number, y: number, width: number, height: number, texture: Texture | AnimatedSprite): void {
         if (!texture.isLoaded) return
         Renderer.style({})
         ctx.save()
         ctx.translate(round(x + width / 2 + offset.x), round(y + height / 2 + offset.y))
         ctx.scale(texture.scale.x, texture.scale.y)
         ctx.rotate(texture.rotation)
+        let sourceBox: Box = new Box(0, 0, texture.size.width, texture.size.height)
+        if (texture instanceof AnimatedSprite) {
+            sourceBox = texture.spriteBox()
+        }
         ctx.drawImage(
             texture.image,
+            sourceBox.x,
+            sourceBox.y,
+            sourceBox.width,
+            sourceBox.height,
             round(width * texture.offset.x - width / 2),
             round(height * texture.offset.y - height / 2),
             round(width),

@@ -187,20 +187,21 @@ class Env extends GameEnvironement {
     }
 }
 
+// main.ts
+const { width, height } = getWindowDimensions()
+// const { width, height } = getCanvasDimensions(canvas)
+
+// const canvas = Renderer.createFromCanvas('#canvas')
+Renderer.create()
+
+const env = new Env(width, height)
+const game = new Game('Space Invader', env)
+
 // Interface.ts
 Interface.addItem(() => `Score : ${env.score}`, 'top-left')
 Interface.addItem(() => `Renderered objects : ${rendererObjetNumber}`, 'top-left')
 Interface.addItem(() => `Health : ${env.player.health}`, 'top-right')
 Interface.addButton(() => paused ? '||' : '>', e => paused = !paused)
-
-// main.ts
-const { width, height } = getWindowDimensions()
-// const canvas = Renderer.createFromCanvas('#canvas')
-// const { width, height } = getCanvasDimensions(canvas)
-Renderer.create()
-
-const env = new Env(width, height)
-const game = new Game('Space Invader', env)
 
 game.setMainLoop(() => env.update())
 game.setFPS(60)

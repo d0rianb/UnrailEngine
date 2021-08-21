@@ -9,6 +9,7 @@ import { RendererError } from '@/helpers/errors'
 import { ApiIsSupported } from '@/helpers/utils'
 
 import RendererWorker from './rendererWorker?worker&inline'
+import { AnimatedSprite } from '@/animation'
 
 type RenderStack = Array<RenderCall>
 
@@ -105,6 +106,7 @@ class OffscreenRenderer {
     public static point(x: number, y: number, obj?: StyleObject): void { this.addRenderCall('point', { x, y, obj }) }
 
     // texture is only tranfered once to the worker
+    // TODO: adapt to AnimatedSprite
     private static handleTexture(texture: Texture, drawCall: string, args: object): void {
         if (!texture.isLoaded) return
         if (textureAlias.has(texture.id)) {
