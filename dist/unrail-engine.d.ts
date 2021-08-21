@@ -35,6 +35,7 @@ declare function isWorker(): boolean;
 declare function hashObject(obj: object): string;
 declare function now(): number;
 declare function ApiIsSupported(APIname: string): boolean;
+declare function windowIsLoaded(): boolean;
 
 interface EnvInterface {
     width?: number;
@@ -325,6 +326,12 @@ declare class OffscreenRenderer {
 }
 declare const OffscreenRendererWrapper: typeof OffscreenRenderer | typeof Renderer;
 
+interface InterfaceItem {
+    callback: InterfaceTextFunction;
+    position?: ItemPosition;
+    options?: CSSOptions;
+    onClick?: InterfaceClickCallback;
+}
 declare type CSSOptions = Object;
 declare type InterfaceTextFunction = () => string;
 declare type InterfaceClickCallback = (e: MouseEvent) => any;
@@ -341,6 +348,7 @@ declare class Interface {
     static statsShift(height: number): void;
     static setUpdateInterval(rate: number): void;
     static get updateInterval(): number;
+    static getItems(): Array<InterfaceItem>;
 }
 
 declare const Config: {};
@@ -356,4 +364,4 @@ declare class Sound extends Audio {
 
 declare const VERSION: string;
 
-export { Animation, AnimationOptions, ApiIsSupported, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWrapper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Sound, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now, setCanvasDimensions };
+export { Animation, AnimationOptions, ApiIsSupported, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWrapper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Sound, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now, setCanvasDimensions, windowIsLoaded };

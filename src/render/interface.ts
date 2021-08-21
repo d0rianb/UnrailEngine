@@ -97,6 +97,9 @@ class Interface {
     public static get updateInterval(): number {
         return updateInterval
     }
+    public static getItems(): Array<InterfaceItem> {
+        return items
+    }
 
 }
 
