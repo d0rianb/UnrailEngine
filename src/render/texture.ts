@@ -1,5 +1,4 @@
 import { Vector2, V_UNIT, V_NULL } from '@/core/math'
-import { isWorker } from '@/helpers/utils'
 import { SizeObject } from '@/core/geometry'
 
 interface TextureOptions {

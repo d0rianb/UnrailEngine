@@ -102,7 +102,6 @@ class AnimatedSprite extends Texture {
     }
 
     private step(): void {
-        console.log(this.coordX, this.coordY)
         if (this.coordX === this.to[0] && this.coordY === this.to[1]) {
             if (this.loop) {
                 this.coordX = this.from[0]

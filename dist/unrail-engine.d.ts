@@ -1,5 +1,8 @@
 import { Renderer as Renderer$1, OffscreenRenderer as OffscreenRenderer$1 } from '@/render';
 import { Vector2 as Vector2$1, Point as Point$1 } from '@/core/math';
+import { SizeObject as SizeObject$1, Box as Box$1 } from '@/core/geometry';
+import { AnimatedSprite as AnimatedSprite$1 } from '@/animation/animatedSprite';
+import { Texture as Texture$1 } from '@/render/texture';
 export { default as Random } from '@dorianb/random-js';
 
 declare class Vector2 {
@@ -22,6 +25,13 @@ declare function inRange(x: number, min: number, max: number): boolean;
 interface SizeObject {
     width?: number;
     height?: number;
+}
+declare class Box {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    constructor(x: number, y: number, width: number, height: number);
 }
 declare function getWindowDimensions(): SizeObject;
 declare function getCanvasDimensions(canvas: HTMLCanvasElement): SizeObject;
@@ -149,48 +159,6 @@ declare class Cell {
     constructor(x: number, y: number, width?: number, height?: number);
 }
 
-declare type EasingFunction = (t: number) => number;
-declare const Easing: {
-    linear: (t: any) => any;
-    smoothStep: (t: any) => number;
-    smootherStep: (t: any) => number;
-    easeIn: (t: any) => number;
-    easeOut: (t: any) => number;
-    easeInOut: (t: any) => number;
-    easeInBack: (t: any) => number;
-    easeOutBack: (t: any) => number;
-    easeInOutBack: (t: any) => number;
-};
-declare const easingName: Array<string>;
-declare type EasingFunctionName = typeof easingName[number];
-
-interface AnimationOptions {
-    autostart?: boolean;
-    loop?: boolean;
-}
-declare class Animation {
-    from: number;
-    to: number;
-    duration: number;
-    easing: EasingFunction;
-    options: AnimationOptions;
-    value: number;
-    hasStarted: boolean;
-    private isPaused;
-    private isEnded;
-    private isReversed;
-    private speed;
-    private lastT;
-    constructor(from: number, to: number, duration: number, easing?: EasingFunction | EasingFunctionName, options?: AnimationOptions);
-    start(): void;
-    reset(): void;
-    toggle(pause?: boolean): void;
-    pause(): void;
-    resume(): void;
-    update(deltaTime: number): void;
-    get isRunning(): boolean;
-}
-
 declare enum EventType {
     KeyboardPressed = 0,
     KeyboardDown = 1,
@@ -237,11 +205,37 @@ declare class Texture {
     image: HTMLImageElement | ImageBitmap;
     rotation: number;
     offset: Vector2$1;
-    size: Vector2$1;
+    size: SizeObject$1;
     scale: Vector2$1;
     isLoaded: boolean;
     constructor(source: string, options?: TextureOptions);
     convertToBitmap(): Promise<Texture> | null;
+    onLoad(): void;
+}
+
+interface InterfaceItem {
+    callback: InterfaceTextFunction;
+    position?: ItemPosition;
+    options?: CSSOptions;
+    onClick?: InterfaceClickCallback;
+}
+declare type CSSOptions = Object;
+declare type InterfaceTextFunction = () => string;
+declare type InterfaceClickCallback = (e: MouseEvent) => any;
+declare const itemPositions: readonly ["top-left", "top-right", "bottom-left", "bottom-right", "custom"];
+declare type ItemPosition = typeof itemPositions[number];
+declare class Interface {
+    static addItem(callback: InterfaceTextFunction | string, position?: ItemPosition, options?: CSSOptions): void;
+    static addButton(callback: InterfaceTextFunction | string, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void;
+    private static internalAddItem;
+    static init(): void;
+    private static addStyle;
+    private static addToDom;
+    static update(): void;
+    static statsShift(height: number): void;
+    static setUpdateInterval(rate: number): void;
+    static get updateInterval(): number;
+    static getItems(): Array<InterfaceItem>;
 }
 
 declare type CanvasRenderContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D;
@@ -279,7 +273,7 @@ declare class Renderer {
     static circle(x: number, y: number, radius: number, obj?: StyleObject): void;
     static circleFromRect(x: number, y: number, width: number, height: number, obj: StyleObject): void;
     static point(x: number, y: number, obj?: StyleObject): void;
-    static rectSprite(x: number, y: number, width: number, height: number, texture: Texture): void;
+    static rectSprite(x: number, y: number, width: number, height: number, texture: Texture | AnimatedSprite$1): void;
     static circleSprite(x: number, y: number, radius: number, texture: Texture): void;
     static text(text: string, x: number, y: number, style?: TextStyleObject): void;
     static centeredText(text: string, x: number, y: number, style?: TextStyleObject): void;
@@ -326,32 +320,84 @@ declare class OffscreenRenderer {
 }
 declare const OffscreenRendererWrapper: typeof OffscreenRenderer | typeof Renderer;
 
-interface InterfaceItem {
-    callback: InterfaceTextFunction;
-    position?: ItemPosition;
-    options?: CSSOptions;
-    onClick?: InterfaceClickCallback;
+declare const Config: {};
+
+declare type EasingFunction = (t: number) => number;
+declare const Easing: {
+    linear: (t: any) => any;
+    smoothStep: (t: any) => number;
+    smootherStep: (t: any) => number;
+    easeIn: (t: any) => number;
+    easeOut: (t: any) => number;
+    easeInOut: (t: any) => number;
+    easeInBack: (t: any) => number;
+    easeOutBack: (t: any) => number;
+    easeInOutBack: (t: any) => number;
+};
+declare const easingName: Array<string>;
+declare type EasingFunctionName = typeof easingName[number];
+
+interface AnimationOptions {
+    autostart?: boolean;
+    loop?: boolean;
 }
-declare type CSSOptions = Object;
-declare type InterfaceTextFunction = () => string;
-declare type InterfaceClickCallback = (e: MouseEvent) => any;
-declare const itemPositions: readonly ["top-left", "top-right", "bottom-left", "bottom-right", "custom"];
-declare type ItemPosition = typeof itemPositions[number];
-declare class Interface {
-    static addItem(callback: InterfaceTextFunction | string, position?: ItemPosition, options?: CSSOptions): void;
-    static addButton(callback: InterfaceTextFunction | string, onClick?: InterfaceClickCallback, position?: ItemPosition, options?: CSSOptions): void;
-    private static internalAddItem;
-    static init(): void;
-    private static addStyle;
-    private static addToDom;
-    static update(): void;
-    static statsShift(height: number): void;
-    static setUpdateInterval(rate: number): void;
-    static get updateInterval(): number;
-    static getItems(): Array<InterfaceItem>;
+declare class Animation {
+    from: number;
+    to: number;
+    duration: number;
+    easing: EasingFunction;
+    options: AnimationOptions;
+    value: number;
+    hasStarted: boolean;
+    private isPaused;
+    private isEnded;
+    private isReversed;
+    private speed;
+    private lastT;
+    constructor(from: number, to: number, duration: number, easing?: EasingFunction | EasingFunctionName, options?: AnimationOptions);
+    start(): void;
+    reset(): void;
+    toggle(pause?: boolean): void;
+    pause(): void;
+    resume(): void;
+    update(deltaTime: number): void;
+    get isRunning(): boolean;
 }
 
-declare const Config: {};
+declare type Tuple = [number, number];
+declare class SpriteSheet {
+    spriteSheetPath: string;
+    cols: number;
+    rows: number;
+    constructor(spriteSheetPath: string, cols: number, rows: number);
+}
+interface AnimatedSpriteOptions {
+    interval?: number;
+    loop?: boolean;
+}
+declare class AnimatedSprite extends Texture$1 {
+    spriteSheet: SpriteSheet;
+    from: Tuple;
+    to: Tuple;
+    loop: boolean;
+    interval: number;
+    intervalId: number;
+    spriteWidth: number;
+    spriteHeight: number;
+    coordX: number;
+    coordY: number;
+    isAnimated: boolean;
+    lastRunTimeStamp: number;
+    constructor(spriteSheet: SpriteSheet, from: Tuple, to: Tuple, options?: AnimatedSpriteOptions);
+    run(): void;
+    animate(): void;
+    pause(): void;
+    reset(): void;
+    stop(): void;
+    setInterval(interval: number): void;
+    private step;
+    spriteBox(): Box$1;
+}
 
 interface SoundOptions {
     volume?: number;
@@ -364,4 +410,4 @@ declare class Sound extends Audio {
 
 declare const VERSION: string;
 
-export { Animation, AnimationOptions, ApiIsSupported, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWrapper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, Sound, Texture, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now, setCanvasDimensions, windowIsLoaded };
+export { AnimatedSprite, Animation, AnimationOptions, ApiIsSupported, Box, Cell, Config, Cooldown, Easing, Event, Game, Env as GameEnvironement, GameObject, Grid, Interface, OffscreenRendererWrapper as OffscreenRenderer, Particle, ParticuleGenerator, PlayerObject, Point, Renderer, SizeObject, Sound, SpriteSheet, Texture, Tuple, VERSION, V_NULL, V_UNIT, Vector2, adaptCanvasToDevicePixelRatio, blink, clamp, createCanvas, getCanvasDimensions, getWindowDimensions, hashObject, inRange, insertCanvas, isWorker, now, setCanvasDimensions, windowIsLoaded };

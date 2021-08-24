@@ -3,7 +3,7 @@ import { Point, Vector2, V_NULL } from '@/core/math'
 import { Texture } from './texture'
 import { isWorker } from '@/helpers/utils'
 import { RendererError } from '@/helpers/errors'
-import { AnimatedSprite } from '@/animation'
+import { AnimatedSprite } from '@/animation/animatedSprite'
 
 type CanvasRenderContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
 

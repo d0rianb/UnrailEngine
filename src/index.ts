@@ -12,10 +12,10 @@ export { Grid, Cell } from './core/grid'
 
 
 // Modules exports
-export * from './animation'
-export * from './audio/sound'
 export * from './events'
 export * from './render'
 export * from './config'
+export * from './animation'
+export * from './audio/sound'
 
 export const VERSION: string = version
