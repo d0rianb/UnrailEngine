@@ -83,9 +83,11 @@ Event.onClick(({ x, y }) => {
     if (X > 2 && Y > 2) return
     const cell = grid.get(X, Y)
     if (!cell || (cell && cell.state)) return
+
     const filledCells = grid.cells.filter(cell => cell.state).length
     if (filledCells % 2 == 0) cell.state = 'cross'
     else if (filledCells % 2 == 1) cell.state = 'circle'
+
     let win = checkWins()
     if (win) {
         if (!lineAnimation.hasStarted) lineAnimation.start()
@@ -93,10 +95,10 @@ Event.onClick(({ x, y }) => {
         else if ('row' in win) line = { x: cellWidth / 3, y: (win.row + 1 / 2) * cellWidth, x2: 2 * cellWidth + 2 * cellWidth / 3, y2: (win.row + 1 / 2) * cellWidth }
         else if ('diagonal' in win && win.diagonal == 1) line = { x: cellWidth / 3, y: cellWidth / 3, x2: 2 * cellWidth + 2 / 3 * cellWidth, y2: 2 * cellWidth + 2 / 3 * cellWidth }
         else if ('diagonal' in win && win.diagonal == -1) line = { x: 2 * cellWidth + 2 * cellWidth / 3, y: cellWidth / 3, x2: cellWidth / 3, y2: 2 * cellWidth + 2 / 3 * cellWidth }
-        window.setTimeout(reset, 1000)
+        window.setTimeout(() => reset(), 1000)
     } else {
         if (!grid.cells.find(cell => !cell.state)) {
-            window.setTimeout(reset, 1000)
+            window.setTimeout(() => reset(), 1000)
         }
     }
 })

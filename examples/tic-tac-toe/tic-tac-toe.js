@@ -676,7 +676,7 @@ class Vt {
     this.isEnded = false, this.hasStarted = true;
   }
   reset() {
-    this.lastT = 0, this.isPaused = false;
+    this.lastT = 0, this.isPaused = false, this.hasStarted = false, this.isEnded = false;
   }
   toggle(t2) {
     t2 !== void 0 && (t2 ? this.pause() : this.resume()), this.isPaused ? this.resume() : this.pause();
@@ -781,10 +781,10 @@ Y.onClick(({ x, y }) => {
       line = { x: cellWidth / 3, y: cellWidth / 3, x2: 2 * cellWidth + 2 / 3 * cellWidth, y2: 2 * cellWidth + 2 / 3 * cellWidth };
     else if ("diagonal" in win && win.diagonal == -1)
       line = { x: 2 * cellWidth + 2 * cellWidth / 3, y: cellWidth / 3, x2: cellWidth / 3, y2: 2 * cellWidth + 2 / 3 * cellWidth };
-    window.setTimeout(reset, 1e3);
+    window.setTimeout(() => reset(), 1e3);
   } else {
     if (!grid.cells.find((cell2) => !cell2.state)) {
-      window.setTimeout(reset, 1e3);
+      window.setTimeout(() => reset(), 1e3);
     }
   }
 });

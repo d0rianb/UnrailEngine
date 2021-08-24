@@ -843,13 +843,13 @@ class Env extends xt {
     pt.endFrame();
   }
 }
-Q.addItem(() => `Score : ${env.score}`, "top-left");
-Q.addItem(() => `Health : ${env.player.health}`, "top-right");
-Q.addButton(() => paused ? "||" : ">", (e) => paused = !paused);
 const { width, height } = Z();
 pt.create();
 const env = new Env(width, height);
 const game = new Zt("Space Invader", env);
+Q.addItem(() => `Score : ${env.score}`, "top-left");
+Q.addItem(() => `Health : ${env.player.health}`, "top-right");
+Q.addButton(() => paused ? "||" : ">", (e) => paused = !paused);
 game.setMainLoop(() => env.update());
 game.setFPS(60);
 game.start();

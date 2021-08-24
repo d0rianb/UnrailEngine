@@ -593,7 +593,7 @@ class Vt {
     this.isEnded = false, this.hasStarted = true;
   }
   reset() {
-    this.lastT = 0, this.isPaused = false;
+    this.lastT = 0, this.isPaused = false, this.hasStarted = false, this.isEnded = false;
   }
   toggle(t2) {
     t2 !== void 0 && (t2 ? this.pause() : this.resume()), this.isPaused ? this.resume() : this.pause();

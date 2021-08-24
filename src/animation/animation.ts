@@ -13,7 +13,6 @@ const defaultOptions: AnimationOptions = {
     loop: false
 }
 
-
 class Animation {
     public from: number
     public to: number
@@ -49,6 +48,8 @@ class Animation {
     public reset(): void {
         this.lastT = 0
         this.isPaused = false
+        this.hasStarted = false
+        this.isEnded = false
     }
 
     public toggle(pause?: boolean): void {
