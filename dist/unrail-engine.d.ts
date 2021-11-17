@@ -349,8 +349,8 @@ declare class Animation {
     options: AnimationOptions;
     value: number;
     hasStarted: boolean;
-    private isPaused;
-    private isEnded;
+    isPaused: boolean;
+    isEnded: boolean;
     private isReversed;
     private speed;
     private lastT;
@@ -362,6 +362,7 @@ declare class Animation {
     resume(): void;
     update(deltaTime: number): void;
     get isRunning(): boolean;
+    onFinish(): void;
 }
 
 declare type Tuple = [number, number];

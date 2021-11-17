@@ -27,8 +27,8 @@ class r {
   }
 }
 const u = new r(0, 0), p = new r(1, 1);
-function y(t2, e2, s2) {
-  return t2 > s2 ? y(s2, e2, t2) : Math.max(t2, Math.min(e2, s2));
+function b(t2, e2, s2) {
+  return t2 > s2 ? b(s2, e2, t2) : Math.max(t2, Math.min(e2, s2));
 }
 class G {
   constructor(t2, e2, s2, i2) {
@@ -163,11 +163,11 @@ var F, z = ((F = function() {
     n2 = this.end();
   }, domElement: i2, setMode: e2 };
 }).Panel = function(t2, e2, s2) {
-  var i2 = 1 / 0, n2 = 0, l2 = Math.round, a2 = l2(window.devicePixelRatio || 1), o2 = 80 * a2, d2 = 48 * a2, c2 = 3 * a2, h2 = 2 * a2, r2 = 3 * a2, m2 = 15 * a2, u2 = 74 * a2, p2 = 30 * a2, y2 = document.createElement("canvas");
-  y2.width = o2, y2.height = d2, y2.style.cssText = "width:80px;height:48px";
-  var b2 = y2.getContext("2d");
-  return b2.font = "bold " + 9 * a2 + "px Helvetica,Arial,sans-serif", b2.textBaseline = "top", b2.fillStyle = s2, b2.fillRect(0, 0, o2, d2), b2.fillStyle = e2, b2.fillText(t2, c2, h2), b2.fillRect(r2, m2, u2, p2), b2.fillStyle = s2, b2.globalAlpha = 0.9, b2.fillRect(r2, m2, u2, p2), { dom: y2, update: function(d3, G2) {
-    i2 = Math.min(i2, d3), n2 = Math.max(n2, d3), b2.fillStyle = s2, b2.globalAlpha = 1, b2.fillRect(0, 0, o2, m2), b2.fillStyle = e2, b2.fillText(l2(d3) + " " + t2 + " (" + l2(i2) + "-" + l2(n2) + ")", c2, h2), b2.drawImage(y2, r2 + a2, m2, u2 - a2, p2, r2, m2, u2 - a2, p2), b2.fillRect(r2 + u2 - a2, m2, a2, p2), b2.fillStyle = s2, b2.globalAlpha = 0.9, b2.fillRect(r2 + u2 - a2, m2, a2, l2((1 - d3 / G2) * p2));
+  var i2 = 1 / 0, n2 = 0, l2 = Math.round, a2 = l2(window.devicePixelRatio || 1), o2 = 80 * a2, d2 = 48 * a2, c2 = 3 * a2, h2 = 2 * a2, r2 = 3 * a2, m2 = 15 * a2, u2 = 74 * a2, p2 = 30 * a2, b2 = document.createElement("canvas");
+  b2.width = o2, b2.height = d2, b2.style.cssText = "width:80px;height:48px";
+  var y2 = b2.getContext("2d");
+  return y2.font = "bold " + 9 * a2 + "px Helvetica,Arial,sans-serif", y2.textBaseline = "top", y2.fillStyle = s2, y2.fillRect(0, 0, o2, d2), y2.fillStyle = e2, y2.fillText(t2, c2, h2), y2.fillRect(r2, m2, u2, p2), y2.fillStyle = s2, y2.globalAlpha = 0.9, y2.fillRect(r2, m2, u2, p2), { dom: b2, update: function(d3, G2) {
+    i2 = Math.min(i2, d3), n2 = Math.max(n2, d3), y2.fillStyle = s2, y2.globalAlpha = 1, y2.fillRect(0, 0, o2, m2), y2.fillStyle = e2, y2.fillText(l2(d3) + " " + t2 + " (" + l2(i2) + "-" + l2(n2) + ")", c2, h2), y2.drawImage(b2, r2 + a2, m2, u2 - a2, p2, r2, m2, u2 - a2, p2), y2.fillRect(r2 + u2 - a2, m2, a2, p2), y2.fillStyle = s2, y2.globalAlpha = 0.9, y2.fillRect(r2 + u2 - a2, m2, a2, l2((1 - d3 / G2) * p2));
   } };
 }, F);
 let M = 0;
@@ -517,11 +517,11 @@ class ut {
   }
 }
 const pt = v("OffscreenCanvas") ? ut : at;
-function yt() {
+function bt() {
   const t2 = new z(), e2 = document.createElement("div");
   return e2.classList.toggle("stats"), t2.showPanel(0), e2.appendChild(t2.dom), document.body.appendChild(e2), Q.statsShift(48), t2;
 }
-class bt {
+class yt {
   constructor(t2, e2 = 60) {
     if (this.requestId = 0, this.animate = t2, this.fps = e2, !window)
       throw new E("No window context", "core");
@@ -551,10 +551,10 @@ class Zt {
     return Gt === "normal" ? at : pt;
   }
   toggleStats(t2) {
-    this.showStatsPanel = t2 !== void 0 ? t2 : !this.showStatsPanel, this.showStatsPanel ? this.stats = yt() : (this.stats = null, document.querySelector(".stats") && document.querySelector(".stats").remove());
+    this.showStatsPanel = t2 !== void 0 ? t2 : !this.showStatsPanel, this.showStatsPanel ? this.stats = bt() : (this.stats = null, document.querySelector(".stats") && document.querySelector(".stats").remove());
   }
   makeAnimationFrame() {
-    this.update && (this.animationFrame = new bt((t2) => this.update(t2), this.fps));
+    this.update && (this.animationFrame = new yt((t2) => this.update(t2), this.fps));
   }
   setMainLoop(t2) {
     this.gameLoop = t2, this.makeAnimationFrame();
@@ -574,7 +574,7 @@ class Zt {
     C() ? this.internalStart() : window.addEventListener("DOMContentLoaded", () => this.internalStart());
   }
   internalStart() {
-    this.name && (document.title = this.name), k.init(), H.init(), Q.init(), this.showStatsPanel && (this.stats = yt()), this.animationFrame.start();
+    this.name && (document.title = this.name), k.init(), H.init(), Q.init(), this.showStatsPanel && (this.stats = bt()), this.animationFrame.start();
   }
 }
 const vt = { linear: (t2) => t2, smoothStep: (t2) => (3 - 2 * t2) * t2 ** 2, smootherStep: (t2) => (6 * t2 * t2 - 15 * t2 + 10) * t2 ** 3, easeIn: (t2) => t2 ** 2, easeOut: (t2) => 1 - (1 - t2) ** 2, easeInOut: (t2) => t2 < 0.5 ? 2 * t2 * t2 : 1 - Math.pow(-2 * t2 + 2, 2) / 2, easeInBack: (t2) => 2.70158 * t2 ** 3 - 1.70158 * t2 ** 2, easeOutBack: (t2) => 1 + 1.70158 * Math.pow(t2 - 1, 3) + 2.70158 * Math.pow(t2 - 1, 2), easeInOutBack: (t2) => t2 < 0.5 ? Math.pow(2 * t2, 2) * (7.189819 * t2 - 2.5949095) / 2 : (Math.pow(2 * t2 - 2, 2) * (3.5949095 * (2 * t2 - 2) + 2.5949095) + 2) / 2 }, Ct = { autostart: false, loop: false };
@@ -587,7 +587,7 @@ class Vt {
         throw new E("Unknow easing parameter", "animation");
       this.easing = vt[i2];
     }
-    this.options = o(o({}, Ct), n2), this.value = this.from, this.speed = (this.to - this.from) / this.duration, H.add(this);
+    this.options = o(o({}, Ct), n2), this.value = this.from, this.speed = Math.abs(this.to - this.from) / this.duration, H.add(this);
   }
   start() {
     this.isEnded = false, this.hasStarted = true;
@@ -607,16 +607,18 @@ class Vt {
   update(t2) {
     if (!this.hasStarted || this.isPaused)
       return;
-    let e2 = y(0, this.lastT + t2 * this.speed / Math.abs(this.to - this.from), 1);
+    let e2 = b(0, this.lastT + t2 * this.speed / Math.abs(this.to - this.from), 1);
     if (e2 >= 1 || e2 <= 0) {
       if (!this.options.loop)
-        return void (this.isEnded = true);
+        return this.isEnded = true, void this.onFinish();
       this.speed *= -1, this.isReversed = !this.isReversed;
     }
     this.lastT = e2, this.value = this.from + (this.to - this.from) * this.easing(e2);
   }
   get isRunning() {
     return this.hasStarted && !(this.isEnded || this.isPaused);
+  }
+  onFinish() {
   }
 }
 

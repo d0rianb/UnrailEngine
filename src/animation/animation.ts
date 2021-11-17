@@ -21,8 +21,8 @@ class Animation {
     public options: AnimationOptions
     public value: number
     public hasStarted: boolean = false
-    private isPaused: boolean = false
-    private isEnded: boolean = false
+    public isPaused: boolean = false
+    public isEnded: boolean = false
     private isReversed: boolean = false
     private speed: number
     private lastT: number = 0
@@ -36,7 +36,7 @@ class Animation {
         else throw new EngineFailure('Unknow easing parameter', 'animation')
         this.options = { ...defaultOptions, ...options }
         this.value = this.from
-        this.speed = (this.to - this.from) / this.duration
+        this.speed = Math.abs(this.to - this.from) / this.duration
         AS.add(this)
     }
 
@@ -76,6 +76,7 @@ class Animation {
         if (t >= 1 || t <= 0) {
             if (!this.options.loop) {
                 this.isEnded = true
+                this.onFinish()
                 return
             }
             // Reverse the animation
@@ -89,6 +90,8 @@ class Animation {
     public get isRunning(): boolean {
         return this.hasStarted && !(this.isEnded || this.isPaused)
     }
+
+    public onFinish() {}
 }
 
 export {
