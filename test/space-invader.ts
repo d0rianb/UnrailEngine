@@ -161,7 +161,7 @@ class Env extends GameEnvironement {
     }
 
     render() {
-        Renderer.clear('#aaa')
+        Renderer.clear('#eee')
         this.player.render()
         this.shots.forEach(shot => shot.render())
         this.enemies.forEach(enemy => enemy.render())
@@ -169,17 +169,17 @@ class Env extends GameEnvironement {
     }
 }
 
-// Interface.ts
-Interface.addItem(() => `Score : ${env.score}`, 'top-right')
-Interface.addItem(() => `Health : ${env.player.health}`, 'top-left')
 
 // main.ts
 const { width, height } = getWindowDimensions()
-const canvas = Renderer.createFromCanvas('canvas')
+const canvas = Renderer.create()
 setCanvasDimensions(canvas, width, height)
 const env = new Env(width, height)
 const game = new Game('Space Invader', env)
 
+// Interface.ts
+Interface.addItem(() => `Score : ${env.score}`, 'top-right')
+Interface.addItem(() => `Health : ${env.player.health}`, 'top-left')
 
 game.setMainLoop(() => env.update())
 game.start()

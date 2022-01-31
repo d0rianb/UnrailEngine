@@ -1,5 +1,5 @@
 import { Env } from './env'
-import { ES } from '@/events/event'
+import { ES, Event } from '@/events/event'
 import { AS } from '@/animation/animationSystem'
 import { showStats, Stats } from './stats'
 import { Interface, OffscreenRenderer, Renderer } from '@/render'
@@ -26,7 +26,7 @@ class Game {
         this.env = env
         this.tick = 0
         this.stats = null
-        this.showStatsPanel = true
+        this.showStatsPanel = false
         this.gameLoop = this.env ? () => env.update() : null
         this.fps = fps
         this.makeAnimationFrame()
@@ -84,7 +84,6 @@ class Game {
         if (!this.animationFrame) throw new Error('AnimationFrame')
         if (windowIsLoaded()) this.internalStart()
         else window.addEventListener('DOMContentLoaded', () => this.internalStart())
-
     }
 
     private internalStart(): void {
@@ -93,7 +92,9 @@ class Game {
         AS.init() // Animation System
         Interface.init()
         if (this.showStatsPanel) this.stats = showStats()
-        this.animationFrame!.start()
+        this.animationFrame!.start();
+        (window as any).unrailEngineLoaded = true
+        Event.emit('EngineLoaded')
     }
 }
 

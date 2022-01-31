@@ -16,6 +16,7 @@ TODO :
     - Add a lighting system
     - Add slider button to the interface
     - Audio System
+    - StyleObject += color (fillStyle & strokeStyle at once) ex : { color: 'red' }
 
 
 PARTS :

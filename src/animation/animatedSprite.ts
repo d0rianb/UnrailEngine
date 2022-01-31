@@ -47,7 +47,7 @@ class AnimatedSprite extends Texture {
             || to[0] < 1 || to[1] < 1
             || from[0] > spriteSheet.cols || from[1] > spriteSheet.rows
             || to[0] > spriteSheet.cols || to[1] > spriteSheet.rows
-        ) throw new EngineFailure('Invalid tuples : the stylesheet coordinate starts at (1, 1)')
+        ) throw new EngineFailure('Invalid tuples : the spritesheet coordinate starts at (1, 1)')
         // TODO: more check on the coordinates
         this.from = from
         this.to = to

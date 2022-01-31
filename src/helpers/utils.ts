@@ -27,5 +27,5 @@ export function ApiIsSupported(APIname: string): boolean {
 }
 
 export function windowIsLoaded(): boolean {
-    return /complete|interactive|loaded/.test(document.readyState)
+    return /complete|interactive|loaded/.test(document.readyState) && (window as any).unrailEngineLoaded
 }

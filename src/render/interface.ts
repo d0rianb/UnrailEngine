@@ -1,6 +1,6 @@
-import { Game } from '../core/game'
 import * as CSSstyle from '@style/main.css'
 import { windowIsLoaded } from '@/helpers/utils'
+import { Event } from '@/events/event'
 
 interface InterfaceItem {
     callback: InterfaceTextFunction
@@ -35,8 +35,8 @@ class Interface {
         const item: InterfaceItem = { callback: textFunction, position, options, onClick } as InterfaceItem
         items.push(item)
         const index: number = items.length
-        if (windowIsLoaded()) Interface.addToDom(item, index)
-        else window.addEventListener('load', () => Interface.addToDom(item, index))
+        if (windowIsLoaded()) { Interface.addToDom(item, index) }
+        else Event.on('EngineLoaded', () => Interface.addToDom(item, index))
     }
 
     public static init(): void {
@@ -49,6 +49,7 @@ class Interface {
             container.appendChild(positionedContainer)
         }
         document.body.appendChild(container)
+        console.log('interface init')
     }
 
     private static addStyle(style: string): void {
@@ -58,6 +59,7 @@ class Interface {
     }
 
     private static addToDom(item: InterfaceItem, index: number): void {
+        console.log('addToDom')
         const value: string = item.callback()
         const element: HTMLSpanElement = document.createElement('span')
         element.classList.add('ue-interface-items')
