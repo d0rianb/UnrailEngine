@@ -111,6 +111,7 @@ import { OffscreenRenderer as Renderer } from 'unrail-engine' // to use the mult
 ```ts
 // Canvas2DContext options from : https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D
 let style: StyleObject = { 
+    color?: string, // shorthand for fillStyle & strokeStyle - only non-standard attribute
     strokeStyle?: string,
     lineWidth?: number,
     lineJoin?: CanvasLineJoin,
@@ -161,6 +162,8 @@ const options = { autostart?: true, loop?: false }
 const animation = new Animation(from, to, duration, Easing.linear, options) // duration in ms
 Event.onClick(() => animation.start())
 ```
+
+The value of the animation is accessible via the property : `animation.value`. 
 
 The default easing function is linear, but others are available in the `Easing` object. To specify an easing function, you can pass the function in the animation constructor or simply its name if the fonction belong to the `Easing` object.
 

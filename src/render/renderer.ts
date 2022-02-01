@@ -8,6 +8,7 @@ import { AnimatedSprite } from '@/animation/animatedSprite'
 type CanvasRenderContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
 
 interface StyleObject {
+    color?: string,
     strokeStyle?: string
     lineWidth?: number
     lineJoin?: CanvasLineJoin
@@ -95,6 +96,11 @@ class Renderer {
         if (!ctx) throw new RendererError('Context has not been initialize. Please use Renderer.setContext')
         const styleObject = { ...defaultStyleObject, ...obj }
         if (styleObject === lastStyleObject) return
+        if ('color' in styleObject) {
+            styleObject['fillStyle'] = styleObject['color']
+            styleObject['strokeStyle'] = styleObject['color']
+            delete styleObject['color']
+        }
         for (let prop in styleObject) {
             if (ctx[prop] !== styleObject[prop]) {
                 ctx[prop] = styleObject[prop]

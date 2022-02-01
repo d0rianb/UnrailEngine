@@ -32,7 +32,7 @@ function draw(ts) {
     Renderer.rect(3 * dimension + 4 * offset, offset, dimension, dimension, { lineWidth: .5 })
     Renderer.circle(3 * dimension + 4 * offset + linear_x.value, offset + easeInOut_y.value, 1)
 
-    Renderer.circle(offset + speed.value, height / 2, 10)
+    Renderer.circle(offset + speed.value, height / 2, 10, { color: 'green' })
     Renderer.circle(offset + speed2.value, height / 2 + 25, 10)
     Renderer.circle(offset + speed3.value, height / 2 + 50, 10)
 }

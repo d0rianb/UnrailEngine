@@ -49,7 +49,6 @@ class Interface {
             container.appendChild(positionedContainer)
         }
         document.body.appendChild(container)
-        console.log('interface init')
     }
 
     private static addStyle(style: string): void {
@@ -59,7 +58,6 @@ class Interface {
     }
 
     private static addToDom(item: InterfaceItem, index: number): void {
-        console.log('addToDom')
         const value: string = item.callback()
         const element: HTMLSpanElement = document.createElement('span')
         element.classList.add('ue-interface-items')
