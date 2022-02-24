@@ -176,6 +176,7 @@ The available methods of the animation class are :
 ## <a name="examples"></a>Examples
 - Space Invader : [Code](./examples/space-invader/space-invader.ts) | [Demo](https://d0rianb.github.io/UnrailEngine/examples/space-invader/index.html)
 - Tic-Tac-Toe : [Code](./examples/tic-tac-toe/tic-tac-toe.ts) | [Demo](https://d0rianb.github.io/UnrailEngine/examples/tic-tac-toe/index.html)
+- Solitaire : [Code](https://github.com/d0rianb/solitaire) | [Demo](https://d0rianb.github.io/solitaire/)
 - Animation : [Code](./examples/animation-curves/animation.ts) | [Demo](https://d0rianb.github.io/UnrailEngine/examples/animation-curves/index.html)
 - The [Swatch Demo](https://github.com/d0rianb/SwatchDemo) uses the UnrailEngine for rendering & handling the update loop.
 - The [TowerDefenseGame](https://github.com/d0rianb/TowerDefenseGame) & [Run&Gun](https://github.com/d0rianb/RunAndGun) will soon use the UnrailEngine too.
