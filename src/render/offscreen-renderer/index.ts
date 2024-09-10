@@ -97,6 +97,8 @@ class OffscreenRenderer {
 
     public static rectFromPoints(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void { this.addRenderCall('rectFromPoints', { x1, y1, x2, y2, obj }) }
 
+    public static roundedRect(x: number, y: number, width: number, height: number, radius: number, obj?: StyleObject): void { this.addRenderCall('roundedRect', { x, y, width, height, radius, obj }) }
+
     public static poly(points: Array<Point>, obj?: StyleObject): void { this.addRenderCall('poly', { points, obj }) }
 
     public static circle(x: number, y: number, radius: number, obj?: StyleObject): void { this.addRenderCall('circle', { x, y, radius, obj }) }

@@ -7,7 +7,7 @@ import { AnimatedSprite } from '@/animation/animatedSprite'
 
 type CanvasRenderContext = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
 
-interface StyleObject {
+type StyleObject = {
     color?: string,
     strokeStyle?: string
     lineWidth?: number
@@ -18,7 +18,7 @@ interface StyleObject {
     globalCompositeOperation?: string
 }
 
-interface TextStyleObject {
+type TextStyleObject = {
     font?: string
     size?: number
     color?: string
@@ -146,14 +146,23 @@ class Renderer {
 
     /* Draw a rect from its center */
     public static rectFromCenter(x: number, y: number, width: number, height: number, obj?: StyleObject): void {
-        return Renderer.rect(x - width / 2, y - height / 2, width, height, obj)
+        return Renderer.rect(round(x - width / 2), round(y - height / 2), round(width), round(height), obj)
     }
 
     /* Draw a rect from its top-left corner to its bottom-right corner */
     public static rectFromPoints(x1: number, y1: number, x2: number, y2: number, obj?: StyleObject): void {
-        return Renderer.rect(x1, y1, x2 - x1, y2 - y1, obj)
+        return Renderer.rect(round(x1), round(y1), round(x2 - x1), round(y2 - y1), obj)
     }
 
+    public static roundedRect(x: number, y: number, width: number, height: number, radius: number, obj?: StyleObject): void {
+        Renderer.style(obj)
+        const [r_x, r_y, r_w, r_h] = [round(x + offset.x), round(y + offset.y), round(width), round(height)]
+        const r_radius = round(radius)
+        ctx.beginPath();
+        ctx.roundRect(r_x, r_y, r_w, r_h, [r_radius]);
+        ctx.fill()
+        ctx.stroke();
+    }
 
     public static poly(points: Array<Point>, obj?: StyleObject): void {
         if (!points.length) return
@@ -163,6 +172,7 @@ class Renderer {
         for (let i = 1; i < points.length; i++) {
             ctx.lineTo(round(points[i].x + offset.x), round(points[i].y + offset.y))
         }
+        ctx.fill()
         ctx.stroke()
     }
 
@@ -176,11 +186,11 @@ class Renderer {
 
     /* Draw the circle included in the rect */
     public static circleFromRect(x: number, y: number, width: number, height: number, obj: StyleObject): void {
-        return Renderer.circle(x + width / 2, y + height / 2, Math.min(width, height) / 2, obj)
+        return Renderer.circle(round(x + width / 2), round(y + height / 2), round(Math.min(width, height) / 2), obj)
     }
 
     public static point(x: number, y: number, obj?: StyleObject): void {
-        Renderer.circle(x, y, 5, obj)
+        Renderer.circle(round(x), round(y), 5, obj)
     }
 
     public static rectSprite(x: number, y: number, width: number, height: number, texture: Texture | AnimatedSprite): void {

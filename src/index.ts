@@ -19,3 +19,5 @@ export * from './animation'
 export * from './audio/sound'
 
 export const VERSION: string = version
+
+console.log('Unrail Engine v' + version.toString())

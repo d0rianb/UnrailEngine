@@ -17,9 +17,7 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-(function(global2, factory) {
-  typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define(["exports"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2["unrail-engine"] = global2["unrail-engine"] || {}));
-})(this, function(exports2) {
+(function(exports) {
   "use strict";
   const version = "0.5.2";
   var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
@@ -308,9 +306,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   }
   const AS = new AnimationSystem();
   var stats_min = {exports: {}};
-  (function(module2, exports3) {
+  (function(module, exports2) {
     (function(f, e) {
-      module2.exports = e();
+      module.exports = e();
     })(commonjsGlobal, function() {
       var f = function() {
         function e(a2) {
@@ -1303,47 +1301,47 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   }
   const VERSION = version;
   console.log("Unrail Engine v" + version.toString());
-  exports2.AnimatedSprite = AnimatedSprite;
-  exports2.Animation = Animation;
-  exports2.ApiIsSupported = ApiIsSupported;
-  exports2.Box = Box;
-  exports2.Cell = Cell;
-  exports2.Config = Config;
-  exports2.Cooldown = Cooldown;
-  exports2.Easing = Easing;
-  exports2.Event = Event;
-  exports2.Game = Game;
-  exports2.GameEnvironement = Env;
-  exports2.GameObject = GameObject;
-  exports2.Grid = Grid;
-  exports2.Interface = Interface;
-  exports2.OffscreenRenderer = OffscreenRendererWrapper;
-  exports2.Particle = Particle;
-  exports2.ParticuleGenerator = ParticuleGenerator;
-  exports2.PlayerObject = PlayerObject;
-  exports2.Point = Point;
-  exports2.Random = main_min;
-  exports2.Renderer = Renderer;
-  exports2.Sound = Sound;
-  exports2.SpriteSheet = SpriteSheet;
-  exports2.Texture = Texture;
-  exports2.VERSION = VERSION;
-  exports2.V_NULL = V_NULL;
-  exports2.V_UNIT = V_UNIT;
-  exports2.Vector2 = Vector2;
-  exports2.adaptCanvasToDevicePixelRatio = adaptCanvasToDevicePixelRatio;
-  exports2.blink = blink;
-  exports2.clamp = clamp;
-  exports2.createCanvas = createCanvas;
-  exports2.getCanvasDimensions = getCanvasDimensions;
-  exports2.getWindowDimensions = getWindowDimensions;
-  exports2.hashObject = hashObject;
-  exports2.inRange = inRange;
-  exports2.insertCanvas = insertCanvas;
-  exports2.isWorker = isWorker;
-  exports2.now = now;
-  exports2.setCanvasDimensions = setCanvasDimensions;
-  exports2.windowIsLoaded = windowIsLoaded;
-  Object.defineProperty(exports2, "__esModule", {value: true});
-  exports2[Symbol.toStringTag] = "Module";
-});
+  exports.AnimatedSprite = AnimatedSprite;
+  exports.Animation = Animation;
+  exports.ApiIsSupported = ApiIsSupported;
+  exports.Box = Box;
+  exports.Cell = Cell;
+  exports.Config = Config;
+  exports.Cooldown = Cooldown;
+  exports.Easing = Easing;
+  exports.Event = Event;
+  exports.Game = Game;
+  exports.GameEnvironement = Env;
+  exports.GameObject = GameObject;
+  exports.Grid = Grid;
+  exports.Interface = Interface;
+  exports.OffscreenRenderer = OffscreenRendererWrapper;
+  exports.Particle = Particle;
+  exports.ParticuleGenerator = ParticuleGenerator;
+  exports.PlayerObject = PlayerObject;
+  exports.Point = Point;
+  exports.Random = main_min;
+  exports.Renderer = Renderer;
+  exports.Sound = Sound;
+  exports.SpriteSheet = SpriteSheet;
+  exports.Texture = Texture;
+  exports.VERSION = VERSION;
+  exports.V_NULL = V_NULL;
+  exports.V_UNIT = V_UNIT;
+  exports.Vector2 = Vector2;
+  exports.adaptCanvasToDevicePixelRatio = adaptCanvasToDevicePixelRatio;
+  exports.blink = blink;
+  exports.clamp = clamp;
+  exports.createCanvas = createCanvas;
+  exports.getCanvasDimensions = getCanvasDimensions;
+  exports.getWindowDimensions = getWindowDimensions;
+  exports.hashObject = hashObject;
+  exports.inRange = inRange;
+  exports.insertCanvas = insertCanvas;
+  exports.isWorker = isWorker;
+  exports.now = now;
+  exports.setCanvasDimensions = setCanvasDimensions;
+  exports.windowIsLoaded = windowIsLoaded;
+  Object.defineProperty(exports, "__esModule", {value: true});
+  exports[Symbol.toStringTag] = "Module";
+})(this["unrail-engine"] = this["unrail-engine"] || {});

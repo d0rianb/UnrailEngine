@@ -26,11 +26,12 @@ export default ({ command }) => {
                 lib: {
                     name: 'unrail-engine',
                     entry: './src/index.ts',
-                    formats: ['es', 'umd']
+                    formats: ['es', 'umd', 'iife']
                 },
-                minify: 'terser',
+                minify: false, //'terser',
                 rollupOptions: {
                     manualChunks: {},
+                    output: { extend: true },
                     plugins: [
                         visualizer({
                             filename: './dist/stats/treemap.html',

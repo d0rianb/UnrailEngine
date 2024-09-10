@@ -70,7 +70,7 @@ class Animation {
     }
 
     public update(deltaTime: number): void {
-        if (!this.hasStarted || this.isPaused) return
+        if (!this.hasStarted || this.isPaused || this.isEnded) return
         // t in  range [0, 1]
         let t = clamp(0, this.lastT + deltaTime * this.speed / Math.abs(this.to - this.from), 1)
         if (t >= 1 || t <= 0) {
@@ -91,7 +91,7 @@ class Animation {
         return this.hasStarted && !(this.isEnded || this.isPaused)
     }
 
-    public onFinish() {}
+    public onFinish() { }
 }
 
 export {

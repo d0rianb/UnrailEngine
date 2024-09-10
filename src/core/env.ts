@@ -16,10 +16,10 @@ class Env implements EnvInterface {
         this.height = height
     }
 
-    public update(): void { }
+    public update(): void {}
 
-    public render(): void { }
-
+    public render(): void {}
 }
+function test() {}
 
 export { Env }

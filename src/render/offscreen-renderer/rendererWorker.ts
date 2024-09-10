@@ -78,6 +78,9 @@ class RendererWorker extends ThreadWorker {
             case 'rectFromPoints':
                 Renderer.rectFromPoints(args.x1, args.y1, args.x2, args.y2, args.obj)
                 break
+            case 'roundedRect':
+                Renderer.roundedRect(args.x1, args.y1, args.width, args.height, args.radius, args.obj)
+                break
             case 'poly':
                 Renderer.poly(args.points, args.obj)
                 break

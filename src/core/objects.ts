@@ -20,6 +20,11 @@ class GameObject implements GameObjectInterface {
         this.height = height || width || 100
     }
 
+    public contains(x: number, y: number): boolean {
+        return this.x <= x && this.x + this.width >= x
+            && this.y <= y && this.y + this.height >= y
+    }
+
     public collide(obj: GameObject): boolean { // AABB algorithm
         if (!obj.width || !obj.height || !this.width || !this.height) return false // Should throw an error ?
         return this.x < obj.x + obj.width &&
