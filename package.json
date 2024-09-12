@@ -1,6 +1,6 @@
 {
     "name": "unrail-engine",
-    "version": "0.5.2",
+    "version": "0.5.3",
     "description": "A lightweight 2D game engine written in typescript",
     "main": "dist/unrail-engine.umd.js",
     "module": "dist/unrail-engine.es.js",
@@ -36,7 +36,7 @@
         "rollup-plugin-esbuild": "^4.4.0",
         "rollup-plugin-json": "^4.0.0",
         "rollup-plugin-visualizer": "^5.5.0",
-        "typedoc": "^0.20.27",
+        "typedoc": "^0.26.7",
         "typescript": "^4.2.3",
         "vite": "^2.0.2"
     },
